@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/common_widgets/custom_appbar.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_body.dart';
 
 class JoinPage extends StatelessWidget {
@@ -7,16 +8,7 @@ class JoinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          "NAVER",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.green,
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: JoinBody(),
     );
   }
