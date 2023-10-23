@@ -17,7 +17,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
   return {
     Move.homeListPage: (context) => WebtoonListPage(),
     // Move.webtoonDetailPage: (context) => WebtoonDetailPage(),
-    Move.loginPage: (context) => const LoginPage(),
+    Move.loginPage: (context) => LoginPage(),
     Move.joinPage: (context) => const JoinPage(),
   };
 }

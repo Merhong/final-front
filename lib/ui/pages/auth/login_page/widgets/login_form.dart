@@ -39,20 +39,25 @@ class LoginForm extends ConsumerWidget {
             controller: _password,
           ),
           const SizedBox(height: sizeXL50),
-          CustomElevatedButton(
-            text: "로그인",
-            funPageRoute: () {
-              if (_formKey.currentState!.validate()) {
-                LoginReqDTO loginReqDTO = LoginReqDTO(
-                  email: _email.text,
-                  password: _password.text,
-                );
-                print(_email.text);
-                print(_password.text);
-                SessionUser user = ref.read(sessionProvider);
-                user.login(loginReqDTO);
-              }
-            },
+          Container(
+            height: 50,
+            width: double.infinity,
+            child: TextButton(
+              child: Text("로그인", style: TextStyle(color: Colors.white)),
+              style: TextButton.styleFrom(backgroundColor: Colors.green),
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  LoginReqDTO loginReqDTO = LoginReqDTO(
+                    email: _email.text,
+                    password: _password.text,
+                  );
+                  print(_email.text);
+                  print(_password.text);
+                  SessionUser user = ref.read(sessionProvider);
+                  user.login(loginReqDTO);
+                }
+              },
+            ),
           ),
         ],
       ),

@@ -51,7 +51,7 @@ class SessionUser {
 
       // print("성공");
       // 3. 페이지 이동
-      Navigator.pushNamed(mContext!, Move.homeListPage);
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.homeListPage, (route) => false);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(SnackBar(content: Text("${responseDTO.errorType!.message!}")));
     }
