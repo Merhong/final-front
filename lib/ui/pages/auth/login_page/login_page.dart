@@ -12,7 +12,6 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-
       // appBar: AppBar(backgroundColor: Colors.blue[900]),
       // bottomNavigationBar: AppBottom(),
       body: LoginBody(),

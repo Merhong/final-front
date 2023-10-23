@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey, // context가 없는 곳에서 context를 사용할 수 있는 방법 (몰라도 됨)
       debugShowCheckedModeBanner: false,
-      initialRoute: Move.joinPage, // 최초 화면
+      // 최초 화면
+      initialRoute: Move.termsPage,
       routes: getRouters(),
       theme: theme(),
     );
