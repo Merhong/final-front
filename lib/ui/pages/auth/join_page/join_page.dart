@@ -7,6 +7,16 @@ class JoinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          "NAVER",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.green,
+          ),
+        ),
+      ),
       body: JoinBody(),
     );
   }
