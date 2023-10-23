@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: Move.webtoonDetailPage, // 최초 화면
       initialRoute: Move.LoginPage, // 최초 화면
+      // 로그인 페이지
       routes: getRouters(),
       theme: theme(),
     );
