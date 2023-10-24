@@ -1,13 +1,10 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/post_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/model/post.dart';
-import 'package:flutter_blog/data/model/webtoon.dart';
 import 'package:logger/logger.dart';
 
 // MVVM패턴 : View -> Provider(전역프로바이더or뷰모델) -> Repository(통신+파싱을 책임)
@@ -107,7 +104,9 @@ class WebtoonRepository {
 
       List<dynamic> mapList = responseDTO.data as List<dynamic>;
 
-      List<ListPageWebtoonDTO> webtoonList = mapList.map((webtoonDTO) => ListPageWebtoonDTO.fromJson(webtoonDTO)).toList();
+      List<ListPageWebtoonDTO> webtoonList = mapList
+          .map((webtoonDTO) => ListPageWebtoonDTO.fromJson(webtoonDTO))
+          .toList();
 
       // Logger().d(webtoonList);
 

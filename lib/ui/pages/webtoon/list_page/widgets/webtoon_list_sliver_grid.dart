@@ -5,7 +5,6 @@ import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../data/model/webtoon.dart';
 import '../../../../common_widgets/webtoon_list_item.dart';
 
 class WebtoonListSliverGrid extends ConsumerWidget {
@@ -33,7 +32,8 @@ class WebtoonListSliverGrid extends ConsumerWidget {
                 onTap: () {
                   ParamStore paramStore = ref.read(paramProvider);
                   paramStore.addWebtoonDetailId(webtoonDTOList[index].id);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
                   // print("실행됨");
                 },
                 child: WebtoonListItem(webtoonDTO: webtoonDTOList[index]));

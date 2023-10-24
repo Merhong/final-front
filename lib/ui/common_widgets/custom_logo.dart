@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomLogo extends StatelessWidget {
   final String title;
 
-  const CustomLogo(this.title, {Key? key}): super(key: key);
+  const CustomLogo(this.title, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

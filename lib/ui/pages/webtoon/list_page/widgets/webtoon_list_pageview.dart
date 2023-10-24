@@ -66,7 +66,10 @@ class _WebtoonListPageViewState extends State<WebtoonListPageView> {
               Align(
                 alignment: Alignment(0.9, 0.55),
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.all(Radius.circular(sizeBorder5))),
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(sizeBorder5))),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
                     child: Text(
@@ -77,7 +80,8 @@ class _WebtoonListPageViewState extends State<WebtoonListPageView> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: sizePaddingLR17),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: sizePaddingLR17),
                 child: Align(
                   alignment: Alignment(0, 1),
                   child: Container(
@@ -103,20 +107,28 @@ class _WebtoonListPageViewState extends State<WebtoonListPageView> {
                               padding: const EdgeInsets.all(1.0),
                               child: Text(
                                 "매일+",
-                                style: TextStyle(color: Colors.white, fontSize: 12),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
                           SizedBox(width: sizeS5),
                           Container(
-                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.5),
-                            child: Text("무한 레벨업 in 무림", style: Theme.of(context).textTheme.bodyLarge, overflow: TextOverflow.ellipsis),
+                            constraints: BoxConstraints(
+                                maxWidth: sizeGetScreenWidth(context) * 0.5),
+                            child: Text("무한 레벨업 in 무림",
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                overflow: TextOverflow.ellipsis),
                           ),
                           SizedBox(width: sizeS5),
                           Container(
-                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.3),
-                            child: Text("김진우 / 곤봉", style: TextStyle(fontSize: 15, color: Colors.grey), overflow: TextOverflow.ellipsis),
+                            constraints: BoxConstraints(
+                                maxWidth: sizeGetScreenWidth(context) * 0.3),
+                            child: Text("김진우 / 곤봉",
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
+                                overflow: TextOverflow.ellipsis),
                           ),
                         ],
                       ),

@@ -4,8 +4,9 @@ class CustomBottomIconButton extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const CustomBottomIconButton({Key? key, required this.icon, required this.text}) : super(key: key);
-
+  const CustomBottomIconButton(
+      {Key? key, required this.icon, required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

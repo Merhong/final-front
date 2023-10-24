@@ -1,6 +1,4 @@
-import 'package:flutter_blog/data/model/Author.dart';
-import 'package:flutter_blog/data/model/episode.dart';
-import 'package:intl/intl.dart';
+
 
 class ListPageWebtoonDTO {
   final int id;
@@ -13,7 +11,8 @@ class ListPageWebtoonDTO {
   String? weekDay;
   List<String>? authorNicknameList;
 
-  ListPageWebtoonDTO(this.id, this.title, this.starScore, this.starCount, this.image, this.ageLimit, this.specially, this.weekDay);
+  ListPageWebtoonDTO(this.id, this.title, this.starScore, this.starCount,
+      this.image, this.ageLimit, this.specially, this.weekDay);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   ListPageWebtoonDTO.fromJson(Map<String, dynamic> json)
@@ -26,7 +25,9 @@ class ListPageWebtoonDTO {
         specially = json["specially"],
         weekDay = json["weekDay"],
         // authorNicknameList = json["authorNicknameList"];
-        authorNicknameList = (json["authorNicknameList"] as List).map((jsonAuthorNickname) => jsonAuthorNickname.toString()).toList();
+        authorNicknameList = (json["authorNicknameList"] as List)
+            .map((jsonAuthorNickname) => jsonAuthorNickname.toString())
+            .toList();
 
   @override
   String toString() {

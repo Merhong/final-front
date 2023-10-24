@@ -7,6 +7,7 @@ import '../../ui/pages/auth/login_page/login_page.dart';
 
 class Move {
   static String homeListPage = "/webtoon/home";
+
 // static String webtoonDetailPage = "/webtoon/detail";
 // detail페이지는 페이지마다 주소가 다르니까 못함
   static String loginPage = "/login";

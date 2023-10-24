@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CustomNavigation extends ConsumerWidget {
   final scaffoldKey;
+
   const CustomNavigation(this.scaffoldKey, {Key? key}) : super(key: key);
 
   @override
@@ -22,7 +22,8 @@ class CustomNavigation extends ConsumerWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  scaffoldKey.currentState!.openEndDrawer(); // 없으면 돌아오면 그대로 드로워 켜져있음
+                  scaffoldKey.currentState!
+                      .openEndDrawer(); // 없으면 돌아오면 그대로 드로워 켜져있음
                   // Navigator.pushNamed(context, Move.postWritePage);
                 },
                 child: const Text(
