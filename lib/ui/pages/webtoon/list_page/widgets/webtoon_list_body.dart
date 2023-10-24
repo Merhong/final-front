@@ -3,6 +3,9 @@ import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/model/webtoon.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_bottom_random.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_bottom_view.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtton_list_bottom_review.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'webtoon_list_middle_advertising.dart';
@@ -30,7 +33,19 @@ class WebtoonListBody extends ConsumerWidget {
         WebtoonListSliverAppBarAndPageView(),
         WebtoonListSliverPersistentHeader(),
         WebtoonListMiddleAdvertising(),
+
         WebtoonListSliverGrid(webtoonDTOList: webtoonDTOList),
+        //WebtoonListSliverGrid(webtoonList: webtoonList),
+        
+        SliverToBoxAdapter(
+          child: Container(
+            height: 200.0, // 높이 설정
+            child: WebtoonListBottomView(),
+          ),
+        ),
+        WebtoonListBottomRandom(),
+        WebttonListBottomReview(),
+
       ],
     );
   }
