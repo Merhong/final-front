@@ -3,7 +3,7 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/user_request.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
-import 'package:flutter_blog/ui/common_widgets/custom_auth_text_form_field.dart';
+import 'package:flutter_blog/ui/common_widgets/custom_login_text_form_field.dart';
 import 'package:flutter_blog/ui/common_widgets/custom_submit_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,15 +24,20 @@ class LoginForm extends ConsumerWidget {
       key: _formKey,
       child: Column(
         children: [
-          CustomAuthTextFormField(
-            text: "email",
+          Row(
+            children: [Text("PC 키보드 보기"), Icon(Icons.toggle_on)],
+          ),
+          CustomLoginTextFormWidget(
+            text: "아이디",
+            iconData: Icons.person,
             obscureText: false,
             funValidator: validateEmail(),
             controller: _email,
           ),
           const SizedBox(height: sizeM10),
-          CustomAuthTextFormField(
-            text: "Password",
+          CustomLoginTextFormWidget(
+            text: "비밀번호",
+            iconData: Icons.lock,
             obscureText: true,
             funValidator: validatePassword(),
             controller: _password,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class JoinBuildContainer1 extends StatelessWidget {
-  const JoinBuildContainer1({super.key});
+  TextEditingController _email;
+  TextEditingController _password;
+  TextEditingController _emailCheck;
+  JoinBuildContainer1(this._email, this._password, this._emailCheck);
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +17,7 @@ class JoinBuildContainer1 extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            controller: _email,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.person),
               labelText: "아이디                             @naver.com",
@@ -22,6 +26,7 @@ class JoinBuildContainer1 extends StatelessWidget {
           ),
           SizedBox(height: 16),
           TextFormField(
+            controller: _password,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.lock),
               labelText: "비밀번호",
@@ -30,6 +35,7 @@ class JoinBuildContainer1 extends StatelessWidget {
             obscureText: true, // 비밀번호 필드로 설정
           ),
           TextFormField(
+            controller: _emailCheck,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.email),
               labelText: "[선택] 비밀번호 분실시 확인용 이메일",
