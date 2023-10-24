@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/common_widgets/custom_appbar.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/widgets/login_body.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

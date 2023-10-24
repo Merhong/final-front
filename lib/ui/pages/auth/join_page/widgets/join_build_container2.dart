@@ -6,6 +6,7 @@ class JoinBuildContainer2 extends StatelessWidget {
   TextEditingController _birthday;
   TextEditingController _gender;
   TextEditingController _tel;
+
   JoinBuildContainer2(this._username, this._birthday, this._gender, this._tel);
 
   @override

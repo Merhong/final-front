@@ -13,7 +13,8 @@ class WebtoonListSliverAppBarAndPageView extends StatelessWidget {
       centerTitle: true,
       leading: Icon(Icons.cookie, size: 40, color: Colors.orange),
       actions: [
-        Padding(padding: EdgeInsets.all(5.0), child: Icon(Icons.search, size: 40)),
+        Padding(
+            padding: EdgeInsets.all(5.0), child: Icon(Icons.search, size: 40)),
       ],
       pinned: true,
       expandedHeight: 210,

@@ -7,7 +7,6 @@ import 'package:flutter_blog/data/model/user.dart';
 import 'package:flutter_blog/data/repository/user_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 // 1. 창고 데이터
 class SessionUser {
@@ -31,7 +30,8 @@ class SessionUser {
     if (responseDTO.success == true) {
       Navigator.pushNamed(mContext!, Move.loginPage);
     } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(SnackBar(content: Text(responseDTO.errorType!.message!)));
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text(responseDTO.errorType!.message!)));
     }
   }
 
@@ -51,9 +51,11 @@ class SessionUser {
 
       // print("성공");
       // 3. 페이지 이동
-      Navigator.pushNamedAndRemoveUntil(mContext!, Move.homeListPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          mContext!, Move.homeListPage, (route) => false);
     } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(SnackBar(content: Text("${responseDTO.errorType!.message!}")));
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("${responseDTO.errorType!.message!}")));
     }
   }
 
@@ -67,7 +69,8 @@ class SessionUser {
     // await 없으면 삭제 전에 로그인페이지로 이동돼서 바로 다시 자동로그인 될 수 있음
 
     // Navigator.popAndPushNamed(context, Move.loginPage);
-    Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        mContext!, Move.loginPage, (route) => false);
     // 로그아웃이니까 스택 쌓인거 싹 다 없애기
   }
 }

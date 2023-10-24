@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/model/user.dart';
-import 'package:logger/logger.dart';
 
 import '../dto/user_request.dart';
 
@@ -12,7 +11,9 @@ class UserRepository {
 //
   Future<ResponseDTO> fetchJoin(JoinReqDTO requestDTO) async {
     try {
-      Response response = await dio.post("/join", data: requestDTO.toJson()); // await dio.http메서드타입("주소", data: 보낼객체.toJson());
+      Response response = await dio.post("/join",
+          data: requestDTO
+              .toJson()); // await dio.http메서드타입("주소", data: 보낼객체.toJson());
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       // Map타입을 유저타입으로 바꿔주기 (그래도 타입은 dynamic이니까 사용할때 as User 붙여서)

@@ -4,6 +4,7 @@ class JoinBuildContainer1 extends StatelessWidget {
   TextEditingController _email;
   TextEditingController _password;
   TextEditingController _emailCheck;
+
   JoinBuildContainer1(this._email, this._password, this._emailCheck);
 
   @override

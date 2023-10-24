@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // 1. 창고 데이터
 class RequestParam {
   int? webtoonDetailId;
+
   // int? commentId;
 
   RequestParam({this.webtoonDetailId});
@@ -19,9 +19,9 @@ class ParamStore extends RequestParam {
     this.webtoonDetailId = webtoonId;
   }
 
-  // void movePostDetail(int postId) {
-  //   Navigator.push(mContext!, MaterialPageRoute(builder: (_) => PostDetailPage()));
-  // }
+// void movePostDetail(int postId) {
+//   Navigator.push(mContext!, MaterialPageRoute(builder: (_) => PostDetailPage()));
+// }
 }
 
 // 3. 창고 관리자

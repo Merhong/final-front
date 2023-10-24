@@ -1,5 +1,4 @@
 import 'package:flutter_blog/data/model/user.dart';
-import 'package:intl/intl.dart';
 
 class Author {
   int id;
@@ -26,7 +25,7 @@ class Author {
   Author.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         authorNickname = json["authorNickname"];
-  // user = json["user"];
-  // created = DateFormat("yyyy-mm-dd").parse(json["created"]), // 3
-  // updated = DateFormat("yyyy-mm-dd").parse(json["updated"]);
+// user = json["user"];
+// created = DateFormat("yyyy-mm-dd").parse(json["created"]), // 3
+// updated = DateFormat("yyyy-mm-dd").parse(json["updated"]);
 }

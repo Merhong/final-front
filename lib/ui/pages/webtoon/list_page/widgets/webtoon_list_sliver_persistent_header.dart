@@ -18,7 +18,8 @@ class WebtoonListSliverPersistentHeader extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.symmetric(horizontal: BorderSide(color: Colors.grey, width: 1.0)),
+            border: Border.symmetric(
+                horizontal: BorderSide(color: Colors.grey, width: 1.0)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

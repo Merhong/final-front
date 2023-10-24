@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 
 import '../../../../../_core/constants/size.dart';
-import '../../../../../data/model/webtoon.dart';
 import '../../../../common_widgets/advertising.dart';
 
 class WebtoonDetailDescription extends StatefulWidget {
@@ -14,7 +13,8 @@ class WebtoonDetailDescription extends StatefulWidget {
   });
 
   @override
-  State<WebtoonDetailDescription> createState() => _WebtoonDetailDescriptionState();
+  State<WebtoonDetailDescription> createState() =>
+      _WebtoonDetailDescriptionState();
 }
 
 class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
@@ -23,15 +23,18 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
+      padding: EdgeInsets.fromLTRB(
+          sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("${widget.webtoonDTO.title}", style: Theme.of(context).textTheme.titleMedium),
+          Text("${widget.webtoonDTO.title}",
+              style: Theme.of(context).textTheme.titleMedium),
           Row(
             children: [
               // Text("${widget.webtoon.authorList}"),
-              Text("${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/')}"),
+              Text(
+                  "${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/')}"),
               Text(" · "),
               Text("${widget.webtoonDTO.weekDay}요웹툰"),
             ],
