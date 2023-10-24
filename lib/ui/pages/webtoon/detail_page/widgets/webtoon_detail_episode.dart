@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../_core/constants/size.dart';
@@ -8,12 +9,12 @@ import '../../../../../data/model/webtoon.dart';
 class WebtoonDetailEpisode extends StatelessWidget {
   WebtoonDetailEpisode({
     super.key,
-    required this.webtoon,
+    required this.webtoonDTO,
     required this.index,
   });
 
   final int index;
-  final Webtoon webtoon;
+  final DetailPageWebtoonDTO webtoonDTO;
   final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
   @override
@@ -34,7 +35,7 @@ class WebtoonDetailEpisode extends StatelessWidget {
                   height: sizeXL50,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(sizeBorder5),
-                    child: Image.network('$imageURL/EpisodeThumbnail/${webtoon.episodeList![index].thumbnail}', fit: BoxFit.cover,
+                    child: Image.network('$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![index].thumbnail}', fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                       return Image.asset(
                         "assets/default_episode_Thumbnail.jpg",
@@ -47,10 +48,10 @@ class WebtoonDetailEpisode extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${webtoon.episodeList![index].detailTitle}"),
+                    Text("${webtoonDTO.episodeList![index].detailTitle}"),
                     Row(
                       children: [
-                        Text("★${webtoon.episodeList![index].starCount}   ${dateFormat.format(webtoon.episodeList![index].createdAt)}",
+                        Text("★${webtoonDTO.episodeList![index].starCount}   ${dateFormat.format(webtoonDTO.episodeList![index].createdAt)}",
                             style: TextStyle(fontSize: 10, color: Colors.grey)),
                       ],
                     ),

@@ -3,20 +3,20 @@ import 'package:intl/intl.dart';
 
 class Author {
   int id;
-  String authorname;
+  String authorNickname;
   User? user;
 
   // 생성자는 선택적 매개변수에 required 하는게 편하다
   Author({
     required this.id,
-    required this.authorname,
+    required this.authorNickname,
     this.user,
   });
 
   // 1. Dart 객체를 통신을 위한 Map 형태로 변환합니다.
   Map<String, dynamic> toJson() => {
         "id": id,
-        "authorname": authorname,
+        "authorNickname": authorNickname,
         "user": user,
       };
 
@@ -25,8 +25,8 @@ class Author {
   // 이름이 있는 생성자
   Author.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        authorname = json["authorname"],
-        user = json["user"];
+        authorNickname = json["authorNickname"];
+  // user = json["user"];
   // created = DateFormat("yyyy-mm-dd").parse(json["created"]), // 3
   // updated = DateFormat("yyyy-mm-dd").parse(json["updated"]);
 }

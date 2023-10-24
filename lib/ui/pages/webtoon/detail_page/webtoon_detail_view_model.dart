@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/model/webtoon.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/repository/webtoon_repository.dart';
@@ -11,8 +12,8 @@ import 'package:logger/logger.dart';
 // 1. 창고 데이터
 
 class WebtoonDetailModel {
-  Webtoon webtoon;
-  WebtoonDetailModel({required this.webtoon});
+  DetailPageWebtoonDTO webtoonDTO;
+  WebtoonDetailModel({required this.webtoonDTO});
 }
 
 // 2. 창고
@@ -29,7 +30,7 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
     print("notifyInit실행");
     int webtoonId = ref.read(paramProvider).webtoonDetailId!;
     ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoon("jwt임시", webtoonId);
-    state = WebtoonDetailModel(webtoon: responseDTO.data);
+    state = WebtoonDetailModel(webtoonDTO: responseDTO.data);
   }
   //
   // Future<void> notifyAdd(PostSaveReqDTO dto) async {

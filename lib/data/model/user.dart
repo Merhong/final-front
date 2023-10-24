@@ -7,6 +7,7 @@ class User {
   String email;
   DateTime? created;
   DateTime? updated;
+  String userTypeEnum;
 
   // 생성자는 선택적 매개변수에 required 하는게 편하다
   User({
@@ -15,6 +16,7 @@ class User {
     required this.email,
     required this.created,
     required this.updated,
+    required this.userTypeEnum,
   });
 
   // 1. Dart 객체를 통신을 위한 Map 형태로 변환합니다.
@@ -26,7 +28,8 @@ class User {
   User.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         username = json["username"],
-        email = json["email"];
+        email = json["email"],
+        userTypeEnum = json["userTypeEnum"];
   // created = DateFormat("yyyy-mm-dd").parse(json["created"]), // 3
   // updated = DateFormat("yyyy-mm-dd").parse(json["updated"]);
 }
