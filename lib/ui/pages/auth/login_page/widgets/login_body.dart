@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/user_request.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
+import 'package:flutter_blog/ui/common_widgets/custom_submit_button.dart';
+import 'package:flutter_blog/ui/common_widgets/custom_text_button.dart';
 import 'package:flutter_blog/ui/common_widgets/custom_text_form_field.dart';
-import 'package:flutter_blog/ui/pages/auth/login_page/widgets/login_form.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../_core/utils/validator_util.dart';
@@ -57,25 +58,30 @@ class LoginBody extends ConsumerWidget {
             SizedBox(
               height: 10,
             ),
-            Container(
-              height: 50,
-              width: double.infinity,
-              child: TextButton(
-                child: Text("로그인", style: TextStyle(color: Colors.white)),
-                style: TextButton.styleFrom(backgroundColor: Colors.green),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    LoginReqDTO loginReqDTO = LoginReqDTO(
-                      email: _email.text,
-                      password: _password.text,
-                    );
-                    print(_email.text);
-                    print(_password.text);
-                    SessionUser user = ref.read(sessionProvider);
-                    user.login(loginReqDTO);
-                  }
-                },
-              ),
+
+            CustomSubmitButton(
+              text: "로그인",
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  LoginReqDTO loginReqDTO = LoginReqDTO(
+                    email: _email.text,
+                    password: _password.text,
+                  );
+                  print(_email.text);
+                  print(_password.text);
+                  SessionUser user = ref.read(sessionProvider);
+                  user.login(loginReqDTO);
+                }
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/join");
+              },
+              child: Text("회원가입페이지로 이동"),
             ),
 
             //로그클래스 받아온다 , "Login": String
