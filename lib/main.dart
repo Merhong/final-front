@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       navigatorKey:
           navigatorKey, // context가 없는 곳에서 context를 사용할 수 있는 방법 (몰라도 됨)
       debugShowCheckedModeBanner: false,
-      // 최초 화면
+
       // 최초 화면
       initialRoute: '/webtoon_episode', // 라우트 이름을 '/webtoon_episode'로 변경
       routes: {
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
 
       // initialRoute: Move.EpisodePage(),
       // routes: getRouters(),
+
       theme: theme(),
     );
   }

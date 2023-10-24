@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../../data/model/webtoon.dart';
 import '../../../../common_widgets/advertising.dart';
 
 class WebtoonDetailDescription extends StatefulWidget {
+  final DetailPageWebtoonDTO webtoonDTO;
+
   const WebtoonDetailDescription({
     super.key,
-    required this.webtoon,
+    required this.webtoonDTO,
   });
-
-  final Webtoon webtoon;
 
   @override
   State<WebtoonDetailDescription> createState() => _WebtoonDetailDescriptionState();
@@ -26,12 +27,13 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("${widget.webtoon.title}", style: Theme.of(context).textTheme.titleMedium),
+          Text("${widget.webtoonDTO.title}", style: Theme.of(context).textTheme.titleMedium),
           Row(
             children: [
-              Text("${widget.webtoon.author.authorname}"),
+              // Text("${widget.webtoon.authorList}"),
+              Text("${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/')}"),
               Text(" · "),
-              Text("${widget.webtoon.weekDay}요웹툰"),
+              Text("${widget.webtoonDTO.weekDay}요웹툰"),
             ],
           ),
           // Text("${widget.webtoon.intro}", maxLines: 1, style: TextStyle(overflow: TextOverflow.ellipsis)),
@@ -51,15 +53,15 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                   // print("확장됨isExpanded:${isExpanded}");
                   isState = !isExpanded;
                   return Text(
-                    "${widget.webtoon.intro}",
+                    "${widget.webtoonDTO.intro}",
                     maxLines: 1,
                     style: TextStyle(overflow: TextOverflow.ellipsis),
                   );
                 },
                 body: Column(
                   children: [
-                    Text("${widget.webtoon.intro}"),
-                    Text("연령 ${widget.webtoon.age}세 이용가"),
+                    Text("${widget.webtoonDTO.intro}"),
+                    Text("연령 ${widget.webtoonDTO.ageLimit}세 이용가"),
                   ],
                 ),
               ),
@@ -72,15 +74,15 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
             children: [
               ExpansionTile(
                 title: Text(
-                  "${widget.webtoon.intro}",
+                  "${widget.webtoonDTO.intro}",
                   maxLines: 1,
                   style: TextStyle(overflow: TextOverflow.ellipsis),
                 ),
                 children: <Widget>[
                   Column(
                     children: [
-                      Text("${widget.webtoon.intro}"),
-                      Text("연령 ${widget.webtoon.age}세 이용가"),
+                      Text("${widget.webtoonDTO.intro}"),
+                      Text("연령 ${widget.webtoonDTO.ageLimit}세 이용가"),
                     ],
                   ),
                 ],

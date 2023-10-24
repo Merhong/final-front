@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/model/webtoon.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/widgets/webtoon_detail_description.dart';
@@ -18,7 +19,7 @@ class WebtoonDetailBody extends ConsumerWidget {
       return Center(child: CircularProgressIndicator());
     }
 
-    Webtoon webtoon = model!.webtoon;
+    DetailPageWebtoonDTO webtoonDTO = model!.webtoonDTO;
 
     return CustomScrollView(
       slivers: [
@@ -34,14 +35,14 @@ class WebtoonDetailBody extends ConsumerWidget {
 
         SliverToBoxAdapter(
           child: WebtoonDetailThumbnail(
-            image: (webtoon.episodeList != null && webtoon.episodeList!.length != 0)
-                ? "$imageURL/EpisodeThumbnail/${webtoon.episodeList![0].thumbnail}"
+            image: (webtoonDTO.episodeList != null && webtoonDTO.episodeList!.length != 0)
+                ? "$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![0].thumbnail}"
                 : "$imageURL/EpisodeThumbnail/default_episode_Thumbnail.jpg",
-            likeCount: webtoon.likeCount!,
+            likeCount: 1, // TODO
           ),
         ),
 
-        SliverToBoxAdapter(child: WebtoonDetailDescription(webtoon: webtoon)),
+        SliverToBoxAdapter(child: WebtoonDetailDescription(webtoonDTO: webtoonDTO)),
 
         // ListView.builder(
         //   itemCount: webtoon.episodeList!.length,
@@ -52,9 +53,9 @@ class WebtoonDetailBody extends ConsumerWidget {
 
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            childCount: webtoon.episodeList!.length,
+            childCount: webtoonDTO.episodeList!.length,
             (context, index) {
-              return WebtoonDetailEpisode(index: index, webtoon: webtoon);
+              return WebtoonDetailEpisode(index: index, webtoonDTO: webtoonDTO);
             },
           ),
         ),

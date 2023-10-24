@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-const String serverURL = "http://192.168.0.48:8081";
+
+const String serverURL = "http://192.168.0.45:8081";
+
 // 통신용 백엔드 서버 주소 여기 적기
 ///////////////////////////////////////////////////////////////
 

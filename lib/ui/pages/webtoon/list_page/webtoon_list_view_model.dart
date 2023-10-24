@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/model/webtoon.dart';
 import 'package:flutter_blog/data/repository/webtoon_repository.dart';
@@ -10,8 +11,9 @@ import 'package:logger/logger.dart';
 // 1. 창고 데이터
 
 class WebtoonListModel {
-  List<Webtoon> webtoonList;
-  WebtoonListModel({required this.webtoonList});
+  List<ListPageWebtoonDTO> webtoonDTOList;
+
+  WebtoonListModel({required this.webtoonDTOList});
 }
 
 // 2. 창고
@@ -25,7 +27,7 @@ class WebtoonListViewModel extends StateNotifier<WebtoonListModel?> {
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
     ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoonList("jwt임시");
-    state = WebtoonListModel(webtoonList: responseDTO.data);
+    state = WebtoonListModel(webtoonDTOList: responseDTO.data);
   }
 }
 
