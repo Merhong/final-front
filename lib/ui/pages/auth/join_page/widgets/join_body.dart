@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/common_widgets/custom_submit_button.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_build_container1.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_build_container2.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_build_container3.dart';
-import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_submit_button.dart';
 
 class JoinBody extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
 
   JoinBody({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +34,14 @@ class JoinBody extends StatelessWidget {
             // 인증 약관 전체 동의 컨테이너 추가
             JoinBuildContainer3(),
             Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Container(
-                  child: JoinSubmitButton(),
-                ))
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Container(
+                child: CustomSubmitButton(text: "회원가입", onPressed: () {}),
+              ),
+            )
           ],
         ),
       ),
     );
   }
 }
-
