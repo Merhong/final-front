@@ -3,7 +3,7 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/user_request.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/custom_text_form_field.dart';
-import 'package:flutter_blog/ui/pages/auth/login_page/widgets/login_form.dart';
+import 'package:flutter_blog/ui/pages/auth/join_page/join_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../_core/utils/validator_util.dart';
@@ -57,6 +57,7 @@ class LoginBody extends ConsumerWidget {
             SizedBox(
               height: 10,
             ),
+
             Container(
               height: 50,
               width: double.infinity,
@@ -77,6 +78,25 @@ class LoginBody extends ConsumerWidget {
                 },
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 50,
+              width: double.infinity,
+              child: TextButton(
+                child: Text("회원가입", style: TextStyle(color: Colors.white)),
+                style: TextButton.styleFrom(backgroundColor: Colors.green),
+                onPressed: () {
+                  print("회원가입페이지이동");
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => JoinPage(),
+                    ),
+                  );
+                },
+              ),
+            )
 
             //로그클래스 받아온다 , "Login": String
           ],
