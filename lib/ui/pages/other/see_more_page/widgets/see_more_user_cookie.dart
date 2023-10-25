@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
-class UserCookie extends StatelessWidget {
-  const UserCookie({super.key});
+class SeeMoreUserCookie extends StatelessWidget {
+  const SeeMoreUserCookie({super.key});
 
   @override
   Widget build(BuildContext context) {
