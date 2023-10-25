@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
+import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
+
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart';
 
@@ -14,6 +18,7 @@ class Move {
   static String loginPage = "/login";
   static String joinPage = "/join";
   static String termsPage = "/terms";
+  static String cookieShop = "/cookieShop";
   static String replyPage = "/webtoons/reply";
 }
 
@@ -27,6 +32,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.loginPage: (context) => LoginPage(),
     Move.joinPage: (context) => const JoinPage(),
     Move.termsPage: (context) => TermsPage(),
+    Move.cookieShop: (context) => CookieShop(),
     Move.replyPage: (context) => ReplyPage(),
   };
 }

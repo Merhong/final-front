@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // 최초 화면
-      initialRoute: Move.replyPage,
+
+      initialRoute: Move.cookieShop,
+      //initialRoute: Move.replyPage,
 
       // _core/move.dart 에 적어주세요
       routes: getRouters(),
