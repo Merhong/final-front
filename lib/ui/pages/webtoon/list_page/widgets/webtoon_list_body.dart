@@ -31,18 +31,17 @@ class WebtoonListBody extends ConsumerWidget {
         WebtoonListSliverAppBarAndPageView(),
         WebtoonListSliverPersistentHeader(),
         WebtoonListMiddleAdvertising(),
-
-        WebtoonListSliverGrid(webtoonDTOList: webtoonDTOList),
+        WebtoonListSliverGrid(),
         //WebtoonListSliverGrid(webtoonList: webtoonList),
 
-        SliverToBoxAdapter(
-          child: Container(
-            height: 200.0, // 높이 설정
-            child: WebtoonListBottomView(),
-          ),
-        ),
-        WebtoonListBottomRandom(),
-        WebttonListBottomReview(),
+        // SliverToBoxAdapter(
+        //   child: Container(
+        //     height: 200.0, // 높이 설정
+        //     child: WebtoonListBottomView(),
+        //   ),
+        // ),
+        // WebtoonListBottomRandom(),
+        // WebttonListBottomReview(),
       ],
     );
   }
