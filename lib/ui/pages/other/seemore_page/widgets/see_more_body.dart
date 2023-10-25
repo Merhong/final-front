@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/common_widgets/advertising.dart';
-import 'package:flutter_blog/ui/pages/seemore/widgets/function_icons.dart';
-import 'package:flutter_blog/ui/pages/seemore/widgets/user_cookie.dart';
-import 'package:flutter_blog/ui/pages/seemore/widgets/user_info.dart';
+import 'package:flutter_blog/ui/pages/other/seemore_page/widgets/function_icons.dart';
+import 'package:flutter_blog/ui/pages/other/seemore_page/widgets/user_cookie.dart';
+import 'package:flutter_blog/ui/pages/other/seemore_page/widgets/user_info.dart';
 
 class SeeMoreBody extends StatelessWidget {
   const SeeMoreBody({super.key});

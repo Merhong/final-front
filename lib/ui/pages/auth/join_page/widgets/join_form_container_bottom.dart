@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_my_expansion_tile.dart';
 
-class JoinBuildContainer3 extends StatelessWidget {
-  const JoinBuildContainer3({super.key});
+class JoinBuildContainerBottom extends StatelessWidget {
+  const JoinBuildContainerBottom({super.key});
 
   @override
   Widget build(BuildContext context) {

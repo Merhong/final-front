@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,17 +23,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // 최초 화면
-      initialRoute: '/home_list',
-      // 라우트 이름을 '/webtoon_episode'로 변경
-      routes: {
-        '/webtoon_episode': (context) => WebtoonEpisodePage(), // 새로운 라우트 추가
-        '/home_list': (context) => WebtoonListPage(),
-        // 다른 라우트들도 필요하다면 여기에 추가
-      },
+      initialRoute: Move.loginPage,
 
-      // initialRoute: Move.EpisodePage(),
-      // routes: getRouters(),
-
+      // _core/move.dart 에 적어주세요
+      routes: getRouters(),
       theme: theme(),
     );
   }

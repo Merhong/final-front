@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_build_container2_buttons.dart';
+import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_middle_buttons.dart';
 
-class JoinBuildContainer2 extends StatelessWidget {
+class JoinFormContainerMiddle extends StatelessWidget {
   TextEditingController _username;
   TextEditingController _birthday;
   TextEditingController _gender;
   TextEditingController _tel;
 
-  JoinBuildContainer2(this._username, this._birthday, this._gender, this._tel);
+  JoinFormContainerMiddle(this._username, this._birthday, this._gender, this._tel);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class JoinBuildContainer2 extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16),
-          JoinBuildContainer2Buttons(),
+          JoinFormContainerMiddleButtons(),
           TextFormField(
             controller: _tel,
             decoration: InputDecoration(

@@ -1,9 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/move.dart';
 
-class AppBottom extends StatelessWidget {
+class AppBottom extends StatefulWidget {
   const AppBottom({
     super.key,
   });
+
+  @override
+  State<AppBottom> createState() => _AppBottomState();
+}
+
+class _AppBottomState extends State<AppBottom> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    print("index : ${index}");
+
+    _selectedIndex = index;
+
+    if (index == 0) {
+      Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
+    }
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +59,12 @@ class AppBottom extends StatelessWidget {
         ],
         selectedItemColor: Colors.black,
         // 선택된 아이템의 아이콘 및 라벨 텍스트 색상
-        unselectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
         // 선택되지 않은 아이템의 아이콘 및 라벨 텍스트 색상
         backgroundColor: Colors.white,
         selectedFontSize: 10,
         unselectedFontSize: 10,
+        onTap: _onItemTapped,
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/common_widgets/app_bottom.dart';
-import 'package:flutter_blog/ui/pages/seemore/widgets/see_more_body.dart';
+import 'package:flutter_blog/ui/pages/other/seemore_page/widgets/see_more_body.dart';
 
 class SeeMore extends StatelessWidget {
   const SeeMore({super.key});
