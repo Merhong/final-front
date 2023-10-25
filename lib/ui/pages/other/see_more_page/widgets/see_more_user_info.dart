@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
-class UserInfo extends StatelessWidget {
-  const UserInfo({super.key});
+class SeeMoreUserInfo extends StatelessWidget {
+  const SeeMoreUserInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
