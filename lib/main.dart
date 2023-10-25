@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
-import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '_core/constants/theme.dart';
-import 'ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // 최초 화면
-      initialRoute: Move.loginPage,
+      initialRoute: Move.replyPage,
 
       // _core/move.dart 에 적어주세요
       routes: getRouters(),
