@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class JoinBuildContainer1 extends StatelessWidget {
+class JoinFormContainerTop extends StatelessWidget {
   TextEditingController _email;
   TextEditingController _password;
   TextEditingController _emailCheck;
 
-  JoinBuildContainer1(this._email, this._password, this._emailCheck);
+  JoinFormContainerTop(this._email, this._password, this._emailCheck);
 
   @override
   Widget build(BuildContext context) {

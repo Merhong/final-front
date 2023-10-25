@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class LoginForm extends ConsumerWidget {
   // 컨슈머위젯으로
   final _formKey = GlobalKey<FormState>();
-  final _email = TextEditingController(text: "ssar@nate.com");
+  final _email = TextEditingController(text: "ssar@naver.com");
   final _password = TextEditingController(text: "1234");
 
   // final _email = TextEditingController();
