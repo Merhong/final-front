@@ -36,7 +36,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
               Text(
                   "${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/')}"),
               Text(" · "),
-              Text("${widget.webtoonDTO.weekDay}요웹툰"),
+              Text("${widget.webtoonDTO.webtoonWeekDayEnum}요웹툰"),
             ],
           ),
           // Text("${widget.webtoon.intro}", maxLines: 1, style: TextStyle(overflow: TextOverflow.ellipsis)),

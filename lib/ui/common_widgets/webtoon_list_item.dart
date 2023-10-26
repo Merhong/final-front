@@ -36,7 +36,7 @@ class WebtoonListItem extends StatelessWidget {
                   },
                 ),
               ),
-              if (webtoonDTO.specially == "순위") ...[
+              if (webtoonDTO.webtoonSpeciallyEnum == "순위") ...[
                 Container(
                   height: sizeWebtoonListItemPictureHeight160,
                   child: Stack(
@@ -54,7 +54,7 @@ class WebtoonListItem extends StatelessWidget {
                   ),
                 ),
               ],
-              if (webtoonDTO.specially == "신작")
+              if (webtoonDTO.webtoonSpeciallyEnum == "신작")
                 Padding(
                   padding: EdgeInsets.all(3.0),
                   child: CircleAvatar(
@@ -62,7 +62,7 @@ class WebtoonListItem extends StatelessWidget {
                       radius: 15,
                       child: Text("신작", style: TextStyle(color: Colors.black))),
                 ),
-              if (webtoonDTO.specially == "무료")
+              if (webtoonDTO.webtoonSpeciallyEnum == "무료")
                 Stack(
                   children: [
                     Icon(Icons.circle, size: 34, color: Colors.black),
@@ -82,7 +82,7 @@ class WebtoonListItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            webtoonDTO.specially == "휴재"
+            webtoonDTO.webtoonSpeciallyEnum == "휴재"
                 ? Row(
                     children: [
                       Container(
@@ -93,7 +93,7 @@ class WebtoonListItem extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          "${webtoonDTO.specially}",
+                          "${webtoonDTO.webtoonSpeciallyEnum}",
                           style: TextStyle(color: Colors.grey, fontSize: 8),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -108,7 +108,7 @@ class WebtoonListItem extends StatelessWidget {
                       ),
                     ],
                   )
-                : webtoonDTO.specially == "완결"
+                : webtoonDTO.webtoonSpeciallyEnum == "완결"
                     ? Row(
                         children: [
                           Container(
@@ -119,7 +119,7 @@ class WebtoonListItem extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              "${webtoonDTO.specially}",
+                              "${webtoonDTO.webtoonSpeciallyEnum}",
                               style: TextStyle(color: Colors.blue, fontSize: 8),
                               overflow: TextOverflow.ellipsis,
                             ),

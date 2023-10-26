@@ -15,10 +15,13 @@ class WebtoonDetailBody extends ConsumerWidget {
     WebtoonDetailModel? model = ref.watch(webtoonDetailProvider);
 
     if (model == null) {
+      ref.read(webtoonDetailProvider.notifier).notifyInit();
       return Center(child: CircularProgressIndicator());
     }
 
-    DetailPageWebtoonDTO webtoonDTO = model!.webtoonDTO;
+    DetailPageWebtoonDTO webtoonDTO = model!.webtoonDTO!;
+
+    print("webtoonDTO.interestCount : ${webtoonDTO.interestCount}");
 
     return CustomScrollView(
       slivers: [
@@ -38,7 +41,7 @@ class WebtoonDetailBody extends ConsumerWidget {
                     webtoonDTO.episodeList!.length != 0)
                 ? "$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![0].thumbnail}"
                 : "$imageURL/EpisodeThumbnail/default_episode_Thumbnail.jpg",
-            likeCount: 1, // TODO
+            interestCount: webtoonDTO.interestCount ?? -1, // TODO
           ),
         ),
 
@@ -51,6 +54,7 @@ class WebtoonDetailBody extends ConsumerWidget {
         //     return WebtoonDetailEpisode(index: index, webtoon: webtoon);
         //   },
         // ),
+        //
 
         SliverList(
           delegate: SliverChildBuilderDelegate(

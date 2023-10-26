@@ -30,7 +30,9 @@ class WebtoonListSliverGrid extends ConsumerWidget {
       week = weekModel.week;
     }
     if (week != "모두") {
-      webtoonDTOList = webtoonDTOList.where((e) => e.weekDay!.contains(week)).toList();
+      webtoonDTOList = webtoonDTOList
+          .where((e) => e.webtoonWeekDayEnum!.contains(week))
+          .toList();
     }
 
     return SliverPadding(
@@ -48,7 +50,8 @@ class WebtoonListSliverGrid extends ConsumerWidget {
                 onTap: () {
                   ParamStore paramStore = ref.read(paramProvider);
                   paramStore.addWebtoonDetailId(webtoonDTOList[index].id);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
                 },
                 child: WebtoonListItem(webtoonDTO: webtoonDTOList[index]));
           },

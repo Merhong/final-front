@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CustomBottomTitleAppbar extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
+
   CustomBottomTitleAppbar(this.title);
 
   @override

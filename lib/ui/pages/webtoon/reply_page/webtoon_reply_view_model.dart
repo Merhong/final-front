@@ -1,9 +1,8 @@
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/episode_repository.dart';
-import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,14 +24,17 @@ class WebtoonReplyViewModel extends StateNotifier<WebtoonReplyModel?> {
 
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
-    ResponseDTO responseDTO = await EpisodeRepository().fetchCommentList("jwt임시", episodeId);
+    ResponseDTO responseDTO =
+        await EpisodeRepository().fetchCommentList(sessionUser.jwt!, episodeId);
     state = WebtoonReplyModel(commentList: responseDTO.data);
   }
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
-final webtoonReplyProvider = StateNotifierProvider.autoDispose<WebtoonReplyViewModel, WebtoonReplyModel?>((ref) {
+final webtoonReplyProvider = StateNotifierProvider.autoDispose<
+    WebtoonReplyViewModel, WebtoonReplyModel?>((ref) {
   // Logger().d("webtoonReply창고관리자 실행됨");
   return new WebtoonReplyViewModel(ref, null)..notifyInit();
 });

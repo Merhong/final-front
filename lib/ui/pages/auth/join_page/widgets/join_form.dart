@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/common_widgets/custom_submit_button.dart';
-import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_top.dart';
-import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_middle.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_bottom.dart';
+import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_middle.dart';
+import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_top.dart';
 
 class JoinForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

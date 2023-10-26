@@ -2,11 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
-import 'package:flutter_blog/data/dto/post_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
-import 'package:flutter_blog/data/model/post.dart';
 import 'package:logger/logger.dart';
 
 // MVVM패턴 : View -> Provider(전역프로바이더or뷰모델) -> Repository(통신+파싱을 책임)
@@ -69,10 +65,7 @@ class EpisodeRepository {
     try {
       // 통신
       Response response = await dio.get("/episodes/$id",
-          options: Options(headers: {
-            "Authorization":
-                "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF2ZXIuY29tIiwiY29va2llIjowLCJ1c2VybmFtZSI6IuyMgCIsInVzZXJUeXBlRW51bSI6Ik5PUk1BTCIsImV4cCI6MTY5ODg0NjUzOX0.R8UFPfLGv-qL9HwuhNVZm5RrlaQbffuqhQnpXnnEgPPCTywKYeZKOkp5wd1wQeGyII7GsIvpRqaRuWSeMOjZRw"
-          }));
+          options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -97,17 +90,15 @@ class EpisodeRepository {
       // 통신
       print("통신시작 episodeId : ${episodeId}");
       Response response = await dio.get("/comments/$episodeId",
-          options: Options(headers: {
-            "Authorization":
-                "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE2OTgzODY3MTN9.bCIsMY0FRg4MFCH32s6UYexrTjcm23hPoN8A9-hJsok-a-zA_BYg7SldbOX_3y1JMMJkRFz5PZHFEI4bzqd53w"
-          }));
+          options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       List<dynamic> mapList = responseDTO.data as List<dynamic>;
 
-      List<CommentDTO> commentList = mapList.map((commentDTO) => CommentDTO.fromJson(commentDTO)).toList();
+      List<CommentDTO> commentList =
+          mapList.map((commentDTO) => CommentDTO.fromJson(commentDTO)).toList();
 
       // Logger().d(webtoonList);
 
@@ -126,36 +117,36 @@ class EpisodeRepository {
     }
   }
 
-  // Future<ResponseDTO> fetchWebtoonList(String jwt) async {
-  //   try {
-  //     // 통신
-  //     Response response = await dio.get("/webtoons",
-  //         options: Options(headers: {
-  //           "Authorization":
-  //               "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE2OTgzODY3MTN9.bCIsMY0FRg4MFCH32s6UYexrTjcm23hPoN8A9-hJsok-a-zA_BYg7SldbOX_3y1JMMJkRFz5PZHFEI4bzqd53w"
-  //         }));
-  //
-  //     // 응답 받은 데이터 파싱
-  //     ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
-  //
-  //     List<dynamic> mapList = responseDTO.data as List<dynamic>;
-  //
-  //     List<ListPageWebtoonDTO> webtoonList = mapList.map((webtoonDTO) => ListPageWebtoonDTO.fromJson(webtoonDTO)).toList();
-  //
-  //     // Logger().d(webtoonList);
-  //
-  //     responseDTO.data = webtoonList;
-  //
-  //     return responseDTO;
-  //   } catch (e) {
-  //     if (e is DioError) {
-  //       Logger().d("오류: ${e.response!.data}");
-  //       return new ResponseDTO.fromJson(e.response!.data);
-  //     }
-  //
-  //     // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
-  //     // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
-  //     return ResponseDTO(success: false);
-  //   }
-  // }
+// Future<ResponseDTO> fetchWebtoonList(String jwt) async {
+//   try {
+//     // 통신
+//     Response response = await dio.get("/webtoons",
+//         options: Options(headers: {
+//           "Authorization":
+//               "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE2OTgzODY3MTN9.bCIsMY0FRg4MFCH32s6UYexrTjcm23hPoN8A9-hJsok-a-zA_BYg7SldbOX_3y1JMMJkRFz5PZHFEI4bzqd53w"
+//         }));
+//
+//     // 응답 받은 데이터 파싱
+//     ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+//
+//     List<dynamic> mapList = responseDTO.data as List<dynamic>;
+//
+//     List<ListPageWebtoonDTO> webtoonList = mapList.map((webtoonDTO) => ListPageWebtoonDTO.fromJson(webtoonDTO)).toList();
+//
+//     // Logger().d(webtoonList);
+//
+//     responseDTO.data = webtoonList;
+//
+//     return responseDTO;
+//   } catch (e) {
+//     if (e is DioError) {
+//       Logger().d("오류: ${e.response!.data}");
+//       return new ResponseDTO.fromJson(e.response!.data);
+//     }
+//
+//     // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+//     // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+//     return ResponseDTO(success: false);
+//   }
+// }
 }
