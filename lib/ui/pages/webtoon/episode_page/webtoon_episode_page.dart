@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
+import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
+import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_body.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_bottom_bar.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_image.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'widgets/webtoon_episode_app_bar.dart';
 
-void main() {
-  runApp(WebtoonApp());
-}
-
-class WebtoonApp extends StatelessWidget {
+class WebtoonEpisodePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: WebtoonEpisodePage(),
-    );
-  }
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    WebtoonEpisodeModel? model = ref.watch(webtoonEpisodeProvider);
 
-class WebtoonEpisodePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+
+    EpisodeDTO episodeDTO = model!.episodeDTO;
+
     return Scaffold(
-      appBar: WebtoonEpisodeAppBar(),
-      body: WebtoonEpisodeImage(),
-      bottomNavigationBar: WebtoonEpisodeBottomBar(),
+      appBar: WebtoonEpisodeAppBar(episodeDTO.detailTitle),
+      body: WebtoonEpisodeBody(episodeDTO),
+      bottomNavigationBar: WebtoonEpisodeBottomBar(episodeDTO: episodeDTO),
     );
   }
 }
