@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomLoginTextFormWidget extends StatelessWidget {
+class LoginTextFormWidget extends StatelessWidget {
   final String text;
   final IconData iconData; // 아이콘 데이터 추가
 
@@ -8,7 +8,7 @@ class CustomLoginTextFormWidget extends StatelessWidget {
   final funValidator;
   final TextEditingController controller;
 
-  CustomLoginTextFormWidget({
+  LoginTextFormWidget({
     required this.text,
     required this.iconData,
     this.obscureText = false,

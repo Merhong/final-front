@@ -17,7 +17,7 @@ class CustomSubmitButton extends StatelessWidget {
       child: TextButton(
         child: Text(text, style: TextStyle(color: Colors.white)),
         style: TextButton.styleFrom(backgroundColor: Colors.green),
-        onPressed: onPressed,
+        onPressed: () {},
       ),
     );
   }
