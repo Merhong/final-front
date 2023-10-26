@@ -20,11 +20,23 @@ class LoginBody extends ConsumerWidget {
           children: [
             SizedBox(height: sizeL20),
             //size.dart const붙여서 사용 가능
-            Text("Naver로고"),
+            Container(
+                child: Text(
+                  "Naver로고",
+                  style: TextStyle(fontSize: 30, color: Colors.green),
+                ),
+                alignment: Alignment.center),
             SizedBox(height: sizeL20),
             LoginForm(),
             SizedBox(height: sizeL20),
-            _buildTextButton(context),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildTextButtonFindId(context),
+                _buildTextButtonPassword(context),
+                _buildTextButtonJoin(context),
+              ],
+            ),
 
             //로그클래스 받아온다 , "Login": String
           ],
@@ -33,12 +45,32 @@ class LoginBody extends ConsumerWidget {
     );
   }
 
-  TextButton _buildTextButton(BuildContext context) {
+  // TODO : 아이디 찾기 페이지 제작 및 연결
+  TextButton _buildTextButtonFindId(BuildContext context) {
     return TextButton(
       onPressed: () {
         Navigator.pushNamed(context, "/join");
       },
-      child: Text("회원가입페이지로 이동"),
+      child: Text("아이디 찾기"),
+    );
+  }
+
+  // TODO : 비밀번호 찾기 페이지 제작 및 연결
+  TextButton _buildTextButtonPassword(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(context, "/join");
+      },
+      child: Text("비밀번호 찾기"),
+    );
+  }
+
+  TextButton _buildTextButtonJoin(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(context, "/join");
+      },
+      child: Text("회원가입"),
     );
   }
 }

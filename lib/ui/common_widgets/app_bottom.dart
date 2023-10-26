@@ -18,8 +18,25 @@ class _AppBottomState extends State<AppBottom> {
 
     _selectedIndex = index;
 
+    // 웹툰
     if (index == 0) {
       Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
+    }
+    // 추천완결
+    else if (index == 1) {
+      Navigator.pushNamedAndRemoveUntil(context, Move.recommendPage, (route) => false);
+    }
+    // 베스트 도전
+    else if (index == 2) {
+      Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
+    }
+    // MY
+    else if (index == 3) {
+      Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
+    }
+    // 더보기
+    else if (index == 4) {
+      Navigator.pushNamedAndRemoveUntil(context, Move.seeMorePage, (route) => false);
     }
 
     setState(() {});
@@ -57,10 +74,12 @@ class _AppBottomState extends State<AppBottom> {
             label: '더보기',
           ),
         ],
-        selectedItemColor: Colors.black,
+
+
         // 선택된 아이템의 아이콘 및 라벨 텍스트 색상
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.black,
         // 선택되지 않은 아이템의 아이콘 및 라벨 텍스트 색상
+        unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
         selectedFontSize: 10,
         unselectedFontSize: 10,

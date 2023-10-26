@@ -5,7 +5,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 const String serverURL = "http://192.168.0.48:8081"; // 김지원
 // const String serverURL = "http://192.168.0.45:8081"; // 김지원
 // const String serverURL = "http://192.168.0.50:8081"; // 김대홍
-
 ///////////////////////////////////////////////////////////////
 
 const String imageURL = "${serverURL}/image?route=";
