@@ -2,6 +2,7 @@ import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/episode_repository.dart';
 import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
@@ -25,8 +26,9 @@ class WebtoonReplyViewModel extends StateNotifier<WebtoonReplyModel?> {
 
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
-    ResponseDTO responseDTO = await EpisodeRepository().fetchCommentList("jwt임시", episodeId);
+    ResponseDTO responseDTO = await EpisodeRepository().fetchCommentList(sessionUser.jwt!, episodeId);
     state = WebtoonReplyModel(commentList: responseDTO.data);
   }
 }

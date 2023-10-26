@@ -68,11 +68,7 @@ class EpisodeRepository {
   Future<ResponseDTO> fetchEpisode(String jwt, int id) async {
     try {
       // 통신
-      Response response = await dio.get("/episodes/$id",
-          options: Options(headers: {
-            "Authorization":
-                "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF2ZXIuY29tIiwiY29va2llIjowLCJ1c2VybmFtZSI6IuyMgCIsInVzZXJUeXBlRW51bSI6Ik5PUk1BTCIsImV4cCI6MTY5ODg0NjUzOX0.R8UFPfLGv-qL9HwuhNVZm5RrlaQbffuqhQnpXnnEgPPCTywKYeZKOkp5wd1wQeGyII7GsIvpRqaRuWSeMOjZRw"
-          }));
+      Response response = await dio.get("/episodes/$id", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -96,11 +92,7 @@ class EpisodeRepository {
     try {
       // 통신
       print("통신시작 episodeId : ${episodeId}");
-      Response response = await dio.get("/comments/$episodeId",
-          options: Options(headers: {
-            "Authorization":
-                "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE2OTgzODY3MTN9.bCIsMY0FRg4MFCH32s6UYexrTjcm23hPoN8A9-hJsok-a-zA_BYg7SldbOX_3y1JMMJkRFz5PZHFEI4bzqd53w"
-          }));
+      Response response = await dio.get("/comments/$episodeId", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);

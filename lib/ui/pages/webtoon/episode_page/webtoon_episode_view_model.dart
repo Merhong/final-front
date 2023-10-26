@@ -1,6 +1,7 @@
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/episode_repository.dart';
 import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
@@ -27,8 +28,9 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
     print("에피소드notifyInit실행");
+    SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
-    ResponseDTO responseDTO = await EpisodeRepository().fetchEpisode("jwt임시", episodeId);
+    ResponseDTO responseDTO = await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
     state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
   }
 

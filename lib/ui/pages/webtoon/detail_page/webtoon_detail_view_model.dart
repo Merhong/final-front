@@ -1,6 +1,7 @@
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,10 +25,21 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
   //
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
     int webtoonId = ref.read(paramProvider).webtoonDetailId!;
-    ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoon("jwt임시", webtoonId);
+    ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoon(sessionUser.jwt!, webtoonId);
     state = WebtoonDetailModel(webtoonDTO: responseDTO.data);
   }
+
+  Future<void> notifyInterest() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+
+    //TODO
+    // ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoon(sessionUser.jwt!, webtoonId);
+    // state!.webtoonDTO.interestCount = state!.webtoonDTO.interestCount + 1;
+    // state = WebtoonDetailModel(webtoonDTO: responseDTO.data);
+  }
+
 //
 // Future<void> notifyAdd(PostSaveReqDTO dto) async {
 //   SessionUser sessionUser = ref.read(sessionProvider);
