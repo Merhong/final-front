@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/pages/auth/logout_page/logout_page.dart';
 import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
+
 import 'package:flutter_blog/ui/pages/other/my_page/my_page.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/see_more_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
@@ -15,7 +17,6 @@ class Move {
   static String episodePage = "/webtoon/episode";
 
 // detail페이지는 페이지마다 주소가 다르니까 못함
-
   static String homeListPage = "/webtoons/home"; // 홈페이지
   static String loginPage = "/login"; // 로그인 페이지
   static String joinPage = "/join"; // 회원가입 페이지
@@ -35,6 +36,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.homeListPage: (context) => WebtoonListPage(),
     // Move.homeListPage: (context) => episodePage(),
     Move.loginPage: (context) => LoginPage(),
+    Move.logoutPage: (context) => LogoutPage(),
     Move.joinPage: (context) => const JoinPage(),
     Move.termsPage: (context) => TermsPage(),
     Move.cookieShop: (context) => CookieShop(),
