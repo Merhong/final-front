@@ -17,7 +17,8 @@ class WebtoonDetailEpisode extends ConsumerWidget {
 
   final int index;
   final DetailPageWebtoonDTO webtoonDTO;
-  final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+  NumberFormat numberFormat = NumberFormat("0.00");
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,7 +57,8 @@ class WebtoonDetailEpisode extends ConsumerWidget {
                     Text("${webtoonDTO.episodeList![index].detailTitle}"),
                     Row(
                       children: [
-                        Text("★${webtoonDTO.episodeList![index].starCount}   ${dateFormat.format(webtoonDTO.episodeList![index].createdAt)}",
+                        Text(
+                            "★${(webtoonDTO.episodeList![index].starScore / webtoonDTO.episodeList![index].starCount).toStringAsFixed(2)}   ${dateFormat.format(webtoonDTO.episodeList![index].createdAt)}",
                             style: TextStyle(fontSize: 10, color: Colors.grey)),
                       ],
                     ),

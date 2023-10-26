@@ -30,7 +30,7 @@ class WebtoonListSliverGrid extends ConsumerWidget {
       week = weekModel.week;
     }
     if (week != "모두") {
-      webtoonDTOList = webtoonDTOList.where((e) => e.weekDay!.contains(week)).toList();
+      webtoonDTOList = webtoonDTOList.where((e) => e.webtoonWeekDayEnum!.contains(week)).toList();
     }
 
     return SliverPadding(
