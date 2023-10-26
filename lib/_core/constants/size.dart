@@ -21,6 +21,10 @@ double sizeGetScreenWidth(BuildContext context) {
   return MediaQuery.of(context).size.width;
 }
 
+double sizeGetScreenHeight(BuildContext context) {
+  return MediaQuery.of(context).size.height;
+}
+
 // double getDrawerWidth(BuildContext context) {
 //   return getScreenWidth(context) * 0.6;
 // }

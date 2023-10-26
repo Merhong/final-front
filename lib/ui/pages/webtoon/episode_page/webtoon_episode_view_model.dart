@@ -1,33 +1,37 @@
+import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/data/repository/episode_repository.dart';
 import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 // 1. 창고 데이터
 
-class WebtoonDetailModel {
-  DetailPageWebtoonDTO webtoonDTO;
+class WebtoonEpisodeModel {
+  EpisodeDTO episodeDTO;
 
-  WebtoonDetailModel({required this.webtoonDTO});
+  WebtoonEpisodeModel({required this.episodeDTO});
 }
 
 // 2. 창고
-class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
+class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
   Ref ref;
 
   final mContext = navigatorKey.currentContext;
 
   // StateNotifier<PostListModel?> 에서 PostListModel은 상태의 타입
-  WebtoonDetailViewModel(this.ref, super._state); // 상태가 바뀌면 자동으로 그려짐
-  //
+  WebtoonEpisodeViewModel(this.ref, super._state); // 상태가 바뀌면 자동으로 그려짐
+
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
-    int webtoonId = ref.read(paramProvider).webtoonDetailId!;
-    ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoon("jwt임시", webtoonId);
-    state = WebtoonDetailModel(webtoonDTO: responseDTO.data);
+    print("에피소드notifyInit실행");
+    int episodeId = ref.read(paramProvider).episodeId!;
+    ResponseDTO responseDTO = await EpisodeRepository().fetchEpisode("jwt임시", episodeId);
+    state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
   }
+
 //
 // Future<void> notifyAdd(PostSaveReqDTO dto) async {
 //   SessionUser sessionUser = ref.read(sessionProvider);
@@ -54,7 +58,7 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
-final webtoonDetailProvider = StateNotifierProvider.autoDispose<WebtoonDetailViewModel, WebtoonDetailModel?>((ref) {
-  // Logger().d("webtoonDetail창고관리자 실행됨");
-  return new WebtoonDetailViewModel(ref, null)..notifyInit();
+final webtoonEpisodeProvider = StateNotifierProvider.autoDispose<WebtoonEpisodeViewModel, WebtoonEpisodeModel?>((ref) {
+  Logger().d("episode창고관리자 실행됨");
+  return new WebtoonEpisodeViewModel(ref, null)..notifyInit();
 });

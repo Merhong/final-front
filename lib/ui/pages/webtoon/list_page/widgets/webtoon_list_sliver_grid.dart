@@ -49,7 +49,6 @@ class WebtoonListSliverGrid extends ConsumerWidget {
                   ParamStore paramStore = ref.read(paramProvider);
                   paramStore.addWebtoonDetailId(webtoonDTOList[index].id);
                   Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
-                  // print("실행됨");
                 },
                 child: WebtoonListItem(webtoonDTO: webtoonDTOList[index]));
           },

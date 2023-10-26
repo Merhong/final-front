@@ -1,21 +1,27 @@
 import 'package:intl/intl.dart';
 
 class Episode {
-  int episodeId;
+  int episodeId; //
   String detailTitle;
-  String thumbnail;
-  double starCount;
+  String? thumbnail;
+  String? authorText;
   int? cookieCost;
+  double starScore;
+  double starCount;
   DateTime createdAt;
+  // DateTime? updatedAt;
 
   // 생성자는 선택적 매개변수에 required 하는게 편하다
   Episode({
     required this.episodeId,
     required this.detailTitle,
-    required this.thumbnail,
-    required this.starCount,
+    this.thumbnail,
+    this.authorText,
     this.cookieCost,
+    required this.starScore,
+    required this.starCount,
     required this.createdAt,
+    // this.updatedAt,
   });
 
   // 2. Map 형태로 받아서 Dart 객체로 변환합니다.
@@ -25,12 +31,15 @@ class Episode {
       : episodeId = json["episodeId"],
         detailTitle = json["detailTitle"],
         thumbnail = json["thumbnail"],
-        starCount = json["starCount"],
+        authorText = json["authorText"],
         cookieCost = json["cookieCost"],
+        starScore = json["starScore"],
+        starCount = json["starCount"],
         createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]);
+  // updatedAt = DateFormat("yyyy-mm-dd").parse(json["updatedAt"]);
 
   @override
   String toString() {
-    return 'Episode{episodeId: $episodeId, detailTitle: $detailTitle, thumbnail: $thumbnail, starCount: $starCount, cookieCost: $cookieCost, createdAt: $createdAt}';
+    return 'Episode{episodeId: $episodeId, detailTitle: $detailTitle, thumbnail: $thumbnail, cookieCost: $cookieCost, starScore: $starScore, starCount: $starCount, createdAt: $createdAt}';
   }
 }
