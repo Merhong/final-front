@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
-import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
-import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
-
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
+import 'package:flutter_blog/ui/pages/webtoon/my_page/my_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart';
 
 import '../../ui/pages/auth/join_page/join_page.dart';
@@ -20,6 +18,7 @@ class Move {
   static String termsPage = "/terms";
   static String cookieShop = "/cookieShop";
   static String replyPage = "/webtoons/reply";
+  static String myPage = "/My";
 }
 
 // Map<String, Widget Function(BuildContext)> 를 반환하는 함수
@@ -34,5 +33,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.termsPage: (context) => TermsPage(),
     Move.cookieShop: (context) => CookieShop(),
     Move.replyPage: (context) => ReplyPage(),
+    Move.myPage: (context) => MyPage(),
   };
 }
