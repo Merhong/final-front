@@ -36,41 +36,27 @@ class WebtoonListItem extends StatelessWidget {
                   },
                 ),
               ),
-              if (webtoonDTO.specially == "순위") ...[
+              if (webtoonDTO.webtoonSpeciallyEnum == "순위") ...[
                 Container(
                   height: sizeWebtoonListItemPictureHeight160,
                   child: Stack(
                     children: [
-                      Align(
-                          alignment: Alignment(1, 1),
-                          child: CustomPaint(
-                              size: Size(75, 25),
-                              painter: DrawTriangle(color: Colors.green))),
-                      Align(
-                          alignment: Alignment(1, 1),
-                          child: Text("순위 상승",
-                              style: TextStyle(color: Colors.white))),
+                      Align(alignment: Alignment(1, 1), child: CustomPaint(size: Size(75, 25), painter: DrawTriangle(color: Colors.green))),
+                      Align(alignment: Alignment(1, 1), child: Text("순위 상승", style: TextStyle(color: Colors.white))),
                     ],
                   ),
                 ),
               ],
-              if (webtoonDTO.specially == "신작")
+              if (webtoonDTO.webtoonSpeciallyEnum == "신작")
                 Padding(
                   padding: EdgeInsets.all(3.0),
-                  child: CircleAvatar(
-                      backgroundColor: Colors.green,
-                      radius: 15,
-                      child: Text("신작", style: TextStyle(color: Colors.black))),
+                  child: CircleAvatar(backgroundColor: Colors.green, radius: 15, child: Text("신작", style: TextStyle(color: Colors.black))),
                 ),
-              if (webtoonDTO.specially == "무료")
+              if (webtoonDTO.webtoonSpeciallyEnum == "무료")
                 Stack(
                   children: [
                     Icon(Icons.circle, size: 34, color: Colors.black),
-                    Positioned(
-                        right: 2,
-                        bottom: 2,
-                        child: Icon(CupertinoIcons.clock,
-                            color: Colors.green, size: 30)),
+                    Positioned(right: 2, bottom: 2, child: Icon(CupertinoIcons.clock, color: Colors.green, size: 30)),
                   ],
                 ),
             ],
@@ -82,7 +68,7 @@ class WebtoonListItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            webtoonDTO.specially == "휴재"
+            webtoonDTO.webtoonSpeciallyEnum == "휴재"
                 ? Row(
                     children: [
                       Container(
@@ -93,22 +79,19 @@ class WebtoonListItem extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          "${webtoonDTO.specially}",
+                          "${webtoonDTO.webtoonSpeciallyEnum}",
                           style: TextStyle(color: Colors.grey, fontSize: 8),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       SizedBox(width: 2),
                       Container(
-                        constraints: BoxConstraints(
-                            maxWidth: sizeGetScreenWidth(context) * 0.24),
-                        child: Text("${webtoonDTO.title}",
-                            style: Theme.of(context).textTheme.displayMedium,
-                            overflow: TextOverflow.ellipsis),
+                        constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.24),
+                        child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                       ),
                     ],
                   )
-                : webtoonDTO.specially == "완결"
+                : webtoonDTO.webtoonSpeciallyEnum == "완결"
                     ? Row(
                         children: [
                           Container(
@@ -119,46 +102,34 @@ class WebtoonListItem extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              "${webtoonDTO.specially}",
+                              "${webtoonDTO.webtoonSpeciallyEnum}",
                               style: TextStyle(color: Colors.blue, fontSize: 8),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           SizedBox(width: 2),
                           Container(
-                            constraints: BoxConstraints(
-                                maxWidth: sizeGetScreenWidth(context) * 0.24),
-                            child: Text("${webtoonDTO.title}",
-                                style:
-                                    Theme.of(context).textTheme.displayMedium,
-                                overflow: TextOverflow.ellipsis),
+                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.24),
+                            child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                           ),
                         ],
                       )
                     : Container(
-                        constraints: BoxConstraints(
-                            maxWidth: sizeGetScreenWidth(context) * 0.29),
-                        child: Text("${webtoonDTO.title}",
-                            style: Theme.of(context).textTheme.displayMedium,
-                            overflow: TextOverflow.ellipsis),
+                        constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.29),
+                        child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                       ),
           ],
         ),
         Row(
           children: [
             Container(
-                constraints: BoxConstraints(
-                    maxWidth: sizeGetScreenWidth(context) * 0.21),
+                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.21),
                 // child: Text("${webtoonDTO.authorNicknameList!.map((str) => str).toList().join('/')} ",
-                child: Text(
-                    "${webtoonDTO.authorNicknameList!.toList().join('/')} ",
-                    style: Theme.of(context).textTheme.bodySmall,
-                    overflow: TextOverflow.ellipsis)),
+                child: Text("${webtoonDTO.authorNicknameList!.toList().join('/')} ",
+                    style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis)),
             Container(
-                child: Text(
-                    "★ ${(webtoonDTO.starScore! / webtoonDTO.starCount!).toStringAsFixed(2)}",
-                    style: Theme.of(context).textTheme.bodySmall,
-                    maxLines: 1)),
+                child: Text("★ ${(webtoonDTO.starScore! / webtoonDTO.starCount!).toStringAsFixed(2)}",
+                    style: Theme.of(context).textTheme.bodySmall, maxLines: 1)),
           ],
         ),
       ],

@@ -34,7 +34,7 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
           child: InkWell(
             onTap: () {
               print("관심클릭");
-              // ref.read(webtoonDetailProvider.notifier).notiaaaaa();
+              ref.read(webtoonDetailProvider.notifier).notifyInterest();
             },
             child: Container(
               height: 25,
