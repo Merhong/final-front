@@ -34,16 +34,14 @@ class WebtoonDetailBody extends ConsumerWidget {
 
         SliverToBoxAdapter(
           child: WebtoonDetailThumbnail(
-            image: (webtoonDTO.episodeList != null &&
-                    webtoonDTO.episodeList!.length != 0)
+            image: (webtoonDTO.episodeList != null && webtoonDTO.episodeList!.length != 0)
                 ? "$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![0].thumbnail}"
                 : "$imageURL/EpisodeThumbnail/default_episode_Thumbnail.jpg",
-            likeCount: 1, // TODO
+            interestCount: webtoonDTO.interestCount ?? -1, // TODO
           ),
         ),
 
-        SliverToBoxAdapter(
-            child: WebtoonDetailDescription(webtoonDTO: webtoonDTO)),
+        SliverToBoxAdapter(child: WebtoonDetailDescription(webtoonDTO: webtoonDTO)),
 
         // ListView.builder(
         //   itemCount: webtoon.episodeList!.length,
