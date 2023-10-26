@@ -19,6 +19,7 @@ class Move {
 // detail페이지는 페이지마다 주소가 다르니까 못함
   static String homeListPage = "/webtoons/home"; // 홈페이지
   static String loginPage = "/login"; // 로그인 페이지
+  static String logoutPage = "/logout"; // 로그인 페이지
   static String joinPage = "/join"; // 회원가입 페이지
   static String termsPage = "/terms"; // 약관페이지(테스트용)
   static String cookieShop = "/cookieShop"; // 쿠키샵

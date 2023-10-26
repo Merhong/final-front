@@ -64,7 +64,7 @@ class LogoutBody extends ConsumerWidget {
   TextButton _buildTextButton(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.pushNamed(context, "/join");
+        Navigator.pushNamed(context, "/login");
       },
       child: Text("+다른 아이디로 로그인", textAlign: TextAlign.start),
     );
