@@ -15,7 +15,10 @@ class ReplyAppBar extends StatelessWidget implements PreferredSizeWidget {
       //   onPressed: () {},
       // ),
       title: Text("댓글 1,276"),
-      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.rocket)), IconButton(onPressed: () {}, icon: Icon(Icons.undo))],
+      actions: [
+        IconButton(onPressed: () {}, icon: Icon(Icons.rocket)),
+        IconButton(onPressed: () {}, icon: Icon(Icons.undo))
+      ],
     );
   }
 }

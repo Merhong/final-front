@@ -24,13 +24,15 @@ class WebtoonListViewModel extends StateNotifier<WebtoonListModel?> {
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionProvider);
-    ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoonList(sessionUser.jwt!);
+    ResponseDTO responseDTO =
+        await WebtoonRepository().fetchWebtoonList(sessionUser.jwt!);
     state = WebtoonListModel(webtoonDTOList: responseDTO.data);
   }
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
-final webtoonListProvider = StateNotifierProvider<WebtoonListViewModel, WebtoonListModel?>((ref) {
+final webtoonListProvider =
+    StateNotifierProvider<WebtoonListViewModel, WebtoonListModel?>((ref) {
   // Logger().d("webtoonList창고관리자 실행됨");
   return new WebtoonListViewModel(ref, null)..notifyInit();
 });

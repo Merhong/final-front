@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/week_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,7 +20,8 @@ class WebtoonListSliverPersistentHeader extends ConsumerWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.symmetric(horizontal: BorderSide(color: Colors.grey, width: 1.0)),
+            border: Border.symmetric(
+                horizontal: BorderSide(color: Colors.grey, width: 1.0)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

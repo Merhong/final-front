@@ -28,7 +28,8 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionProvider);
     int webtoonId = ref.read(paramProvider).webtoonDetailId!;
-    ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoon(sessionUser.jwt!, webtoonId);
+    ResponseDTO responseDTO =
+        await WebtoonRepository().fetchWebtoon(sessionUser.jwt!, webtoonId);
     state = WebtoonDetailModel(webtoonDTO: responseDTO.data);
   }
 
@@ -40,9 +41,11 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
 
     int webtoonId = state!.webtoonDTO!.id;
 
-    ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoonInterest(sessionUser.jwt!, webtoonId);
+    ResponseDTO responseDTO = await WebtoonRepository()
+        .fetchWebtoonInterest(sessionUser.jwt!, webtoonId);
 
-    print("(responseDTO.data as InterestDTO).webtoonTotalInterest : ${(responseDTO.data as InterestDTO).webtoonTotalInterest}");
+    print(
+        "(responseDTO.data as InterestDTO).webtoonTotalInterest : ${(responseDTO.data as InterestDTO).webtoonTotalInterest}");
 
     notifyInit();
     // state!.webtoonDTO.interestCount = (responseDTO.data as InterestDTO).webtoonTotalInterest;
@@ -76,7 +79,8 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
-final webtoonDetailProvider = StateNotifierProvider.autoDispose<WebtoonDetailViewModel, WebtoonDetailModel?>((ref) {
+final webtoonDetailProvider = StateNotifierProvider.autoDispose<
+    WebtoonDetailViewModel, WebtoonDetailModel?>((ref) {
   // Logger().d("webtoonDetail창고관리자 실행됨");
   // return new WebtoonDetailViewModel(ref, null)..notifyInit();
   return new WebtoonDetailViewModel(ref, null);

@@ -44,8 +44,10 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: sizeS5),
-                child:
-                    Text("+ 관심 ${NumberFormat('#,###').format(interestCount)}", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
+                child: Text(
+                    "+ 관심 ${NumberFormat('#,###').format(interestCount)}",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500)),
               ),
             ),
           ),
@@ -59,7 +61,10 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
       child: Center(
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network('${image}', fit: BoxFit.cover, height: 190, width: sizeGetScreenWidth(context) * 0.85)),
+            child: Image.network('${image}',
+                fit: BoxFit.cover,
+                height: 190,
+                width: sizeGetScreenWidth(context) * 0.85)),
       ),
     );
   }

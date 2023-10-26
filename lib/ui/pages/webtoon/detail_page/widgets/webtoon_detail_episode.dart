@@ -27,13 +27,15 @@ class WebtoonDetailEpisode extends ConsumerWidget {
         print("에피소드보기클릭");
         ParamStore paramStore = ref.read(paramProvider);
         paramStore.addEpisodeDetailId(webtoonDTO.episodeList[index].episodeId);
-        Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
       },
       child: Column(
         children: [
           Divider(height: 1, color: Colors.grey),
           Padding(
-            padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
+            padding: EdgeInsets.fromLTRB(
+                sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
             child: Row(
               children: [
                 SizedBox(
@@ -41,7 +43,9 @@ class WebtoonDetailEpisode extends ConsumerWidget {
                   height: sizeXL50,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(sizeBorder5),
-                    child: Image.network('$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![index].thumbnail}', fit: BoxFit.cover,
+                    child: Image.network(
+                        '$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![index].thumbnail}',
+                        fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                       return Image.asset(
                         "assets/default_episode_Thumbnail.jpg",

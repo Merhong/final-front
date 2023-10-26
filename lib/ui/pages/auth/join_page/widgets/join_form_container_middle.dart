@@ -7,7 +7,8 @@ class JoinFormContainerMiddle extends StatelessWidget {
   TextEditingController _gender;
   TextEditingController _tel;
 
-  JoinFormContainerMiddle(this._username, this._birthday, this._gender, this._tel);
+  JoinFormContainerMiddle(
+      this._username, this._birthday, this._gender, this._tel);
 
   @override
   Widget build(BuildContext context) {

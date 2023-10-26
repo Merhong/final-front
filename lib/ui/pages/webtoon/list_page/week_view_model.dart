@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // 1. 창고 데이터
 class WeekModel {
   String week;
+
   WeekModel(this.week);
 }
 
@@ -24,7 +25,8 @@ class WeekViewModel extends StateNotifier<WeekModel?> {
 }
 
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
-final weekProvider = StateNotifierProvider.autoDispose<WeekViewModel, WeekModel?>((ref) {
+final weekProvider =
+    StateNotifierProvider.autoDispose<WeekViewModel, WeekModel?>((ref) {
   // print("위크창고관리자");
   return WeekViewModel(null, ref)..notifyInit();
 });

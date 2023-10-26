@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class JoinFormContainerMiddleButtons extends StatefulWidget {
   @override
-  _JoinFormContainerMiddleButtonsState createState() => _JoinFormContainerMiddleButtonsState();
+  _JoinFormContainerMiddleButtonsState createState() =>
+      _JoinFormContainerMiddleButtonsState();
 }
 
-class _JoinFormContainerMiddleButtonsState extends State<JoinFormContainerMiddleButtons> {
+class _JoinFormContainerMiddleButtonsState
+    extends State<JoinFormContainerMiddleButtons> {
   int selectedButtonIndex = -1;
 
   @override
