@@ -35,7 +35,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                   print("작가페이지로 가야함");
                 },
                 child: Row(
-                  children: [Text("${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/')}"), Text("✅")],
+                  children: [Text("${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/')}"), Text(" ✅")],
                 ),
               ),
               Text("  ·  "),

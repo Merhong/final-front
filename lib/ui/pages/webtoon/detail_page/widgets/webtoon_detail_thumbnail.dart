@@ -15,7 +15,7 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
-        Container(color: Colors.blue, height: 60),
+        DetailScrollListener(),
         buildThumbnail(context),
         buildInteresting(context, ref),
       ],
@@ -77,5 +77,77 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
                 width: sizeGetScreenWidth(context) * 0.85)),
       ),
     );
+  }
+}
+
+//
+
+class DetailScrollListener extends StatefulWidget {
+  const DetailScrollListener({
+    super.key,
+  });
+
+  @override
+  State<DetailScrollListener> createState() => _DetailScrollListenerState();
+}
+
+class _DetailScrollListenerState extends State<DetailScrollListener> {
+  final ScrollController _controller = ScrollController();
+
+  double prev = 0;
+  double height = 300;
+  double op = 1.0;
+
+  @override
+  void initState() {
+    _controller.addListener(() {
+      scrollListener();
+    });
+    super.initState();
+  }
+
+  void scrollListener() {
+    print("스크롤 동작중");
+    double currentOffset = _controller.offset;
+    print("currentOffset : $currentOffset");
+
+    // 실습
+    if (currentOffset < 300) {
+      setState(() {
+        height = 300 - currentOffset;
+        op = (300 - currentOffset) / 300;
+        if (height < 56) {
+          height = 56;
+        }
+      });
+    }
+
+    // 301              300
+    if (currentOffset > prev) {
+      // 아래방향
+      print("아래로 내려가요");
+    }
+
+    // 300              301
+    if (currentOffset < prev) {
+      // 위방향
+      print("위로 올라가요");
+    }
+
+    if (currentOffset == _controller.position.maxScrollExtent) {
+      print("가장 하단");
+    }
+
+    // currentOffset == 0;
+    if (currentOffset == _controller.position.minScrollExtent) {
+      print("가장 위");
+    }
+
+    prev = currentOffset;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.blue, height: 60);
   }
 }

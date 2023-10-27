@@ -40,7 +40,12 @@ class WebtoonDetailBody extends ConsumerWidget {
                         ),
                       ),
                       SizedBox(width: sizeM10),
-                      Icon(Icons.notifications_off_outlined), // TODO
+                      InkWell(
+                        onTap: () {
+                          print("asdasd");
+                        },
+                        child: Icon(Icons.notifications_off_outlined),
+                      ), // TODO
                       // Icon(Icons.notifications_on), // TODO
                       SizedBox(width: sizeL20),
                     ],
@@ -57,11 +62,11 @@ class WebtoonDetailBody extends ConsumerWidget {
                   ),
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.menu),
+              icon: Icon(Icons.more_vert),
             )
           ],
           pinned: true,
-          elevation: 0,
+          elevation: 1,
           expandedHeight: 60,
           backgroundColor: Colors.white,
           flexibleSpace: FlexibleSpaceBar(
