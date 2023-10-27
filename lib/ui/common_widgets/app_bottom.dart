@@ -31,7 +31,7 @@ class _AppBottomState extends State<AppBottom> {
     // 베스트 도전
     else if (index == 2) {
       Navigator.pushNamedAndRemoveUntil(
-          context, Move.homeListPage, (route) => false);
+          context, Move.bestPage, (route) => false);
     }
     // MY
     else if (index == 3) {
