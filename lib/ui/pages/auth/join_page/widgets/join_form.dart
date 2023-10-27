@@ -41,7 +41,7 @@ class JoinForm extends ConsumerWidget {
                 child: CustomSubmitButton(
                     text: "회원가입",
                     onPressed: () {
-                      print("11111111111111");
+                      print("회원가입 버튼 눌렸음.");
                       JoinReqDTO joinReqDTO = JoinReqDTO(
                           username: _username.text,
                           password: _password.text,

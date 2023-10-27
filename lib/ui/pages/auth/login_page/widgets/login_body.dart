@@ -27,7 +27,11 @@ class LoginBody extends ConsumerWidget {
                 ),
                 alignment: Alignment.center),
             SizedBox(height: sizeL20),
-            LoginForm(),
+            //
+            //
+            LoginForm(), // 로그인폼
+            //
+            //
             SizedBox(height: sizeL20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

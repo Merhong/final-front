@@ -8,7 +8,6 @@ import '../dto/user_request.dart';
 // MVVM패턴 : View -> Provider(전역프로바이더or뷰모델) -> Repository(통신+파싱을 책임)
 // 나중에 싱글톤으로 바꿀것
 class UserRepository {
-//
   Future<ResponseDTO> fetchJoin(JoinReqDTO requestDTO) async {
     try {
       Response response = await dio.post("/join",
