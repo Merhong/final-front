@@ -8,16 +8,13 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: MyappAppbar(),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 17), // 양쪽 여백을 17로 설정
-          child: MyBodyTabBar(),
-        ),
-        bottomNavigationBar: AppBottom(),
+    return Scaffold(
+      appBar: MyappAppbar(),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 17), // 양쪽 여백을 17로 설정
+        child: MyBodyTabBar(),
       ),
+      bottomNavigationBar: AppBottom(),
     );
   }
 }
