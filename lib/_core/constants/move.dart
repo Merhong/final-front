@@ -43,7 +43,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.termsPage: (context) => TermsPage(),
     Move.cookieShop: (context) => CookieShop(),
     Move.replyPage: (context) => ReplyPage(),
-    Move.recommendPage: (context) => WebtoonRecommendPage(),
+    Move.recommendPage: (context) => RecommendPage(),
     Move.seeMorePage: (context) => SeeMorePage(),
     Move.bestPage: (context) => WebtoonBestPage(),
     Move.myPage: (context) => MyPage(),

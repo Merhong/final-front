@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ReplyAppBar extends StatelessWidget implements PreferredSizeWidget {
+class WebtoonReplyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final int commentAmount;
-  const ReplyAppBar({Key? key, required this.commentAmount}) : super(key: key);
+  const WebtoonReplyAppBar({Key? key, required this.commentAmount}) : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);

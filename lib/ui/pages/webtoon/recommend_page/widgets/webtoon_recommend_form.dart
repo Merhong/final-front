@@ -13,7 +13,7 @@ class WebtoonRecommendForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    RecommendModel? model = ref.watch(recommendProvider);
+    WebtoonRecommendModel? model = ref.watch(recommendProvider);
     if (model == null) {
       return Center(child: CircularProgressIndicator());
     }
@@ -72,7 +72,7 @@ class WebtoonRecommendForm extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 return WebtoonRecommendMiddleBar(
-                    allEnded: model!.recommendationList.length);
+                    allEnded: model!.webtoonRecommendationList.length);
               },
               childCount: 1, // 1로 설정하면 1개의 자식 위젯을 생성합니다.
             ),

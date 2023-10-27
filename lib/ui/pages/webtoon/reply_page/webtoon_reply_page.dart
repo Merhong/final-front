@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_view_model.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_episode_reply_app_bar.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_episode_reply_body.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_app_bar.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_body.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_bottom_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // class WebtoonReplyPage extends StatelessWidget {
@@ -30,7 +31,8 @@ class ReplyPage extends ConsumerWidget {
     List<CommentDTO> commentList = model!.commentList;
 
     return Scaffold(
-        appBar: ReplyAppBar(
+        bottomNavigationBar: WebtoonReplyBottomAppBar(),
+        appBar: WebtoonReplyAppBar(
           commentAmount: commentList.length,
         ),
         body: ListView.separated(
@@ -47,6 +49,7 @@ class ReplyPage extends ConsumerWidget {
         );
   }
 }
+
 
 class Card extends StatefulWidget {
   int index;

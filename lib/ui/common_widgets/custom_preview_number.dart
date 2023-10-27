@@ -8,13 +8,13 @@ class CustomPreviewNumber extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    RecommendModel? model = ref.read(recommendProvider);
+    WebtoonRecommendModel? model = ref.read(recommendProvider);
 
     if (model == null) {
       return Center(child: CircularProgressIndicator());
     }
 
-    List<EndRecommendationDTO> DTOList = model!.recommendationList!;
+    List<EndRecommendationDTO> DTOList = model!.webtoonRecommendationList!;
 
     return Padding(
       padding: const EdgeInsets.only(top: 2),

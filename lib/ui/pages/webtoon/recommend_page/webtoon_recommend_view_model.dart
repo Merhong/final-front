@@ -8,25 +8,25 @@ import 'package:flutter_blog/main.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RecommendModel {
-  List<EndRecommendationDTO> recommendationList;
-  RecommendModel({required this.recommendationList});
+class WebtoonRecommendModel {
+  List<EndRecommendationDTO> webtoonRecommendationList;
+  WebtoonRecommendModel({required this.webtoonRecommendationList});
 }
 
-class RecommendViewmodel extends StateNotifier<RecommendModel?> {
+class WebtoonRecommendViewmodel extends StateNotifier<WebtoonRecommendModel?> {
   Ref ref;
-  RecommendViewmodel(this.ref, super._state);
+  WebtoonRecommendViewmodel(this.ref, super._state);
   final mContext = navigatorKey.currentContext;
 
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionProvider);
     ResponseDTO responseDTO = await recommendRepository().fetchRecommendList();
     print(responseDTO.data);
-    state = RecommendModel(recommendationList: responseDTO.data);
+    state = WebtoonRecommendModel(webtoonRecommendationList: responseDTO.data);
   }
 }
 
 final recommendProvider =
-    StateNotifierProvider<RecommendViewmodel, RecommendModel?>((ref) {
-  return new RecommendViewmodel(ref, null)..notifyInit();
+    StateNotifierProvider<WebtoonRecommendViewmodel, WebtoonRecommendModel?>((ref) {
+  return new WebtoonRecommendViewmodel(ref, null)..notifyInit();
 });
