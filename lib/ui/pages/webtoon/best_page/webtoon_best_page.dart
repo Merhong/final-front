@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/common_widgets/app_bottom.dart';
 import 'package:flutter_blog/ui/pages/webtoon/best_page/wigets/best_nested_tab_bar.dart';
 
 class WebtoonBestPage extends StatelessWidget {
@@ -37,6 +38,7 @@ class WebtoonBestPage extends StatelessWidget {
             BestNestedTabBar('드라마'),
           ],
         ),
+        bottomNavigationBar: AppBottom(),
       ),
     );
   }
