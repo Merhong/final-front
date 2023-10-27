@@ -10,9 +10,7 @@ import '../dto/user_request.dart';
 class UserRepository {
   Future<ResponseDTO> fetchJoin(JoinReqDTO requestDTO) async {
     try {
-      Response response = await dio.post("/join",
-          data: requestDTO
-              .toJson()); // await dio.http메서드타입("주소", data: 보낼객체.toJson());
+      Response response = await dio.post("/join", data: requestDTO.toJson()); // await dio.http메서드타입("주소", data: 보낼객체.toJson());
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       // Map타입을 유저타입으로 바꿔주기 (그래도 타입은 dynamic이니까 사용할때 as User 붙여서)
@@ -33,16 +31,12 @@ class UserRepository {
 
   Future<ResponseDTO> fetchLogin(LoginReqDTO requestDTO) async {
     try {
-      // 1. 통신
       Response response = await dio.post("/login", data: requestDTO.toJson());
 
-      // 2. DTO 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       responseDTO.data = new User.fromJson(responseDTO.data);
-      // Logger().d(responseDTO);
 
-      // 3. 토큰 받기
       List<String>? jwt = response.headers["Authorization"];
 
       if (jwt != null) {
@@ -55,8 +49,6 @@ class UserRepository {
       return responseDTO;
     } catch (e) {
       // 200이 아니면 catch로 감
-
-      // Logger().d("캐치로옴");
       return new ResponseDTO(
         success: false,
         errorType: ErrorType(message: "로그인실패"),

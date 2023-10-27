@@ -26,8 +26,9 @@ class Move {
   static String replyPage = "/webtoons/reply"; // 댓글쓰기(테스트용)
   static String recommendPage = "/webtoons/recommend"; // 추천완결
   static String seeMorePage = "/seemore"; // 더보기
+  static String myPage = "/my";
   static String bestPage = "/best"; // 베스트페이지
-  static String myPage = "/mypage";
+
 }
 
 // Map<String, Widget Function(BuildContext)> 를 반환하는 함수

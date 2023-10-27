@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/widgets/webtoon_detail_description.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/widgets/webtoon_detail_episode.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/widgets/webtoon_detail_thumbnail.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
+
 
 class WebtoonDetailBody extends ConsumerWidget {
   const WebtoonDetailBody({Key? key}) : super(key: key);
@@ -19,13 +20,22 @@ class WebtoonDetailBody extends ConsumerWidget {
       return Center(child: CircularProgressIndicator());
     }
 
-    DetailPageWebtoonDTO webtoonDTO = model!.webtoonDTO!;
-
-    print("webtoonDTO.interestCount : ${webtoonDTO.interestCount}");
+    DetailPageWebtoonDTO webtoonDTO = model.webtoonDTO!;
 
     return CustomScrollView(
       slivers: [
         SliverAppBar(
+          actions: [
+            webtoonDTO.isInterest == true
+                ? InkWell(
+                    onTap: () => ref.read(webtoonDetailProvider.notifier).notifyInterestDelete(),
+                    child: Text("관심웹툰임", style: TextStyle(color: Colors.black, fontSize: 30)),
+                  )
+                : InkWell(
+                    onTap: () => ref.read(webtoonDetailProvider.notifier).notifyInterestCreate(),
+                    child: Text("관심웹툰아님", style: TextStyle(color: Colors.black, fontSize: 30)),
+                  ),
+          ],
           pinned: true,
           elevation: 0,
           expandedHeight: 60,
@@ -36,13 +46,7 @@ class WebtoonDetailBody extends ConsumerWidget {
         ),
 
         SliverToBoxAdapter(
-          child: WebtoonDetailThumbnail(
-            image: (webtoonDTO.episodeList != null &&
-                    webtoonDTO.episodeList!.length != 0)
-                ? "$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![0].thumbnail}"
-                : "$imageURL/EpisodeThumbnail/default_episode_Thumbnail.jpg",
-            interestCount: webtoonDTO.interestCount ?? -1, // TODO
-          ),
+          child: WebtoonDetailThumbnail(webtoonDTO: webtoonDTO),
         ),
 
         SliverToBoxAdapter(

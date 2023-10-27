@@ -1,11 +1,8 @@
 import 'package:flutter_blog/data/dto/recommend_dto/end_recommendation_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
-import 'package:flutter_blog/data/model/Author.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/recommend_repository.dart';
-import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
-import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WebtoonRecommendModel {

@@ -5,7 +5,6 @@ import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/episode_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 // 1. 창고 데이터
 
@@ -60,8 +59,10 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
+
 final webtoonEpisodeProvider = StateNotifierProvider.autoDispose<
     WebtoonEpisodeViewModel, WebtoonEpisodeModel?>((ref) {
-  Logger().d("episode창고관리자 실행됨");
+  print("episode창고관리자 실행됨");
+
   return new WebtoonEpisodeViewModel(ref, null)..notifyInit();
 });

@@ -10,7 +10,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // 1. 창고 데이터
 
 class WebtoonDetailModel {
+  // int? interestCount;
+  // bool isInterest;
   DetailPageWebtoonDTO? webtoonDTO;
+
+  WebtoonDetailModel interestCountUpdate({required int updateInterestCount, required bool nowIsInterest}) {
+    DetailPageWebtoonDTO updateWebtoonDTO = this.webtoonDTO!;
+
+    updateWebtoonDTO.interestCount = updateInterestCount;
+    updateWebtoonDTO.isInterest = nowIsInterest;
+
+    return WebtoonDetailModel(webtoonDTO: updateWebtoonDTO);
+  }
 
   WebtoonDetailModel({required this.webtoonDTO});
 }
@@ -31,26 +42,42 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
     ResponseDTO responseDTO =
         await WebtoonRepository().fetchWebtoon(sessionUser.jwt!, webtoonId);
     state = WebtoonDetailModel(webtoonDTO: responseDTO.data);
+    // state = WebtoonDetailModel();
+    // state!.webtoonDTO = responseDTO.data;
   }
 
-  Future<void> notifyInterest() async {
+  Future<void> notifyInterestCreate() async {
     SessionUser sessionUser = ref.read(sessionProvider);
 
-    // int webtoonId = ref.read(paramProvider).webtoonDetailId!;
-    // print("webtoonId$webtoonId");
+    int webtoonId = state!.webtoonDTO!.id;
+    ResponseDTO responseDTO = await WebtoonRepository().fetchInterestCreate(sessionUser.jwt!, webtoonId);
+
+    if (responseDTO.success == false) {
+      notifyInterestDelete();
+    }
+
+    state = state!.interestCountUpdate(
+      updateInterestCount: (responseDTO.data as InterestDTO).webtoonTotalInterest,
+      nowIsInterest: true,
+    );
+    // state!.webtoonDTO!.interestCount = (responseDTO.data as InterestDTO).webtoonTotalInterest; // TODO 이거론 왜 안되지
+  }
+
+  Future<void> notifyInterestDelete() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
 
     int webtoonId = state!.webtoonDTO!.id;
+    ResponseDTO responseDTO = await WebtoonRepository().fetchInterestDelete(sessionUser.jwt!, webtoonId);
 
-    ResponseDTO responseDTO = await WebtoonRepository()
-        .fetchWebtoonInterest(sessionUser.jwt!, webtoonId);
+    if (responseDTO.success == false) {
+      notifyInterestCreate();
+    }
 
-    print(
-        "(responseDTO.data as InterestDTO).webtoonTotalInterest : ${(responseDTO.data as InterestDTO).webtoonTotalInterest}");
-
-    notifyInit();
-    // state!.webtoonDTO.interestCount = (responseDTO.data as InterestDTO).webtoonTotalInterest;
-
-    // state = WebtoonDetailModel(webtoonDTO: responseDTO.data);
+    state = state!.interestCountUpdate(
+      updateInterestCount: (responseDTO.data as InterestDTO).webtoonTotalInterest,
+      nowIsInterest: false,
+    );
+    // state!.webtoonDTO!.interestCount = (responseDTO.data as InterestDTO).webtoonTotalInterest; // TODO 이거론 왜 안되지
   }
 
 //

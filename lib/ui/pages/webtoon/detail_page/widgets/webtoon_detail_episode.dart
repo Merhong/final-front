@@ -25,10 +25,12 @@ class WebtoonDetailEpisode extends ConsumerWidget {
     return InkWell(
       onTap: () {
         print("에피소드보기클릭");
-        ParamStore paramStore = ref.read(paramProvider);
-        paramStore.addEpisodeDetailId(webtoonDTO.episodeList[index].episodeId);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+        ParamStore ps = ref.read(paramProvider);
+        ps.addWebtoonLastEpisode(webtoonDTO.episodeList[0].episodeId);
+        ps.addWebtoonFirstEpisode(webtoonDTO.episodeList[webtoonDTO.episodeList.length - 1].episodeId);
+        ps.addEpisodeDetailId(webtoonDTO.episodeList[index].episodeId);
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+
       },
       child: Column(
         children: [

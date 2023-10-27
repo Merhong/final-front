@@ -18,6 +18,8 @@ class EpisodeDTO {
   // List<Comment> commentList;
   final List<EpisodePhoto> photoList;
 
+  // 에피소드말고 상위웹툰의 전체 에피소드 개수 필요
+
   EpisodeDTO(
     this.episodeId,
     this.detailTitle,
