@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LogoutSubmitButton extends StatelessWidget {
+class LogoutSubmitButton extends ConsumerWidget {
   final String text;
   final VoidCallback onPressed;
 
@@ -8,7 +10,7 @@ class LogoutSubmitButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
   });
-  void _showAlertDialog(BuildContext context) {
+  void _showAlertDialog(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -46,7 +48,7 @@ class LogoutSubmitButton extends StatelessWidget {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                ref.read(sessionProvider).logout();
               },
               child: Text('확인'),
             ),
@@ -57,7 +59,7 @@ class LogoutSubmitButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: 50,
       width: double.infinity,
@@ -65,7 +67,7 @@ class LogoutSubmitButton extends StatelessWidget {
         child: Text(text, style: TextStyle(color: Colors.white)),
         style: TextButton.styleFrom(backgroundColor: Colors.green),
         onPressed: () {
-          _showAlertDialog(context);
+          _showAlertDialog(context, ref);
         },
       ),
     );
