@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/pages/webtoon/recommend_page/webtoon_recommend_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_middle_list.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_bottom_list.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_middle_bar.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_middle_image.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WebtoonRecommendForm extends StatelessWidget {
+class WebtoonRecommendForm extends ConsumerWidget {
   const WebtoonRecommendForm({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    WebtoonRecommendModel? model = ref.watch(recommendProvider);
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+
     return Padding(
       padding: const EdgeInsets.only(left: 3),
       child: CustomScrollView(
@@ -64,7 +71,8 @@ class WebtoonRecommendForm extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return WebtoonRecommendMiddleBar();
+                return WebtoonRecommendMiddleBar(
+                    allEnded: model!.webtoonRecommendationList.length);
               },
               childCount: 1, // 1로 설정하면 1개의 자식 위젯을 생성합니다.
             ),

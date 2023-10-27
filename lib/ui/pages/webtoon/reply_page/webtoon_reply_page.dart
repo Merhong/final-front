@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
-import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_bottom_bar.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_view_model.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_episode_reply_app_bar.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_episode_reply_body.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/wetoon_episode_reply_tab_bar.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_app_bar.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_body.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_bottom_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // class WebtoonReplyPage extends StatelessWidget {
@@ -35,20 +34,34 @@ class ReplyPage extends ConsumerWidget {
     List<CommentDTO> commentList = model!.commentList;
 
     return Scaffold(
-        appBar: ReplyAppBar(),
-        body: RefreshIndicator(
-          key: refreshKey,
-          onRefresh: () async {
-            print("리플래시됨");
-            await ref.read(webtoonReplyProvider.notifier).notifyInit();
-          },
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                return WebtoonReplyBody(commentList, index);
-              },
-              separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey),
-              itemCount: commentList.length),
-        )
+
+        // 지원씨꺼
+        // appBar: WebtoonReplyAppBar(),
+        // body: RefreshIndicator(
+        //   key: refreshKey,
+        //   onRefresh: () async {
+        //     print("리플래시됨");
+        //     await ref.read(webtoonReplyProvider.notifier).notifyInit();
+        //   },
+        //   child: ListView.separated(
+        //       itemBuilder: (context, index) {
+        //         return WebtoonReplyBody(commentList, index);
+        //       },
+        //       separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey),
+        //       itemCount: commentList.length),
+        // )
+
+        bottomNavigationBar: WebtoonReplyBottomAppBar(),
+        appBar: WebtoonReplyAppBar(
+          commentAmount: commentList.length,
+        ),
+        body: ListView.separated(
+            itemBuilder: (context, index) {
+              return WebtoonReplyBody(commentList, index);
+            },
+            separatorBuilder: (context, index) =>
+                Divider(height: 1, color: Colors.grey),
+            itemCount: commentList.length)
 
         // WebtoonReplyBody(),
         // ReplyTabBar(),
@@ -59,6 +72,7 @@ class ReplyPage extends ConsumerWidget {
 
 class Card extends StatefulWidget {
   int index;
+
   Card(this.index);
 
   @override

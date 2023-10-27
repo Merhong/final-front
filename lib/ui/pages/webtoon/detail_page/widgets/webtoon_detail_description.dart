@@ -13,7 +13,8 @@ class WebtoonDetailDescription extends StatefulWidget {
   });
 
   @override
-  State<WebtoonDetailDescription> createState() => _WebtoonDetailDescriptionState();
+  State<WebtoonDetailDescription> createState() =>
+      _WebtoonDetailDescriptionState();
 }
 
 class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
@@ -22,7 +23,8 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
+      padding: EdgeInsets.fromLTRB(
+          sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

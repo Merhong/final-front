@@ -10,7 +10,14 @@ class ListPageWebtoonDTO {
   List<String>? authorNicknameList;
 
   ListPageWebtoonDTO(
-      this.id, this.title, this.starScore, this.starCount, this.image, this.ageLimit, this.webtoonSpeciallyEnum, this.webtoonWeekDayEnum);
+      this.id,
+      this.title,
+      this.starScore,
+      this.starCount,
+      this.image,
+      this.ageLimit,
+      this.webtoonSpeciallyEnum,
+      this.webtoonWeekDayEnum);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   ListPageWebtoonDTO.fromJson(Map<String, dynamic> json)
@@ -23,7 +30,9 @@ class ListPageWebtoonDTO {
         webtoonSpeciallyEnum = json["webtoonSpeciallyEnum"],
         webtoonWeekDayEnum = json["webtoonWeekDayEnum"],
         // authorNicknameList = json["authorNicknameList"];
-        authorNicknameList = (json["authorNicknameList"] as List).map((jsonAuthorNickname) => jsonAuthorNickname.toString()).toList();
+        authorNicknameList = (json["authorNicknameList"] as List)
+            .map((jsonAuthorNickname) => jsonAuthorNickname.toString())
+            .toList();
 
   @override
   String toString() {

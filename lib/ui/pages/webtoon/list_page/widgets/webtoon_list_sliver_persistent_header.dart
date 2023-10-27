@@ -20,7 +20,8 @@ class WebtoonListSliverPersistentHeader extends ConsumerWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.symmetric(horizontal: BorderSide(color: Colors.grey, width: 1.0)),
+            border: Border.symmetric(
+                horizontal: BorderSide(color: Colors.grey, width: 1.0)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -60,11 +61,16 @@ class WebtoonListWeekSelect extends ConsumerWidget {
       child: weekClickCheck == "${checkWeek}"
           ? InkWell(
               // onTap: () => ref.read(webtoonListProvider.notifier).notifyWeek("신작"),
-              child: Text("${checkWeek}", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+              child: Text("${checkWeek}",
+                  style: TextStyle(
+                      color: Colors.green, fontWeight: FontWeight.bold)),
             )
           : InkWell(
-              onTap: () => ref.read(webtoonListProvider.notifier).notifyWeek("${checkWeek}"),
-              child: Text("${checkWeek}", style: TextStyle(color: Colors.black)),
+              onTap: () => ref
+                  .read(webtoonListProvider.notifier)
+                  .notifyWeek("${checkWeek}"),
+              child:
+                  Text("${checkWeek}", style: TextStyle(color: Colors.black)),
             ),
     );
   }

@@ -14,6 +14,7 @@ class EpisodeDTO {
   final int cookieCost;
   final int likeEpisodeCount;
   final int commentCount;
+
   // List<Comment> commentList;
   final List<EpisodePhoto> photoList;
 
@@ -49,7 +50,9 @@ class EpisodeDTO {
         cookieCost = json["cookieCost"],
         commentCount = json["commentCount"],
         likeEpisodeCount = json["likeEpisodeCount"],
-        photoList = (json["photoList"] as List).map((jsonPhoto) => EpisodePhoto.fromJson(jsonPhoto)).toList();
+        photoList = (json["photoList"] as List)
+            .map((jsonPhoto) => EpisodePhoto.fromJson(jsonPhoto))
+            .toList();
 
   @override
   String toString() {

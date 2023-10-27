@@ -72,6 +72,7 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
                 (webtoonDTO.episodeList != null && webtoonDTO.episodeList!.length != 0)
                     ? "${imageURL}/EpisodeThumbnail/${webtoonDTO.episodeList![0].thumbnail}"
                     : "${imageURL}/EpisodeThumbnail/default_episode_Thumbnail.jpg",
+
                 fit: BoxFit.cover,
                 height: 190,
                 width: sizeGetScreenWidth(context) * 0.85)),
