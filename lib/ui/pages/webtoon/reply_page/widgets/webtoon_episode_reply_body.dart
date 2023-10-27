@@ -24,8 +24,7 @@ class WebtoonReplyBody extends StatelessWidget {
                 color: Colors.red,
               ),
               Container(
-                child:
-                    commentList[index].isAuthor ? Text("작가맞음") : Text("작가아님"),
+                child: commentList[index].isAuthor ? Text("작가") : Text("작가아님"),
               ),
               Text("${commentList[index].userUsername}"),
               Text("(${commentList[index].userEmail.split("@")[0].length < 4 //
