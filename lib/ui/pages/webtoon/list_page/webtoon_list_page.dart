@@ -29,13 +29,11 @@ class WebtoonListPage extends ConsumerWidget {
   }
 
   DateTime? currentBackPressTime;
-
   Future<bool> onWillPop() {
     final mContext = navigatorKey.currentContext;
     DateTime now = DateTime.now();
 
-    if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+    if (currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
       currentBackPressTime = now;
 
       final snackBar = SnackBar(content: Text("'뒤로' 버튼을 한 번 더 누르시면 종료됩니다"));

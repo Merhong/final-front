@@ -28,8 +28,7 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
                   // 빈 하트 아이콘을 눌렀을 때 수행할 작업 추가
                 },
               ),
-              Text("${episodeDTO!.likeEpisodeCount}",
-                  style: TextStyle(color: Colors.white)),
+              Text("${episodeDTO!.likeEpisodeCount}", style: TextStyle(color: Colors.white)),
               SizedBox(width: 10),
               IconButton(
                 icon: Icon(Icons.comment, color: Colors.white),
@@ -39,8 +38,7 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (_) => ReplyPage()));
                 },
               ),
-              Text("${episodeDTO!.commentCount}",
-                  style: TextStyle(color: Colors.white)),
+              Text("${episodeDTO!.commentCount}", style: TextStyle(color: Colors.white)),
             ],
           ),
           Row(

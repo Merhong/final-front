@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-class WebtoonEpisodeAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class WebtoonEpisodeAppBar extends StatelessWidget implements PreferredSizeWidget {
   String title;
 
   WebtoonEpisodeAppBar(this.title);

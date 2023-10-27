@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class WebtoonReplyTabBar extends StatefulWidget {
-  const WebtoonReplyTabBar({Key? key}) : super(key: key);
+class ReplyTabBar extends StatefulWidget {
+  const ReplyTabBar({Key? key}) : super(key: key);
 
   @override
-  State<WebtoonReplyTabBar> createState() => _ReplyTabBarState();
+  State<ReplyTabBar> createState() => _ReplyTabBarState();
 }
 
-class _ReplyTabBarState extends State<WebtoonReplyTabBar>
+class _ReplyTabBarState extends State<ReplyTabBar>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 

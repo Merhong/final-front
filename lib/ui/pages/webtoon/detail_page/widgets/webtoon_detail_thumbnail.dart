@@ -45,7 +45,7 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: sizeM10),
                       child: Text("✔ 관심 ${NumberFormat('#,###').format(webtoonDTO.interestCount)}",
-                          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500, fontSize: 20)),
+                          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500, fontSize: 17)),
                     ),
                   )
                 : Container(
@@ -72,7 +72,6 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
                 (webtoonDTO.episodeList != null && webtoonDTO.episodeList!.length != 0)
                     ? "${imageURL}/EpisodeThumbnail/${webtoonDTO.episodeList![0].thumbnail}"
                     : "${imageURL}/EpisodeThumbnail/default_episode_Thumbnail.jpg",
-
                 fit: BoxFit.cover,
                 height: 190,
                 width: sizeGetScreenWidth(context) * 0.85)),
