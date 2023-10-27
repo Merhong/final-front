@@ -52,10 +52,7 @@ class LoginForm extends ConsumerWidget {
                   email: _email.text,
                   password: _password.text,
                 );
-                print(_email.text);
-                print(_password.text);
-                SessionUser user = ref.read(sessionProvider);
-                user.login(loginReqDTO);
+                ref.read(sessionProvider).login(loginReqDTO);
               }
             },
           ),
