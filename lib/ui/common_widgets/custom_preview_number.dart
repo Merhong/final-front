@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/dto/recommend_dto/end_recommendation_DTO.dart';
+import 'package:flutter_blog/ui/pages/webtoon/recommend_page/webtoon_recommend_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomPreviewNumber extends StatelessWidget {
-  const CustomPreviewNumber({
-    super.key,
-  });
+class CustomPreviewNumber extends ConsumerWidget {
+  const CustomPreviewNumber({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    RecommendModel? model = ref.read(recommendProvider);
+
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+
+    List<EndRecommendationDTO> DTOList = model!.recommendationList!;
+
     return Padding(
       padding: const EdgeInsets.only(top: 2),
       child: Container(
@@ -14,13 +23,14 @@ class CustomPreviewNumber extends StatelessWidget {
         color: Colors.grey,
         child: Row(
           children: [
-            Image.asset('assets/default_episode_Thumbnail.jpg'), // 이미지 추가
+            Image.asset(""), // 이미지 추가
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "살아남은 로맨스",
+                    //여기에 DTOList[index].title 이런식으로 해주면 됨!!!
+                    "",
                     style: TextStyle(
                       fontWeight: FontWeight.bold, // 텍스트를 두꺼운 스타일로 설정
                     ),

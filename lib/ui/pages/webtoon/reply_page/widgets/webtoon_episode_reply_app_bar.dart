@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ReplyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const ReplyAppBar({Key? key}) : super(key: key);
+  final int commentAmount;
+  const ReplyAppBar({Key? key, required this.commentAmount}) : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -14,7 +15,7 @@ class ReplyAppBar extends StatelessWidget implements PreferredSizeWidget {
       //   icon: Icon(Icons.close),
       //   onPressed: () {},
       // ),
-      title: Text("댓글 1,276"),
+      title: Text("댓글 ${commentAmount}"),
       actions: [
         IconButton(onPressed: () {}, icon: Icon(Icons.rocket)),
         IconButton(onPressed: () {}, icon: Icon(Icons.undo))

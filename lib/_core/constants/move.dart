@@ -24,7 +24,7 @@ class Move {
   static String termsPage = "/terms"; // 약관페이지(테스트용)
   static String cookieShop = "/cookieShop"; // 쿠키샵
   static String replyPage = "/webtoons/reply"; // 댓글쓰기(테스트용)
-  static String recommendPage = "/weboons/recommend"; // 추천완결
+  static String recommendPage = "/webtoons/recommend"; // 추천완결
   static String seeMorePage = "/seemore"; // 더보기
   static String myPage = "/mypage";
 }

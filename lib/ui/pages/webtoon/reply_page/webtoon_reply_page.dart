@@ -30,7 +30,9 @@ class ReplyPage extends ConsumerWidget {
     List<CommentDTO> commentList = model!.commentList;
 
     return Scaffold(
-        appBar: ReplyAppBar(),
+        appBar: ReplyAppBar(
+          commentAmount: commentList.length,
+        ),
         body: ListView.separated(
             itemBuilder: (context, index) {
               return WebtoonReplyBody(commentList, index);
