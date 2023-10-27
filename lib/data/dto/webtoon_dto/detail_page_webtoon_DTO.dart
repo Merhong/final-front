@@ -9,6 +9,7 @@ class DetailPageWebtoonDTO {
   final List<Episode> episodeList;
 
   int? interestCount;
+  bool isInterest;
   // double? starScore;
   // double? starCount;
   String? image;
@@ -21,7 +22,7 @@ class DetailPageWebtoonDTO {
   // DateTime? updatedAt;
 
   DetailPageWebtoonDTO(this.id, this.title, this.intro, this.episodeList, this.authorList, this.image, this.detailImage, this.ageLimit,
-      this.webtoonWeekDayEnum, this.webtoonSpeciallyEnum, this.interestCount);
+      this.webtoonWeekDayEnum, this.webtoonSpeciallyEnum, this.interestCount, this.isInterest);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   DetailPageWebtoonDTO.fromJson(Map<String, dynamic> json)
@@ -34,11 +35,12 @@ class DetailPageWebtoonDTO {
         webtoonSpeciallyEnum = json["webtoonSpeciallyEnum"],
         webtoonWeekDayEnum = json["webtoonWeekDayEnum"],
         interestCount = json["interestCount"],
+        isInterest = json["isInterest"],
         authorList = (json["authorList"] as List).map((jsonAuthor) => Author.fromJson(jsonAuthor)).toList(),
         episodeList = (json["episodeList"] as List).map((jsonEpisode) => Episode.fromJson(jsonEpisode)).toList();
 
   @override
   String toString() {
-    return 'DetailPageWebtoonDTO{id: $id, title: $title, intro: $intro, episodeList: $episodeList, authorList: $authorList, image: $image, detailImage: $detailImage, ageLimit: $ageLimit, webtoonWeekDayEnum: $webtoonWeekDayEnum, interestCount: $interestCount, webtoonSpeciallyEnum: $webtoonSpeciallyEnum}';
+    return 'DetailPageWebtoonDTO{id: $id, title: $title, intro: $intro, authorList: $authorList, episodeList: $episodeList, interestCount: $interestCount, isInterest: $isInterest, image: $image, detailImage: $detailImage, ageLimit: $ageLimit, webtoonWeekDayEnum: $webtoonWeekDayEnum, webtoonSpeciallyEnum: $webtoonSpeciallyEnum}';
   }
 }

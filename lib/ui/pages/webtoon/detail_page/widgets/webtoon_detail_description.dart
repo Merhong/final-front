@@ -26,13 +26,19 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("${widget.webtoonDTO.title}", style: Theme.of(context).textTheme.titleMedium),
+          Text("${widget.webtoonDTO.title}", style: Theme.of(context).textTheme.titleLarge),
           Row(
             children: [
-              // Text("${widget.webtoon.authorList}"),
-              Text("${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/')}"),
-              Text(" · "),
-              Text("${widget.webtoonDTO.webtoonWeekDayEnum}요웹툰"),
+              InkWell(
+                onTap: () {
+                  print("작가페이지로 가야함");
+                },
+                child: Row(
+                  children: [Text("${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/')}"), Text("✅")],
+                ),
+              ),
+              Text("  ·  "),
+              Text("${widget.webtoonDTO.webtoonWeekDayEnum} 연재", style: TextStyle(color: Colors.grey)),
             ],
           ),
           // Text("${widget.webtoon.intro}", maxLines: 1, style: TextStyle(overflow: TextOverflow.ellipsis)),

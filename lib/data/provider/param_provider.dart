@@ -5,6 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class RequestParam {
   int? webtoonDetailId;
   int? episodeId;
+  bool? isEpisodeMove;
+  int? webtoonLastEpisodeId;
+  int? webtoonFirstEpisodeId;
 
   // int? commentId;
 
@@ -15,13 +18,28 @@ class RequestParam {
 class ParamStore extends RequestParam {
   final mContext = navigatorKey.currentContext;
 
+  void addWebtoonLastEpisode(int episodeId) {
+    print("에피소드끝:${episodeId}");
+    this.webtoonLastEpisodeId = episodeId;
+  }
+
+  void addWebtoonFirstEpisode(int episodeId) {
+    print("에피소드처음:${episodeId}");
+    this.webtoonFirstEpisodeId = episodeId;
+  }
+
+  void addIsEpisodeMove() {
+    print("에피소드이동감지");
+    this.isEpisodeMove = true;
+  }
+
   void addWebtoonDetailId(int webtoonId) {
     print("파람프로바이더webtoonDetailId : ${webtoonId}");
     this.webtoonDetailId = webtoonId;
   }
 
   void addEpisodeDetailId(int episodeId) {
-    print("파람프로바이더episodeDetailId : ${episodeId}");
+    print("파람episodeDetailId : ${episodeId}");
     this.episodeId = episodeId;
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
+import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_body.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_bottom_bar.dart';
@@ -11,6 +12,12 @@ import 'widgets/webtoon_episode_app_bar.dart';
 class WebtoonEpisodePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (ref.read(paramProvider).isEpisodeMove == true) {
+      print("ref.read(paramProvider).isEpisodeMove : ${ref.read(paramProvider).isEpisodeMove}");
+      ref.read(paramProvider).isEpisodeMove = false;
+      ref.read(webtoonEpisodeProvider.notifier).notifyInit();
+    }
+
     WebtoonEpisodeModel? model = ref.watch(webtoonEpisodeProvider);
 
     if (model == null) {

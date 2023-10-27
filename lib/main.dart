@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       // 최초 화면
 
       // initialRoute: Move.cookieShop,
-      initialRoute: Move.myPage,
+      initialRoute: Move.loginPage,
 
       // _core/move.dart 에 적어주세요
       routes: getRouters(),

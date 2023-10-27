@@ -7,7 +7,6 @@ import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.
 
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/webtoon_recommend_page.dart';
-import 'package:flutter_blog/ui/pages/webtoon/my_page/my_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart';
 
 import '../../ui/pages/auth/join_page/join_page.dart';
@@ -27,7 +26,6 @@ class Move {
   static String recommendPage = "/weboons/recommend"; // 추천완결
   static String seeMorePage = "/seemore"; // 더보기
   static String myPage = "/My";
-
 }
 
 // Map<String, Widget Function(BuildContext)> 를 반환하는 함수
@@ -44,6 +42,5 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.replyPage: (context) => ReplyPage(),
     Move.recommendPage: (context) => WebtoonRecommendPage(),
     Move.seeMorePage: (context) => SeeMorePage(),
-    Move.myPage: (context) => MyPage(),
   };
 }

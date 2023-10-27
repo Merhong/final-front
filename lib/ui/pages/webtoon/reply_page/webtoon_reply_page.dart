@@ -19,7 +19,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // }
 
 class ReplyPage extends ConsumerWidget {
-  const ReplyPage({super.key});
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final refreshKey = GlobalKey<RefreshIndicatorState>();
+
+  ReplyPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,12 +36,19 @@ class ReplyPage extends ConsumerWidget {
 
     return Scaffold(
         appBar: ReplyAppBar(),
-        body: ListView.separated(
-            itemBuilder: (context, index) {
-              return WebtoonReplyBody(commentList, index);
-            },
-            separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey),
-            itemCount: commentList.length)
+        body: RefreshIndicator(
+          key: refreshKey,
+          onRefresh: () async {
+            print("리플래시됨");
+            await ref.read(webtoonReplyProvider.notifier).notifyInit();
+          },
+          child: ListView.separated(
+              itemBuilder: (context, index) {
+                return WebtoonReplyBody(commentList, index);
+              },
+              separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey),
+              itemCount: commentList.length),
+        )
 
         // WebtoonReplyBody(),
         // ReplyTabBar(),

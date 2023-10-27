@@ -61,6 +61,6 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
 final webtoonEpisodeProvider = StateNotifierProvider.autoDispose<WebtoonEpisodeViewModel, WebtoonEpisodeModel?>((ref) {
-  Logger().d("episode창고관리자 실행됨");
+  print("episode창고관리자 실행됨");
   return new WebtoonEpisodeViewModel(ref, null)..notifyInit();
 });

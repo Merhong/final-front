@@ -19,13 +19,22 @@ class WebtoonDetailBody extends ConsumerWidget {
       return Center(child: CircularProgressIndicator());
     }
 
-    DetailPageWebtoonDTO webtoonDTO = model!.webtoonDTO!;
-
-    print("webtoonDTO.interestCount : ${webtoonDTO.interestCount}");
+    DetailPageWebtoonDTO webtoonDTO = model.webtoonDTO!;
 
     return CustomScrollView(
       slivers: [
         SliverAppBar(
+          actions: [
+            webtoonDTO.isInterest == true
+                ? InkWell(
+                    onTap: () => ref.read(webtoonDetailProvider.notifier).notifyInterestDelete(),
+                    child: Text("관심웹툰임", style: TextStyle(color: Colors.black, fontSize: 30)),
+                  )
+                : InkWell(
+                    onTap: () => ref.read(webtoonDetailProvider.notifier).notifyInterestCreate(),
+                    child: Text("관심웹툰아님", style: TextStyle(color: Colors.black, fontSize: 30)),
+                  ),
+          ],
           pinned: true,
           elevation: 0,
           expandedHeight: 60,
@@ -36,12 +45,7 @@ class WebtoonDetailBody extends ConsumerWidget {
         ),
 
         SliverToBoxAdapter(
-          child: WebtoonDetailThumbnail(
-            image: (webtoonDTO.episodeList != null && webtoonDTO.episodeList!.length != 0)
-                ? "$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![0].thumbnail}"
-                : "$imageURL/EpisodeThumbnail/default_episode_Thumbnail.jpg",
-            interestCount: webtoonDTO.interestCount ?? -1, // TODO
-          ),
+          child: WebtoonDetailThumbnail(webtoonDTO: webtoonDTO),
         ),
 
         SliverToBoxAdapter(child: WebtoonDetailDescription(webtoonDTO: webtoonDTO)),
