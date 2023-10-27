@@ -34,6 +34,19 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
   }
 
+  Future<void> likeEpisode() async {
+    Logger().d("likeEpisode 실행됨");
+    SessionUser sessionUser = ref.read(sessionProvider);
+    int episodeId = ref.read(paramProvider).episodeId!;
+    Logger().d("episodeId가져옴");
+    ResponseDTO responseDTO =
+        await EpisodeRepository().fetchLike(sessionUser.jwt!, episodeId);
+
+    if (responseDTO.success == true) {
+      notifyInit();
+    }
+  }
+
 //
 // Future<void> notifyAdd(PostSaveReqDTO dto) async {
 //   SessionUser sessionUser = ref.read(sessionProvider);

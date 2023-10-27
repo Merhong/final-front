@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
+import 'package:flutter_blog/data/dto/response_dto.dart';
+import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,6 +12,7 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    WebtoonEpisodeModel? model = ref.watch(webtoonEpisodeProvider);
     return BottomAppBar(
       color: Colors.black,
       child: Row(
@@ -17,10 +20,11 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
         children: <Widget>[
           Row(
             children: [
+              // Todo: 좋아요 취소기능도 만들어야함
               IconButton(
                 icon: Icon(Icons.favorite_border, color: Colors.white),
-                onPressed: () {
-                  // 빈 하트 아이콘을 눌렀을 때 수행할 작업 추가
+                onPressed: () async {
+                  ref.watch(webtoonEpisodeProvider.notifier).likeEpisode();
                 },
               ),
               Text("${episodeDTO!.likeEpisodeCount}",

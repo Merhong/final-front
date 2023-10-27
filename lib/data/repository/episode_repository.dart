@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
+import 'package:flutter_blog/data/dto/episode_dto/episode_like_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:logger/logger.dart';
 
@@ -114,6 +115,21 @@ class EpisodeRepository {
       // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
       // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
       return ResponseDTO(success: false);
+    }
+  }
+
+  Future<ResponseDTO> fetchLike(String jwt, int episodeId) async {
+    try {
+      Response response = await dio.post("/episodes/like/${episodeId}",
+          options: Options(headers: {"Authorization": "${jwt}"}));
+      Logger().d("11111111111");
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      Logger().d("${responseDTO.data}");
+      responseDTO.data = EpisodeLikeDTO.fromJson(responseDTO.data);
+      Logger().d(responseDTO.data);
+      return responseDTO;
+    } catch (e) {
+      return new ResponseDTO(success: false, data: "좋아요 등록 실패");
     }
   }
 
