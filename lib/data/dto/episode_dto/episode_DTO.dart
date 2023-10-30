@@ -14,10 +14,10 @@ class EpisodeDTO {
   final int cookieCost;
   final int likeEpisodeCount;
   final int commentCount;
-  final bool isLike;
 
   // List<Comment> commentList;
   final List<EpisodePhoto> photoList;
+  final bool like;
 
   EpisodeDTO(
       this.episodeId,
@@ -33,7 +33,7 @@ class EpisodeDTO {
       this.commentCount,
       this.likeEpisodeCount,
       this.photoList,
-      this.isLike);
+      this.like);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   EpisodeDTO.fromJson(Map<String, dynamic> json)
@@ -52,10 +52,10 @@ class EpisodeDTO {
         photoList = (json["photoList"] as List)
             .map((jsonPhoto) => EpisodePhoto.fromJson(jsonPhoto))
             .toList(),
-        isLike = json["isLike"];
+        like = json["like"];
 
   @override
   String toString() {
-    return 'EpisodeDTO{episodeId: $episodeId, detailTitle: $detailTitle, starScore: $starScore, starCount: $starCount, createdAt: $createdAt, authorText: $authorText, authorName: $authorName, webtoonId: $webtoonId, webtoonName: $webtoonName, cookieCost: $cookieCost, likeEpisodeCount: $likeEpisodeCount, commentCount: $commentCount, photoList: $photoList}';
+    return 'EpisodeDTO{episodeId: $episodeId, detailTitle: $detailTitle, starScore: $starScore, starCount: $starCount, createdAt: $createdAt, authorText: $authorText, authorName: $authorName, webtoonId: $webtoonId, webtoonName: $webtoonName, cookieCost: $cookieCost, likeEpisodeCount: $likeEpisodeCount, commentCount: $commentCount, photoList: $photoList, isLike: $like}';
   }
 }

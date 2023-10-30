@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
@@ -6,13 +7,14 @@ import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WebtoonEpisodeBottomBar extends ConsumerWidget {
-  EpisodeDTO? episodeDTO;
+  EpisodeDTO episodeDTO;
 
-  WebtoonEpisodeBottomBar({this.episodeDTO});
+  WebtoonEpisodeBottomBar({required this.episodeDTO});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     WebtoonEpisodeModel? model = ref.watch(webtoonEpisodeProvider);
+
     return BottomAppBar(
       color: Colors.black,
       child: Row(
@@ -22,12 +24,12 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
             children: [
               // Todo: 좋아요 취소기능도 만들어야함
               IconButton(
-                icon: Icon(Icons.favorite_border, color: Colors.white),
+                icon: _likeIcon(episodeDTO.like),
                 onPressed: () async {
                   ref.watch(webtoonEpisodeProvider.notifier).likeEpisode();
                 },
               ),
-              Text("${episodeDTO!.likeEpisodeCount}",
+              Text("${episodeDTO.likeEpisodeCount}",
                   style: TextStyle(color: Colors.white)),
               SizedBox(width: 10),
               IconButton(
@@ -40,7 +42,7 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
                       context, MaterialPageRoute(builder: (_) => ReplyPage()));
                 },
               ),
-              Text("${episodeDTO!.commentCount}",
+              Text("${episodeDTO.commentCount}",
                   style: TextStyle(color: Colors.white)),
             ],
           ),
@@ -63,5 +65,13 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  Widget _likeIcon(bool like) {
+    if (like == true) {
+      return Icon(CupertinoIcons.heart_fill, color: Colors.red);
+    } else {
+      return Icon(Icons.favorite_border, color: Colors.white);
+    }
   }
 }

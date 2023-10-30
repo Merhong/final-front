@@ -70,9 +70,8 @@ class EpisodeRepository {
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
-
+      Logger().d(response.data);
       responseDTO.data = EpisodeDTO.fromJson(responseDTO.data);
-
       return responseDTO;
     } catch (e) {
       if (e is DioError) {
