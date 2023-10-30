@@ -20,18 +20,15 @@ class _AppBottomState extends State<AppBottom> {
 
     // 웹툰
     if (index == 0) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, Move.homeListPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
     }
     // 추천완결
     else if (index == 1) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, Move.recommendPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Move.recommendPage, (route) => false);
     }
     // 베스트 도전
     else if (index == 2) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, Move.bestPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Move.bestPage, (route) => false);
     }
     // MY
     else if (index == 3) {
@@ -39,8 +36,7 @@ class _AppBottomState extends State<AppBottom> {
     }
     // 더보기
     else if (index == 4) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, Move.seeMorePage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Move.seeMorePage, (route) => false);
     }
 
     setState(() {});
@@ -78,6 +74,7 @@ class _AppBottomState extends State<AppBottom> {
             label: '더보기',
           ),
         ],
+
 
         // 선택된 아이템의 아이콘 및 라벨 텍스트 색상
         selectedItemColor: Colors.black,

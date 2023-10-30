@@ -14,9 +14,10 @@ class EpisodeDTO {
   final int cookieCost;
   final int likeEpisodeCount;
   final int commentCount;
-
   // List<Comment> commentList;
   final List<EpisodePhoto> photoList;
+
+  // 에피소드말고 상위웹툰의 전체 에피소드 개수 필요
 
   EpisodeDTO(
     this.episodeId,
@@ -40,7 +41,7 @@ class EpisodeDTO {
         detailTitle = json["detailTitle"],
         starScore = json["starScore"],
         starCount = json["starCount"],
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
+        createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]),
         authorText = json["authorText"],
         authorName = json["authorName"],
         webtoonId = json["webtoonId"],
@@ -48,9 +49,7 @@ class EpisodeDTO {
         cookieCost = json["cookieCost"],
         commentCount = json["commentCount"],
         likeEpisodeCount = json["likeEpisodeCount"],
-        photoList = (json["photoList"] as List)
-            .map((jsonPhoto) => EpisodePhoto.fromJson(jsonPhoto))
-            .toList();
+        photoList = (json["photoList"] as List).map((jsonPhoto) => EpisodePhoto.fromJson(jsonPhoto)).toList();
 
   @override
   String toString() {

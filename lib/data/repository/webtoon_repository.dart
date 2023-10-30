@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/post_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
+import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/interest_DTO.dart';
@@ -89,11 +90,55 @@ class WebtoonRepository {
     }
   }
 
-  Future<ResponseDTO> fetchWebtoonInterest(String jwt, int webtoonId) async {
+  Future<ResponseDTO> fetchInterestAlarmOn(String jwt, int webtoonId) async {
     try {
       // 통신
-      Response response = await dio.post("/webtoons/interest/$webtoonId",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.post("/users/interest/alarmon/$webtoonId", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      responseDTO.data = InterestWebtoonDTO.fromJson(responseDTO.data);
+      // print(responseDTO);
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
+  Future<ResponseDTO> fetchInterestAlarmOff(String jwt, int webtoonId) async {
+    try {
+      // 통신
+      Response response = await dio.post("/users/interest/alarmoff/$webtoonId", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      responseDTO.data = InterestWebtoonDTO.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
+  Future<ResponseDTO> fetchInterestCreate(String jwt, int webtoonId) async {
+    try {
+      // 통신
+      Response response = await dio.post("/webtoons/interest/$webtoonId", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -113,20 +158,38 @@ class WebtoonRepository {
     }
   }
 
+  Future<ResponseDTO> fetchInterestDelete(String jwt, int webtoonId) async {
+    try {
+      Response response = await dio.delete("/webtoons/interest/$webtoonId", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      responseDTO.data = InterestDTO.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
   Future<ResponseDTO> fetchWebtoonList(String jwt) async {
     try {
       // 통신
-      Response response = await dio.get("/webtoons",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.get("/webtoons", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       List<dynamic> mapList = responseDTO.data as List<dynamic>;
 
-      List<ListPageWebtoonDTO> webtoonList = mapList
-          .map((webtoonDTO) => ListPageWebtoonDTO.fromJson(webtoonDTO))
-          .toList();
+      List<ListPageWebtoonDTO> webtoonList = mapList.map((webtoonDTO) => ListPageWebtoonDTO.fromJson(webtoonDTO)).toList();
 
       // Logger().d(webtoonList);
 

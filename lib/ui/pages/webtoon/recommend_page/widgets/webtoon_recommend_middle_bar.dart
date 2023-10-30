@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class WebtoonRecommendMiddleBar extends StatelessWidget {
-  final int allEnded;
-  const WebtoonRecommendMiddleBar({super.key, required this.allEnded});
+  const WebtoonRecommendMiddleBar({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class WebtoonRecommendMiddleBar extends StatelessWidget {
                 ),
               ],
             ),
-            Text("총 ${allEnded}작품"),
+            Text("총 1089작품"),
           ],
         ),
       ),

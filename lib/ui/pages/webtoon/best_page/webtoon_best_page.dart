@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/common_widgets/app_bottom.dart';
-import 'package:flutter_blog/ui/pages/webtoon/best_page/wigets/best_nested_tab_bar.dart';
+import 'package:flutter_blog/ui/pages/webtoon/best_page/widgets/best_nested_tab_bar.dart';
 
-class WebtoonBestPage extends StatelessWidget {
-  const WebtoonBestPage({Key? key});
+class BestPage extends StatelessWidget {
+  const BestPage({Key? key});
 
   @override
   Widget build(BuildContext context) {

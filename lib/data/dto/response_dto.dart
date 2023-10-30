@@ -17,7 +17,7 @@ class ResponseDTO {
   ResponseDTO.fromJson(Map<String, dynamic> json)
       : data = json["data"],
         success = json["success"],
-        errorType = json["errorType"];
+        errorType = json["errorType"] == null ? json["errorType"] : ErrorType.fromJson(json["errorType"]);
 
   @override
   String toString() {
@@ -32,6 +32,10 @@ class ErrorType {
   int? status;
 
   ErrorType({this.message, this.status});
+
+  ErrorType.fromJson(Map<String, dynamic> json)
+      : message = json["message"],
+        status = json["status"];
 
   @override
   String toString() {

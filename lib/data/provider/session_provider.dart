@@ -22,7 +22,6 @@ class SessionUser {
     this.isLogin = false,
   });
 
-  // 회원가입
   Future<void> join(JoinReqDTO joinReqDTO) async {
     // 1. 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
@@ -35,8 +34,7 @@ class SessionUser {
           SnackBar(content: Text(responseDTO.errorType!.message!)));
     }
   }
-  
-  // 로그인
+
   Future<void> login(LoginReqDTO loginReqDTO) async {
     // 1. 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
@@ -61,7 +59,6 @@ class SessionUser {
     }
   }
 
-  // 로그아웃
   // JWT는 로그아웃 할 때 서버로 요청할 필요가 없음.(어짜피 스테스리스로 서버에 정보가 없으니까)
   Future<void> logout() async {
     this.jwt = null;
