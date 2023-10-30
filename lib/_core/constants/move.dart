@@ -8,6 +8,7 @@ import 'package:flutter_blog/ui/pages/webtoon/best_page/webtoon_best_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/webtoon_recommend_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart';
+import 'package:flutter_blog/ui/pay/pay_page.dart';
 
 import '../../ui/pages/auth/join_page/join_page.dart';
 import '../../ui/pages/auth/login_page/login_page.dart';
@@ -28,6 +29,7 @@ class Move {
   static String seeMorePage = "/seemore"; // 더보기
   static String bestPage = "/best"; // 베스트페이지
   static String myPage = "/mypage";
+  static String payPage = "/paypage";
 }
 
 // Map<String, Widget Function(BuildContext)> 를 반환하는 함수
@@ -47,5 +49,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.seeMorePage: (context) => SeeMorePage(),
     Move.bestPage: (context) => WebtoonBestPage(),
     Move.myPage: (context) => MyPage(),
+    Move.payPage: (context) => PayPage(),
   };
 }
