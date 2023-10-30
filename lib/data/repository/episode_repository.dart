@@ -122,11 +122,8 @@ class EpisodeRepository {
     try {
       Response response = await dio.post("/episodes/like/${episodeId}",
           options: Options(headers: {"Authorization": "${jwt}"}));
-      Logger().d("11111111111");
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
-      Logger().d("${responseDTO.data}");
       responseDTO.data = EpisodeLikeDTO.fromJson(responseDTO.data);
-      Logger().d(responseDTO.data);
       return responseDTO;
     } catch (e) {
       return new ResponseDTO(success: false, data: "좋아요 등록 실패");
