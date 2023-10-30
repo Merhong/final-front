@@ -3,7 +3,6 @@ import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/episode_repository.dart';
-import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -30,8 +29,25 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     print("에피소드notifyInit실행");
     SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
+    Logger().d("1단계");
     ResponseDTO responseDTO = await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
+
     state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
+  }
+
+  Future<void> likeEpisode() async {
+    Logger().d("likeEpisode 실행됨");
+    SessionUser sessionUser = ref.read(sessionProvider);
+    int episodeId = ref.read(paramProvider).episodeId!;
+    bool like = state!.episodeDTO.like;
+    Logger().d("fetchLike 전");
+
+    ResponseDTO responseDTO =
+        await EpisodeRepository().fetchLike(sessionUser.jwt!, episodeId, like);
+
+    if (responseDTO.success == true) {
+      notifyInit();
+    }
   }
 
 //
