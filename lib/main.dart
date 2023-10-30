@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // 최초 화면
-      // initialRoute: Move.loginPage,
+      initialRoute: Move.loginPage,
       // initialRoute: Move.payHomePage,
-      initialRoute: Move.payCardPage,
+      // initialRoute: Move.payCardPage,
 
 
       // _core/move.dart 에 적어주세요

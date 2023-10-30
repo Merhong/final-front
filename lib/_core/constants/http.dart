@@ -6,7 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // const String serverURL = "http://192.168.0.44:8081"; // 김하얀
 // const String serverURL = "http://192.168.0.48:8081"; // 박민희
 // const String serverURL = "http://192.168.0.49:8081"; // 윤혜림
-// const String serverURL = "http://192.168.0.50:8081"; // 김대홍
+const String serverURL = "http://192.168.0.50:8081"; // 김대홍
 ///////////////////////////////////////////////////////
 
 

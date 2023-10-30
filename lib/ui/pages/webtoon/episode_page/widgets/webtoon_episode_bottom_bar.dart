@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
-import 'package:flutter_blog/data/dto/response_dto.dart';
-import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +14,7 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ParamStore ps = ref.read(paramProvider);
     WebtoonEpisodeModel? model = ref.watch(webtoonEpisodeProvider);
 
     return BottomAppBar(
