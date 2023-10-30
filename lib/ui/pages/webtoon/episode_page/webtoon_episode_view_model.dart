@@ -40,13 +40,14 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     Logger().d("likeEpisode 실행됨");
     SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
+    bool like = state!.episodeDTO.like;
     Logger().d("fetchLike 전");
+
     ResponseDTO responseDTO =
-        await EpisodeRepository().fetchLike(sessionUser.jwt!, episodeId);
+        await EpisodeRepository().fetchLike(sessionUser.jwt!, episodeId, like);
 
     if (responseDTO.success == true) {
       notifyInit();
-      Logger().d("fetchLike 후 notifyiniy 실행");
     }
   }
 

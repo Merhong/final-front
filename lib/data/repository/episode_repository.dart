@@ -117,10 +117,18 @@ class EpisodeRepository {
     }
   }
 
-  Future<ResponseDTO> fetchLike(String jwt, int episodeId) async {
+  Future<ResponseDTO> fetchLike(String jwt, int episodeId, bool like) async {
     try {
-      Response response = await dio.post("/episodes/like/${episodeId}",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response;
+
+      if (like == true) {
+        response = await dio.post("/episodes/likecancel/${episodeId}",
+            options: Options(headers: {"Authorization": "${jwt}"}));
+      } else {
+        response = await dio.post("/episodes/like/${episodeId}",
+            options: Options(headers: {"Authorization": "${jwt}"}));
+      }
+
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
       responseDTO.data = EpisodeLikeDTO.fromJson(responseDTO.data);
       return responseDTO;
