@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PaymentBlackButton extends StatelessWidget {
-  const PaymentBlackButton({super.key});
+class PayBlackButton extends StatelessWidget {
+  const PayBlackButton({super.key});
 
   @override
   Widget build(BuildContext context) {

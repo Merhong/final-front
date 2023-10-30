@@ -3,7 +3,7 @@ import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_page.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/see_more_page.dart';
-import 'package:flutter_blog/ui/pages/payment/payment_page.dart';
+import 'package:flutter_blog/ui/pages/pay/pay_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/best_page/webtoon_best_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/webtoon_recommend_page.dart';
@@ -28,8 +28,6 @@ class Move {
   static String seeMorePage = "/seemore"; // 더보기
   static String myPage = "/my"; // MY
   static String bestPage = "/best"; // MY
-  static String bestPage = "/best"; // 베스트페이지
-  static String myPage = "/my";
   static String payPage = "/pay";
 
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class PaymentWhiteButton extends StatelessWidget {
+class PayWhiteButton extends StatelessWidget {
   final String payment;
   final String smallFont;
-  const PaymentWhiteButton(
+
+  const PayWhiteButton(
       {super.key, required this.payment, required this.smallFont});
 
   @override

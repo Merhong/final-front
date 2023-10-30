@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/payment/widgets/payment_black_button.dart';
-import 'package:flutter_blog/ui/pages/payment/widgets/payment_white_button.dart';
+import 'package:flutter_blog/ui/pages/pay/widgets/pay_black_button.dart';
+import 'package:flutter_blog/ui/pages/pay/widgets/pay_white_button.dart';
 
-class paymentPage extends StatelessWidget {
-  const paymentPage({Key? key});
+class payPage extends StatelessWidget {
+  const payPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +48,14 @@ class paymentPage extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(height: 8),
-            PaymentBlackButton(),
+            PayBlackButton(),
             SizedBox(height: 5),
-            PaymentWhiteButton(
+            PayWhiteButton(
               payment: "PIN번호",
               smallFont: "6자리 숫자로 간편하게 (PayShot 포함)",
             ),
             SizedBox(height: 5),
-            PaymentWhiteButton(
+            PayWhiteButton(
               payment: "일반",
               smallFont: "카드번호로 결제 (기존 등록 카드만 가능)",
             ),
