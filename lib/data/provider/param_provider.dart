@@ -10,6 +10,7 @@ class RequestParam {
   int? webtoonLastEpisodeId;
   int? webtoonFirstEpisodeId;
   int? commentId;
+  int? bottomNavigationBarIndex;
 
   RequestParam({this.webtoonDetailId});
 }
@@ -47,9 +48,14 @@ class ParamStore extends RequestParam {
     print("파람commentDetailId : ${commentId}");
     this.commentId = commentId;
   }
+
+  void addBottomNavigationBarIndex(int id) {
+    print("파람addBottomNavigationBarIndex : ${id}");
+    this.bottomNavigationBarIndex = id;
+  }
 }
 
-// 3. 창고 관리자
+// 3. 창고 관리자paramProvider
 final paramProvider = Provider<ParamStore>((ref) {
   return new ParamStore();
 });
