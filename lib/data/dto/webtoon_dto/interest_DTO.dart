@@ -1,3 +1,5 @@
+import 'package:flutter_blog/data/model/author.dart';
+import 'package:flutter_blog/data/model/episode.dart';
 import 'package:intl/intl.dart';
 
 class InterestDTO {
@@ -8,14 +10,13 @@ class InterestDTO {
   int webtoonId;
   int webtoonTotalInterest;
 
-  InterestDTO(this.id, this.isAlarm, this.createdAt, this.userId,
-      this.webtoonId, this.webtoonTotalInterest);
+  InterestDTO(this.id, this.isAlarm, this.createdAt, this.userId, this.webtoonId, this.webtoonTotalInterest);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   InterestDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         isAlarm = json["isAlarm"],
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
+        createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]),
         userId = json["userId"],
         webtoonId = json["webtoonId"],
         webtoonTotalInterest = json["webtoonTotalInterest"];

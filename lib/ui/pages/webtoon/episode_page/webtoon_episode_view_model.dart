@@ -3,8 +3,10 @@ import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/episode_repository.dart';
+import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 // 1. 창고 데이터
 
@@ -28,8 +30,7 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     print("에피소드notifyInit실행");
     SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
-    ResponseDTO responseDTO =
-        await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
+    ResponseDTO responseDTO = await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
     state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
   }
 
@@ -59,10 +60,7 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
-
-final webtoonEpisodeProvider = StateNotifierProvider.autoDispose<
-    WebtoonEpisodeViewModel, WebtoonEpisodeModel?>((ref) {
+final webtoonEpisodeProvider = StateNotifierProvider.autoDispose<WebtoonEpisodeViewModel, WebtoonEpisodeModel?>((ref) {
   print("episode창고관리자 실행됨");
-
   return new WebtoonEpisodeViewModel(ref, null)..notifyInit();
 });

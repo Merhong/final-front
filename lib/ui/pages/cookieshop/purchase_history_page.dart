@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/widgets/history_list_item.dart';
 
 class PurchaseHistory extends StatelessWidget {
