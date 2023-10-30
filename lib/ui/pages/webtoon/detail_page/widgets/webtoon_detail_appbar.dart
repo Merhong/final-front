@@ -29,9 +29,11 @@ class WebtoonDetailAppbar extends ConsumerWidget implements PreferredSizeWidget 
                 children: [
                   InkWell(
                     onTap: () {
+                      ScaffoldMessenger.of(context).clearSnackBars();
                       ref.read(webtoonDetailProvider.notifier).notifyInterestDelete();
                       mySnackbar(
                         context,
+                        1000,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -52,9 +54,11 @@ class WebtoonDetailAppbar extends ConsumerWidget implements PreferredSizeWidget 
                   webtoonDTO.isAlarm == true
                       ? InkWell(
                           onTap: () {
+                            ScaffoldMessenger.of(context).clearSnackBars();
                             ref.read(webtoonDetailProvider.notifier).notifyInterestAlarmOff();
                             mySnackbar(
                               context,
+                              1000,
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -67,9 +71,11 @@ class WebtoonDetailAppbar extends ConsumerWidget implements PreferredSizeWidget 
                           child: Icon(Icons.notifications_on, color: !isScroll ? Colors.white : Colors.black))
                       : InkWell(
                           onTap: () {
+                            ScaffoldMessenger.of(context).clearSnackBars();
                             ref.read(webtoonDetailProvider.notifier).notifyInterestAlarmOn();
                             mySnackbar(
                               context,
+                              1000,
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -85,9 +91,11 @@ class WebtoonDetailAppbar extends ConsumerWidget implements PreferredSizeWidget 
               )
             : InkWell(
                 onTap: () {
+                  ScaffoldMessenger.of(context).clearSnackBars();
                   ref.read(webtoonDetailProvider.notifier).notifyInterestCreate();
                   mySnackbar(
                     context,
+                    1000,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

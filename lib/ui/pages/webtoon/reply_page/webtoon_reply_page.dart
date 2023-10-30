@@ -4,10 +4,9 @@ import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_bottom_bar.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_view_model.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_episode_reply_app_bar.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_episode_reply_body.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_app_bar.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_body.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_write.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/wetoon_episode_reply_tab_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ReplyPage extends ConsumerWidget {

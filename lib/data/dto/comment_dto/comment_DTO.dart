@@ -6,7 +6,7 @@ class CommentDTO {
   final int episodeId;
   int likeCommentCount;
   int dislikeCommentCount;
-  final bool isDelete;
+  bool isDelete;
   final String text;
   final bool isAuthor;
   final DateTime createdAt;

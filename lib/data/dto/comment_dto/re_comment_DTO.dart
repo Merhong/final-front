@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 class ReCommentDTO {
   final int id;
   final int commentId;
-  final bool isDelete;
+  bool isDelete;
   final String text;
   final DateTime createdAt;
   int likeReCommentCount;

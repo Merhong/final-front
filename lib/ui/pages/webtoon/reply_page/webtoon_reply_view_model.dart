@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
+import 'package:flutter_blog/data/dto/comment_dto/comment_delete_DTO.dart';
 import 'package:flutter_blog/data/dto/comment_dto/re_comment_DTO.dart';
+import 'package:flutter_blog/data/dto/comment_dto/re_comment_delete_DTO.dart';
 import 'package:flutter_blog/data/dto/reply_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/comment_like_DTO.dart';
@@ -58,6 +60,29 @@ class WebtoonReplyModel {
       updateReComment.isMyLike = false;
       print("대댓글싫어요취소${reCommentLikeDTO.isLike}");
     }
+    return WebtoonReplyModel(commentList: updateCommentList);
+  }
+
+  WebtoonReplyModel reCommentDeleteUpdate(ReCommentDeleteDTO reCommentDeleteDTO) {
+    List<CommentDTO> updateCommentList = this.commentList;
+
+    CommentDTO updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == reCommentDeleteDTO.commentId);
+
+    ReCommentDTO updateReComment = updateComment.reCommentList.firstWhere((reCommentDTO) => reCommentDTO.id == reCommentDeleteDTO.deletedId);
+
+    updateReComment.isDelete = true;
+    print("대댓글삭제함${updateReComment.isDelete}");
+
+    return WebtoonReplyModel(commentList: updateCommentList);
+  }
+
+  WebtoonReplyModel deleteUpdate(CommentDeleteDTO commentDeleteDTO) {
+    List<CommentDTO> updateCommentList = this.commentList;
+
+    final updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentDeleteDTO.deletedId);
+    updateComment.isDelete = true;
+    print("댓글삭제함${updateComment.isDelete}");
+
     return WebtoonReplyModel(commentList: updateCommentList);
   }
 
@@ -177,6 +202,28 @@ class WebtoonReplyViewModel extends StateNotifier<WebtoonReplyModel?> {
     }
     state = state!.reCommentlikeDelete(responseDTO.data as ReCommentLikeDTO);
     print("끝끝끝끝끝끝끝");
+  }
+
+  Future<void> notifyReCommentDelete(int reCommentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchReCommentDelete(sessionUser.jwt!, reCommentId);
+
+    if (responseDTO.success == false) {
+      print("if로감ReCommentDelete");
+      return;
+    }
+    state = state!.reCommentDeleteUpdate(responseDTO.data as ReCommentDeleteDTO);
+  }
+
+  Future<void> notifyCommentDelete(int commentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchCommentDelete(sessionUser.jwt!, commentId);
+
+    if (responseDTO.success == false) {
+      print("if로감CommentDelete");
+      return;
+    }
+    state = state!.deleteUpdate(responseDTO.data as CommentDeleteDTO);
   }
 
   Future<void> notifyCommentLike(int commentId) async {

@@ -42,9 +42,11 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
         child: InkWell(
           onTap: () {
             if (webtoonDTO.isInterest) {
+              ScaffoldMessenger.of(context).clearSnackBars();
               ref.read(webtoonDetailProvider.notifier).notifyInterestDelete();
               mySnackbar(
                 context,
+                1000,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -54,9 +56,11 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
                 ),
               );
             } else {
+              ScaffoldMessenger.of(context).clearSnackBars();
               ref.read(webtoonDetailProvider.notifier).notifyInterestCreate();
               mySnackbar(
                 context,
+                1000,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
