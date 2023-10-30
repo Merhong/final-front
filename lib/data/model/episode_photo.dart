@@ -1,8 +1,7 @@
-
+import 'package:intl/intl.dart';
 
 class EpisodePhoto {
   int id;
-
   // int episodeId;
   String photoURL;
 

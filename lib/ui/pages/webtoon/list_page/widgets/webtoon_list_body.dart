@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
+import 'package:flutter_blog/ui/common_widgets/bottom_rule.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_bottom_random.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_bottom_view.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_bottom_review.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'webtoon_list_middle_advertising.dart';
@@ -29,7 +33,7 @@ class WebtoonListBody extends ConsumerWidget {
         WebtoonListSliverPersistentHeader(),
         WebtoonListMiddleAdvertising(),
         WebtoonListSliverGrid(),
-        //WebtoonListSliverGrid(webtoonList: webtoonList),
+        SliverToBoxAdapter(child: BottomRule()),
 
         // SliverToBoxAdapter(
         //   child: Container(

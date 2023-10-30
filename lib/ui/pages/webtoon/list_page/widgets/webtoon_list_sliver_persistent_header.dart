@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/webtoon/list_page/week_view_model.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widgets/my_sliver_persistent_header_delegate.dart';
@@ -20,49 +20,52 @@ class WebtoonListSliverPersistentHeader extends ConsumerWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.symmetric(
-                horizontal: BorderSide(color: Colors.grey, width: 1.0)),
+            border: Border.symmetric(horizontal: BorderSide(color: Colors.grey, width: 1.0)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // Text("모두", style: TextStyle(color: Colors.black)), //TODO
-              Text("신작", style: TextStyle(color: Colors.black)), //TODO
-              Text("매일+", style: TextStyle(color: Colors.black)), //TODO
-              InkWell(
-                // onTap: () => ref.read(weekProvider)!.week = "월", // 이거는 왜 안되는건지
-                onTap: () => ref.read(weekProvider.notifier).notifyWeek("월"),
-                child: Text(" 월 ", style: TextStyle(color: Colors.black)),
-              ),
-              InkWell(
-                onTap: () => ref.read(weekProvider.notifier).notifyWeek("화"),
-                child: Text(" 화 ", style: TextStyle(color: Colors.black)),
-              ),
-              InkWell(
-                onTap: () => ref.read(weekProvider.notifier).notifyWeek("수"),
-                child: Text(" 수 ", style: TextStyle(color: Colors.black)),
-              ),
-              InkWell(
-                onTap: () => ref.read(weekProvider.notifier).notifyWeek("목"),
-                child: Text(" 목 ", style: TextStyle(color: Colors.black)),
-              ),
-              InkWell(
-                onTap: () => ref.read(weekProvider.notifier).notifyWeek("금"),
-                child: Text(" 금 ", style: TextStyle(color: Colors.black)),
-              ),
-              InkWell(
-                onTap: () => ref.read(weekProvider.notifier).notifyWeek("토"),
-                child: Text(" 토 ", style: TextStyle(color: Colors.black)),
-              ),
-              InkWell(
-                onTap: () => ref.read(weekProvider.notifier).notifyWeek("일"),
-                child: Text(" 일 ", style: TextStyle(color: Colors.black)),
-              ),
-              Text("완결", style: TextStyle(color: Colors.black)), //TODO
+              // WebtoonListWeekSelect(checkWeek: "모두"), TODO 기본 화면이 모두 보는건데 버튼도 만들지 안만들지
+              WebtoonListWeekSelect(checkWeek: "신작"),
+              WebtoonListWeekSelect(checkWeek: "매일"),
+              WebtoonListWeekSelect(checkWeek: "월"),
+              WebtoonListWeekSelect(checkWeek: "화"),
+              WebtoonListWeekSelect(checkWeek: "수"),
+              WebtoonListWeekSelect(checkWeek: "목"),
+              WebtoonListWeekSelect(checkWeek: "금"),
+              WebtoonListWeekSelect(checkWeek: "토"),
+              WebtoonListWeekSelect(checkWeek: "일"),
+              WebtoonListWeekSelect(checkWeek: "완결"),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class WebtoonListWeekSelect extends ConsumerWidget {
+  const WebtoonListWeekSelect({
+    required this.checkWeek,
+  });
+
+  final String? checkWeek;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    String? weekClickCheck = ref.read(webtoonListProvider)!.weekCheck;
+    // print(weekClickCheck);
+
+    return Container(
+      child: weekClickCheck == "${checkWeek}"
+          ? InkWell(
+              // onTap: () => ref.read(webtoonListProvider.notifier).notifyWeek("신작"),
+              child: Text("${checkWeek}", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+            )
+          : InkWell(
+              onTap: () => ref.read(webtoonListProvider.notifier).notifyWeek("${checkWeek}"),
+              child: Text("${checkWeek}", style: TextStyle(color: Colors.black)),
+            ),
     );
   }
 }

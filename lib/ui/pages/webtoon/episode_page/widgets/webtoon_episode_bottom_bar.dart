@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
+import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,10 +38,8 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
                 icon: Icon(Icons.comment, color: Colors.white),
                 onPressed: () {
                   print("댓글보기클릭");
-                  // ParamStore paramStore = ref.read(paramProvider);
-                  // paramStore.addEpisodeDetailId(episodeDTO!.episodeId);
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => ReplyPage()));
+                  // ps.addEpisodeDetailId(episodeDTO!.episodeId);
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => ReplyPage()));
                 },
               ),
               Text("${episodeDTO.commentCount}",
@@ -48,18 +48,29 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
           ),
           Row(
             children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.white),
-                onPressed: () {
-                  // 왼쪽으로 넘어가는 아이콘을 눌렀을 때 수행할 작업 추가
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_forward, color: Colors.white),
-                onPressed: () {
-                  // 오른쪽으로 넘어가는 아이콘을 눌렀을 때 수행할 작업 추가
-                },
-              ),
+              ps.webtoonFirstEpisodeId != episodeDTO!.episodeId
+                  ? IconButton(
+                      icon: Icon(Icons.arrow_left, color: Colors.white, size: 30),
+                      onPressed: () {
+                        ps.isEpisodeMove = true;
+                        ps.addEpisodeDetailId((episodeDTO!.episodeId) + 1); // 역순정렬?
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+                      },
+                    )
+                  : IconButton(onPressed: () {}, icon: Icon(Icons.arrow_left, color: Colors.grey[700], size: 30)),
+              //
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_left, color: Colors.white)),
+              //
+              ps.webtoonLastEpisodeId != episodeDTO!.episodeId
+                  ? IconButton(
+                      icon: Icon(Icons.arrow_right, color: Colors.white, size: 30),
+                      onPressed: () {
+                        ps.isEpisodeMove = true;
+                        ps.addEpisodeDetailId((episodeDTO!.episodeId) - 1); // 역순정렬?
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+                      },
+                    )
+                  : IconButton(onPressed: () {}, icon: Icon(Icons.arrow_right, color: Colors.grey[700], size: 30)),
             ],
           ),
         ],
