@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       // initialRoute: Move.cookieShop,
       initialRoute: Move.paymentPage,
 
+
       // _core/move.dart 에 적어주세요
       routes: getRouters(),
       theme: theme(),
