@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
       // 최초 화면
       // initialRoute: Move.loginPage,
       // initialRoute: Move.payHomePage,
-      initialRoute: Move.payCardPage,
-
+      initialRoute: Move.payMethodPage,
 
       // _core/move.dart 에 적어주세요
       routes: getRouters(),
