@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
+import 'package:flutter_blog/data/dto/comment_dto/comment_delete_DTO.dart';
 import 'package:flutter_blog/data/dto/comment_dto/re_comment_DTO.dart';
+import 'package:flutter_blog/data/dto/comment_dto/re_comment_delete_DTO.dart';
 import 'package:flutter_blog/data/dto/reply_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/comment_like_DTO.dart';
@@ -113,6 +115,51 @@ class CommentRepository {
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
       responseDTO.data = ReCommentLikeDTO.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
+  Future<ResponseDTO> fetchReCommentDelete(String jwt, int reCommentId) async {
+    try {
+      // 통신
+      print("실행됨1");
+      Response response = await dio.delete("/recomments/$reCommentId", options: Options(headers: {"Authorization": "${jwt}"}));
+      print("실행됨2");
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      print("실행됨3");
+      responseDTO.data = ReCommentDeleteDTO.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
+  Future<ResponseDTO> fetchCommentDelete(String jwt, int commentId) async {
+    try {
+      // 통신
+      Response response = await dio.delete("/comments/$commentId", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      responseDTO.data = CommentDeleteDTO.fromJson(responseDTO.data);
 
       return responseDTO;
     } catch (e) {

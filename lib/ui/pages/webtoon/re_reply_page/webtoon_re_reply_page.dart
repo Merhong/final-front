@@ -6,8 +6,8 @@ import 'package:flutter_blog/ui/pages/webtoon/re_reply_page/widgets/webtoon_re_r
 import 'package:flutter_blog/ui/pages/webtoon/re_reply_page/widgets/webtoon_re_reply_body.dart';
 import 'package:flutter_blog/ui/pages/webtoon/re_reply_page/widgets/webtoon_re_reply_write.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_view_model.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_episode_reply_app_bar.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_episode_reply_body.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_app_bar.dart';
+import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_body.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/widgets/webtoon_reply_write.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

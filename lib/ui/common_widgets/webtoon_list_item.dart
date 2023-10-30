@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
+import 'package:flutter_blog/ui/common_widgets/specially_tag.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 
 import '../../_core/constants/size.dart';
@@ -40,29 +41,11 @@ class WebtoonListItem extends StatelessWidget {
               if (webtoonDTO.webtoonSpeciallyEnum == "순위") ...[
                 Container(
                   height: sizeWebtoonListItemPictureHeight160,
-                  child: Stack(
-                    children: [
-                      Align(alignment: Alignment(1, 1), child: CustomPaint(size: Size(75, 25), painter: DrawTriangle(color: Colors.green))),
-                      Align(alignment: Alignment(1, 1), child: Text("순위 상승", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
-                    ],
-                  ),
+                  child: SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.rank),
                 ),
               ],
-              if (webtoonDTO.webtoonSpeciallyEnum == "신작")
-                Padding(
-                  padding: EdgeInsets.all(3.0),
-                  child: CircleAvatar(
-                      backgroundColor: Colors.green,
-                      radius: 15,
-                      child: Text("신작", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold))),
-                ),
-              if (webtoonDTO.webtoonSpeciallyEnum == "무료")
-                Stack(
-                  children: [
-                    Icon(Icons.circle, size: 36, color: Colors.black),
-                    Positioned(right: 3, bottom: 3, child: Icon(CupertinoIcons.clock, color: Colors.green, size: 30)),
-                  ],
-                ),
+              if (webtoonDTO.webtoonSpeciallyEnum == "신작") SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.isNew),
+              if (webtoonDTO.webtoonSpeciallyEnum == "무료") SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.free),
             ],
           ),
         ),
@@ -72,10 +55,10 @@ class WebtoonListItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            todayDateTime.difference(webtoonDTO.episodeUpdatedAt!).inHours < 40
+            webtoonDTO.webtoonSpeciallyEnum == "휴재"
                 ? Row(
                     children: [
-                      TitleTag(titleTagEnum: TitleTagEnum.up),
+                      TitleTag(titleTagEnum: TitleTagEnum.stop),
                       SizedBox(width: 2),
                       Container(
                         constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.235),
@@ -83,10 +66,10 @@ class WebtoonListItem extends StatelessWidget {
                       ),
                     ],
                   )
-                : webtoonDTO.webtoonSpeciallyEnum == "휴재"
+                : webtoonDTO.webtoonSpeciallyEnum == "완결"
                     ? Row(
                         children: [
-                          TitleTag(titleTagEnum: TitleTagEnum.stop),
+                          TitleTag(titleTagEnum: TitleTagEnum.end),
                           SizedBox(width: 2),
                           Container(
                             constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.235),
@@ -94,10 +77,10 @@ class WebtoonListItem extends StatelessWidget {
                           ),
                         ],
                       )
-                    : webtoonDTO.webtoonSpeciallyEnum == "완결"
+                    : webtoonDTO.episodeUpdatedAt != null && todayDateTime.difference(webtoonDTO.episodeUpdatedAt!).inHours < 40
                         ? Row(
                             children: [
-                              TitleTag(titleTagEnum: TitleTagEnum.end),
+                              TitleTag(titleTagEnum: TitleTagEnum.up),
                               SizedBox(width: 2),
                               Container(
                                 constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.235),

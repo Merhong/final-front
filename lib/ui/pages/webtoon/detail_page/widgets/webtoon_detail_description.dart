@@ -4,7 +4,7 @@ import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../common_widgets/advertising.dart';
-import '../../../../common_widgets/hashtag.dart';
+import '../../../../common_widgets/webtoon_hashtag.dart';
 
 class WebtoonDetailDescription extends StatefulWidget {
   final DetailPageWebtoonDTO webtoonDTO;
