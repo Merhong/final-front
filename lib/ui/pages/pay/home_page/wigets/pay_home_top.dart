@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class PayTop extends StatefulWidget {
-  const PayTop({
+class PayHomeTop extends StatefulWidget {
+  const PayHomeTop({
     Key? key,
   }) : super(key: key);
 
   @override
-  _PayTopState createState() => _PayTopState();
+  _PayHomeTopState createState() => _PayHomeTopState();
 }
 
-class _PayTopState extends State<PayTop> {
+class _PayHomeTopState extends State<PayHomeTop> {
   bool isProductInfoVisible = false;
 
   void toggleProductInfo() {

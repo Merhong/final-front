@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-class PayWhiteButton extends StatelessWidget {
-  final String payment;
-  final String smallFont;
-
-  const PayWhiteButton(
-      {super.key, required this.payment, required this.smallFont});
+class PayCardBlackButton extends StatelessWidget {
+  const PayCardBlackButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(18.0),
       child: Row(
         children: [
           Expanded(
@@ -21,20 +17,17 @@ class PayWhiteButton extends StatelessWidget {
                 children: [
                   SizedBox(height: 10),
                   Text(
-                    "$payment 결제",
-                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    "앱카드 결제",
+                    style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    "$smallFont",
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ),
+                  Text("현대카드 앱으로 쉽고 빠르게 결제")
                 ],
               ),
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
                 fixedSize: MaterialStateProperty.all<Size>(
                   Size(double.infinity, 100),
                 ),

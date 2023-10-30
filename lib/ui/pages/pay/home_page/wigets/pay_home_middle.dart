@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MiddlePay extends StatelessWidget {
+class PayHomeMiddle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(

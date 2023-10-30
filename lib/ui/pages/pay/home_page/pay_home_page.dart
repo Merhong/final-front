@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pay/wigets/middle_pay.dart';
-import 'package:flutter_blog/ui/pay/wigets/pay_top.dart';
+import 'package:flutter_blog/ui/pages/pay/home_page/wigets/pay_home_middle.dart';
+import 'package:flutter_blog/ui/pages/pay/home_page/wigets/pay_home_top.dart';
 
-class PayPage extends StatelessWidget {
-  const PayPage({Key? key});
+class PayHomePage extends StatelessWidget {
+  const PayHomePage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class PayPage extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     return Container(
-                      child: PayTop(),
+                      child: PayHomeTop(),
                     );
                   },
                   childCount: 1,
@@ -34,7 +34,7 @@ class PayPage extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     return Container(
-                      child: MiddlePay(),
+                      child: PayHomeMiddle(),
                     );
                   },
                   childCount: 1,
