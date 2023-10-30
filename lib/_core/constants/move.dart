@@ -3,8 +3,9 @@ import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_page.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/see_more_page.dart';
-import 'package:flutter_blog/ui/pages/pay/card_page/pay_card_page.dart';
 import 'package:flutter_blog/ui/pages/pay/home_page/pay_home_page.dart';
+import 'package:flutter_blog/ui/pages/pay/pay_card_page/pay_card_page.dart';
+import 'package:flutter_blog/ui/pages/pay/pay_method_page/pay_method_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/best_page/webtoon_best_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/webtoon_recommend_page.dart';
@@ -30,6 +31,7 @@ class Move {
   static String myPage = "/my"; // MY
   static String bestPage = "/best"; // 베스트도전
   static String payHomePage = "/pay/home"; // 메인결제
+  static String payMethodPage = "/pay/method"; // 결제(카드)
   static String payCardPage = "/pay/card"; // 결제(카드)
 }
 
@@ -50,6 +52,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.myPage: (context) => MyPage(),
     Move.bestPage: (context) => BestPage(),
     Move.payHomePage: (context) => PayHomePage(),
+    Move.payMethodPage: (context) => PayMethodPage(),
     Move.payCardPage: (context) => PayCardPage(),
   };
 }
