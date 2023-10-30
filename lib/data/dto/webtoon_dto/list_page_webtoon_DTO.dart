@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class ListPageWebtoonDTO {
   final int id;
   final String title;
@@ -8,6 +10,7 @@ class ListPageWebtoonDTO {
   String? webtoonSpeciallyEnum;
   String? webtoonWeekDayEnum;
   List<String>? authorNicknameList;
+  DateTime? episodeUpdatedAt;
 
   ListPageWebtoonDTO(
       this.id, this.title, this.starScore, this.starCount, this.image, this.ageLimit, this.webtoonSpeciallyEnum, this.webtoonWeekDayEnum);
@@ -23,7 +26,8 @@ class ListPageWebtoonDTO {
         webtoonSpeciallyEnum = json["webtoonSpeciallyEnum"],
         webtoonWeekDayEnum = json["webtoonWeekDayEnum"],
         // authorNicknameList = json["authorNicknameList"];
-        authorNicknameList = (json["authorNicknameList"] as List).map((jsonAuthorNickname) => jsonAuthorNickname.toString()).toList();
+        authorNicknameList = (json["authorNicknameList"] as List).map((jsonAuthorNickname) => jsonAuthorNickname.toString()).toList(),
+        episodeUpdatedAt = json["episodeUpdatedAt"] == null ? null : DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["episodeUpdatedAt"]);
 
   @override
   String toString() {

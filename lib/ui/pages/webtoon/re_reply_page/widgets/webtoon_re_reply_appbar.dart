@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ReplyAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  int commentListSize;
+class WebtoonReReplyAppBar extends ConsumerWidget implements PreferredSizeWidget {
+  int reCommentListSize;
 
-  ReplyAppBar(this.commentListSize);
+  WebtoonReReplyAppBar(this.reCommentListSize);
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -14,7 +14,7 @@ class ReplyAppBar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
       backgroundColor: Colors.black,
-      title: Text("댓글 ${commentListSize}"),
+      title: Text("답글 ${reCommentListSize}"),
       actions: [
         IconButton(
             onPressed: () async {

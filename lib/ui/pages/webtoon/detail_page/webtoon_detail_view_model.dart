@@ -1,4 +1,5 @@
 import 'package:flutter_blog/data/dto/response_dto.dart';
+import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/interest_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
@@ -16,10 +17,21 @@ class WebtoonDetailModel {
 
   WebtoonDetailModel interestCountUpdate({required int updateInterestCount, required bool nowIsInterest}) {
     DetailPageWebtoonDTO updateWebtoonDTO = this.webtoonDTO!;
-
     updateWebtoonDTO.interestCount = updateInterestCount;
     updateWebtoonDTO.isInterest = nowIsInterest;
+    if (nowIsInterest == true) {
+      updateWebtoonDTO.isAlarm = true;
+    }
+    if (nowIsInterest == false) {
+      updateWebtoonDTO.isAlarm = true;
+    }
+    return WebtoonDetailModel(webtoonDTO: updateWebtoonDTO);
+  }
 
+  WebtoonDetailModel interestAlarmUpdate({required bool isAlarm}) {
+    DetailPageWebtoonDTO updateWebtoonDTO = this.webtoonDTO!;
+    updateWebtoonDTO.isAlarm = isAlarm;
+    // updateWebtoonDTO.renderingSwitch = !(updateWebtoonDTO.renderingSwitch!);
     return WebtoonDetailModel(webtoonDTO: updateWebtoonDTO);
   }
 
@@ -34,7 +46,7 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
 
   // StateNotifier<PostListModel?> 에서 PostListModel은 상태의 타입
   WebtoonDetailViewModel(this.ref, super._state); // 상태가 바뀌면 자동으로 그려짐
-  //
+
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionProvider);
@@ -45,6 +57,34 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
     // state!.webtoonDTO = responseDTO.data;
   }
 
+  Future<void> notifyInterestAlarmOn() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+
+    int webtoonId = state!.webtoonDTO!.id;
+    ResponseDTO responseDTO = await WebtoonRepository().fetchInterestAlarmOn(sessionUser.jwt!, webtoonId);
+
+    if (responseDTO.success == false) {
+      print("if로감On");
+      return;
+    }
+
+    state = state!.interestAlarmUpdate(isAlarm: (responseDTO.data as InterestWebtoonDTO).isAlarm);
+  }
+
+  Future<void> notifyInterestAlarmOff() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+
+    int webtoonId = state!.webtoonDTO!.id;
+    ResponseDTO responseDTO = await WebtoonRepository().fetchInterestAlarmOff(sessionUser.jwt!, webtoonId);
+
+    if (responseDTO.success == false) {
+      print("if로감Off");
+      return;
+    }
+
+    state = state!.interestAlarmUpdate(isAlarm: (responseDTO.data as InterestWebtoonDTO).isAlarm);
+  }
+
   Future<void> notifyInterestCreate() async {
     SessionUser sessionUser = ref.read(sessionProvider);
 
@@ -52,9 +92,9 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
     ResponseDTO responseDTO = await WebtoonRepository().fetchInterestCreate(sessionUser.jwt!, webtoonId);
 
     if (responseDTO.success == false) {
-      notifyInterestDelete();
+      // notifyInterestDelete();
+      return;
     }
-
     state = state!.interestCountUpdate(
       updateInterestCount: (responseDTO.data as InterestDTO).webtoonTotalInterest,
       nowIsInterest: true,
@@ -69,9 +109,9 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
     ResponseDTO responseDTO = await WebtoonRepository().fetchInterestDelete(sessionUser.jwt!, webtoonId);
 
     if (responseDTO.success == false) {
-      notifyInterestCreate();
+      // notifyInterestCreate();
+      return;
     }
-
     state = state!.interestCountUpdate(
       updateInterestCount: (responseDTO.data as InterestDTO).webtoonTotalInterest,
       nowIsInterest: false,

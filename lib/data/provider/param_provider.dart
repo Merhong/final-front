@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // 1. 창고 데이터
 class RequestParam {
   int? webtoonDetailId;
+  bool? isWebtoonDetailMove;
   int? episodeId;
   bool? isEpisodeMove;
   int? webtoonLastEpisodeId;
   int? webtoonFirstEpisodeId;
-
-  // int? commentId;
+  int? commentId;
 
   RequestParam({this.webtoonDetailId});
 }
@@ -28,10 +28,10 @@ class ParamStore extends RequestParam {
     this.webtoonFirstEpisodeId = episodeId;
   }
 
-  void addIsEpisodeMove() {
-    print("에피소드이동감지");
-    this.isEpisodeMove = true;
-  }
+  // void addIsEpisodeMove() {
+  //   print("에피소드이동감지");
+  //   this.isEpisodeMove = true;
+  // }
 
   void addWebtoonDetailId(int webtoonId) {
     print("파람프로바이더webtoonDetailId : ${webtoonId}");
@@ -43,9 +43,10 @@ class ParamStore extends RequestParam {
     this.episodeId = episodeId;
   }
 
-// void movePostDetail(int postId) {
-//   Navigator.push(mContext!, MaterialPageRoute(builder: (_) => PostDetailPage()));
-// }
+  void addCommentDetailId(int commentId) {
+    print("파람commentDetailId : ${commentId}");
+    this.commentId = commentId;
+  }
 }
 
 // 3. 창고 관리자

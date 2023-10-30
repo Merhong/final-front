@@ -1,4 +1,4 @@
-import 'package:flutter_blog/data/model/Author.dart';
+import 'package:flutter_blog/data/model/author.dart';
 import 'package:flutter_blog/data/model/episode.dart';
 import 'package:intl/intl.dart';
 
@@ -16,7 +16,7 @@ class InterestDTO {
   InterestDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         isAlarm = json["isAlarm"],
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
+        createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]),
         userId = json["userId"],
         webtoonId = json["webtoonId"],
         webtoonTotalInterest = json["webtoonTotalInterest"];

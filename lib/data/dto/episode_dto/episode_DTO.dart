@@ -41,7 +41,7 @@ class EpisodeDTO {
         detailTitle = json["detailTitle"],
         starScore = json["starScore"],
         starCount = json["starCount"],
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
+        createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]),
         authorText = json["authorText"],
         authorName = json["authorName"],
         webtoonId = json["webtoonId"],

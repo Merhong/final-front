@@ -35,8 +35,8 @@ class Episode {
         cookieCost = json["cookieCost"],
         starScore = json["starScore"],
         starCount = json["starCount"],
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]);
-  // updatedAt = DateFormat("yyyy-mm-dd").parse(json["updatedAt"]);
+        createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]);
+  // updatedAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["updatedAt"]);
 
   @override
   String toString() {

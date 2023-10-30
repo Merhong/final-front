@@ -1,4 +1,4 @@
-import 'package:flutter_blog/data/model/Author.dart';
+import 'package:flutter_blog/data/model/author.dart';
 import 'package:flutter_blog/data/model/episode.dart';
 
 class Webtoon {
@@ -48,12 +48,8 @@ class Webtoon {
         weekDay = json["weekDay"],
         specially = json["specially"],
         // author = Author.fromJson(json["authorDTO"]),
-        authorList = (json["authorList"] as List)
-            .map((jsonAuthor) => Author.fromJson(jsonAuthor))
-            .toList(),
-        episodeList = (json["episodeList"] as List)
-            .map((jsonEpisode) => Episode.fromJson(jsonEpisode))
-            .toList();
+        authorList = (json["authorList"] as List).map((jsonAuthor) => Author.fromJson(jsonAuthor)).toList(),
+        episodeList = (json["episodeList"] as List).map((jsonEpisode) => Episode.fromJson(jsonEpisode)).toList();
 
   Webtoon.fromHomeJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -64,9 +60,7 @@ class Webtoon {
         ageLimit = json["ageLimit"],
         specially = json["specially"],
         weekDay = json["weekDay"],
-        authorList = (json["authorList"] as List)
-            .map((jsonAuthor) => Author.fromJson(jsonAuthor))
-            .toList();
+        authorList = (json["authorList"] as List).map((jsonAuthor) => Author.fromJson(jsonAuthor)).toList();
 
   @override
   String toString() {

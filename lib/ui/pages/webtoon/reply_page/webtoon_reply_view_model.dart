@@ -1,10 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
+import 'package:flutter_blog/data/dto/comment_dto/re_comment_DTO.dart';
+import 'package:flutter_blog/data/dto/reply_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
+import 'package:flutter_blog/data/dto/webtoon_dto/comment_like_DTO.dart';
+import 'package:flutter_blog/data/dto/webtoon_dto/re_comment_like_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
-import 'package:flutter_blog/data/repository/episode_repository.dart';
-import 'package:flutter_blog/data/repository/webtoon_repository.dart';
+import 'package:flutter_blog/data/repository/comment_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,8 +15,99 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WebtoonReplyModel {
   List<CommentDTO> commentList;
-
   WebtoonReplyModel({required this.commentList});
+
+  //
+
+  WebtoonReplyModel reCommentLikeUpdate(ReCommentLikeDTO reCommentLikeDTO) {
+    List<CommentDTO> updateCommentList = this.commentList;
+    CommentDTO updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == reCommentLikeDTO.commentId);
+
+    if (reCommentLikeDTO.isLike == true) {
+      final updateReComment = updateComment.reCommentList.firstWhere((reCommentDTO) => reCommentDTO.id == reCommentLikeDTO.reCommentId);
+      updateReComment.likeReCommentCount++;
+      updateReComment.isMyLike = true;
+      updateReComment.isMyDislike = false;
+      print("대댓글좋아요등록${reCommentLikeDTO.isLike}");
+    }
+    if (reCommentLikeDTO.isLike == false) {
+      final updateReComment = updateComment.reCommentList.firstWhere((reCommentDTO) => reCommentDTO.id == reCommentLikeDTO.reCommentId);
+      updateReComment.dislikeReCommentCount++;
+      updateReComment.isMyDislike = true;
+      updateReComment.isMyLike = false;
+      print("대댓글싫어요등록${reCommentLikeDTO.isLike}");
+    }
+    return WebtoonReplyModel(commentList: updateCommentList);
+  }
+
+  WebtoonReplyModel reCommentlikeDelete(ReCommentLikeDTO reCommentLikeDTO) {
+    List<CommentDTO> updateCommentList = this.commentList;
+    CommentDTO updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == reCommentLikeDTO.commentId);
+
+    if (reCommentLikeDTO.isLike == true) {
+      final updateReComment = updateComment.reCommentList.firstWhere((reCommentDTO) => reCommentDTO.id == reCommentLikeDTO.reCommentId);
+      updateReComment.likeReCommentCount--;
+      updateReComment.isMyLike = false;
+      updateReComment.isMyDislike = false;
+      print("대댓글좋아요취소${reCommentLikeDTO.isLike}");
+    }
+    if (reCommentLikeDTO.isLike == false) {
+      final updateReComment = updateComment.reCommentList.firstWhere((reCommentDTO) => reCommentDTO.id == reCommentLikeDTO.reCommentId);
+      updateReComment.dislikeReCommentCount--;
+      updateReComment.isMyDislike = false;
+      updateReComment.isMyLike = false;
+      print("대댓글싫어요취소${reCommentLikeDTO.isLike}");
+    }
+    return WebtoonReplyModel(commentList: updateCommentList);
+  }
+
+  WebtoonReplyModel likeUpdate(CommentLikeDTO commentLikeDTO) {
+    List<CommentDTO> updateCommentList = this.commentList;
+
+    if (commentLikeDTO.isLike == true) {
+      // updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId).likeCommentCount++;
+      // updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId).isMyLike = true;
+      final updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId);
+      updateComment.likeCommentCount++;
+      updateComment.isMyLike = true;
+      updateComment.isMyDislike = false;
+      print("댓글좋아요등록${commentLikeDTO.isLike}");
+    }
+    if (commentLikeDTO.isLike == false) {
+      // updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId).dislikeCommentCount++;
+      // updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId).isMyDislike = true;
+      final updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId);
+      updateComment.dislikeCommentCount++;
+      updateComment.isMyDislike = true;
+      updateComment.isMyLike = false;
+      print("댓글싫어요등록${commentLikeDTO.isLike}");
+    }
+    return WebtoonReplyModel(commentList: updateCommentList);
+  }
+
+  WebtoonReplyModel likeDelete(CommentLikeDTO commentLikeDTO) {
+    List<CommentDTO> updateCommentList = this.commentList;
+
+    if (commentLikeDTO.isLike == true) {
+      // updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId).likeCommentCount++;
+      // updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId).isMyLike = true;
+      final updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId);
+      updateComment.likeCommentCount--;
+      updateComment.isMyLike = false;
+      updateComment.isMyDislike = false;
+      print("댓글좋아요취소${commentLikeDTO.isLike}");
+    }
+    if (commentLikeDTO.isLike == false) {
+      // updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId).dislikeCommentCount++;
+      // updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId).isMyDislike = true;
+      final updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == commentLikeDTO.commentId);
+      updateComment.dislikeCommentCount--;
+      updateComment.isMyDislike = false;
+      updateComment.isMyLike = false;
+      print("댓글싫어요취소${commentLikeDTO.isLike}");
+    }
+    return WebtoonReplyModel(commentList: updateCommentList);
+  }
 }
 
 // 2. 창고
@@ -28,8 +122,112 @@ class WebtoonReplyViewModel extends StateNotifier<WebtoonReplyModel?> {
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
-    ResponseDTO responseDTO = await EpisodeRepository().fetchCommentList(sessionUser.jwt!, episodeId);
+    ResponseDTO responseDTO = await CommentRepository().fetchCommentList(sessionUser.jwt!, episodeId);
     state = WebtoonReplyModel(commentList: responseDTO.data);
+  }
+
+  Future<void> notifyReCommentCreate(ReplyReqDTO dto) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    int commentId = ref.read(paramProvider).commentId!;
+    ResponseDTO responseDTO = await CommentRepository().fetchReCommentCreate(sessionUser.jwt!, dto, commentId);
+
+    if (responseDTO.success == false) {
+      return;
+    }
+
+    ReCommentDTO newDTO = responseDTO.data as ReCommentDTO;
+
+    List<CommentDTO> updateCommentList = state!.commentList;
+
+    CommentDTO updateComment = updateCommentList.firstWhere((commentDTO) => commentDTO.id == newDTO.commentId);
+
+    updateComment.reCommentList = [newDTO, ...updateComment.reCommentList];
+    state = new WebtoonReplyModel(commentList: updateCommentList);
+  }
+
+  Future<void> notifyReCommentLike(int reCommentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchReCommentLike(sessionUser.jwt!, reCommentId);
+
+    if (responseDTO.success == false) {
+      print("if로감ReCommentLike");
+      return;
+    }
+    state = state!.reCommentLikeUpdate(responseDTO.data as ReCommentLikeDTO);
+  }
+
+  Future<void> notifyReCommentDislike(int reCommentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchReCommentDislike(sessionUser.jwt!, reCommentId);
+
+    if (responseDTO.success == false) {
+      print("if로감ReCommentDislike");
+      return;
+    }
+    state = state!.reCommentLikeUpdate(responseDTO.data as ReCommentLikeDTO);
+  }
+
+  Future<void> notifyReCommentLikecancel(int reCommentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchReCommentLikecancel(sessionUser.jwt!, reCommentId);
+
+    if (responseDTO.success == false) {
+      print("if로감ReCommentLike캔슬");
+      return;
+    }
+    state = state!.reCommentlikeDelete(responseDTO.data as ReCommentLikeDTO);
+    print("끝끝끝끝끝끝끝");
+  }
+
+  Future<void> notifyCommentLike(int commentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchCommentLike(sessionUser.jwt!, commentId);
+
+    if (responseDTO.success == false) {
+      print("if로감CommentLike");
+      return;
+    }
+    state = state!.likeUpdate(responseDTO.data as CommentLikeDTO);
+  }
+
+  Future<void> notifyCommentDislike(int commentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchCommentDislike(sessionUser.jwt!, commentId);
+
+    if (responseDTO.success == false) {
+      print("if로감CommentDislike");
+      return;
+    }
+    state = state!.likeUpdate(responseDTO.data as CommentLikeDTO);
+  }
+
+  Future<void> notifyCommentLikecancel(int commentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchCommentLikecancel(sessionUser.jwt!, commentId);
+
+    if (responseDTO.success == false) {
+      print("if로감CommentLike캔슬");
+      return;
+    }
+    state = state!.likeDelete(responseDTO.data as CommentLikeDTO);
+  }
+
+  Future<void> notifyCommentCreate(ReplyReqDTO dto) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    int episodeId = ref.read(paramProvider).episodeId!;
+    ResponseDTO responseDTO = await CommentRepository().fetchCommentCreate(sessionUser.jwt!, dto, episodeId);
+
+    if (responseDTO.success == false) {
+      return;
+    }
+    // state = state!.interestCountUpdate(
+    //   updateInterestCount: (responseDTO.data as InterestDTO).webtoonTotalInterest,
+    //   nowIsInterest: false,
+    // );
+
+    CommentDTO newDTO = responseDTO.data as CommentDTO;
+    List<CommentDTO> newCommentList = [newDTO, ...state!.commentList];
+    state = new WebtoonReplyModel(commentList: newCommentList);
   }
 }
 
