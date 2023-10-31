@@ -20,13 +20,24 @@ class DetailPageWebtoonDTO {
   List<ListPageWebtoonDTO>? authorOtherWebtoonList;
   bool? isAlarm;
 
-  // double? starScore;
-  // double? starCount;
-  // DateTime? createdAt;
-  // DateTime? updatedAt;
+  double? starScore;
+  double? starCount;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  DetailPageWebtoonDTO(this.id, this.title, this.intro, this.episodeList, this.authorList, this.image, this.detailImage, this.ageLimit,
-      this.webtoonWeekDayEnum, this.webtoonSpeciallyEnum, this.interestCount, this.isInterest);
+  DetailPageWebtoonDTO(
+      this.id,
+      this.title,
+      this.intro,
+      this.episodeList,
+      this.authorList,
+      this.image,
+      this.detailImage,
+      this.ageLimit,
+      this.webtoonWeekDayEnum,
+      this.webtoonSpeciallyEnum,
+      this.interestCount,
+      this.isInterest);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   DetailPageWebtoonDTO.fromJson(Map<String, dynamic> json)
@@ -40,11 +51,19 @@ class DetailPageWebtoonDTO {
         webtoonWeekDayEnum = json["webtoonWeekDayEnum"],
         interestCount = json["interestCount"],
         isInterest = json["isInterest"],
-        authorList = (json["authorList"] as List).map((jsonAuthor) => Author.fromJson(jsonAuthor)).toList(),
-        episodeList = (json["episodeList"] as List).map((jsonEpisode) => Episode.fromJson(jsonEpisode)).toList(),
-        hashTagList = (json["hashTagList"] as List).map((jsonHashTag) => WebtoonHashTag.fromJson(jsonHashTag)).toList(),
-        authorOtherWebtoonList =
-            (json["authorOtherWebtoonList"] as List).map((jsonOtherWebtoon) => ListPageWebtoonDTO.fromJson(jsonOtherWebtoon)).toList(),
+        authorList = (json["authorList"] as List)
+            .map((jsonAuthor) => Author.fromJson(jsonAuthor))
+            .toList(),
+        episodeList = (json["episodeList"] as List)
+            .map((jsonEpisode) => Episode.fromJson(jsonEpisode))
+            .toList(),
+        hashTagList = (json["hashTagList"] as List)
+            .map((jsonHashTag) => WebtoonHashTag.fromJson(jsonHashTag))
+            .toList(),
+        authorOtherWebtoonList = (json["authorOtherWebtoonList"] as List)
+            .map((jsonOtherWebtoon) =>
+                ListPageWebtoonDTO.fromJson(jsonOtherWebtoon))
+            .toList(),
         isAlarm = json["isAlarm"];
 
   @override
