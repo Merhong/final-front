@@ -10,11 +10,11 @@ class RatingStarAlert extends StatefulWidget {
 }
 
 class _RatingStarAlertState extends State<RatingStarAlert> {
-  bool isStarRated = false; // 별 아이콘의 클릭 상태
+  int numberOfStars = 0; // 클릭된 별의 수
 
-  void toggleStarRating() {
+  void setNumberOfStars(int num) {
     setState(() {
-      isStarRated = !isStarRated;
+      numberOfStars = num;
     });
   }
 
@@ -25,69 +25,25 @@ class _RatingStarAlertState extends State<RatingStarAlert> {
         showDialog(
           context: context,
           builder: (context) {
-            List<bool> isStarRatedList = [false, false, false, false, false];
             return StatefulBuilder(builder: (context, setStateInDialog) {
               return AlertDialog(
-                title: Text("별점주기"),
+                title: Text("별젘주기"),
                 content: Row(
                   children: [
                     Row(
                       children: [
-                        IconButton(
-                          icon: Icon(Icons.star),
-                          iconSize: 36.0,
-                          color:
-                              isStarRatedList[0] ? Colors.yellow : Colors.grey,
-                          onPressed: () {
-                            setStateInDialog(() {
-                              isStarRatedList[0] = !isStarRatedList[0];
-                            });
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.star),
-                          iconSize: 36.0,
-                          color:
-                              isStarRatedList[1] ? Colors.yellow : Colors.grey,
-                          onPressed: () {
-                            setStateInDialog(() {
-                              isStarRatedList[1] = !isStarRatedList[1];
-                            });
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.star),
-                          iconSize: 36.0,
-                          color:
-                              isStarRatedList[2] ? Colors.yellow : Colors.grey,
-                          onPressed: () {
-                            setStateInDialog(() {
-                              isStarRatedList[2] = !isStarRatedList[2];
-                            });
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.star),
-                          iconSize: 36.0,
-                          color:
-                              isStarRatedList[3] ? Colors.yellow : Colors.grey,
-                          onPressed: () {
-                            setStateInDialog(() {
-                              isStarRatedList[3] = !isStarRatedList[3];
-                            });
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.star),
-                          iconSize: 36.0,
-                          color:
-                              isStarRatedList[4] ? Colors.yellow : Colors.grey,
-                          onPressed: () {
-                            setStateInDialog(() {
-                              isStarRatedList[4] = !isStarRatedList[4];
-                            });
-                          },
-                        ),
+                        for (int i = 0; i < 5; i++)
+                          IconButton(
+                            icon: Icon(Icons.star),
+                            iconSize: 36.0,
+                            color:
+                                i < numberOfStars ? Colors.yellow : Colors.grey,
+                            onPressed: () {
+                              setStateInDialog(() {
+                                setNumberOfStars(i + 1);
+                              });
+                            },
+                          ),
                       ],
                     ),
                   ],
