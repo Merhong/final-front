@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
-import 'package:flutter_blog/data/dto/comment_dto/re_comment_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
@@ -11,11 +11,12 @@ import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_view_mode
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class WebtoonReReplyBody extends ConsumerWidget {
-  List<ReCommentDTO> reCommentList;
+class WebtoonReplyBody extends ConsumerWidget {
+  List<CommentDTO> commentList;
   int index;
+  bool isReReply;
 
-  WebtoonReReplyBody({required this.reCommentList, required this.index});
+  WebtoonReplyBody({required this.commentList, required this.index, this.isReReply = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,24 +24,36 @@ class WebtoonReReplyBody extends ConsumerWidget {
       padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
       child: Column(
         children: [
-          reCommentList[index].isDelete == true
+          commentList[index].isDelete == true
               ? Row(
                   children: [
-                    Text("ㄴ "),
                     Text("삭제된 댓글입니다.", style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 )
+              // ? SizedBox(height: 24)
               : Row(
                   children: [
-                    Text("ㄴ "),
-                    Text("${reCommentList[index].userUsername}", style: TextStyle(fontWeight: FontWeight.bold)),
+                    commentList[index].isAuthor
+                        ? Row(
+                            children: [TitleTag(titleTagEnum: TitleTagEnum.author), SizedBox(width: 3)],
+                          )
+                        : commentList[index].isAdmin
+                            ? Row(
+                                children: [TitleTag(titleTagEnum: TitleTagEnum.admin), SizedBox(width: 3)],
+                              )
+                            : commentList[index].likeCommentCount - commentList[index].dislikeCommentCount >= 1
+                                ? Row(
+                                    children: [TitleTag(titleTagEnum: TitleTagEnum.best), SizedBox(width: 3)],
+                                  )
+                                : SizedBox(),
+                    Text("${commentList[index].userUsername}", style: TextStyle(fontWeight: FontWeight.bold)),
                     Text(
-                        "(${reCommentList[index].userEmail.split("@")[0].length < 4 //
-                            ? reCommentList[index].userEmail.split("@")[0] //
-                            : reCommentList[index].userEmail.split("@")[0].substring(0, 3)}***)",
+                        "(${commentList[index].userEmail.split("@")[0].length < 4 //
+                            ? commentList[index].userEmail.split("@")[0] //
+                            : commentList[index].userEmail.split("@")[0].substring(0, 3)}***)",
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     Text(
-                      " ${DateFormat('yyyy-MM-dd HH:mm:ss').format(reCommentList[index].createdAt)}",
+                      " ${DateFormat('yyyy-MM-dd HH:mm:ss').format(commentList[index].createdAt)}",
                       style: TextStyle(color: Colors.grey[600], fontSize: 13),
                     ),
                     Spacer(),
@@ -48,7 +61,7 @@ class WebtoonReReplyBody extends ConsumerWidget {
                       onTap: () {
                         ScaffoldMessenger.of(context).clearSnackBars();
 
-                        reCommentList[index].userId != ref.read(sessionProvider).user!.id
+                        commentList[index].userId != ref.read(sessionProvider).user!.id
                             ? mySnackbar(
                                 context,
                                 1000,
@@ -66,8 +79,8 @@ class WebtoonReReplyBody extends ConsumerWidget {
                                       child: Icon(Icons.check, color: Colors.red),
                                       onTap: () {
                                         ScaffoldMessenger.of(context).clearSnackBars();
-                                        print("스낵바-대댓글 삭제누름");
-                                        ref.read(webtoonReplyProvider.notifier).notifyReCommentDelete(reCommentList[index].id);
+                                        print("스낵바-삭제누름");
+                                        ref.read(webtoonReplyProvider.notifier).notifyCommentDelete(commentList[index].id);
                                       },
                                     ),
                                     SizedBox(width: sizeL20),
@@ -86,24 +99,41 @@ class WebtoonReReplyBody extends ConsumerWidget {
                   ],
                 ),
           SizedBox(height: sizeS5),
-          Padding(
-            padding: EdgeInsets.fromLTRB(18, 0, 0, 0),
-            child: Align(
-                alignment: Alignment(-1, 0),
-                child: Wrap(children: [
-                  reCommentList[index].isDelete == true ? SizedBox() : Text("${reCommentList[index].text}"),
-                ])),
-          ),
+          Align(
+              alignment: Alignment(-1, 0),
+              child: Wrap(children: [
+                commentList[index].isDelete == true ? SizedBox() : Text("${commentList[index].text}"),
+              ])),
           SizedBox(height: sizeS5),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              InkWell(
+                onTap: isReReply == true
+                    ? () {}
+                    : () {
+                        print("대댓글 답글보기");
+                        // ParamStore ps = ref.read(paramProvider);
+                        ref.read(paramProvider).addCommentDetailId((commentList[index].id));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ReReplyPage()));
+                      },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: sizeS5),
+                  height: sizeML20,
+                  decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+                  child: Row(
+                    children: [
+                      Text("답글 ${commentList[index].reCommentList.length == 0 ? '' : commentList[index].reCommentList.length}"),
+                    ],
+                  ),
+                ),
+              ),
               Row(
                 children: [
                   InkWell(
                     onTap: () {
                       ScaffoldMessenger.of(context).clearSnackBars();
-                      reCommentList[index].isDelete == true
+                      commentList[index].isDelete == true
                           ? mySnackbar(
                               context,
                               1000,
@@ -116,10 +146,10 @@ class WebtoonReReplyBody extends ConsumerWidget {
                                 ],
                               ),
                             )
-                          : reCommentList[index].isMyLike == false && reCommentList[index].isMyDislike == false
-                              ? ref.read(webtoonReplyProvider.notifier).notifyReCommentLike(reCommentList[index].id)
-                              : reCommentList[index].isMyLike == true
-                                  ? ref.read(webtoonReplyProvider.notifier).notifyReCommentLikecancel(reCommentList[index].id)
+                          : commentList[index].isMyLike == false && commentList[index].isMyDislike == false
+                              ? ref.read(webtoonReplyProvider.notifier).notifyCommentLike(commentList[index].id)
+                              : commentList[index].isMyLike == true
+                                  ? ref.read(webtoonReplyProvider.notifier).notifyCommentLikecancel(commentList[index].id)
                                   : mySnackbar(
                                       context,
                                       1000,
@@ -140,11 +170,11 @@ class WebtoonReReplyBody extends ConsumerWidget {
                       decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
                       child: Row(
                         children: [
-                          reCommentList[index].isMyLike == true ? Icon(Icons.thumb_up_outlined, color: Colors.red) : Icon(Icons.thumb_up_outlined),
+                          commentList[index].isMyLike == true ? Icon(Icons.thumb_up_outlined, color: Colors.red) : Icon(Icons.thumb_up_outlined),
                           SizedBox(width: sizeS5),
                           Text(
-                            "${reCommentList[index].likeReCommentCount}",
-                            style: TextStyle(color: reCommentList[index].isMyLike == true ? Colors.red : Colors.black),
+                            "${commentList[index].likeCommentCount}",
+                            style: TextStyle(color: commentList[index].isMyLike == true ? Colors.red : Colors.black),
                           ),
                         ],
                       ),
@@ -154,7 +184,7 @@ class WebtoonReReplyBody extends ConsumerWidget {
                   InkWell(
                     onTap: () {
                       ScaffoldMessenger.of(context).clearSnackBars();
-                      reCommentList[index].isDelete == true
+                      commentList[index].isDelete == true
                           ? mySnackbar(
                               context,
                               1000,
@@ -167,10 +197,10 @@ class WebtoonReReplyBody extends ConsumerWidget {
                                 ],
                               ),
                             )
-                          : reCommentList[index].isMyDislike == false && reCommentList[index].isMyLike == false
-                              ? ref.read(webtoonReplyProvider.notifier).notifyReCommentDislike(reCommentList[index].id)
-                              : reCommentList[index].isMyDislike == true
-                                  ? ref.read(webtoonReplyProvider.notifier).notifyReCommentLikecancel(reCommentList[index].id)
+                          : commentList[index].isMyDislike == false && commentList[index].isMyLike == false
+                              ? ref.read(webtoonReplyProvider.notifier).notifyCommentDislike(commentList[index].id)
+                              : commentList[index].isMyDislike == true
+                                  ? ref.read(webtoonReplyProvider.notifier).notifyCommentLikecancel(commentList[index].id)
                                   : mySnackbar(
                                       context,
                                       1000,
@@ -191,13 +221,13 @@ class WebtoonReReplyBody extends ConsumerWidget {
                       decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
                       child: Row(
                         children: [
-                          reCommentList[index].isMyDislike == true
+                          commentList[index].isMyDislike == true
                               ? Icon(Icons.thumb_down_outlined, color: Colors.blue[800])
                               : Icon(Icons.thumb_down_outlined),
                           SizedBox(width: sizeS5),
                           Text(
-                            "${reCommentList[index].dislikeReCommentCount}",
-                            style: TextStyle(color: reCommentList[index].isMyDislike == true ? Colors.blue[800] : Colors.black),
+                            "${commentList[index].dislikeCommentCount}",
+                            style: TextStyle(color: commentList[index].isMyDislike == true ? Colors.blue[800] : Colors.black),
                           ),
                         ],
                       ),

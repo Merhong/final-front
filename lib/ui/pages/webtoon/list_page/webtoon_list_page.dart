@@ -41,6 +41,7 @@ class WebtoonListPage extends ConsumerWidget {
 
       mySnackbar(
         mContext,
+        2000,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [Text("'뒤로' 버튼을 한 번 더 누르시면 종료됩니다.")],

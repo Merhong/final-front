@@ -4,10 +4,13 @@ class PayHomeMiddle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 0),
+      padding: const EdgeInsets.only(top: 10),
       child: Container(
-        height: 180,
-        color: Colors.white,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            border: Border.all(
+          color: Colors.grey,
+        )),
         child: Column(
           children: [
             Row(
