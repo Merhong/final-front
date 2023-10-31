@@ -9,7 +9,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // const String serverURL = "http://192.168.0.50:8081"; // 김대홍
 ///////////////////////////////////////////////////////////////
 
-
 DateTime todayDateTime = DateTime.now(); // 세계시간 UTC임
 
 const String imageURL = "${serverURL}/image?route=";
