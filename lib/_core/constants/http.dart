@@ -4,10 +4,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // ↓↓↓↓ 통신용 백엔드 서버 주소 여기 적기 ↓↓↓↓
 // const String serverURL = "http://192.168.0.45:8081"; // 김지원
 // const String serverURL = "http://192.168.0.44:8081"; // 김하얀
-// const String serverURL = "http://192.168.0.48:8081"; //박민희
+const String serverURL = "http://192.168.0.48:8081"; //박민희gitgit g
 // const String serverURL = "http://192.168.0.49:8081"; // 윤혜림
 // const String serverURL = "http://192.168.0.50:8081"; // 김대홍
-
 
 DateTime todayDateTime = DateTime.now(); // 세계시간 UTC임
 

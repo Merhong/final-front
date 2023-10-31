@@ -34,7 +34,7 @@ class WebtoonListBody extends ConsumerWidget {
         WebtoonListSliverGrid(),
         SliverToBoxAdapter(
           child: Container(
-            height: 200.0, // 높이 설정
+            height: 200.0,
             child: WebtoonListBottomView(),
           ),
         ),

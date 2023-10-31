@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_middle_list.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_bottom_list.dart';
-import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_middle_bar.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_middle_image.dart';
 
 class WebtoonRecommendForm extends StatelessWidget {
@@ -61,22 +60,63 @@ class WebtoonRecommendForm extends StatelessWidget {
           //     childCount: 1,
           //   ),
           // ),
+          // SliverList(
+          //   delegate: SliverChildBuilderDelegate(
+          //     (context, index) {
+          //       return WebtoonRecommendMiddleBar();
+          //     },
+          //     childCount: 1, // 1로 설정하면 1개의 자식 위젯을 생성합니다.
+          //   ),
+          // ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return WebtoonRecommendMiddleBar();
+                if (index == 0) {
+                  return Container(
+                    height: 50,
+                    color: Colors.grey,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                // 최신순 버튼 눌렀을 때의 동작 추가
+                              },
+                              child: Row(
+                                children: [
+                                  Text("최신순"),
+                                  Icon(Icons.arrow_drop_down),
+                                ],
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                // 전체 장르 버튼 눌렀을 때의 동작 추가
+                              },
+                              child: Row(
+                                children: [
+                                  Text("전체 장르"),
+                                  Icon(Icons.arrow_drop_down),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text("총 50작품"),
+                      ],
+                    ),
+                  );
+                } else {
+                  return WebtoonRecommendMiddleImage();
+                }
               },
-              childCount: 1, // 1로 설정하면 1개의 자식 위젯을 생성합니다.
+              childCount:
+                  3, // 1은 Container, 2는 WebtoonRecommendMiddleImage를 나타냅니다.
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return WebtoonRecommendMiddleImage();
-              },
-              childCount: 2, // 1로 설정하면 1개의 자식 위젯을 생성합니다.
-            ),
-          ),
+
           SliverPadding(
             padding: const EdgeInsets.only(top: 3),
             sliver: SliverToBoxAdapter(
