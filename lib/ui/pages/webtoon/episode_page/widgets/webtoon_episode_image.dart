@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
-import 'package:flutter_blog/data/model/episode_photo.dart';
+import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_rating_star.dart';
 
 class WebtoonEpisodeImage extends StatelessWidget {
   EpisodeDTO episodeDTO;
@@ -29,13 +29,7 @@ class WebtoonEpisodeImage extends StatelessWidget {
                       "★ ${(episodeDTO.starScore / episodeDTO.starCount).toStringAsFixed(2)}",
                       style: TextStyle(color: Colors.red, fontSize: 25),
                     ),
-                    Container(
-                      decoration: BoxDecoration(border: Border.all()),
-                      child: Padding(
-                        padding: EdgeInsets.all(2),
-                        child: Text("별점주기"),
-                      ),
-                    ),
+                    RatingStarAlert(),
                   ],
                 ),
               ),
