@@ -28,7 +28,7 @@ class _RatingStarAlertState extends State<RatingStarAlert> {
             List<bool> isStarRatedList = [false, false, false, false, false];
             return StatefulBuilder(builder: (context, setStateInDialog) {
               return AlertDialog(
-                title: Text("별젘주기"),
+                title: Text("별점주기"),
                 content: Row(
                   children: [
                     Row(
