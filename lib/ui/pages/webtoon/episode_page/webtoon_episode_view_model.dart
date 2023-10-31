@@ -30,7 +30,6 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     print("에피소드notifyInit실행");
     SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
-    Logger().d("1단계");
     ResponseDTO responseDTO =
         await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
 
@@ -50,13 +49,6 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     if (responseDTO.success == true) {
       notifyInit();
     }
-  }
-
-  Future<DetailPageWebtoonDTO> notifyRandom() async {
-    SessionUser sessionUser = ref.read(sessionProvider);
-    ResponseDTO responseDTO =
-        await EpisodeRepository().fetchRandom(sessionUser.jwt!);
-    return responseDTO.data;
   }
 }
 
