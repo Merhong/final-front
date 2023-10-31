@@ -56,40 +56,33 @@ class PayHomeMiddle extends StatelessWidget {
                 Text("사용"),
                 Spacer(),
                 Container(
-                  height: 30,
-                  width: 300,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: Colors.black, width: 1),
+                    border: Border.all(
+                      color: Colors.grey,
+                      // 테두리 색상
+                      // 테두리 두께
+                    ),
                   ),
+                  height: 40,
+                  width: 300,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        "0원",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Text("0원"),
+                      Container(
+                        width: 10,
                       ),
                       Container(
-                        width: 80,
                         height: 30,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(2),
-                          border: Border.all(color: Colors.black, width: 1),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "전액사용",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                        width: 2,
+                        decoration: BoxDecoration(color: Colors.grey),
+                      ),
+                      Container(
+                        width: 15,
+                      ),
+                      InkWell(child: Container(child: Text("전액사용"))),
+                      Container(
+                        width: 15,
                       ),
                     ],
                   ),
