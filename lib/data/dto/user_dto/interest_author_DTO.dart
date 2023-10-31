@@ -2,34 +2,36 @@ import 'package:flutter_blog/data/model/author.dart';
 import 'package:flutter_blog/data/model/episode.dart';
 import 'package:intl/intl.dart';
 
-class InterestWebtoonDTO {
+class InterestAuthorDTO {
   int id;
   int userId;
-  int webtoonId;
-  String? webtoonTitle;
-  String? webtoonImage;
-  String? webtoonSpeciallyEnum;
+  int authorId;
+  String? authorPhoto;
+  String? authorNickname;
+  String? authorSiteURL;
+  List<String> authorWebtoonNameList;
   bool isAlarm;
-  DateTime? webtoonUpdateAt;
+  DateTime? authorBoardCreateAt;
   DateTime createdAt;
 
-  InterestWebtoonDTO(this.webtoonSpeciallyEnum, this.id, this.userId, this.webtoonId, this.webtoonTitle, this.webtoonImage, this.isAlarm,
-      this.webtoonUpdateAt, this.createdAt);
+  InterestAuthorDTO(this.id, this.userId, this.authorId, this.authorPhoto, this.authorNickname, this.authorSiteURL, this.authorWebtoonNameList,
+      this.isAlarm, this.authorBoardCreateAt, this.createdAt);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
-  InterestWebtoonDTO.fromJson(Map<String, dynamic> json)
+  InterestAuthorDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         userId = json["userId"],
-        webtoonId = json["webtoonId"],
-        webtoonTitle = json["webtoonTitle"],
-        webtoonImage = json["webtoonImage"],
+        authorId = json["authorId"],
+        authorPhoto = json["authorPhoto"],
+        authorNickname = json["authorNickname"],
+        authorSiteURL = json["authorSiteURL"],
+        authorWebtoonNameList = (json["authorWebtoonNameList"] as List).map((jsonWebtoonName) => jsonWebtoonName.toString()).toList(),
         isAlarm = json["isAlarm"],
-        webtoonSpeciallyEnum = json["webtoonSpeciallyEnum"] == null ? "없음" : json["webtoonSpeciallyEnum"],
-        webtoonUpdateAt = json["webtoonUpdateAt"] == null ? null : DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["webtoonUpdateAt"]),
+        authorBoardCreateAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["authorBoardCreateAt"]),
         createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]);
 
   @override
   String toString() {
-    return 'InterestWebtoonDTO{id: $id, userId: $userId, webtoonId: $webtoonId, webtoonTitle: $webtoonTitle, webtoonImage: $webtoonImage, webtoonSpeciallyEnum: $webtoonSpeciallyEnum, isAlarm: $isAlarm, webtoonUpdateAt: $webtoonUpdateAt, createdAt: $createdAt}';
+    return 'InterestAuthorDTO{id: $id, userId: $userId, authorId: $authorId, authorPhoto: $authorPhoto, authorNickname: $authorNickname, authorSiteURL: $authorSiteURL, authorWebtoonNameList: $authorWebtoonNameList, isAlarm: $isAlarm, authorBoardCreateAt: $authorBoardCreateAt, createdAt: $createdAt}';
   }
 }

@@ -60,7 +60,7 @@ class WebtoonDetailEpisode extends ConsumerWidget {
                     Row(
                       children: [
                         Text("${webtoonDTO.episodeList![index].detailTitle} "),
-                        todayDateTime.difference(webtoonDTO.episodeList[index].createdAt).inHours < 40
+                        todayDateTime.difference(webtoonDTO.episodeList[index].createdAt).inHours < 50
                             ? TitleTag(titleTagEnum: TitleTagEnum.up)
                             : SizedBox(),
                       ],

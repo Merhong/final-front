@@ -48,12 +48,11 @@ class MyInterestAuthor extends ConsumerWidget {
             itemBuilder: (context, index) {
               return Column(
                 children: [
-                  Padding(
+                  Container(
+                    height: 85,
                     padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
                     child: Row(
                       children: [
-                        // 왼쪽에 이미지를 배치
-
                         InkWell(
                           // onTap: () {
                           //   ParamStore ps = ref.read(paramProvider);
@@ -63,10 +62,10 @@ class MyInterestAuthor extends ConsumerWidget {
                           // },
                           child: CircleAvatar(
                             backgroundImage: NetworkImage('${imageURL}/AuthorPhoto/${interestAuthorDTOList[index].authorPhoto}'),
-                            radius: 35,
+                            radius: 37,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: sizeM10),
                         // 중앙에 제목과 날짜 배치
                         Expanded(
                           child: InkWell(
@@ -82,33 +81,58 @@ class MyInterestAuthor extends ConsumerWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.4),
-                                      child: Text(
-                                        "${interestAuthorDTOList[index].authorNickname}",
-                                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
-                                      ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
+                                          child: Text(
+                                            "${interestAuthorDTOList[index].authorNickname}",
+                                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
+                                          ),
+                                        ),
+                                        SizedBox(width: 3),
+                                        todayDateTime.difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours < 50
+                                            ? TitleTag(titleTagEnum: TitleTagEnum.up)
+                                            : SizedBox()
+                                      ],
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: sizeS5),
-                                Text(
-                                  "${DateFormat('yyyy-MM-dd').format(interestAuthorDTOList[index].createdAt)}",
-                                  style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                                SizedBox(height: 3),
+                                Container(
+                                  constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
+                                  child: Wrap(
+                                    runSpacing: -2,
+                                    children: interestAuthorDTOList[index].authorWebtoonNameList.map((webtoonName) {
+                                      return Text(
+                                        "${webtoonName}  ",
+                                        style: TextStyle(fontSize: 11, color: Colors.grey[600], overflow: TextOverflow.ellipsis),
+                                      );
+                                    }).toList(),
+                                  ),
                                 ),
-                                SizedBox(height: sizeS5),
+                                SizedBox(height: 3),
                                 interestAuthorDTOList[index].authorBoardCreateAt != null &&
-                                        todayDateTime.difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours < 40
+                                        DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours < 100
                                     ? RichText(
                                         text: TextSpan(
-                                          text: "새 이야기 ",
-                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black),
+                                          text: DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours >= 1
+                                              ? "${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours}시간 전 "
+                                              : DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inMinutes >= 1
+                                                  ? "${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inMinutes}분 전 "
+                                                  : DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inSeconds >= 5
+                                                      ? "${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inSeconds}초 전 "
+                                                      : "지금 ",
+                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green),
                                           children: [
-                                            TextSpan(text: "등록!", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green)),
+                                            TextSpan(text: "새 소식", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black)),
                                           ],
                                         ),
                                       )
                                     : SizedBox(),
+                                // Text(
+                                //     "${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inDays}일/${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours}시간/${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inMinutes}분/${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inSeconds}초")
                               ],
                             ),
                           ),
