@@ -66,12 +66,11 @@ class EpisodeRepository {
   Future<ResponseDTO> fetchEpisode(String jwt, int id) async {
     try {
       // 통신
-      Response response = await dio.get("/episodes/$id",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.get("/episodes/$id", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
-      Logger().d(response.data);
+      // Logger().d(response.data);
       responseDTO.data = EpisodeDTO.fromJson(responseDTO.data);
       return responseDTO;
     } catch (e) {
@@ -90,16 +89,14 @@ class EpisodeRepository {
     try {
       // 통신
       print("통신시작 episodeId : ${episodeId}");
-      Response response = await dio.get("/comments/$episodeId",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.get("/comments/$episodeId", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       List<dynamic> mapList = responseDTO.data as List<dynamic>;
 
-      List<CommentDTO> commentList =
-          mapList.map((commentDTO) => CommentDTO.fromJson(commentDTO)).toList();
+      List<CommentDTO> commentList = mapList.map((commentDTO) => CommentDTO.fromJson(commentDTO)).toList();
 
       // Logger().d(webtoonList);
 
@@ -123,11 +120,9 @@ class EpisodeRepository {
       Response response;
 
       if (like == true) {
-        response = await dio.post("/episodes/likecancel/${episodeId}",
-            options: Options(headers: {"Authorization": "${jwt}"}));
+        response = await dio.post("/episodes/likecancel/${episodeId}", options: Options(headers: {"Authorization": "${jwt}"}));
       } else {
-        response = await dio.post("/episodes/like/${episodeId}",
-            options: Options(headers: {"Authorization": "${jwt}"}));
+        response = await dio.post("/episodes/like/${episodeId}", options: Options(headers: {"Authorization": "${jwt}"}));
       }
 
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -142,12 +137,11 @@ class EpisodeRepository {
     try {
       Response response;
 
-      response = await dio.get("/webtoons/random",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      response = await dio.get("/webtoons/random", options: Options(headers: {"Authorization": "${jwt}"}));
 
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
       responseDTO.data = DetailPageWebtoonDTO.fromJson(responseDTO.data);
-      Logger().d(responseDTO.data);
+      // Logger().d(responseDTO.data);
       return responseDTO;
     } catch (e) {
       return new ResponseDTO(success: false, data: "랜덤작품 불러오기 실패");

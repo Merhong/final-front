@@ -23,7 +23,7 @@ class WebtoonEpisodeAppBar extends StatelessWidget implements PreferredSizeWidge
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.bookmark, color: Colors.white),
+          icon: Icon(Icons.more_vert, color: Colors.white),
           onPressed: () {
             // 댓글 아이콘을 눌렀을 때 수행할 작업 추가
           },
