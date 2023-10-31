@@ -3,11 +3,8 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_like_dto.dart';
-import 'package:flutter_blog/data/dto/post_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
-import 'package:flutter_blog/data/model/post.dart';
 import 'package:logger/logger.dart';
 
 // MVVM패턴 : View -> Provider(전역프로바이더or뷰모델) -> Repository(통신+파싱을 책임)
@@ -69,7 +66,8 @@ class EpisodeRepository {
   Future<ResponseDTO> fetchEpisode(String jwt, int id) async {
     try {
       // 통신
-      Response response = await dio.get("/episodes/$id", options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.get("/episodes/$id",
+          options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -137,6 +135,22 @@ class EpisodeRepository {
       return responseDTO;
     } catch (e) {
       return new ResponseDTO(success: false, data: "좋아요 등록 실패");
+    }
+  }
+
+  Future<ResponseDTO> fetchRandom(String jwt) async {
+    try {
+      Response response;
+
+      response = await dio.get("/webtoons/random",
+          options: Options(headers: {"Authorization": "${jwt}"}));
+
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      responseDTO.data = DetailPageWebtoonDTO.fromJson(responseDTO.data);
+      Logger().d(responseDTO.data);
+      return responseDTO;
+    } catch (e) {
+      return new ResponseDTO(success: false, data: "랜덤작품 불러오기 실패");
     }
   }
 
