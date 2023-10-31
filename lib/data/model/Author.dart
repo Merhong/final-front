@@ -26,6 +26,6 @@ class Author {
       : id = json["id"],
         authorNickname = json["authorNickname"];
 // user = json["user"];
-// created = DateFormat("yyyy-mm-dd").parse(json["created"]), // 3
-// updated = DateFormat("yyyy-mm-dd").parse(json["updated"]);
+// created = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["created"]), // 3
+// updated = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["updated"]);
 }

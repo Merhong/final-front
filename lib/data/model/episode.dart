@@ -9,7 +9,6 @@ class Episode {
   double starScore;
   double starCount;
   DateTime createdAt;
-
   // DateTime? updatedAt;
 
   // 생성자는 선택적 매개변수에 required 하는게 편하다
@@ -36,9 +35,8 @@ class Episode {
         cookieCost = json["cookieCost"],
         starScore = json["starScore"],
         starCount = json["starCount"],
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]);
-
-  // updatedAt = DateFormat("yyyy-mm-dd").parse(json["updatedAt"]);
+        createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]);
+  // updatedAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["updatedAt"]);
 
   @override
   String toString() {

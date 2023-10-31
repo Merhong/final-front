@@ -54,10 +54,13 @@ Function validateTitle() {
   };
 }
 
+// validateContent()를 실행하면 값이 아니라 함수 자체를 반환한다
 Function validateContent() {
   return (String? value) {
     if (value!.isEmpty) {
       return "내용은 공백이 들어갈 수 없습니다.";
+    } else if (value.length < 5) {
+      return "5글자 이상 입력하세요";
     } else if (value.length > 500) {
       return "내용의 길이를 초과하였습니다.";
     } else {

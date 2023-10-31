@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
+import 'package:flutter_blog/ui/common_widgets/specially_tag.dart';
+import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 
 import '../../_core/constants/size.dart';
 import 'draw_triangle.dart';
@@ -39,40 +41,11 @@ class WebtoonListItem extends StatelessWidget {
               if (webtoonDTO.webtoonSpeciallyEnum == "순위") ...[
                 Container(
                   height: sizeWebtoonListItemPictureHeight160,
-                  child: Stack(
-                    children: [
-                      Align(
-                          alignment: Alignment(1, 1),
-                          child: CustomPaint(
-                              size: Size(75, 25),
-                              painter: DrawTriangle(color: Colors.green))),
-                      Align(
-                          alignment: Alignment(1, 1),
-                          child: Text("순위 상승",
-                              style: TextStyle(color: Colors.white))),
-                    ],
-                  ),
+                  child: SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.rank),
                 ),
               ],
-              if (webtoonDTO.webtoonSpeciallyEnum == "신작")
-                Padding(
-                  padding: EdgeInsets.all(3.0),
-                  child: CircleAvatar(
-                      backgroundColor: Colors.green,
-                      radius: 15,
-                      child: Text("신작", style: TextStyle(color: Colors.black))),
-                ),
-              if (webtoonDTO.webtoonSpeciallyEnum == "무료")
-                Stack(
-                  children: [
-                    Icon(Icons.circle, size: 34, color: Colors.black),
-                    Positioned(
-                        right: 2,
-                        bottom: 2,
-                        child: Icon(CupertinoIcons.clock,
-                            color: Colors.green, size: 30)),
-                  ],
-                ),
+              if (webtoonDTO.webtoonSpeciallyEnum == "신작") SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.isNew),
+              if (webtoonDTO.webtoonSpeciallyEnum == "무료") SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.free),
             ],
           ),
         ),
@@ -85,80 +58,52 @@ class WebtoonListItem extends StatelessWidget {
             webtoonDTO.webtoonSpeciallyEnum == "휴재"
                 ? Row(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(3),
-                          ),
-                        ),
-                        child: Text(
-                          "${webtoonDTO.webtoonSpeciallyEnum}",
-                          style: TextStyle(color: Colors.grey, fontSize: 8),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
+                      TitleTag(titleTagEnum: TitleTagEnum.stop),
                       SizedBox(width: 2),
                       Container(
-                        constraints: BoxConstraints(
-                            maxWidth: sizeGetScreenWidth(context) * 0.24),
-                        child: Text("${webtoonDTO.title}",
-                            style: Theme.of(context).textTheme.displayMedium,
-                            overflow: TextOverflow.ellipsis),
+                        constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.235),
+                        child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                       ),
                     ],
                   )
                 : webtoonDTO.webtoonSpeciallyEnum == "완결"
                     ? Row(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blue),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(3),
-                              ),
-                            ),
-                            child: Text(
-                              "${webtoonDTO.webtoonSpeciallyEnum}",
-                              style: TextStyle(color: Colors.blue, fontSize: 8),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
+                          TitleTag(titleTagEnum: TitleTagEnum.end),
                           SizedBox(width: 2),
                           Container(
-                            constraints: BoxConstraints(
-                                maxWidth: sizeGetScreenWidth(context) * 0.24),
-                            child: Text("${webtoonDTO.title}",
-                                style:
-                                    Theme.of(context).textTheme.displayMedium,
-                                overflow: TextOverflow.ellipsis),
+                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.235),
+                            child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                           ),
                         ],
                       )
-                    : Container(
-                        constraints: BoxConstraints(
-                            maxWidth: sizeGetScreenWidth(context) * 0.29),
-                        child: Text("${webtoonDTO.title}",
-                            style: Theme.of(context).textTheme.displayMedium,
-                            overflow: TextOverflow.ellipsis),
-                      ),
+                    : webtoonDTO.episodeUpdatedAt != null && todayDateTime.difference(webtoonDTO.episodeUpdatedAt!).inHours < 40
+                        ? Row(
+                            children: [
+                              TitleTag(titleTagEnum: TitleTagEnum.up),
+                              SizedBox(width: 2),
+                              Container(
+                                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.235),
+                                child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
+                              ),
+                            ],
+                          )
+                        : Container(
+                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.29),
+                            child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
+                          ),
           ],
         ),
         Row(
           children: [
             Container(
-                constraints: BoxConstraints(
-                    maxWidth: sizeGetScreenWidth(context) * 0.21),
-                // child: Text("${webtoonDTO.authorNicknameList!.map((str) => str).toList().join('/')} ",
-                child: Text(
-                    "${webtoonDTO.authorNicknameList!.toList().join('/')} ",
-                    style: Theme.of(context).textTheme.bodySmall,
-                    overflow: TextOverflow.ellipsis)),
+                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.21),
+                // child: Text("${webtoonDTO.authorNicknameList!.map((str) => str).toList().join('/').replaceAll(' ', '')} ",
+                child: Text("${webtoonDTO.authorNicknameList!.toList().join('/').replaceAll(' ', '')} ",
+                    style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis)),
             Container(
-                child: Text(
-                    "★ ${(webtoonDTO.starScore! / webtoonDTO.starCount!).toStringAsFixed(2)}",
-                    style: Theme.of(context).textTheme.bodySmall,
-                    maxLines: 1)),
+                child: Text("★ ${(webtoonDTO.starScore! / webtoonDTO.starCount!).toStringAsFixed(2)}",
+                    style: Theme.of(context).textTheme.bodySmall, maxLines: 1)),
           ],
         ),
       ],

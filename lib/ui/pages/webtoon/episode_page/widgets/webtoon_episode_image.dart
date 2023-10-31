@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
+import 'package:flutter_blog/data/model/episode_photo.dart';
 
 class WebtoonEpisodeImage extends StatelessWidget {
   EpisodeDTO episodeDTO;

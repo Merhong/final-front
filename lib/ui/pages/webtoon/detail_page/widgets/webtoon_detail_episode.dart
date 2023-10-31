@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../_core/constants/size.dart';
+import '../../../../common_widgets/title_tag.dart';
 
 class WebtoonDetailEpisode extends ConsumerWidget {
   WebtoonDetailEpisode({
@@ -17,7 +18,7 @@ class WebtoonDetailEpisode extends ConsumerWidget {
 
   final int index;
   final DetailPageWebtoonDTO webtoonDTO;
-  DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
   NumberFormat numberFormat = NumberFormat("0.00");
 
   @override
@@ -25,17 +26,17 @@ class WebtoonDetailEpisode extends ConsumerWidget {
     return InkWell(
       onTap: () {
         print("에피소드보기클릭");
-        ParamStore paramStore = ref.read(paramProvider);
-        paramStore.addEpisodeDetailId(webtoonDTO.episodeList[index].episodeId);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+        ParamStore ps = ref.read(paramProvider);
+        ps.addWebtoonLastEpisode(webtoonDTO.episodeList[0].episodeId);
+        ps.addWebtoonFirstEpisode(webtoonDTO.episodeList[webtoonDTO.episodeList.length - 1].episodeId);
+        ps.addEpisodeDetailId(webtoonDTO.episodeList[index].episodeId);
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
       },
       child: Column(
         children: [
           Divider(height: 1, color: Colors.grey),
           Padding(
-            padding: EdgeInsets.fromLTRB(
-                sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
+            padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
             child: Row(
               children: [
                 SizedBox(
@@ -43,9 +44,7 @@ class WebtoonDetailEpisode extends ConsumerWidget {
                   height: sizeXL50,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(sizeBorder5),
-                    child: Image.network(
-                        '$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![index].thumbnail}',
-                        fit: BoxFit.cover,
+                    child: Image.network('$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![index].thumbnail}', fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                       return Image.asset(
                         "assets/default_episode_Thumbnail.jpg",
@@ -58,12 +57,19 @@ class WebtoonDetailEpisode extends ConsumerWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${webtoonDTO.episodeList![index].detailTitle}"),
+                    Row(
+                      children: [
+                        Text("${webtoonDTO.episodeList![index].detailTitle} "),
+                        todayDateTime.difference(webtoonDTO.episodeList[index].createdAt).inHours < 40
+                            ? TitleTag(titleTagEnum: TitleTagEnum.up)
+                            : SizedBox(),
+                      ],
+                    ),
                     Row(
                       children: [
                         Text(
-                            "★${(webtoonDTO.episodeList![index].starScore / webtoonDTO.episodeList![index].starCount).toStringAsFixed(2)}   ${dateFormat.format(webtoonDTO.episodeList![index].createdAt)}",
-                            style: TextStyle(fontSize: 10, color: Colors.grey)),
+                            "★${(webtoonDTO.episodeList![index].starScore / webtoonDTO.episodeList![index].starCount).toStringAsFixed(2)}   ${DateFormat('yyyy-MM-dd').format(webtoonDTO.episodeList![index].createdAt)}",
+                            style: TextStyle(fontSize: 10, color: Colors.grey[600])),
                       ],
                     ),
                   ],

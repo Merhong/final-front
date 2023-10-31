@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/data/dto/comment_dto/re_comment_DTO.dart';
-import 'package:flutter_blog/data/dto/recommend_dto/end_recommendation_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
-import 'package:logger/logger.dart';
+import 'package:flutter_blog/data/dto/webtoon_dto/end_recommend_DTO.dart';
 
-class recommendRepository {
+class RecommendRepository {
   Future<ResponseDTO> fetchRecommendList() async {
     try {
       Response response = await dio.get("/webtoons/recommend");

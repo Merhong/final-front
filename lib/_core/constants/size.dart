@@ -28,3 +28,11 @@ double sizeGetScreenHeight(BuildContext context) {
 // double getDrawerWidth(BuildContext context) {
 //   return getScreenWidth(context) * 0.6;
 // }
+
+Color IdToColor(int id) {
+  return Color.fromRGBO(
+      id * 111 % 255 > 200 ? 50 : id * 111 % 255, //
+      id * 155 % 255 > 200 ? 50 : id * 155 % 255, //
+      id * 222 % 255 > 200 ? 50 : id * 222 % 255, //
+      0.8);
+}
