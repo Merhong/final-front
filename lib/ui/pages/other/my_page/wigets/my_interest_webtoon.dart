@@ -136,14 +136,27 @@ class MyInterestWebtoon extends ConsumerWidget {
                                 interestWebtoonDTOList[index].webtoonUpdateAt != null &&
                                         todayDateTime.difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours < 50
                                     ? RichText(
-                                        text: TextSpan(
-                                          text: "새 이야기 ",
-                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black),
-                                          children: [
-                                            TextSpan(text: "등록!", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green)),
-                                          ],
-                                        ),
-                                      )
+                                        text:
+                                            // TextSpan(
+                                            //   text: "새 이야기 ",
+                                            //   style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black),
+                                            //   children: [
+                                            //     TextSpan(text: "등록!", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green)),
+                                            //   ],
+                                            // ),
+                                            TextSpan(
+                                        text: DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours >= 1
+                                            ? "${DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours}시간 전 "
+                                            : DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inMinutes >= 1
+                                                ? "${DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inMinutes}분 전 "
+                                                : DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inSeconds >= 5
+                                                    ? "${DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inSeconds}초 전 "
+                                                    : "지금 ",
+                                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green),
+                                        children: [
+                                          TextSpan(text: "새 이야기", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black)),
+                                        ],
+                                      ))
                                     : interestWebtoonDTOList[index].webtoonSpeciallyEnum == "무료"
                                         ? Text("무료 충전 완료!", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green))
                                         : SizedBox(),
