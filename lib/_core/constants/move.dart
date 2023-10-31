@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/pages/auth/logout_page/logout_page.dart';
 import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_page.dart';
@@ -23,6 +24,7 @@ class Move {
   static String homeListPage = "/webtoons/home"; // 홈페이지
   static String loginPage = "/login"; // 로그인 페이지
   static String joinPage = "/join"; // 회원가입 페이지
+  static String logoutPage = "/logout"; // 로그아웃 페이지
   static String termsPage = "/terms"; // 약관페이지(테스트용)
   static String cookieShop = "/cookieShop"; // 쿠키샵
   static String replyPage = "/webtoons/reply"; // 댓글쓰기(테스트용)
@@ -44,6 +46,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // Move.homeListPage: (context) => episodePage(),
     Move.loginPage: (context) => LoginPage(),
     Move.joinPage: (context) => const JoinPage(),
+    Move.logoutPage: (context) => LogoutPage(),
     Move.termsPage: (context) => TermsPage(),
     Move.cookieShop: (context) => CookieShop(),
     Move.replyPage: (context) => ReplyPage(),

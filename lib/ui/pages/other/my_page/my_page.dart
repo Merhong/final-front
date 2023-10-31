@@ -11,10 +11,7 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyappAppbar(),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 17), // 양쪽 여백을 17로 설정
-        child: MyBodyTabBar(),
-      ),
+      body: MyBodyTabBar(),
       bottomNavigationBar: AppBottom(),
     );
   }

@@ -31,7 +31,6 @@ class WebtoonDetailModel {
   WebtoonDetailModel interestAlarmUpdate({required bool isAlarm}) {
     DetailPageWebtoonDTO updateWebtoonDTO = this.webtoonDTO!;
     updateWebtoonDTO.isAlarm = isAlarm;
-    // updateWebtoonDTO.renderingSwitch = !(updateWebtoonDTO.renderingSwitch!);
     return WebtoonDetailModel(webtoonDTO: updateWebtoonDTO);
   }
 

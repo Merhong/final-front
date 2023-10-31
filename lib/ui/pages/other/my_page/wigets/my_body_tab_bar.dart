@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_page_view_model.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_model.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_tab_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
