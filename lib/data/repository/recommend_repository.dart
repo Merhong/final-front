@@ -2,11 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/end_recommend_DTO.dart';
+import 'package:logger/logger.dart';
 
 class RecommendRepository {
-  Future<ResponseDTO> fetchRecommendList() async {
+  Future<ResponseDTO> fetchRecommendList(String jwt) async {
     try {
-      Response response = await dio.get("/webtoons/recommend");
+      Response response = await dio.get("/webtoons/recommend",
+          options: Options(headers: {"Authorization": "${jwt}"}));
+
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       List<dynamic> mapList = responseDTO.data as List<dynamic>;

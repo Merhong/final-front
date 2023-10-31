@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // ↓↓↓↓ 통신용 백엔드 서버 주소 여기 적기 ↓↓↓↓
 // const String serverURL = "http://192.168.0.45:8081"; // 김지원
-// const String serverURL = "http://192.168.0.44:8081"; // 김하얀
+const String serverURL = "http://192.168.0.44:8081"; // 김하얀
 // const String serverURL = "http://192.168.0.48:8081"; //박민희
 // const String serverURL = "http://192.168.0.49:8081"; // 윤혜림
 // const String serverURL = "http://192.168.0.50:8081"; // 김대홍
@@ -15,7 +15,7 @@ const String imageURL = "http://192.168.0.44:8081/image?route=";
 // http 통신
 final dio = Dio(
   BaseOptions(
-    baseUrl: "http://192.168.0.44:8081/", // 서버 주소 위에 적어주세요
+    baseUrl: serverURL, // 서버 주소 위에 적어주세요
     contentType: "application/json; charset=utf-8",
   ),
 );
