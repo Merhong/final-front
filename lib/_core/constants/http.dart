@@ -17,7 +17,7 @@ const String imageURL = "http://192.168.0.44:8081/image?route=";
 // http 통신
 final dio = Dio(
   BaseOptions(
-    baseUrl: "http://192.168.0.44:8081/", // 서버 주소 위에 적어주세요
+    baseUrl: serverURL, // 서버 주소 위에 적어주세요
     contentType: "application/json; charset=utf-8",
   ),
 );
