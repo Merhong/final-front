@@ -15,7 +15,8 @@ class WebtoonDetailModel {
   // bool isInterest;
   DetailPageWebtoonDTO? webtoonDTO;
 
-  WebtoonDetailModel interestCountUpdate({required int updateInterestCount, required bool nowIsInterest}) {
+  WebtoonDetailModel interestCountUpdate(
+      {required int updateInterestCount, required bool nowIsInterest}) {
     DetailPageWebtoonDTO updateWebtoonDTO = this.webtoonDTO!;
     updateWebtoonDTO.interestCount = updateInterestCount;
     updateWebtoonDTO.isInterest = nowIsInterest;
@@ -50,7 +51,8 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionProvider);
     int webtoonId = ref.read(paramProvider).webtoonDetailId!;
-    ResponseDTO responseDTO = await WebtoonRepository().fetchWebtoon(sessionUser.jwt!, webtoonId);
+    ResponseDTO responseDTO =
+        await WebtoonRepository().fetchWebtoon(sessionUser.jwt!, webtoonId);
     state = WebtoonDetailModel(webtoonDTO: responseDTO.data);
     // state = WebtoonDetailModel();
     // state!.webtoonDTO = responseDTO.data;
@@ -60,42 +62,48 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
     SessionUser sessionUser = ref.read(sessionProvider);
 
     int webtoonId = state!.webtoonDTO!.id;
-    ResponseDTO responseDTO = await WebtoonRepository().fetchInterestAlarmOn(sessionUser.jwt!, webtoonId);
+    ResponseDTO responseDTO = await WebtoonRepository()
+        .fetchInterestAlarmOn(sessionUser.jwt!, webtoonId);
 
     if (responseDTO.success == false) {
       print("if로감On");
       return;
     }
 
-    state = state!.interestAlarmUpdate(isAlarm: (responseDTO.data as InterestWebtoonDTO).isAlarm);
+    state = state!.interestAlarmUpdate(
+        isAlarm: (responseDTO.data as InterestWebtoonDTO).isAlarm);
   }
 
   Future<void> notifyInterestAlarmOff() async {
     SessionUser sessionUser = ref.read(sessionProvider);
 
     int webtoonId = state!.webtoonDTO!.id;
-    ResponseDTO responseDTO = await WebtoonRepository().fetchInterestAlarmOff(sessionUser.jwt!, webtoonId);
+    ResponseDTO responseDTO = await WebtoonRepository()
+        .fetchInterestAlarmOff(sessionUser.jwt!, webtoonId);
 
     if (responseDTO.success == false) {
       print("if로감Off");
       return;
     }
 
-    state = state!.interestAlarmUpdate(isAlarm: (responseDTO.data as InterestWebtoonDTO).isAlarm);
+    state = state!.interestAlarmUpdate(
+        isAlarm: (responseDTO.data as InterestWebtoonDTO).isAlarm);
   }
 
   Future<void> notifyInterestCreate() async {
     SessionUser sessionUser = ref.read(sessionProvider);
 
     int webtoonId = state!.webtoonDTO!.id;
-    ResponseDTO responseDTO = await WebtoonRepository().fetchInterestCreate(sessionUser.jwt!, webtoonId);
+    ResponseDTO responseDTO = await WebtoonRepository()
+        .fetchInterestCreate(sessionUser.jwt!, webtoonId);
 
     if (responseDTO.success == false) {
       // notifyInterestDelete();
       return;
     }
     state = state!.interestCountUpdate(
-      updateInterestCount: (responseDTO.data as InterestDTO).webtoonTotalInterest,
+      updateInterestCount:
+          (responseDTO.data as InterestDTO).webtoonTotalInterest,
       nowIsInterest: true,
     );
     // state!.webtoonDTO!.interestCount = (responseDTO.data as InterestDTO).webtoonTotalInterest; // TODO 이거론 왜 안되지
@@ -105,19 +113,29 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
     SessionUser sessionUser = ref.read(sessionProvider);
 
     int webtoonId = state!.webtoonDTO!.id;
-    ResponseDTO responseDTO = await WebtoonRepository().fetchInterestDelete(sessionUser.jwt!, webtoonId);
+    ResponseDTO responseDTO = await WebtoonRepository()
+        .fetchInterestDelete(sessionUser.jwt!, webtoonId);
 
     if (responseDTO.success == false) {
       // notifyInterestCreate();
       return;
     }
     state = state!.interestCountUpdate(
-      updateInterestCount: (responseDTO.data as InterestDTO).webtoonTotalInterest,
+      updateInterestCount:
+          (responseDTO.data as InterestDTO).webtoonTotalInterest,
       nowIsInterest: false,
     );
     // state!.webtoonDTO!.interestCount = (responseDTO.data as InterestDTO).webtoonTotalInterest; // TODO 이거론 왜 안되지
   }
 
+  Future<void> notifyRandom() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO =
+        await WebtoonRepository().fetchRandom(sessionUser.jwt!);
+
+    ParamStore paramStore = ref.read(paramProvider);
+    paramStore.webtoonDetailId = responseDTO.data.id;
+  }
 //
 // Future<void> notifyAdd(PostSaveReqDTO dto) async {
 //   SessionUser sessionUser = ref.read(sessionProvider);
@@ -144,7 +162,8 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
-final webtoonDetailProvider = StateNotifierProvider.autoDispose<WebtoonDetailViewModel, WebtoonDetailModel?>((ref) {
+final webtoonDetailProvider = StateNotifierProvider.autoDispose<
+    WebtoonDetailViewModel, WebtoonDetailModel?>((ref) {
   // Logger().d("webtoonDetail창고관리자 실행됨");
   // return new WebtoonDetailViewModel(ref, null)..notifyInit();
   return new WebtoonDetailViewModel(ref, null);

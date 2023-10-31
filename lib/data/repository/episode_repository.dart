@@ -138,22 +138,6 @@ class EpisodeRepository {
     }
   }
 
-  Future<ResponseDTO> fetchRandom(String jwt) async {
-    try {
-      Response response;
-
-      response = await dio.get("/webtoons/random",
-          options: Options(headers: {"Authorization": "${jwt}"}));
-
-      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
-      responseDTO.data = DetailPageWebtoonDTO.fromJson(responseDTO.data);
-      Logger().d(responseDTO.data);
-      return responseDTO;
-    } catch (e) {
-      return new ResponseDTO(success: false, data: "랜덤작품 불러오기 실패");
-    }
-  }
-
 // Future<ResponseDTO> fetchWebtoonList(String jwt) async {
 //   try {
 //     // 통신

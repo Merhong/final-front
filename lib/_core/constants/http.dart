@@ -9,14 +9,15 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // const String serverURL = "http://192.168.0.50:8081"; // 김대홍
 ///////////////////////////////////////////////////////////////
 
+
 DateTime todayDateTime = DateTime.now(); // 세계시간 UTC임
 
-const String imageURL = "${serverURL}/image?route=";
+const String imageURL = "http://192.168.0.44:8081/image?route=";
 
 // http 통신
 final dio = Dio(
   BaseOptions(
-    baseUrl: serverURL, // 서버 주소 위에 적어주세요
+    baseUrl: "http://192.168.0.44:8081/", // 서버 주소 위에 적어주세요
     contentType: "application/json; charset=utf-8",
   ),
 );
