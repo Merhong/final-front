@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
+import 'package:flutter_blog/data/dto/webtoon_dto/best_DTO.dart';
+import 'package:flutter_blog/ui/pages/webtoon/best_page/webtoon_best_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomBestView extends StatelessWidget {
+class CustomBestView extends ConsumerWidget {
+  final int index;
+
+  const CustomBestView({super.key, required this.index});
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    WebtoonBestModel? model = ref.watch(webtoonBestProvider);
+
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+    List<BestDTO> bestList = model!.bestDTOList;
+
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
@@ -12,12 +27,18 @@ class CustomBestView extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // 왼쪽에 이미지를 배치
-              Image.asset(
-                "assets/default_episode_Thumbnail.jpg",
-                width: 150,
-                height: 120,
-                fit: BoxFit.fitWidth,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.network(
+                  "${imageURL}/WebtoonThumbnail/${bestList[index].image}",
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      "assets/default_webtoon_Thumbnail.jpg",
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
               ),
               SizedBox(width: 10),
               // 중앙에 제목과 날짜 배치
