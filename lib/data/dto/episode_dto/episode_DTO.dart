@@ -12,29 +12,16 @@ class EpisodeDTO {
   final int webtoonId;
   final String webtoonName;
   final int cookieCost;
-  final int likeEpisodeCount;
+  int likeEpisodeCount;
   final int commentCount;
   // List<Comment> commentList;
   final List<EpisodePhoto> photoList;
-  final bool like;
+  bool like;
 
   // 에피소드말고 상위웹툰의 전체 에피소드 개수 필요
 
-  EpisodeDTO(
-      this.episodeId,
-      this.detailTitle,
-      this.starScore,
-      this.starCount,
-      this.createdAt,
-      this.authorText,
-      this.authorName,
-      this.webtoonId,
-      this.webtoonName,
-      this.cookieCost,
-      this.commentCount,
-      this.likeEpisodeCount,
-      this.photoList,
-      this.like);
+  EpisodeDTO(this.episodeId, this.detailTitle, this.starScore, this.starCount, this.createdAt, this.authorText, this.authorName, this.webtoonId,
+      this.webtoonName, this.cookieCost, this.commentCount, this.likeEpisodeCount, this.photoList, this.like);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   EpisodeDTO.fromJson(Map<String, dynamic> json)
@@ -50,11 +37,8 @@ class EpisodeDTO {
         cookieCost = json["cookieCost"],
         commentCount = json["commentCount"],
         likeEpisodeCount = json["likeEpisodeCount"],
-        photoList = (json["photoList"] as List)
-            .map((jsonPhoto) => EpisodePhoto.fromJson(jsonPhoto))
-            .toList(),
+        photoList = (json["photoList"] as List).map((jsonPhoto) => EpisodePhoto.fromJson(jsonPhoto)).toList(),
         like = json["like"];
-
 
   @override
   String toString() {

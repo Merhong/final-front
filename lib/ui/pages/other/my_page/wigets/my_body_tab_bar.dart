@@ -4,12 +4,12 @@ import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_mod
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_tab_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyBodyTabBar extends ConsumerStatefulWidget {
+class MyBodyTabBar extends StatefulWidget {
   @override
   _MyBodyTabBarState createState() => _MyBodyTabBarState();
 }
 
-class _MyBodyTabBarState extends ConsumerState<MyBodyTabBar> with SingleTickerProviderStateMixin {
+class _MyBodyTabBarState extends State<MyBodyTabBar> with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   @override
@@ -20,14 +20,6 @@ class _MyBodyTabBarState extends ConsumerState<MyBodyTabBar> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    MyPageModel? model = ref.watch(myPageProvider);
-
-    if (model == null) {
-      return Center(child: CircularProgressIndicator());
-    }
-
-    List<InterestWebtoonDTO> interestWebtoonDTOList = model.interestWebtoonDTOList!;
-
     return MyTabBar(tabController: _tabController);
   }
 }
