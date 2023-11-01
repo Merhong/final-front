@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_view_model.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_model.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_comment.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_webtoon.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_recently_view.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_comment_page/my_comment.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_page/my_interest_author.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_webtoon_page/my_interest_webtoon.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_recent_page/my_recently_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyTabBar extends ConsumerWidget {
@@ -51,7 +51,7 @@ class MyTabBar extends ConsumerWidget {
             ),
             Tab(
               child: Text(
-                "댓글",
+                "모든 댓글",
                 style: TextStyle(
                   color: Colors.black, // 텍스트 색상을 검은색으로 설정
                   fontWeight: FontWeight.bold, // 텍스트를 굵게 만듭니다

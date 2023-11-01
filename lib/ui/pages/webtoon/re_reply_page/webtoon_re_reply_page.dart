@@ -52,10 +52,9 @@ class ReReplyPage extends ConsumerWidget {
                   return SizedBox(height: 70);
                 }
                 if (index == 0) {
-                  return WebtoonReplyBody(commentList: [commentDTO], index: index, isReReply: true);
+                  return WebtoonReplyBody(commentList: [commentDTO], index: index, isReReply: true); // 원댓글
                 }
-                return WebtoonReReplyBody(reCommentList: commentDTO.reCommentList, index: index - 1);
-                // return Text("${commentDTO.reCommentList[index - 1]}");
+                return WebtoonReReplyBody(reCommentList: commentDTO.reCommentList, index: index - 1); // 댓글의 대댓글들
               },
               separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey),
               itemCount: commentDTO.reCommentList.length + 2),

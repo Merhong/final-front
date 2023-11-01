@@ -42,5 +42,53 @@ class AuthorRepository {
     }
   }
 
-//
+  //
+
+  Future<ResponseDTO> fetchInterestAlarmOn(String jwt, int authorId) async {
+    try {
+      // 통신
+      Response response = await dio.post("/users/interest/author/alarmon/$authorId", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      responseDTO.data = InterestAuthorDTO.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
+  //
+
+  Future<ResponseDTO> fetchInterestAlarmOff(String jwt, int authorId) async {
+    try {
+      // 통신
+      Response response = await dio.post("/users/interest/author/alarmoff/$authorId", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      responseDTO.data = InterestAuthorDTO.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
+  //
 }
