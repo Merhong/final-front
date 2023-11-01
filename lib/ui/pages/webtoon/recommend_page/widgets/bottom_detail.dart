@@ -64,7 +64,7 @@ class _BottomDetailState extends State<BottomDetail> {
                       children: [
                         Container(
                           width:
-                              sizeGetScreenWidth(context) * 0.6, // 예시로 0.6로 변경
+                              sizeGetScreenWidth(context) * 0.5, // 예시로 0.6로 변경
                           child: Text(
                             "${widget.list[widget.index].intro}",
                             style: TextStyle(
@@ -94,7 +94,7 @@ class _BottomDetailState extends State<BottomDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: sizeGetScreenWidth(context) * 0.6, // 예시로 0.7로 변경
+                      width: sizeGetScreenWidth(context) * 0.5, // 예시로 0.7로 변경
                       child: Text(
                         "${widget.list[widget.index].intro}",
                         style: TextStyle(fontSize: 13, color: Colors.grey[600]),
