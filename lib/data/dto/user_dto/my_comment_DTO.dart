@@ -2,7 +2,7 @@ import 'package:flutter_blog/data/dto/comment_dto/re_comment_DTO.dart';
 import 'package:intl/intl.dart';
 
 class MyCommentDTO {
-  final int id;
+  final int commentId;
   final String text;
   final DateTime createdAt;
   final int userId;
@@ -14,13 +14,15 @@ class MyCommentDTO {
   int likeCommentCount;
   int dislikeCommentCount;
   int reCommentCount;
+  int reCommentId;
+  bool isReComment;
 
-  MyCommentDTO(this.id, this.text, this.createdAt, this.userId, this.episodeId, this.episodeTitle, this.episodeThumbnail, this.webtoonId,
-      this.webtoonTitle, this.likeCommentCount, this.dislikeCommentCount, this.reCommentCount);
+  MyCommentDTO(this.commentId, this.text, this.createdAt, this.userId, this.episodeId, this.episodeTitle, this.episodeThumbnail, this.webtoonId,
+      this.webtoonTitle, this.likeCommentCount, this.dislikeCommentCount, this.reCommentCount, this.reCommentId, this.isReComment);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   MyCommentDTO.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
+      : commentId = json["commentId"],
         text = json["text"],
         createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]),
         userId = json["userId"],
@@ -31,10 +33,12 @@ class MyCommentDTO {
         webtoonTitle = json["webtoonTitle"],
         likeCommentCount = json["likeCommentCount"],
         dislikeCommentCount = json["dislikeCommentCount"],
-        reCommentCount = json["reCommentCount"];
+        reCommentCount = json["reCommentCount"],
+        reCommentId = json["reCommentId"],
+        isReComment = json["isReComment"];
 
   @override
   String toString() {
-    return 'MyCommentDTO{id: $id, text: $text, createdAt: $createdAt, userId: $userId, episodeId: $episodeId, episodeTitle: $episodeTitle, episodeThumbnail: $episodeThumbnail, webtoonId: $webtoonId, webtoonTitle: $webtoonTitle, likeCommentCount: $likeCommentCount, dislikeCommentCount: $dislikeCommentCount, reCommentCount: $reCommentCount}';
+    return 'MyCommentDTO{commentId: $commentId, text: $text, createdAt: $createdAt, userId: $userId, episodeId: $episodeId, episodeTitle: $episodeTitle, episodeThumbnail: $episodeThumbnail, webtoonId: $webtoonId, webtoonTitle: $webtoonTitle, likeCommentCount: $likeCommentCount, dislikeCommentCount: $dislikeCommentCount, reCommentCount: $reCommentCount, reCommentId: $reCommentId, isReComment: $isReComment}';
   }
 }

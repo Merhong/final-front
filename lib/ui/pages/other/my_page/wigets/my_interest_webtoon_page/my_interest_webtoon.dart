@@ -37,7 +37,7 @@ class MyInterestWebtoon extends ConsumerWidget {
                 padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
                 child: Row(
                   children: [
-                    buildPhoto(ref, interestWebtoonDTOList, index, context),
+                    buildPhoto(ref, interestWebtoonDTOList[index], index, context),
                     SizedBox(width: sizeM10),
                     buildDescription(ref, interestWebtoonDTOList, index, context),
                     SizedBox(width: sizeL20),
@@ -86,7 +86,7 @@ class MyInterestWebtoon extends ConsumerWidget {
     );
   }
 
-  Expanded buildDescription(WidgetRef ref, List<InterestWebtoonDTO> interestWebtoonDTOList, int index, BuildContext context) {
+  Widget buildDescription(WidgetRef ref, List<InterestWebtoonDTO> interestWebtoonDTOList, int index, BuildContext context) {
     return Expanded(
       child: InkWell(
         onTap: () {
@@ -159,20 +159,20 @@ class MyInterestWebtoon extends ConsumerWidget {
     );
   }
 
-  ClipRRect buildPhoto(WidgetRef ref, List<InterestWebtoonDTO> interestWebtoonDTOList, int index, BuildContext context) {
+  Widget buildPhoto(WidgetRef ref, InterestWebtoonDTO interestWebtoonDTO, int index, BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(5)),
       child: InkWell(
         onTap: () {
           ParamStore ps = ref.read(paramProvider);
-          ps.addWebtoonDetailId(interestWebtoonDTOList[index].webtoonId);
+          ps.addWebtoonDetailId(interestWebtoonDTO.webtoonId);
           ps.addBottomNavigationBarIndex(0);
           Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
         },
         child: Stack(
           children: [
             Image.network(
-              "${imageURL}/EpisodeThumbnail/${interestWebtoonDTOList[index].webtoonImage}",
+              "${imageURL}/EpisodeThumbnail/${interestWebtoonDTO.webtoonImage}",
               height: sizeGetScreenWidth(context) * 0.18,
               width: sizeGetScreenWidth(context) * 0.25,
               fit: BoxFit.cover,
@@ -185,11 +185,11 @@ class MyInterestWebtoon extends ConsumerWidget {
                 );
               },
             ),
-            interestWebtoonDTOList[index].webtoonSpeciallyEnum == "신작"
+            interestWebtoonDTO.webtoonSpeciallyEnum == "신작"
                 ? SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.isNew)
-                : interestWebtoonDTOList[index].webtoonSpeciallyEnum == "무료"
+                : interestWebtoonDTO.webtoonSpeciallyEnum == "무료"
                     ? SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.free)
-                    : interestWebtoonDTOList[index].webtoonSpeciallyEnum == "순위"
+                    : interestWebtoonDTO.webtoonSpeciallyEnum == "순위"
                         ? Container(
                             height: sizeGetScreenWidth(context) * 0.18,
                             width: sizeGetScreenWidth(context) * 0.25,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum TitleTagEnum { up, end, stop, author, admin, best, reReply }
+enum TitleTagEnum { up, end, stop, author, admin, best, reReply, reply }
 
 class TitleTag extends StatelessWidget {
   TitleTagEnum titleTagEnum;
@@ -69,25 +69,37 @@ class TitleTag extends StatelessWidget {
                         : titleTagEnum == TitleTagEnum.reReply
                             ? Container(
                                 decoration: BoxDecoration(
-                                  // color: Colors.grey,
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(3),
+                                  // color: Color.fromRGBO(211, 211, 211, 1),
+                                  border: Border.all(color: Colors.blue),
+                                  borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.fromLTRB(1, 0, 1, 0),
-                                  child: Text("답글", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.grey[600])),
+                                  padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                                  child: Text("답글", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.blue)),
                                 ),
                               )
-                            : Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  border: Border.all(color: Colors.red),
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(1, 0, 1, 0),
-                                  child: Text("BEST", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white)),
-                                ),
-                              );
+                            : titleTagEnum == TitleTagEnum.reply
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                      // color: Colors.yellow,
+                                      border: Border.all(color: Colors.green),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                                      child: Text("댓글", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green)),
+                                    ),
+                                  )
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      border: Border.all(color: Colors.red),
+                                      borderRadius: BorderRadius.circular(3),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(1, 0, 1, 0),
+                                      child: Text("BEST", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white)),
+                                    ),
+                                  );
   }
 }

@@ -51,7 +51,7 @@ class MyTabBar extends ConsumerWidget {
             ),
             Tab(
               child: Text(
-                "댓글",
+                "모든 댓글",
                 style: TextStyle(
                   color: Colors.black, // 텍스트 색상을 검은색으로 설정
                   fontWeight: FontWeight.bold, // 텍스트를 굵게 만듭니다

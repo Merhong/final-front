@@ -144,7 +144,7 @@ class WebtoonReplyBody extends ConsumerWidget {
       onTap: isReReply == true
           ? () {}
           : () {
-              print("대댓글 답글보기");
+              print("대댓글보기");
               // ParamStore ps = ref.read(paramProvider);
               ref.read(paramProvider).addCommentDetailId((commentList[index].id));
               Navigator.push(context, MaterialPageRoute(builder: (_) => ReReplyPage()));

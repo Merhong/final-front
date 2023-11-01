@@ -1,3 +1,4 @@
+import 'package:flutter_blog/data/dto/comment_dto/comment_delete_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/user_dto/my_comment_DTO.dart';
@@ -13,6 +14,17 @@ class MyCommentPageModel {
   List<MyCommentDTO> myCommentDTOList;
 
   MyCommentPageModel({required this.myCommentDTOList});
+
+  MyCommentPageModel deleteUpdate(CommentDeleteDTO commentDeleteDTO) {
+    List<MyCommentDTO> updateMyCommentList = this.myCommentDTOList;
+
+    // MyCommentDTO updateMyComment = updateMyCommentList.firstWhere((myCommentDTO) => myCommentDTO.id == commentDeleteDTO.deletedId);
+    updateMyCommentList = updateMyCommentList.where((myCommentDTO) => myCommentDTO.commentId != commentDeleteDTO.deletedId).toList();
+
+    print("my댓글 댓글삭제");
+
+    return MyCommentPageModel(myCommentDTOList: updateMyCommentList);
+  }
 }
 
 // 2. 창고
@@ -30,7 +42,18 @@ class MyCommentPageViewModel extends StateNotifier<MyCommentPageModel?> {
     state = MyCommentPageModel(myCommentDTOList: responseDTO.data);
   }
 
-  // Future<void> notifyMyInterestAlarm(InterestWebtoonDTO paramDTO) async {
+  Future<void> notifyCommentDelete(int commentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchCommentDelete(sessionUser.jwt!, commentId);
+
+    if (responseDTO.success == false) {
+      print("if로감CommentDelete");
+      return;
+    }
+    state = state!.deleteUpdate(responseDTO.data as CommentDeleteDTO);
+  }
+
+// Future<void> notifyMyInterestAlarm(InterestWebtoonDTO paramDTO) async {
   //   SessionUser sessionUser = ref.read(sessionProvider);
   //
   //   ResponseDTO responseDTO;
