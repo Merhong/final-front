@@ -5,13 +5,14 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 const String serverURL = "http://192.168.0.45:8081"; // 김지원
 // const String serverURL = "http://172.30.1.18:8081"; // 김지원
 // const String serverURL = "http://192.168.0.44:8081"; // 김하얀
-// const String serverURL = "http://192.168.0.48:8081"; //박민희
+// const String serverURL = "http://192.168.0.48:8081"; // 박민희
 // const String serverURL = "http://192.168.0.49:8081"; // 윤혜림
 // const String serverURL = "http://192.168.0.50:8081"; // 김대홍
+///////////////////////////////////////////////////////////////
 
 DateTime todayDateTime = DateTime.now(); // 세계시간 UTC임
 
-const String imageURL = "${serverURL}/image?route=";
+const String imageURL = "http://192.168.0.44:8081/image?route=";
 
 // http 통신
 final dio = Dio(

@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
 
       // 최초 화면
       initialRoute: Move.loginPage,
+      // initialRoute: Move.loginPage,
       // initialRoute: Move.payHomePage,
       // initialRoute: Move.payMethodPage,
       // initialRoute: Move.payCardPage,

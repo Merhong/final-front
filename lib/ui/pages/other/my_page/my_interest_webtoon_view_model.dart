@@ -1,9 +1,5 @@
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
-import 'package:flutter_blog/data/dto/webtoon_dto/interest_DTO.dart';
-import 'package:flutter_blog/data/dto/webtoon_dto/interst_webtoon_DTO.dart';
-import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/webtoon_repository.dart';
 import 'package:flutter_blog/main.dart';
