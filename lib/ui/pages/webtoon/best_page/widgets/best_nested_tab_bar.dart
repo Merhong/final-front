@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/common_widgets/custom_best_view.dart';
 
 class BestNestedTabBar extends StatefulWidget {
-  const BestNestedTabBar(this.outerTab, {Key? key});
+  const BestNestedTabBar(
+    this.outerTab, {
+    Key? key,
+  });
 
   final String outerTab;
 
@@ -43,16 +46,16 @@ class _BestNestedTabBarState extends State<BestNestedTabBar>
           ],
         ),
         Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: <Widget>[
-              CustomBestView(),
-              CustomBestView(),
-              CustomBestView(),
-              CustomBestView(),
-            ],
-          ),
-        ),
+            child: TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            //TODO 미완성
+            CustomBestView(index: 0),
+            CustomBestView(index: 1),
+            CustomBestView(index: 2),
+            CustomBestView(index: 3),
+          ],
+        )),
       ],
     );
   }
