@@ -1,80 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_middle_list.dart';
+import 'package:flutter_blog/data/dto/webtoon_dto/end_recommend_DTO.dart';
+import 'package:flutter_blog/ui/common_widgets/custom_preview_number.dart';
+import 'package:flutter_blog/ui/common_widgets/custom_privew_image.dart';
+import 'package:flutter_blog/ui/pages/webtoon/recommend_page/webtoon_recommend_view_model.dart';
+import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/recommend_page_view.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_bottom_list.dart';
-import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_middle_image.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WebtoonRecommendForm extends StatelessWidget {
+class WebtoonRecommendForm extends ConsumerWidget {
   const WebtoonRecommendForm({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    RecommendModel? model = ref.watch(recommendProvider);
+
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+    List<EndRecommendationDTO> list = model!.recommendationList;
     return Padding(
       padding: const EdgeInsets.only(left: 3),
       child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-            child: Container(
-              height: 200,
-              color: Colors.black,
-            ),
-          ),
-          // SliverPadding(
-          //   padding: const EdgeInsets.only(top: 0),
-          //   sliver: SliverToBoxAdapter(
-          //     child: Container(
-          //       height: 50,
-          //       color: Colors.grey,
-          //       child: Center(
-          //         child: Row(
-          //           mainAxisAlignment:
-          //               MainAxisAlignment.center, // 텍스트를 수직 중앙에 정렬
-          //           children: [
-          //             Text(
-          //               "머홍 님,",
-          //               style: TextStyle(
-          //                 fontWeight: FontWeight.bold, // 첫 번째 텍스트 굵게 표시
-          //                 fontSize: 20, // 원하는 글꼴 크기로 설정
-          //               ),
-          //             ),
-          //             Text(
-          //               "무료 대여권이 생겼어요!",
-          //               style: TextStyle(
-          //                 fontWeight: FontWeight.w400, // 두 번째 텍스트 굵게 표시
-          //                 fontSize: 20, // 원하는 글꼴 크기로 설정
-          //               ),
-          //             ),
-          //             Icon(Icons.downloading_rounded)
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // SliverList(
-          //   delegate: SliverChildBuilderDelegate(
-          //     (context, index) {
-          //       return WebtoonCircleList();
-          //     },
-          //     childCount: 1,
-          //   ),
-          // ),
-          // SliverList(
-          //   delegate: SliverChildBuilderDelegate(
-          //     (context, index) {
-          //       return WebtoonRecommendMiddleBar();
-          //     },
-          //     childCount: 1, // 1로 설정하면 1개의 자식 위젯을 생성합니다.
-          //   ),
-          // ),
+          RecommendPageView(),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 if (index == 0) {
                   return Container(
                     height: 50,
-                    color: Colors.grey,
+                    color: Colors.white,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -109,20 +66,19 @@ class WebtoonRecommendForm extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return WebtoonRecommendMiddleImage();
+                  return CustomPreviewNumber(index: index);
                 }
               },
               childCount:
                   3, // 1은 Container, 2는 WebtoonRecommendMiddleImage를 나타냅니다.
             ),
           ),
-
           SliverPadding(
             padding: const EdgeInsets.only(top: 3),
             sliver: SliverToBoxAdapter(
               child: Container(
                 height: 50,
-                color: Colors.grey,
+                color: Colors.white,
                 child: Center(
                   child: Row(
                     mainAxisAlignment:
@@ -151,7 +107,7 @@ class WebtoonRecommendForm extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return WebtoonMiddleList();
+                return CustomPrivewImage(index: index);
               },
               childCount: 1,
             ),
@@ -159,7 +115,7 @@ class WebtoonRecommendForm extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return WebtoonRecommendBotoomList();
+                return WebtoonRecommendBotoomList(index: index);
               },
             ),
           )
