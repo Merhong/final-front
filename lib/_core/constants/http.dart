@@ -12,7 +12,7 @@ const String serverURL = "http://192.168.0.45:8081"; // 김지원
 
 DateTime todayDateTime = DateTime.now(); // 세계시간 UTC임
 
-const String imageURL = "http://192.168.0.44:8081/image?route=";
+const String imageURL = "${serverURL}/image?route=";
 
 // http 통신
 final dio = Dio(

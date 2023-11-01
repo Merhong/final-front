@@ -17,16 +17,14 @@ class WebtoonRepository {
   Future<ResponseDTO> fetchInterestWebtoon(String jwt) async {
     try {
       // 통신
-      Response response = await dio.get("/users/interest",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.get("/users/interest", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       List<dynamic> mapList = responseDTO.data as List<dynamic>;
 
-      List<InterestWebtoonDTO> iwDTOList =
-          mapList.map((iwDTO) => InterestWebtoonDTO.fromJson(iwDTO)).toList();
+      List<InterestWebtoonDTO> iwDTOList = mapList.map((iwDTO) => InterestWebtoonDTO.fromJson(iwDTO)).toList();
 
       responseDTO.data = iwDTOList;
 
@@ -106,7 +104,7 @@ class WebtoonRepository {
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
       responseDTO.data = DetailPageWebtoonDTO.fromJson(responseDTO.data);
-      Logger().d(responseDTO.data);
+      // Logger().d(responseDTO.data);
       return responseDTO;
     } catch (e) {
       if (e is DioError) {
@@ -123,8 +121,7 @@ class WebtoonRepository {
   Future<ResponseDTO> fetchInterestAlarmOn(String jwt, int webtoonId) async {
     try {
       // 통신
-      Response response = await dio.post("/users/interest/alarmon/$webtoonId",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.post("/users/interest/alarmon/$webtoonId", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -147,8 +144,7 @@ class WebtoonRepository {
   Future<ResponseDTO> fetchInterestAlarmOff(String jwt, int webtoonId) async {
     try {
       // 통신
-      Response response = await dio.post("/users/interest/alarmoff/$webtoonId",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.post("/users/interest/alarmoff/$webtoonId", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -170,8 +166,7 @@ class WebtoonRepository {
   Future<ResponseDTO> fetchInterestCreate(String jwt, int webtoonId) async {
     try {
       // 통신
-      Response response = await dio.post("/webtoons/interest/$webtoonId",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.post("/webtoons/interest/$webtoonId", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -193,8 +188,7 @@ class WebtoonRepository {
 
   Future<ResponseDTO> fetchInterestDelete(String jwt, int webtoonId) async {
     try {
-      Response response = await dio.delete("/webtoons/interest/$webtoonId",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.delete("/webtoons/interest/$webtoonId", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
@@ -216,17 +210,14 @@ class WebtoonRepository {
   Future<ResponseDTO> fetchWebtoonList(String jwt) async {
     try {
       // 통신
-      Response response = await dio.get("/webtoons",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.get("/webtoons", options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
 
       List<dynamic> mapList = responseDTO.data as List<dynamic>;
 
-      List<ListPageWebtoonDTO> webtoonList = mapList
-          .map((webtoonDTO) => ListPageWebtoonDTO.fromJson(webtoonDTO))
-          .toList();
+      List<ListPageWebtoonDTO> webtoonList = mapList.map((webtoonDTO) => ListPageWebtoonDTO.fromJson(webtoonDTO)).toList();
 
       // Logger().d(webtoonList);
 
@@ -249,8 +240,7 @@ class WebtoonRepository {
     try {
       Response response;
 
-      response = await dio.get("/webtoons/random",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      response = await dio.get("/webtoons/random", options: Options(headers: {"Authorization": "${jwt}"}));
 
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
       responseDTO.data = DetailPageWebtoonDTO.fromJson(responseDTO.data);

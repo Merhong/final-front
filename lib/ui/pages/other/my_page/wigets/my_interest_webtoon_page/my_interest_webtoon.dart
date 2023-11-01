@@ -71,14 +71,14 @@ class MyInterestWebtoon extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.sentiment_very_dissatisfied, color: IdToColor(interestWebtoonDTOList[index].webtoonId)),
-                    Text(" 관심 웹툰을 해제하였습니다."),
+                    Text(" 웹툰 등록 알림을 껐습니다."),
                   ],
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add_reaction_outlined, color: IdToColor(interestWebtoonDTOList[index].webtoonId)),
-                    Text(" 관심 웹툰으로 등록하였습니다."),
+                    Text(" 웹툰 등록 알림을 켰습니다."),
                   ],
                 ),
         );

@@ -44,7 +44,7 @@ class MyInterestAuthor extends ConsumerWidget {
                     SizedBox(width: sizeM10),
                     buildDescription(ref, interestAuthorDTOList, index, context), // TODO 클릭시 작가페이지이동
                     SizedBox(width: sizeL20),
-                    buildAlarmButton(ref, interestAuthorDTOList, index, context), // TODO 알람작동하게
+                    buildAlarmButton(ref, interestAuthorDTOList, index, context),
                   ],
                 ),
               );
@@ -63,9 +63,28 @@ class MyInterestAuthor extends ConsumerWidget {
           ? Icon(Icons.notifications, color: Colors.green)
           : Icon(Icons.notifications_off_outlined, color: Colors.grey),
       onTap: () {
-        // ref.read(myAuthorPageProvider.notifier).notifyMyInterestAlarm(interestAuthorDTOList[index]);
+        ref.read(myAuthorPageProvider.notifier).notifyMyInterestAlarm(interestAuthorDTOList[index]);
         print("알람설정");
         ScaffoldMessenger.of(context).clearSnackBars();
+        mySnackbar(
+          context,
+          1000,
+          interestAuthorDTOList[index].isAlarm == true
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.sentiment_very_dissatisfied, color: Colors.grey[400]),
+                    Text(" 웹툰 등록 알림을 껐습니다."),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add_reaction_outlined, color: Colors.yellow),
+                    Text(" 웹툰 등록 알림을 켰습니다."),
+                  ],
+                ),
+        );
       },
     );
   }

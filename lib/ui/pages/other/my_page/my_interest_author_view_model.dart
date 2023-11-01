@@ -18,9 +18,9 @@ class MyAuthorPageModel {
 
   MyAuthorPageModel({required this.interestAuthorDTOList});
 
-  // MyAuthorPageModel interestAlarmUpdate({required List<InterestWebtoonDTO> interestWebtoonDTOList}) {
-  //   return MyAuthorPageModel(interestWebtoonDTOList: interestWebtoonDTOList);
-  // }
+  MyAuthorPageModel interestAlarmUpdate({required List<InterestAuthorDTO> interestAuthorDTOList}) {
+    return MyAuthorPageModel(interestAuthorDTOList: interestAuthorDTOList);
+  }
 }
 
 // 2. 창고
@@ -41,27 +41,27 @@ class MyAuthorPageViewModel extends StateNotifier<MyAuthorPageModel?> {
     // state!.webtoonDTO = responseDTO.data;
   }
 
-  // Future<void> notifyMyInterestAlarm(InterestWebtoonDTO paramDTO) async {
-  //   SessionUser sessionUser = ref.read(sessionProvider);
-  //
-  //   ResponseDTO responseDTO;
-  //   if (paramDTO.isAlarm == true) {
-  //     responseDTO = await WebtoonRepository().fetchInterestAlarmOff(sessionUser.jwt!, paramDTO.webtoonId);
-  //   } else {
-  //     responseDTO = await WebtoonRepository().fetchInterestAlarmOn(sessionUser.jwt!, paramDTO.webtoonId);
-  //   }
-  //
-  //   if (responseDTO.success == false) {
-  //     print("if로감On");
-  //     return;
-  //   }
-  //
-  //   List<InterestWebtoonDTO> interestWebtoonDTOList = state!.interestWebtoonDTOList;
-  //   InterestWebtoonDTO updateInterestWebtoonDTO = responseDTO.data as InterestWebtoonDTO;
-  //   interestWebtoonDTOList = interestWebtoonDTOList.map((e) => e.id == paramDTO.id ? updateInterestWebtoonDTO : e).toList();
-  //
-  //   state = state!.interestAlarmUpdate(interestWebtoonDTOList: interestWebtoonDTOList);
-  // }
+  Future<void> notifyMyInterestAlarm(InterestAuthorDTO paramDTO) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+
+    ResponseDTO responseDTO;
+    if (paramDTO.isAlarm == true) {
+      responseDTO = await AuthorRepository().fetchInterestAlarmOff(sessionUser.jwt!, paramDTO.authorId);
+    } else {
+      responseDTO = await AuthorRepository().fetchInterestAlarmOn(sessionUser.jwt!, paramDTO.authorId);
+    }
+
+    if (responseDTO.success == false) {
+      print("if로감");
+      return;
+    }
+
+    List<InterestAuthorDTO> interestAuthorDTOList = state!.interestAuthorDTOList;
+    InterestAuthorDTO updateInterestAuthorDTO = responseDTO.data as InterestAuthorDTO;
+    interestAuthorDTOList = interestAuthorDTOList.map((e) => e.id == paramDTO.id ? updateInterestAuthorDTO : e).toList();
+
+    state = state!.interestAlarmUpdate(interestAuthorDTOList: interestAuthorDTOList);
+  }
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)

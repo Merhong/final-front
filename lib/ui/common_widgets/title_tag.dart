@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum TitleTagEnum { up, end, stop, author, admin, best }
+enum TitleTagEnum { up, end, stop, author, admin, best, reReply }
 
 class TitleTag extends StatelessWidget {
   TitleTagEnum titleTagEnum;
@@ -66,16 +66,28 @@ class TitleTag extends StatelessWidget {
                               child: Text("관리자", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white)),
                             ),
                           )
-                        : Container(
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              border: Border.all(color: Colors.red),
-                              borderRadius: BorderRadius.circular(3),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(1, 0, 1, 0),
-                              child: Text("BEST", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white)),
-                            ),
-                          );
+                        : titleTagEnum == TitleTagEnum.reReply
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  // color: Colors.grey,
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(1, 0, 1, 0),
+                                  child: Text("답글", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.grey[600])),
+                                ),
+                              )
+                            : Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  border: Border.all(color: Colors.red),
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(1, 0, 1, 0),
+                                  child: Text("BEST", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white)),
+                                ),
+                              );
   }
 }
