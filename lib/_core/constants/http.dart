@@ -11,7 +11,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 DateTime todayDateTime = DateTime.now(); // 세계시간 UTC임
 
-const String imageURL = "${serverURL}/image?route=";
+const String imageURL = "$serverURL/image?route=";
 
 // http 통신
 final dio = Dio(
