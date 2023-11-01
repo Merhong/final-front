@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/data/dto/user_request.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/custom_submit_button.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_top.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_middle.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_bottom.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class JoinForm extends StatelessWidget {
+class JoinForm extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -16,7 +19,7 @@ class JoinForm extends StatelessWidget {
   final _tel = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(sizePaddingLR17),
       child: Form(
@@ -36,14 +39,12 @@ class JoinForm extends StatelessWidget {
                 child: CustomSubmitButton(
                     text: "회원가입",
                     onPressed: () {
-                      print(_email.text);
-                      print(_password.text);
-                      print(_checkEmail.text);
-                      print("여기까지만 잘 불러짐");
-                      print(_username.text);
-                      print(_birthday.text);
-                      print(_gender.text);
-                      print(_tel.text);
+                      print("회원가입 버튼 누름");
+                      JoinReqDTO joinReqDTO = JoinReqDTO(
+                          username: _username.text,
+                          password: _password.text,
+                          email: _email.text);
+                      ref.read(sessionProvider).join(joinReqDTO);
                     }),
               ),
             ),
