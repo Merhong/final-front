@@ -12,9 +12,8 @@ class WebtoonListMiddleAdvertising extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(
-            sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
-        child: Advertising(ADHeight: sizeXL50),
+        padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
+        child: Advertising(ADHeight: 75),
       ),
     );
   }

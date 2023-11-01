@@ -74,14 +74,14 @@ class MyInterestAuthor extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.sentiment_very_dissatisfied, color: Colors.grey[400]),
-                    Text(" 웹툰 등록 알림을 껐습니다."),
+                    Text(" 작가의 글 등록 알림을 껐습니다."),
                   ],
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add_reaction_outlined, color: Colors.yellow),
-                    Text(" 웹툰 등록 알림을 켰습니다."),
+                    Text(" 작가의 글 등록 알림을 켰습니다."),
                   ],
                 ),
         );

@@ -151,7 +151,7 @@ class WebtoonReplyBody extends ConsumerWidget {
             },
       child: CommentBox(
           commentBoxRow: Row(
-        children: [Text("답글${commentList[index].reCommentList.length == 0 ? '' : commentList[index].reCommentList.length}")],
+        children: [Text("답글${commentList[index].reCommentList.length == 0 ? '' : ' ${commentList[index].reCommentList.length}'}")],
       )),
     );
   }
@@ -203,7 +203,7 @@ class WebtoonReplyBody extends ConsumerWidget {
                   )
                 : mySnackbar(
                     context,
-                    5000,
+                    3000,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

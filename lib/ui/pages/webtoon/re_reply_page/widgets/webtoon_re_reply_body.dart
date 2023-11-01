@@ -171,7 +171,7 @@ class WebtoonReReplyBody extends ConsumerWidget {
                   )
                 : mySnackbar(
                     context,
-                    5000,
+                    3000,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -17,7 +17,7 @@ class _AppBottomState extends ConsumerState<AppBottom> {
 
   void _onItemTapped(int index) {
     // 웹툰
-    if (index == 0 && ps.bottomNavigationBarIndex != index) {
+    if (index == 0) {
       Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
     }
     // 추천완결

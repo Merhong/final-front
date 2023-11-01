@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
+import 'package:flutter_blog/data/dto/other_dto/advertising_main_DTO.dart';
 import 'package:flutter_blog/data/dto/post_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
@@ -13,6 +14,30 @@ import 'package:logger/logger.dart';
 // 나중에 싱글톤으로 바꿀것
 class WebtoonRepository {
 //
+
+  Future<ResponseDTO> fetchAdvertisingMainList(String jwt) async {
+    try {
+      // 통신
+      Response response = await dio.get("/webtoons/advertising/main", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      List<dynamic> mapList = responseDTO.data as List<dynamic>;
+
+      List<AdvertisingMainDTO> amDTOList = mapList.map((amDTO) => AdvertisingMainDTO.fromJson(amDTO)).toList();
+      responseDTO.data = amDTOList;
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
 
   Future<ResponseDTO> fetchInterestWebtoon(String jwt) async {
     try {
