@@ -1,3 +1,4 @@
+import 'package:flutter_blog/data/dto/other_dto/advertising_main_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
@@ -10,11 +11,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class WebtoonListModel {
   List<ListPageWebtoonDTO> webtoonDTOList;
   String? weekCheck;
+  List<AdvertisingMainDTO>? advertisingMainDTOList;
 
-  WebtoonListModel({required this.webtoonDTOList, this.weekCheck});
+  WebtoonListModel({required this.webtoonDTOList, this.weekCheck, this.advertisingMainDTOList});
 
   WebtoonListModel weekUpdate({required String week}) {
-    return WebtoonListModel(webtoonDTOList: this.webtoonDTOList, weekCheck: week);
+    return WebtoonListModel(webtoonDTOList: this.webtoonDTOList, weekCheck: week, advertisingMainDTOList: this.advertisingMainDTOList);
   }
 }
 
@@ -40,7 +42,10 @@ class WebtoonListViewModel extends StateNotifier<WebtoonListModel?> {
     List<ListPageWebtoonDTO> webtoonDTOList = responseDTO.data;
     webtoonDTOList.sort((a, b) => (b.starScore ?? 0).compareTo(a.starScore ?? 0)); // 별점 총합 순 정렬
 
-    state = WebtoonListModel(webtoonDTOList: webtoonDTOList);
+    ResponseDTO responseDTO2 = await WebtoonRepository().fetchAdvertisingMainList(sessionUser.jwt!);
+    List<AdvertisingMainDTO> advertisingMainDTOList = responseDTO2.data;
+
+    state = WebtoonListModel(webtoonDTOList: webtoonDTOList, advertisingMainDTOList: advertisingMainDTOList);
   }
 }
 

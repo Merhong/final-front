@@ -19,7 +19,6 @@ class SeeMoreBody extends StatelessWidget {
         Container(height: 70.0),
         Advertising(
           ADHeight: sizeXXL100,
-          ADImg: "${imageURL}default_AD.jpg",
         )
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter_blog/data/dto/comment_dto/comment_delete_DTO.dart';
+import 'package:flutter_blog/data/dto/comment_dto/re_comment_delete_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/user_dto/my_comment_DTO.dart';
@@ -18,10 +19,15 @@ class MyCommentPageModel {
   MyCommentPageModel deleteUpdate(CommentDeleteDTO commentDeleteDTO) {
     List<MyCommentDTO> updateMyCommentList = this.myCommentDTOList;
 
-    // MyCommentDTO updateMyComment = updateMyCommentList.firstWhere((myCommentDTO) => myCommentDTO.id == commentDeleteDTO.deletedId);
     updateMyCommentList = updateMyCommentList.where((myCommentDTO) => myCommentDTO.commentId != commentDeleteDTO.deletedId).toList();
 
-    print("my댓글 댓글삭제");
+    return MyCommentPageModel(myCommentDTOList: updateMyCommentList);
+  }
+
+  MyCommentPageModel deleteReReplyUpdate(ReCommentDeleteDTO reCommentDeleteDTO) {
+    List<MyCommentDTO> updateMyCommentList = this.myCommentDTOList;
+
+    updateMyCommentList = updateMyCommentList.where((myCommentDTO) => myCommentDTO.reCommentId != reCommentDeleteDTO.deletedId).toList();
 
     return MyCommentPageModel(myCommentDTOList: updateMyCommentList);
   }
@@ -40,6 +46,17 @@ class MyCommentPageViewModel extends StateNotifier<MyCommentPageModel?> {
     SessionUser sessionUser = ref.read(sessionProvider);
     ResponseDTO responseDTO = await CommentRepository().fetchMyComment(sessionUser.jwt!);
     state = MyCommentPageModel(myCommentDTOList: responseDTO.data);
+  }
+
+  Future<void> notifyReCommentDelete(int reCommentId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    ResponseDTO responseDTO = await CommentRepository().fetchReCommentDelete(sessionUser.jwt!, reCommentId);
+
+    if (responseDTO.success == false) {
+      print("if로감ReCommentDelete");
+      return;
+    }
+    state = state!.deleteReReplyUpdate(responseDTO.data as ReCommentDeleteDTO);
   }
 
   Future<void> notifyCommentDelete(int commentId) async {

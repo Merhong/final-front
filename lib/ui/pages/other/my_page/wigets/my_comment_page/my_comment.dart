@@ -18,6 +18,8 @@ import '../../../../../common_widgets/comment_box.dart';
 class MyComment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final refreshKey = GlobalKey<RefreshIndicatorState>();
+
     MyCommentPageModel? model = ref.watch(myCommentPageProvider);
     if (model == null) {
       return Center(child: CircularProgressIndicator());
@@ -39,15 +41,20 @@ class MyComment extends ConsumerWidget {
       children: [
         Divider(color: Colors.grey, height: 1),
         buildMyCommentTopMenu(myCommentDTOList.length),
-        buildMyCommentCount(replyCount, reReplyCount, totalLikeCount),
         Divider(color: Colors.grey, height: 1),
         Expanded(
-          child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1),
-            itemCount: myCommentDTOList.length,
-            itemBuilder: (context, index) {
-              return buildCommentDescription(myCommentDTOList[index], context, ref);
-            },
+          child: RefreshIndicator(
+            key: refreshKey,
+            onRefresh: () async => await ref.read(myCommentPageProvider.notifier).notifyInit(),
+            child: ListView.separated(
+              separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1),
+              itemCount: myCommentDTOList.length + 1,
+              itemBuilder: (context, index) {
+                return index == 0
+                    ? buildMyCommentCount(replyCount, reReplyCount, totalLikeCount)
+                    : buildCommentDescription(myCommentDTOList[index - 1], context, ref);
+              },
+            ),
           ),
         ),
       ],
@@ -68,7 +75,7 @@ class MyComment extends ConsumerWidget {
                     ScaffoldMessenger.of(context).clearSnackBars();
                     mySnackbar(
                       context,
-                      5000,
+                      3000,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -79,7 +86,9 @@ class MyComment extends ConsumerWidget {
                             onTap: () {
                               ScaffoldMessenger.of(context).clearSnackBars();
                               print("스낵바-삭제누름");
-                              ref.read(myCommentPageProvider.notifier).notifyCommentDelete(myCommentDTO.commentId);
+                              myCommentDTO.isReComment == false
+                                  ? ref.read(myCommentPageProvider.notifier).notifyCommentDelete(myCommentDTO.commentId)
+                                  : ref.read(myCommentPageProvider.notifier).notifyReCommentDelete(myCommentDTO.reCommentId);
                             },
                           ),
                           SizedBox(width: sizeL20),
@@ -98,10 +107,9 @@ class MyComment extends ConsumerWidget {
           ),
           Align(
             alignment: Alignment(-1, 0),
-            child: Wrap(children: [
+            child: Stack(children: [
               myCommentDTO.isReComment == true ? TitleTag(titleTagEnum: TitleTagEnum.reReply) : TitleTag(titleTagEnum: TitleTagEnum.reply),
-              SizedBox(width: 3),
-              Text("${myCommentDTO.text}"),
+              Text("        ${myCommentDTO.text}"),
             ]),
           ),
           SizedBox(height: sizeS5),
@@ -158,7 +166,7 @@ class MyComment extends ConsumerWidget {
                 child: myCommentDTO.isReComment == true
                     ? Text("답글보기 >", style: TextStyle(fontSize: 12, color: Colors.grey[700]))
                     : CommentBox(
-                        commentBoxRow: Row(children: [Text("답글${myCommentDTO.reCommentCount == 0 ? '' : myCommentDTO.reCommentCount}")]),
+                        commentBoxRow: Row(children: [Text("답글${myCommentDTO.reCommentCount == 0 ? '' : ' ${myCommentDTO.reCommentCount}'}")]),
                       ),
               ),
               Spacer(),
@@ -186,7 +194,7 @@ class MyComment extends ConsumerWidget {
 
   Padding buildMyCommentCount(int replyCount, int reReplyCount, int totalLikeCount) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(sizePaddingLR17, 0, sizePaddingLR17, sizeM10),
+      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
       child: Container(
         padding: EdgeInsets.all(sizeM10),
         decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(5)),

@@ -3,28 +3,34 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/_core/constants/url.dart';
+import 'package:flutter_blog/data/dto/other_dto/advertising_main_DTO.dart';
+import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WebtoonListPageView extends StatefulWidget {
+class WebtoonListPageView extends ConsumerStatefulWidget {
   const WebtoonListPageView({
     super.key,
   });
 
   @override
-  State<WebtoonListPageView> createState() => _WebtoonListPageViewState();
+  _WebtoonListPageViewState createState() => _WebtoonListPageViewState();
 }
 
-class _WebtoonListPageViewState extends State<WebtoonListPageView> {
+class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
   int currentPage = 0;
-  PageController _PageController = PageController(
-    initialPage: 0,
-  );
+  PageController _PageController = PageController(initialPage: 0);
+
+  late int lastPage;
 
   @override
   void initState() {
     super.initState();
 
     Timer.periodic(Duration(seconds: 3), (Timer timer) {
-      if (currentPage < 10) {
+      if (currentPage < lastPage) {
         currentPage++;
       } else {
         currentPage = 0;
@@ -40,6 +46,9 @@ class _WebtoonListPageViewState extends State<WebtoonListPageView> {
 
   @override
   Widget build(BuildContext context) {
+    List<AdvertisingMainDTO> advertisingMainDTOList = ref.watch(webtoonListProvider)!.advertisingMainDTOList!;
+    lastPage = advertisingMainDTOList.length;
+
     return SizedBox(
       // height: 210,
       // width: sizeGetScreenWidth(context),
@@ -51,92 +60,88 @@ class _WebtoonListPageViewState extends State<WebtoonListPageView> {
           // print("페이지넘김currentPage:${currentPage}");
           // print("value${value}");
         },
-        itemCount: 10,
+        itemCount: advertisingMainDTOList.length,
         itemBuilder: (context, index) {
-          return Stack(
-            children: [
-              Container(
-                height: double.infinity,
-                width: sizeGetScreenWidth(context),
-                child: Image.network(
-                  "${imageURL}OtherImage/${index + 21}.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Align(
-                alignment: Alignment(0.9, 0.55),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(sizeBorder5))),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
-                    child: Text(
-                      "${index + 1} / 10",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
+          return InkWell(
+            onTap: () {
+              if (advertisingMainDTOList[index].isWebLink == true) {
+                URLLink("${advertisingMainDTOList[index].linkURL}");
+              } else {
+                ParamStore ps = ref.read(paramProvider);
+                ps.addWebtoonDetailId(advertisingMainDTOList[index].webtoonId);
+                ps.addBottomNavigationBarIndex(0);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+              }
+            },
+            child: Stack(
+              children: [
+                Container(
+                  height: double.infinity,
+                  width: sizeGetScreenWidth(context),
+                  child: Image.network(
+                    "${imageURL}${advertisingMainDTOList[index].photo}",
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: sizePaddingLR17),
-                child: Align(
-                  alignment: Alignment(0, 1),
+                Align(
+                  alignment: Alignment(0.9, 0.55),
                   child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(sizeBorder5),
-                      ),
-                      color: Color.fromARGB(255, 200, index * 110, index * 20),
-                    ),
+                    decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.all(Radius.circular(sizeBorder5))),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(sizeBorder5),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(1.0),
-                              child: Text(
-                                "매일+",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: sizeS5),
-                          Container(
-                            constraints: BoxConstraints(
-                                maxWidth: sizeGetScreenWidth(context) * 0.5),
-                            child: Text("무한 레벨업 in 무림",
-                                style: Theme.of(context).textTheme.bodyLarge,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(width: sizeS5),
-                          Container(
-                            constraints: BoxConstraints(
-                                maxWidth: sizeGetScreenWidth(context) * 0.3),
-                            child: Text("김진우 / 곤봉",
-                                style:
-                                    TextStyle(fontSize: 15, color: Colors.grey),
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
+                      padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+                      child: Text(
+                        "${index + 1} / ${advertisingMainDTOList.length}",
+                        style: TextStyle(fontSize: 15, color: Colors.white),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: sizePaddingLR17),
+                  child: Align(
+                    alignment: Alignment(0, 1),
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(sizeBorder5),
+                        ),
+                        color: advertisingMainDTOList[index].isWebLink == true
+                            ? IdToColor(advertisingMainDTOList[index].id)
+                            : IdToColor(advertisingMainDTOList[index].webtoonId),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: Row(
+                          children: [
+                            SizedBox(width: sizeS5),
+                            Container(
+                              constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.8),
+                              child: RichText(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(
+                                  text:
+                                      "${advertisingMainDTOList[index].isWebLink == true ? advertisingMainDTOList[index].mainText : advertisingMainDTOList[index].webtoonTitle} ",
+                                  style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          " ${advertisingMainDTOList[index].isWebLink == true ? advertisingMainDTOList[index].subText : advertisingMainDTOList[index].authorNicknameList!.join('/')}",
+                                      style: TextStyle(fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),

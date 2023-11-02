@@ -74,7 +74,7 @@ class TitleTag extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                                  padding: EdgeInsets.fromLTRB(2, 0, 2, 2),
                                   child: Text("답글", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.blue)),
                                 ),
                               )
@@ -86,7 +86,7 @@ class TitleTag extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                                      padding: EdgeInsets.fromLTRB(2, 0, 2, 2),
                                       child: Text("댓글", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green)),
                                     ),
                                   )
