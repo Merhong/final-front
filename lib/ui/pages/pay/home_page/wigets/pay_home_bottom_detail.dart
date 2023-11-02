@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class PayHomeTop extends StatefulWidget {
-  const PayHomeTop({
+class PayHomeBottomDetail extends StatefulWidget {
+  const PayHomeBottomDetail({
     Key? key,
   }) : super(key: key);
 
   @override
-  _PayHomeTopState createState() => _PayHomeTopState();
+  _PayHomeBottomDetailState createState() => _PayHomeBottomDetailState();
 }
 
-class _PayHomeTopState extends State<PayHomeTop> {
+class _PayHomeBottomDetailState extends State<PayHomeBottomDetail> {
   bool isProductInfoVisible = false;
 
   void toggleProductInfo() {
@@ -33,7 +33,7 @@ class _PayHomeTopState extends State<PayHomeTop> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    '결제상품',
+                    '결제상세',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -55,31 +55,20 @@ class _PayHomeTopState extends State<PayHomeTop> {
           ),
           if (isProductInfoVisible)
             Container(
-              height: 100,
+              height: 40,
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Image.asset(
-                      "assets/pay.png",
-                      fit: BoxFit.cover,
+                    SizedBox(width: 4),
+                    Text(
+                      '주문금액',
+                      style: TextStyle(fontSize: 18),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          '쿠키 10개',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          '1.000원',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
+                    Spacer(),
+                    Text(
+                      '1.000원',
+                      style: TextStyle(fontSize: 18),
                     ),
                   ],
                 ),
@@ -93,7 +82,7 @@ class _PayHomeTopState extends State<PayHomeTop> {
               child: Row(
                 children: [
                   Text(
-                    '상품금액',
+                    '신용카드',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
