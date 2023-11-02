@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/_core/constants/url.dart';
 import 'package:flutter_blog/data/dto/other_dto/advertising_main_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
@@ -63,10 +64,14 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              ParamStore ps = ref.read(paramProvider);
-              ps.addWebtoonDetailId(advertisingMainDTOList[index].webtoonId);
-              ps.addBottomNavigationBarIndex(0);
-              Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+              if (advertisingMainDTOList[index].isWebLink == true) {
+                URLLink("${advertisingMainDTOList[index].linkURL}");
+              } else {
+                ParamStore ps = ref.read(paramProvider);
+                ps.addWebtoonDetailId(advertisingMainDTOList[index].webtoonId);
+                ps.addBottomNavigationBarIndex(0);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+              }
             },
             child: Stack(
               children: [
@@ -101,36 +106,28 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
                         borderRadius: BorderRadius.all(
                           Radius.circular(sizeBorder5),
                         ),
-                        color: IdToColor(advertisingMainDTOList[index].webtoonId),
+                        color: advertisingMainDTOList[index].isWebLink == true
+                            ? IdToColor(advertisingMainDTOList[index].id)
+                            : IdToColor(advertisingMainDTOList[index].webtoonId),
                       ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         child: Row(
                           children: [
                             SizedBox(width: sizeS5),
-                            // Container(
-                            //   constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.5),
-                            //   child: Text("${advertisingMainDTOList[index].webtoonTitle}",
-                            //       style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
-                            // ),
-                            // SizedBox(width: sizeS5),
-                            // Container(
-                            //   constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.35),
-                            //   child: Text("${advertisingMainDTOList[index].authorNicknameList!.join('/')}",
-                            //       style: TextStyle(fontSize: 13, color: Colors.grey[600], fontWeight: FontWeight.bold),
-                            //       overflow: TextOverflow.ellipsis),
-                            // ),
                             Container(
                               constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.8),
                               child: RichText(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 text: TextSpan(
-                                  text: "${advertisingMainDTOList[index].webtoonTitle} ",
+                                  text:
+                                      "${advertisingMainDTOList[index].isWebLink == true ? advertisingMainDTOList[index].mainText : advertisingMainDTOList[index].webtoonTitle} ",
                                   style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                                   children: [
                                     TextSpan(
-                                      text: " ${advertisingMainDTOList[index].authorNicknameList!.join('/')}",
+                                      text:
+                                          " ${advertisingMainDTOList[index].isWebLink == true ? advertisingMainDTOList[index].subText : advertisingMainDTOList[index].authorNicknameList!.join('/')}",
                                       style: TextStyle(fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
                                     )
                                   ],

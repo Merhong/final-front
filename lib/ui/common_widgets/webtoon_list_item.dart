@@ -102,7 +102,7 @@ class WebtoonListItem extends StatelessWidget {
                 child: Text("${webtoonDTO.authorNicknameList!.toList().join('/').replaceAll(' ', '')} ",
                     style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis)),
             Container(
-                child: Text("★ ${(webtoonDTO.starScore! / webtoonDTO.starCount!).toStringAsFixed(2)}",
+                child: Text("★ ${(webtoonDTO.starScore! / (webtoonDTO.starCount == 0 ? 1 : webtoonDTO.starCount!)).toStringAsFixed(2)}",
                     style: Theme.of(context).textTheme.bodySmall, maxLines: 1)),
           ],
         ),
