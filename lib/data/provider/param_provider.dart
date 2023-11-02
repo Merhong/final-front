@@ -11,6 +11,8 @@ class RequestParam {
   int? webtoonFirstEpisodeId;
   int? commentId;
   int? bottomNavigationBarIndex;
+  String? searchText;
+  bool? isSearchMove;
 
   RequestParam({this.webtoonDetailId});
 }
@@ -52,6 +54,11 @@ class ParamStore extends RequestParam {
   void addBottomNavigationBarIndex(int id) {
     print("파람addBottomNavigationBarIndex : ${id}");
     this.bottomNavigationBarIndex = id;
+  }
+
+  void addSearchText(String searchText) {
+    print("파람searchText : ${searchText}");
+    this.searchText = searchText;
   }
 }
 

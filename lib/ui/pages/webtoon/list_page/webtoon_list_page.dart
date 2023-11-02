@@ -10,12 +10,36 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common_widgets/app_bottom.dart';
 
-class WebtoonListPage extends ConsumerWidget {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+class WebtoonListPage extends ConsumerStatefulWidget {
+  @override
+  _WebtoonListPageState createState() => _WebtoonListPageState();
+}
+
+class _WebtoonListPageState extends ConsumerState<WebtoonListPage> {
+  // final scaffoldKey = GlobalKey<ScaffoldState>();
   final refreshKey = GlobalKey<RefreshIndicatorState>();
 
+  final ScrollController listPageController = ScrollController();
+  bool isScroll = false;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    listPageController.addListener(() {
+      // print("offset : ${detailPageController.offset}");
+      if (listPageController.offset >= 130 && isScroll == false) {
+        print("스크롤 감지");
+        isScroll = true;
+        setState(() {});
+      } else if (listPageController.offset < 130 && isScroll == true) {
+        print("스크롤 처음");
+        isScroll = false;
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ref.read(advertisingSubProvider).fetchAdvertisingSubList(ref.read(sessionProvider).jwt!);
 
     return Scaffold(
@@ -28,7 +52,7 @@ class WebtoonListPage extends ConsumerWidget {
             print("리플래시됨");
             await ref.read(webtoonListProvider.notifier).notifyInit();
           },
-          child: WebtoonListBody(),
+          child: WebtoonListBody(listPageController, isScroll),
         ),
       ),
     );

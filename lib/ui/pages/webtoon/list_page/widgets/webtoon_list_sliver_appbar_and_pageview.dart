@@ -1,25 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_pageview.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../../common_widgets/search_alert_dialog.dart';
 
 class WebtoonListSliverAppBarAndPageView extends StatelessWidget {
-  const WebtoonListSliverAppBarAndPageView({
-    super.key,
-  });
+  bool isScroll;
+
+  WebtoonListSliverAppBarAndPageView(this.isScroll);
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      // title: InkWell(onTap: () {}, child: Text("인기순", style: TextStyle(fontSize: 30))),
       centerTitle: true,
       // primary: false, // 상단 화면표시줄 침범함
-      // title: Text("title1", style: TextStyle(color: Colors.yellow)),
-      title: Center(child: WebtoonListAppbarDropdown()),
+      title: Container(width: 110, child: isScroll ? WebtoonListAppbarDropdown() : SizedBox()),
       backgroundColor: Colors.white,
       elevation: 0,
-      leading: Icon(Icons.cookie, size: 30, color: Colors.orange),
+      leading: InkWell(
+        onTap: () {},
+        child: Icon(Icons.cookie, size: 30, color: Colors.orange),
+      ),
       actions: [
-        Icon(Icons.search, size: 30, color: Colors.black),
-        SizedBox(width: 10),
+        InkWell(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return SearchAlertDialog();
+              },
+            );
+          },
+          child: Icon(Icons.search, size: 30, color: Colors.black),
+        ),
+        SizedBox(width: 18),
       ],
       pinned: true,
       expandedHeight: 200,
@@ -35,15 +51,15 @@ class WebtoonListSliverAppBarAndPageView extends StatelessWidget {
   }
 }
 
-class WebtoonListAppbarDropdown extends StatefulWidget {
+class WebtoonListAppbarDropdown extends ConsumerStatefulWidget {
   const WebtoonListAppbarDropdown({super.key});
 
   @override
-  State<WebtoonListAppbarDropdown> createState() => _WebtoonListAppbarDropdownState();
+  _WebtoonListAppbarDropdownState createState() => _WebtoonListAppbarDropdownState();
 }
 
-class _WebtoonListAppbarDropdownState extends State<WebtoonListAppbarDropdown> {
-  final _cities = ["  인기 순", "  별점 순", "  업뎃 순", "가나다 순"];
+class _WebtoonListAppbarDropdownState extends ConsumerState<WebtoonListAppbarDropdown> {
+  final _cities = ["인기 순", "별점 순", "등록 순", "가나다 순"];
   String _selectedCity = '';
 
   @override
@@ -56,21 +72,8 @@ class _WebtoonListAppbarDropdownState extends State<WebtoonListAppbarDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    // return DropdownMenu(
-    //   initialSelection: "1", // 처음 선택되어 있는거
-    //   onSelected: (String? value) {
-    //     setState(() {
-    //       dropdownValue = value!;
-    //     });
-    //   },
-    //   dropdownMenuEntries: [
-    //     DropdownMenuEntry(value: "1", label: "a"),
-    //     DropdownMenuEntry(value: "2", label: "b"),
-    //     DropdownMenuEntry(value: "3", label: "c"),
-    //   ],
-    // );
-
-    return DropdownButton(
+    return DropdownButtonFormField(
+      decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
       isDense: true,
       // dropdownColor: Colors.blue,
       // padding: EdgeInsets.all(0),
@@ -92,6 +95,7 @@ class _WebtoonListAppbarDropdownState extends State<WebtoonListAppbarDropdown> {
         setState(() {
           _selectedCity = value!;
           print(_selectedCity);
+          ref.read(webtoonListProvider.notifier).notifySort("${_selectedCity}");
         });
       },
     );

@@ -1,4 +1,4 @@
-import 'package:flutter_blog/data/model/Author.dart';
+import 'package:flutter_blog/data/model/author.dart';
 
 class EndRecommendationDTO {
   final int id;
@@ -8,8 +8,7 @@ class EndRecommendationDTO {
   final String intro;
   final List<String> authorNicknameList;
 
-  EndRecommendationDTO(this.id, this.title, this.image, this.episodeCount,
-      this.intro, this.authorNicknameList);
+  EndRecommendationDTO(this.id, this.title, this.image, this.episodeCount, this.intro, this.authorNicknameList);
 
   EndRecommendationDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -17,9 +16,7 @@ class EndRecommendationDTO {
         image = json["image"],
         episodeCount = json["episodeCount"],
         intro = json["intro"],
-        authorNicknameList = (json["authorNicknameList"] as List)
-            .map((e) => e.toString())
-            .toList();
+        authorNicknameList = (json["authorNicknameList"] as List).map((e) => e.toString()).toList();
 
   @override
   String toString() {
