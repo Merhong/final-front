@@ -7,6 +7,7 @@ import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_comment_view_model.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_comment_page/my_comment_dropdown.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_comment_page/my_comment_top_menu.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/re_reply_page/webtoon_re_reply_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,21 +54,17 @@ class MyComment extends ConsumerWidget {
     return Column(
       children: [
         Divider(color: Colors.grey, height: 1, thickness: 1),
-        buildMyCommentTopMenu(myCommentDTOList.length),
+        MyCommentTopMenu(allLength: myCommentDTOList.length),
         Divider(color: Colors.grey, height: 1, thickness: 1),
         Expanded(
-          child: RefreshIndicator(
-            key: refreshKey,
-            onRefresh: () async => await ref.read(myCommentPageProvider.notifier).notifyInit(),
-            child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
-              itemCount: myCommentDTOList.length + 1,
-              itemBuilder: (context, index) {
-                return index == 0
-                    ? buildMyCommentCount(replyCount, reReplyCount, totalLikeCount)
-                    : buildCommentDescription(myCommentDTOList[index - 1], context, ref);
-              },
-            ),
+          child: ListView.separated(
+            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
+            itemCount: myCommentDTOList.length + 1,
+            itemBuilder: (context, index) {
+              return index == 0
+                  ? buildMyCommentCount(replyCount, reReplyCount, totalLikeCount)
+                  : buildCommentDescription(myCommentDTOList[index - 1], context, ref);
+            },
           ),
         ),
       ],
@@ -228,22 +225,22 @@ class MyComment extends ConsumerWidget {
     );
   }
 
-  Container buildMyCommentTopMenu(int count) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(sizePaddingLR17, 0, sizePaddingLR17, 0),
-      child: Row(
-        children: [
-          Text("웹툰 ${count}", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-          SizedBox(width: sizeL20),
-          Text("베스트도전 0", style: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold)),
-          SizedBox(width: sizeL20),
-          // Text("최신 순", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-          // Text("▼"),
-          Container(width: 80, child: MyCommentDropdown()),
-          Spacer(),
-          InkWell(child: Icon(Icons.warning, size: 20, color: Colors.grey)),
-        ],
-      ),
-    );
-  }
+//   Container buildMyCommentTopMenu(int count) {
+//     return Container(
+//       padding: EdgeInsets.fromLTRB(sizePaddingLR17, 0, sizePaddingLR17, 0),
+//       child: Row(
+//         children: [
+//           Text("웹툰 ${count}", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+//           SizedBox(width: sizeL20),
+//           Text("베스트도전 0", style: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold)),
+//           SizedBox(width: sizeL20),
+//           // Text("최신 순", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+//           // Text("▼"),
+//           Container(width: 80, child: MyCommentDropdown()),
+//           Spacer(),
+//           InkWell(child: Icon(Icons.warning, size: 20, color: Colors.grey)),
+//         ],
+//       ),
+//     );
+//   }
 }
