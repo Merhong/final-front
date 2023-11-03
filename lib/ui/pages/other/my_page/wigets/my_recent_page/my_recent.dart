@@ -139,6 +139,23 @@ class MyRecent extends ConsumerWidget {
                   ))
                 : SizedBox(),
             SizedBox(height: 3),
+            RichText(
+              text: TextSpan(
+                text: "남은 이야기 ",
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black),
+                children: [
+                  TextSpan(
+                    text: "${recentDTO.totalCount - recentDTO.viewCount}",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.green),
+                  ),
+                  TextSpan(
+                    text: " / ${recentDTO.totalCount}",
+                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
+            ),
+
             // interestWebtoonDTOList[index].webtoonUpdateAt != null &&
             //         todayDateTime.difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours < 50
             //     ? RichText(

@@ -32,52 +32,55 @@ class WebtoonDetailEpisode extends ConsumerWidget {
         ps.addEpisodeDetailId(webtoonDTO.episodeList[index].episodeId);
         Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
       },
-      child: Column(
-        children: [
-          Divider(color: Colors.grey, height: 1, thickness: 1),
-          Padding(
-            padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: sizeGetScreenWidth(context) * 0.25,
-                  height: sizeXL50,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(sizeBorder5),
-                    child: Image.network('$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![index].thumbnail}', fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                      return Image.asset(
-                        "assets/default_episode_Thumbnail.jpg",
-                        fit: BoxFit.cover,
-                      );
-                    }),
+      child: Container(
+        color: webtoonDTO.episodeList[index].isView == true ? Color.fromRGBO(233, 233, 233, 1) : Colors.white,
+        child: Column(
+          children: [
+            Divider(color: Colors.grey, height: 1, thickness: 1),
+            Padding(
+              padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: sizeGetScreenWidth(context) * 0.25,
+                    height: sizeXL50,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(sizeBorder5),
+                      child: Image.network('$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![index].thumbnail}', fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          "assets/default_episode_Thumbnail.jpg",
+                          fit: BoxFit.cover,
+                        );
+                      }),
+                    ),
                   ),
-                ),
-                SizedBox(width: sizeM10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text("${webtoonDTO.episodeList![index].detailTitle} "),
-                        DateTime.now().difference(webtoonDTO.episodeList[index].createdAt).inHours < 50
-                            ? TitleTag(titleTagEnum: TitleTagEnum.up)
-                            : SizedBox(),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                            "★${(webtoonDTO.episodeList![index].starScore / webtoonDTO.episodeList![index].starCount).toStringAsFixed(2)}   ${DateFormat('yyyy-MM-dd').format(webtoonDTO.episodeList![index].createdAt)}",
-                            style: TextStyle(fontSize: 10, color: Colors.grey[600])),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                  SizedBox(width: sizeM10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text("${webtoonDTO.episodeList![index].detailTitle} "),
+                          DateTime.now().difference(webtoonDTO.episodeList[index].createdAt).inHours < 50
+                              ? TitleTag(titleTagEnum: TitleTagEnum.up)
+                              : SizedBox(),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                              "★${(webtoonDTO.episodeList![index].starScore / webtoonDTO.episodeList![index].starCount).toStringAsFixed(2)}   ${DateFormat('yyyy-MM-dd').format(webtoonDTO.episodeList![index].createdAt)}",
+                              style: TextStyle(fontSize: 10, color: Colors.grey[600])),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

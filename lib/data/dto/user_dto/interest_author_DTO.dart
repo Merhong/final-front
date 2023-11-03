@@ -1,5 +1,4 @@
 import 'package:flutter_blog/data/model/author.dart';
-import 'package:flutter_blog/data/model/episode.dart';
 import 'package:intl/intl.dart';
 
 class InterestAuthorDTO {

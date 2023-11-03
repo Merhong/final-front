@@ -1,5 +1,4 @@
 import 'package:flutter_blog/data/model/author.dart';
-import 'package:flutter_blog/data/model/episode.dart';
 
 class Webtoon {
   final int id;
@@ -7,7 +6,7 @@ class Webtoon {
   // final Author author;
   final List<Author> authorList;
   final String title;
-  List<Episode>? episodeList;
+  // List<Episode>? episodeList;
   String? intro;
   double? starScore;
   double? starCount;
@@ -23,7 +22,7 @@ class Webtoon {
     required this.id,
     required this.authorList,
     required this.title,
-    this.episodeList,
+    // this.episodeList,
     this.intro,
     this.starScore,
     this.starCount,
@@ -48,8 +47,8 @@ class Webtoon {
         weekDay = json["weekDay"],
         specially = json["specially"],
         // author = Author.fromJson(json["authorDTO"]),
-        authorList = (json["authorList"] as List).map((jsonAuthor) => Author.fromJson(jsonAuthor)).toList(),
-        episodeList = (json["episodeList"] as List).map((jsonEpisode) => Episode.fromJson(jsonEpisode)).toList();
+        authorList = (json["authorList"] as List).map((jsonAuthor) => Author.fromJson(jsonAuthor)).toList();
+  // episodeList = (json["episodeList"] as List).map((jsonEpisode) => Episode.fromJson(jsonEpisode)).toList();
 
   Webtoon.fromHomeJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -64,6 +63,6 @@ class Webtoon {
 
   @override
   String toString() {
-    return 'Webtoon{id: $id, authorList: $authorList, title: $title, episodeList: $episodeList, intro: $intro, starScore: $starScore, starCount: $starCount, image: $image, detailImage: $detailImage, ageLimit: $ageLimit, weekDay: $weekDay, specially: $specially, createdAt: $createdAt, updatedAt: $updatedAt}';
+    return 'Webtoon{id: $id, authorList: $authorList, title: $title, intro: $intro, starScore: $starScore, starCount: $starCount, image: $image, detailImage: $detailImage, ageLimit: $ageLimit, weekDay: $weekDay, specially: $specially, createdAt: $createdAt, updatedAt: $updatedAt}';
   }
 }
