@@ -17,8 +17,8 @@ class RatingStarAlert extends ConsumerWidget {
     int star = model.numberOfStar;
     Logger().d("디버그1", star);
 
-    return InkWell(
-      onTap: () {
+    return FloatingActionButton(
+      onPressed: () {
         showDialog(
           context: context,
           builder: (context) {
