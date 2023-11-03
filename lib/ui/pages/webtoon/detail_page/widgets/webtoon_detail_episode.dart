@@ -25,7 +25,7 @@ class WebtoonDetailEpisode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        print("에피소드보기클릭");
+        print("에피소드보기   클릭");
         ParamStore ps = ref.read(paramProvider);
         ps.addWebtoonLastEpisode(webtoonDTO.episodeList[0].episodeId);
         ps.addWebtoonFirstEpisode(webtoonDTO.episodeList[webtoonDTO.episodeList.length - 1].episodeId);
