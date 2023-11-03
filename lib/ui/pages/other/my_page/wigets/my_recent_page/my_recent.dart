@@ -34,22 +34,26 @@ class MyRecent extends ConsumerWidget {
           MyRecentTopMenu(allLength: myRecentDTOList.length),
           Divider(color: Colors.grey, height: 1, thickness: 1),
           Expanded(
-            child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
+            child: ListView.builder(
               itemCount: myRecentDTOList.length,
               itemBuilder: (context, index) {
-                return Container(
-                  height: 85,
-                  padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
-                  child: Row(
-                    children: [
-                      buildPhoto(ref, myRecentDTOList[index], context),
-                      SizedBox(width: sizeM10),
-                      buildDescription(ref, myRecentDTOList[index], context),
-                      // SizedBox(width: sizeL20),
-                      buildEpisodeGo(ref, myRecentDTOList[index], context),
-                    ],
-                  ),
+                return Column(
+                  children: [
+                    Container(
+                      height: 85,
+                      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
+                      child: Row(
+                        children: [
+                          buildPhoto(ref, myRecentDTOList[index], context),
+                          SizedBox(width: sizeM10),
+                          buildDescription(ref, myRecentDTOList[index], context),
+                          // SizedBox(width: sizeL20),
+                          buildEpisodeGo(ref, myRecentDTOList[index], context),
+                        ],
+                      ),
+                    ),
+                    Divider(color: Colors.grey, height: 1, thickness: 1),
+                  ],
                 );
               },
             ),

@@ -210,7 +210,7 @@ class MyComment extends ConsumerWidget {
       padding: EdgeInsets.all(sizePaddingLR17),
       child: Container(
         padding: EdgeInsets.all(sizeM10),
-        decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(5)),
+        decoration: BoxDecoration(color: Color.fromRGBO(200, 200, 200, 1), borderRadius: BorderRadius.circular(5)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

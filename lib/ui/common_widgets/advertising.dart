@@ -22,7 +22,7 @@ class Advertising extends ConsumerWidget {
       List<AdvertisingSubDTO> advertisingSubDTOList = ref.read(advertisingSubProvider).advertisingSubDTOList!;
 
       // int nowTime = (DateTime.now().minute);
-      int nowTime = (DateTime.now().second.toInt() / 10).toInt();
+      int nowTime = (DateTime.now().second.toInt() / 20).toInt();
       int listLength = advertisingSubDTOList.length;
 
       int nowIndex = (nowTime % listLength);
