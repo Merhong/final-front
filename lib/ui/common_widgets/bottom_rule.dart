@@ -13,7 +13,7 @@ class BottomRule extends StatelessWidget {
       color: Colors.grey[300],
       child: Column(
         children: [
-          Divider(color: Colors.grey, height: 1),
+          Divider(color: Colors.grey, height: 1, thickness: 1),
           SizedBox(height: sizeL20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

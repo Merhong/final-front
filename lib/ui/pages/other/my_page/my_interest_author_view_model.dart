@@ -15,11 +15,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyAuthorPageModel {
   List<InterestAuthorDTO> interestAuthorDTOList;
+  String? sortCheck;
 
-  MyAuthorPageModel({required this.interestAuthorDTOList});
+  MyAuthorPageModel({required this.interestAuthorDTOList, this.sortCheck});
 
   MyAuthorPageModel interestAlarmUpdate({required List<InterestAuthorDTO> interestAuthorDTOList}) {
-    return MyAuthorPageModel(interestAuthorDTOList: interestAuthorDTOList);
+    return MyAuthorPageModel(interestAuthorDTOList: interestAuthorDTOList, sortCheck: this.sortCheck);
+  }
+
+  MyAuthorPageModel sortUpdate({required String sort}) {
+    return MyAuthorPageModel(interestAuthorDTOList: this.interestAuthorDTOList, sortCheck: sort);
   }
 }
 
@@ -61,6 +66,10 @@ class MyAuthorPageViewModel extends StateNotifier<MyAuthorPageModel?> {
     interestAuthorDTOList = interestAuthorDTOList.map((e) => e.id == paramDTO.id ? updateInterestAuthorDTO : e).toList();
 
     state = state!.interestAlarmUpdate(interestAuthorDTOList: interestAuthorDTOList);
+  }
+
+  Future<void> notifySort(String sort) async {
+    state = state!.sortUpdate(sort: sort);
   }
 }
 

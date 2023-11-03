@@ -71,7 +71,7 @@ class _SearchSearchbarState extends ConsumerState<SearchSearchbar> {
                 ],
               ),
             ),
-            Divider(height: 1, color: Colors.grey),
+            Divider(color: Colors.grey, height: 1, thickness: 1),
             Container(
               padding: EdgeInsets.symmetric(vertical: sizeS5),
               child: Row(
@@ -83,7 +83,7 @@ class _SearchSearchbarState extends ConsumerState<SearchSearchbar> {
                 ],
               ),
             ),
-            Divider(height: 1, color: Colors.grey),
+            Divider(color: Colors.grey, height: 1, thickness: 1),
           ],
         ),
       ),

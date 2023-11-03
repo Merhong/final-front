@@ -34,7 +34,7 @@ class WebtoonDetailEpisode extends ConsumerWidget {
       },
       child: Column(
         children: [
-          Divider(height: 1, color: Colors.grey),
+          Divider(color: Colors.grey, height: 1, thickness: 1),
           Padding(
             padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
             child: Row(
@@ -60,7 +60,7 @@ class WebtoonDetailEpisode extends ConsumerWidget {
                     Row(
                       children: [
                         Text("${webtoonDTO.episodeList![index].detailTitle} "),
-                        todayDateTime.difference(webtoonDTO.episodeList[index].createdAt).inHours < 50
+                        DateTime.now().difference(webtoonDTO.episodeList[index].createdAt).inHours < 50
                             ? TitleTag(titleTagEnum: TitleTagEnum.up)
                             : SizedBox(),
                       ],

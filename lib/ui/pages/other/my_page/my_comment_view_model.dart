@@ -13,23 +13,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyCommentPageModel {
   List<MyCommentDTO> myCommentDTOList;
+  String? sortCheck;
 
-  MyCommentPageModel({required this.myCommentDTOList});
+  MyCommentPageModel({required this.myCommentDTOList, this.sortCheck});
 
   MyCommentPageModel deleteUpdate(CommentDeleteDTO commentDeleteDTO) {
     List<MyCommentDTO> updateMyCommentList = this.myCommentDTOList;
-
     updateMyCommentList = updateMyCommentList.where((myCommentDTO) => myCommentDTO.commentId != commentDeleteDTO.deletedId).toList();
-
-    return MyCommentPageModel(myCommentDTOList: updateMyCommentList);
+    return MyCommentPageModel(myCommentDTOList: updateMyCommentList, sortCheck: this.sortCheck);
   }
 
   MyCommentPageModel deleteReReplyUpdate(ReCommentDeleteDTO reCommentDeleteDTO) {
     List<MyCommentDTO> updateMyCommentList = this.myCommentDTOList;
-
     updateMyCommentList = updateMyCommentList.where((myCommentDTO) => myCommentDTO.reCommentId != reCommentDeleteDTO.deletedId).toList();
+    return MyCommentPageModel(myCommentDTOList: updateMyCommentList, sortCheck: this.sortCheck);
+  }
 
-    return MyCommentPageModel(myCommentDTOList: updateMyCommentList);
+  MyCommentPageModel sortUpdate({required String sort}) {
+    return MyCommentPageModel(myCommentDTOList: this.myCommentDTOList, sortCheck: sort);
   }
 }
 
@@ -68,6 +69,10 @@ class MyCommentPageViewModel extends StateNotifier<MyCommentPageModel?> {
       return;
     }
     state = state!.deleteUpdate(responseDTO.data as CommentDeleteDTO);
+  }
+
+  Future<void> notifySort(String sort) async {
+    state = state!.sortUpdate(sort: sort);
   }
 
 // Future<void> notifyMyInterestAlarm(InterestWebtoonDTO paramDTO) async {

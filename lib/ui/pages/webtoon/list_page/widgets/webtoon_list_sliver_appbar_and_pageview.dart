@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_appbar_dropdown.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_pageview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,57 +48,6 @@ class WebtoonListSliverAppBarAndPageView extends StatelessWidget {
           child: WebtoonListPageView(),
         ),
       ),
-    );
-  }
-}
-
-class WebtoonListAppbarDropdown extends ConsumerStatefulWidget {
-  const WebtoonListAppbarDropdown({super.key});
-
-  @override
-  _WebtoonListAppbarDropdownState createState() => _WebtoonListAppbarDropdownState();
-}
-
-class _WebtoonListAppbarDropdownState extends ConsumerState<WebtoonListAppbarDropdown> {
-  final _cities = ["인기 순", "별점 순", "등록 순", "가나다 순"];
-  String _selectedCity = '';
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _selectedCity = _cities[0];
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField(
-      decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
-      isDense: true,
-      // dropdownColor: Colors.blue,
-      // padding: EdgeInsets.all(0),
-      // elevation: 0,
-      // borderRadius: BorderRadius.all(Radius.zero),
-      icon: Icon(Icons.arrow_drop_down, color: Colors.black, size: 30),
-      style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-      value: _selectedCity,
-      items: _cities.map(
-        (e) {
-          return DropdownMenuItem(
-            value: e, // 선택 시 onChanged 를 통해 반환할 value
-            child: Text(e),
-          );
-        },
-      ).toList(),
-      onChanged: (value) {
-        // items 의 DropdownMenuItem 의 value 반환
-        setState(() {
-          _selectedCity = value!;
-          print(_selectedCity);
-          ref.read(webtoonListProvider.notifier).notifySort("${_selectedCity}");
-        });
-      },
     );
   }
 }

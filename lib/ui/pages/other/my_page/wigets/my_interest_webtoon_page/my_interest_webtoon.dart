@@ -7,7 +7,7 @@ import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/specially_tag.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_model.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_top_menu.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_webtoon_page/my_interest_webtoon_top_menu.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -22,14 +22,26 @@ class MyInterestWebtoon extends ConsumerWidget {
     List<InterestWebtoonDTO> interestWebtoonDTOList = model.interestWebtoonDTOList;
     // List<InterestWebtoonDTO> interestWebtoonDTOList = ref.watch(myPageProvider)!.interestWebtoonDTOList;
 
+    if (model.sortCheck == "등록 순") {
+      interestWebtoonDTOList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    }
+
+    if (model.sortCheck == "가나다 순") {
+      interestWebtoonDTOList.sort((a, b) => a.webtoonTitle!.compareTo(b.webtoonTitle!));
+    }
+
+    if (model.sortCheck == "새소식 순") {
+      interestWebtoonDTOList.sort((a, b) => b.webtoonUpdateAt!.compareTo(a.webtoonUpdateAt!));
+    }
+
     return Column(
       children: [
-        Divider(color: Colors.grey, height: 1),
-        MyTopMenu(allLength: interestWebtoonDTOList.length, isUpdateButton: true),
-        Divider(color: Colors.grey, height: 1),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
+        MyInterestWebtoonTopMenu(allLength: interestWebtoonDTOList.length, isUpdateButton: true),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1),
+            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
             itemCount: interestWebtoonDTOList.length,
             itemBuilder: (context, index) {
               return Container(
@@ -115,7 +127,7 @@ class MyInterestWebtoon extends ConsumerWidget {
                         ? TitleTag(titleTagEnum: TitleTagEnum.end)
                         : interestWebtoonDTOList[index].webtoonSpeciallyEnum == "휴재"
                             ? TitleTag(titleTagEnum: TitleTagEnum.stop)
-                            : todayDateTime.difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours < 50
+                            : DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours < 50
                                 ? TitleTag(titleTagEnum: TitleTagEnum.up)
                                 : SizedBox()
               ],
@@ -127,7 +139,7 @@ class MyInterestWebtoon extends ConsumerWidget {
             ),
             SizedBox(height: 3),
             interestWebtoonDTOList[index].webtoonUpdateAt != null &&
-                    todayDateTime.difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours < 50
+                    DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours < 50
                 ? RichText(
                     text:
                         // TextSpan(

@@ -151,7 +151,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                         for (Author author in authorList)
                           Column(
                             children: [
-                              Divider(color: Colors.grey, height: 1),
+                              Divider(color: Colors.grey, height: 1, thickness: 1),
                               SizedBox(height: sizeS5),
                               InkWell(
                                 onTap: () {

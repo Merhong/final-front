@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_recent_page/my_recent_top_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class MyRecentlyView extends ConsumerWidget {
+class MyRecentView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        Divider(color: Colors.grey, height: 1),
-        Container(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
-            child: Row(
-              children: [
-                Text("전체 123", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-                SizedBox(width: sizeL20),
-                Text("지금 볼 33", style: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold)),
-                Spacer(),
-                // isUpdateButton == true ? Text("편집", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)) : SizedBox(),
-                Text("편집", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
-        ),
-        Divider(color: Colors.grey, height: 1),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
+        // Container(
+        //   child: Padding(
+        //     padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
+        //     child: Row(
+        //       children: [
+        //         Text("전체 123", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        //         SizedBox(width: sizeL20),
+        //         Text("지금 볼 33", style: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold)),
+        //         Spacer(),
+        //         // isUpdateButton == true ? Text("편집", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)) : SizedBox(),
+        //         Text("편집", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        MyRecentTopMenu(allLength: 55555),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1),
+            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
             itemCount: 3,
             // itemCount: interestWebtoonDTOList.length,
             itemBuilder: (context, index) {

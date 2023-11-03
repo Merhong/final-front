@@ -20,7 +20,7 @@ class WebtoonEpisodeImage extends StatelessWidget {
           return Column(
             children: [
               episodeDTO.photoList.length == 0 ? Text("에피소드 내용사진 없음", style: TextStyle(fontSize: 25)) : SizedBox(),
-              Divider(height: 1, color: Colors.grey),
+              Divider(color: Colors.grey, height: 1, thickness: 1),
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                 child: Row(
@@ -34,7 +34,7 @@ class WebtoonEpisodeImage extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(height: 1, color: Colors.grey),
+              Divider(color: Colors.grey, height: 1, thickness: 1),
               Row(
                 children: [
                   // Image.network("${episodeDTO.authorImage}"),

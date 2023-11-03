@@ -48,7 +48,7 @@ class WebtoonListSliverGrid extends ConsumerWidget {
       webtoonDTOList.sort((a, b) => a.title.compareTo(b.title));
     }
 
-    if (model.sortCheck == "등록 순") {
+    if (model.sortCheck == "최신 순") {
       webtoonDTOList.sort((a, b) => b.episodeUpdatedAt!.compareTo(a.episodeUpdatedAt!));
     }
 

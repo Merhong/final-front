@@ -73,7 +73,7 @@ class _SearchAlertDialogState extends ConsumerState<SearchAlertDialog> {
         // height: 5 + authorList.length * 70,
         child: Column(
           children: [
-            Divider(color: Colors.grey, height: 1),
+            Divider(color: Colors.grey, height: 1, thickness: 1),
             Column(
               children: [
                 // for (Author author in authorList)

@@ -4,7 +4,7 @@ import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_mod
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_comment_page/my_comment.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_page/my_interest_author.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_webtoon_page/my_interest_webtoon.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_recent_page/my_recently_view.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_recent_page/my_recent_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyTabBar extends ConsumerWidget {
@@ -65,16 +65,14 @@ class MyTabBar extends ConsumerWidget {
             controller: _tabController,
             children: [
               RefreshIndicator(
-                  onRefresh: () async {
-                    await ref.read(myAuthorPageProvider.notifier).notifyInit();
-                  },
-                  child: MyInterestAuthor()),
+                onRefresh: () async => await ref.read(myAuthorPageProvider.notifier).notifyInit(),
+                child: MyInterestAuthor(),
+              ),
               RefreshIndicator(
-                  onRefresh: () async {
-                    await ref.read(myWebtoonPageProvider.notifier).notifyInit();
-                  },
-                  child: MyInterestWebtoon()),
-              MyRecentlyView(),
+                onRefresh: () async => await ref.read(myWebtoonPageProvider.notifier).notifyInit(),
+                child: MyInterestWebtoon(),
+              ),
+              MyRecentView(),
               MyComment(),
             ],
           ),

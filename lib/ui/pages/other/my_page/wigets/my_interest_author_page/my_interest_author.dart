@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_author_DTO.dart';
-import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/specially_tag.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_view_model.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_model.dart';
-import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_page/my_interest_author_top_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
-import '../my_top_menu.dart';
 
 class MyInterestAuthor extends ConsumerWidget {
   @override
@@ -25,14 +21,26 @@ class MyInterestAuthor extends ConsumerWidget {
     List<InterestAuthorDTO> interestAuthorDTOList = model.interestAuthorDTOList;
     // List<InterestAuthorDTO> interestAuthorDTOList = ref.watch(myAuthorPageProvider)!.interestAuthorDTOList;
 
+    if (model.sortCheck == "등록 순") {
+      interestAuthorDTOList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    }
+
+    if (model.sortCheck == "가나다 순") {
+      interestAuthorDTOList.sort((a, b) => a.authorNickname!.compareTo(b.authorNickname!));
+    }
+
+    if (model.sortCheck == "새소식 순") {
+      interestAuthorDTOList.sort((a, b) => b.authorBoardCreateAt!.compareTo(a.authorBoardCreateAt!));
+    }
+
     return Column(
       children: [
-        Divider(color: Colors.grey, height: 1),
-        MyTopMenu(allLength: interestAuthorDTOList.length),
-        Divider(color: Colors.grey, height: 1),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
+        MyInterestAuthorTopMenu(allLength: interestAuthorDTOList.length),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1),
+            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
             itemCount: interestAuthorDTOList.length,
             itemBuilder: (context, index) {
               return Container(
@@ -115,7 +123,7 @@ class MyInterestAuthor extends ConsumerWidget {
                       ),
                     ),
                     SizedBox(width: 3),
-                    todayDateTime.difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours < 50
+                    DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours < 50
                         ? TitleTag(titleTagEnum: TitleTagEnum.up)
                         : SizedBox()
                   ],
