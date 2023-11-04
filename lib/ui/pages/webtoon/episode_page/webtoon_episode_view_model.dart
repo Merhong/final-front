@@ -57,6 +57,7 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
 
     state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
 
+    // TODO // 페이지 build 안에서 때리면 안되던데
     ref.read(webtoonDetailProvider.notifier).notifyEpisodeViewUpdate(episodeId);
   }
 

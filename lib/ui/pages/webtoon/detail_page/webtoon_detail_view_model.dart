@@ -59,7 +59,6 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
   }
 
   Future<void> notifyEpisodeViewUpdate(int epId) async {
-    print("에피소드본거반영222222222");
     DetailPageWebtoonDTO detailDTO = state!.webtoonDTO!;
 
     detailDTO.episodeList.map((e) => e.isLastView = false).toList();
@@ -69,6 +68,7 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
     ep.isView = true;
 
     state = WebtoonDetailModel(webtoonDTO: detailDTO);
+    print("에피소드 본거 디테일에 반영됨");
   }
 
   Future<void> notifyInterestAlarmOn() async {
