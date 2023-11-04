@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/common_widgets/app_bottom.dart';
 import 'package:flutter_blog/ui/pages/webtoon/best_page/widgets/best_nested_tab_bar.dart';
 
-class BestPage extends StatelessWidget {
-  const BestPage({Key? key});
+class BestPage extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +14,23 @@ class BestPage extends StatelessWidget {
       length: 7,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('베스트도전'),
+          backgroundColor: Colors.white,
+          title: Center(
+            child: Text(
+              '베스트도전',
+              style: TextStyle(
+                fontSize: sizeL20,
+                color: Colors.black, // 또는 Colors.black으로 변경
+              ),
+            ),
+          ),
           actions: [Icon(Icons.search)],
           bottom: TabBar(
-            dividerColor: Colors.transparent,
+            isScrollable: true,
+            labelPadding: EdgeInsets.symmetric(horizontal: 15.0),
+            indicatorColor: Colors.green, // 탭 바 아래의 인디케이터 색상
+            labelColor: Colors.green, // 선택된 탭의 텍스트 색상
+            unselectedLabelColor: Colors.black, // 선택되지 않은 탭의 텍스트 색상
             tabs: <Widget>[
               Tab(text: '전체'),
               Tab(text: '순정'),

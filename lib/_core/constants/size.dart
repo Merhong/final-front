@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const double sizeS5 = 5.0;
 const double sizeM10 = 10.0;
+const double sizeM17 = 17.0;
 const double sizeL20 = 20.0;
 const double sizeML20 = 30.0;
 const double sizeXL50 = 50.0;
@@ -31,8 +32,8 @@ double sizeGetScreenHeight(BuildContext context) {
 
 Color IdToColor(int id) {
   return Color.fromRGBO(
-      id * 111 % 255 > 200 ? 50 : id * 111 % 255, //
-      id * 155 % 255 > 200 ? 50 : id * 155 % 255, //
-      id * 222 % 255 > 200 ? 50 : id * 222 % 255, //
-      0.8);
+      (id * 111 % 255 > 200 || id * 111 % 255 < 50) ? id * 111 % 255 - 50 : id * 111 % 255, //
+      (id * 155 % 255 > 200 || id * 155 % 255 < 50) ? id * 155 % 255 - 100 : id * 155 % 255, //
+      (id * 222 % 255 > 200 || id * 222 % 255 < 50) ? id * 222 % 255 - 150 : id * 222 % 255, //
+      1);
 }

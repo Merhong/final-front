@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
+import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
+import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,12 +14,12 @@ class WebtoonListBottomRandom extends ConsumerWidget {
         (BuildContext context, int index) {
           return InkWell(
             onTap: () async {
-              DetailPageWebtoonDTO detailPageWebtoonDTO = await ref
-                  .read(webtoonEpisodeProvider.notifier)
-                  .notifyRandom();
+              await ref.read(webtoonDetailProvider.notifier).notifyRandom();
 
-              Navigator.of(context)
-                  .pushNamed("/webtoon/episode/${detailPageWebtoonDTO.id}");
+              ParamStore paramStore = ref.read(paramProvider);
+
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
 
               //   Navigator.push(context,
               //       MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));

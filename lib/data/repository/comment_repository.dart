@@ -6,12 +6,40 @@ import 'package:flutter_blog/data/dto/comment_dto/re_comment_DTO.dart';
 import 'package:flutter_blog/data/dto/comment_dto/re_comment_delete_DTO.dart';
 import 'package:flutter_blog/data/dto/reply_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
+import 'package:flutter_blog/data/dto/user_dto/my_comment_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/comment_like_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/re_comment_like_DTO.dart';
 import 'package:flutter_blog/data/model/post.dart';
 import 'package:logger/logger.dart';
 
 class CommentRepository {
+  Future<ResponseDTO> fetchMyComment(String jwt) async {
+    try {
+      // 통신
+      Response response = await dio.get("/users/comments", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+
+      List<dynamic> mapList = responseDTO.data as List<dynamic>;
+
+      List<MyCommentDTO> mcDTOList = mapList.map((mcDTO) => MyCommentDTO.fromJson(mcDTO)).toList();
+
+      responseDTO.data = mcDTOList;
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
   Future<ResponseDTO> fetchCommentList(String jwt, episodeId) async {
     try {
       // 통신

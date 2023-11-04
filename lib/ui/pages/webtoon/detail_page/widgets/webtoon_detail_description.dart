@@ -29,7 +29,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
           buildAuthornameAndWeek(),
           buildDescriptionButton(context),
           SizedBox(height: sizeS5),
-          Advertising(ADHeight: 75),
+          Advertising(),
         ],
       ),
     );

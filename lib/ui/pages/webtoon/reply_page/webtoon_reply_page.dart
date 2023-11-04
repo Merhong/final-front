@@ -36,7 +36,7 @@ class ReplyPage extends ConsumerWidget {
           },
           child: GestureDetector(
             onTap: () {
-              print("제스처작동");
+              print("제스처작동 키보드내리기");
               FocusScope.of(context).unfocus();
             },
             child: ListView.separated(

@@ -44,6 +44,26 @@ class WebtoonListSliverGrid extends ConsumerWidget {
       webtoonDTOList = webtoonDTOList.where((e) => e.webtoonWeekDayEnum!.contains("월화수목금토일")).toList();
     }
 
+    String sortCheck = "업데이트순";
+
+    if (sortCheck == "가나다순") {
+      webtoonDTOList.sort((a, b) => a.title.compareTo(b.title));
+    }
+
+    if (sortCheck == "업데이트순") {
+      webtoonDTOList.sort((a, b) => b.episodeUpdatedAt!.compareTo(a.episodeUpdatedAt!));
+    }
+
+    if (sortCheck == "인기순") {
+      // 별점 총합순
+      webtoonDTOList.sort((a, b) => b.starScore!.compareTo(a.starScore!));
+    }
+
+    if (sortCheck == "별점순") {
+      webtoonDTOList
+          .sort((a, b) => (b.starScore! / (b.starCount == 0 ? 1 : b.starCount!)).compareTo(a.starScore! / (a.starCount == 0 ? 1 : a.starCount!)));
+    }
+
     return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: sizePaddingLR17),
       sliver: SliverGrid(
