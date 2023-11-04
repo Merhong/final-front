@@ -24,12 +24,27 @@ class WebtoonEpisodePage extends ConsumerWidget {
       return Center(child: CircularProgressIndicator());
     }
 
-    EpisodeDTO episodeDTO = model!.episodeDTO;
+    EpisodeDTO episodeDTO = model.episodeDTO;
 
-    return Scaffold(
-      appBar: WebtoonEpisodeAppBar(episodeDTO.detailTitle),
-      body: WebtoonEpisodeBody(episodeDTO),
-      bottomNavigationBar: WebtoonEpisodeBottomBar(episodeDTO: episodeDTO),
+    return Scrollbar(
+      trackVisibility: true,
+      thumbVisibility: true,
+      thickness: model.isClick == true ? 7 : 0,
+      child: Scaffold(
+        appBar: model.isClick == true
+            ? WebtoonEpisodeAppBar(episodeDTO.detailTitle) //
+            : AppBar(backgroundColor: Colors.black, toolbarHeight: 0),
+        body: GestureDetector(
+          onTap: () {
+            ref.watch(webtoonEpisodeProvider.notifier).appBarHidden();
+          },
+          child: InteractiveViewer(
+            // 에피소드 사진 확대 축소 (컨트롤 클릭해서 끌기)
+            child: WebtoonEpisodeBody(episodeDTO),
+          ),
+        ),
+        bottomNavigationBar: model.isClick == true ? WebtoonEpisodeBottomBar(episodeDTO: episodeDTO) : BottomAppBar(),
+      ),
     );
   }
 }

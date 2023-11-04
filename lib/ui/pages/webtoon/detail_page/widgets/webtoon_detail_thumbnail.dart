@@ -18,7 +18,7 @@ class WebtoonDetailThumbnail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
-        Container(height: 170, color: !isScroll ? IdToColor(webtoonDTO.id) : Colors.transparent),
+        Container(height: 190, color: !isScroll ? IdToColor(webtoonDTO.id) : Colors.transparent),
         Column(
           children: [
             SizedBox(height: 90),

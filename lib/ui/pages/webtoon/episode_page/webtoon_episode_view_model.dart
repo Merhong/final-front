@@ -1,4 +1,5 @@
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
+import 'package:flutter_blog/data/dto/episode_dto/episode_like_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
@@ -13,7 +14,24 @@ import 'package:logger/logger.dart';
 class WebtoonEpisodeModel {
   EpisodeDTO episodeDTO;
 
-  WebtoonEpisodeModel({required this.episodeDTO});
+  bool? isClick;
+
+  WebtoonEpisodeModel({required this.episodeDTO, this.isClick = true});
+
+  WebtoonEpisodeModel isClickUpdate() {
+    EpisodeDTO updateEpisodeDTO = this.episodeDTO;
+    bool updateIsClick = this.isClick!;
+    print("클릭반영");
+    return WebtoonEpisodeModel(episodeDTO: updateEpisodeDTO, isClick: !updateIsClick);
+  }
+
+  WebtoonEpisodeModel likeUpdate(bool isLike) {
+    EpisodeDTO updateEpisodeDTO = this.episodeDTO;
+    updateEpisodeDTO.like = isLike;
+    isLike == true ? updateEpisodeDTO.likeEpisodeCount++ : updateEpisodeDTO.likeEpisodeCount--;
+    print("에피소드좋아요업뎃");
+    return WebtoonEpisodeModel(episodeDTO: updateEpisodeDTO);
+  }
 }
 
 // 2. 창고
@@ -30,32 +48,36 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     print("에피소드notifyInit실행");
     SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
-    Logger().d("1단계");
-    ResponseDTO responseDTO =
-        await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
+
+    // Logger().d("1단계");
+    ResponseDTO responseDTO = await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
+
 
     state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
   }
 
+  Future<void> appBarHidden() async {
+    state = state!.isClickUpdate();
+  }
+
   Future<void> likeEpisode() async {
-    Logger().d("likeEpisode 실행됨");
     SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
     bool like = state!.episodeDTO.like;
-    Logger().d("fetchLike 전");
 
-    ResponseDTO responseDTO =
-        await EpisodeRepository().fetchLike(sessionUser.jwt!, episodeId, like);
+    ResponseDTO responseDTO = await EpisodeRepository().fetchLike(sessionUser.jwt!, episodeId, like);
 
-    if (responseDTO.success == true) {
-      notifyInit();
+    if (responseDTO.success == false) {
+      return;
     }
+    EpisodeLikeDTO episodeLikeDTO = responseDTO.data;
+    print(episodeLikeDTO);
+    state = state!.likeUpdate(episodeLikeDTO.isLike);
   }
 
   Future<DetailPageWebtoonDTO> notifyRandom() async {
     SessionUser sessionUser = ref.read(sessionProvider);
-    ResponseDTO responseDTO =
-        await EpisodeRepository().fetchRandom(sessionUser.jwt!);
+    ResponseDTO responseDTO = await EpisodeRepository().fetchRandom(sessionUser.jwt!);
     return responseDTO.data;
   }
 }
@@ -85,8 +107,7 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
 //
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
-final webtoonEpisodeProvider = StateNotifierProvider.autoDispose<
-    WebtoonEpisodeViewModel, WebtoonEpisodeModel?>((ref) {
+final webtoonEpisodeProvider = StateNotifierProvider.autoDispose<WebtoonEpisodeViewModel, WebtoonEpisodeModel?>((ref) {
   print("episode창고관리자 실행됨");
   return new WebtoonEpisodeViewModel(ref, null)..notifyInit();
 });

@@ -39,7 +39,7 @@ class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
                   color: Colors.green,
                 ),
               ),
-              Icon(Icons.search, color: Colors.black),
+              Icon(Icons.search, color: Colors.black, size: 30),
             ],
           ),
         ),

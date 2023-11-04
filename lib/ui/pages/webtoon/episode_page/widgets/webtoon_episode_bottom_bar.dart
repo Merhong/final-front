@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
@@ -25,25 +26,39 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
           Row(
             children: [
               // Todo: 좋아요 취소기능도 만들어야함
-              IconButton(
-                icon: _likeIcon(episodeDTO.like),
-                onPressed: () async {
+              SizedBox(width: sizeM10),
+              InkWell(
+                onTap: () async {
                   ref.watch(webtoonEpisodeProvider.notifier).likeEpisode();
                 },
+                child: Padding(
+                  padding: EdgeInsets.all(sizeM10),
+                  child: Row(
+                    children: [
+                      _likeIcon(episodeDTO.like),
+                      SizedBox(width: sizeM10),
+                      Text("${episodeDTO.likeEpisodeCount}", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                ),
               ),
-              Text("${episodeDTO.likeEpisodeCount}",
-                  style: TextStyle(color: Colors.white)),
-              SizedBox(width: 10),
-              IconButton(
-                icon: Icon(Icons.comment, color: Colors.white),
-                onPressed: () {
-                  print("댓글보기클릭");
+              SizedBox(width: sizeM10),
+              InkWell(
+                onTap: () {
                   // ps.addEpisodeDetailId(episodeDTO!.episodeId);
                   Navigator.push(context, MaterialPageRoute(builder: (_) => ReplyPage()));
                 },
+                child: Padding(
+                  padding: EdgeInsets.all(sizeM10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.comment, color: Colors.white),
+                      SizedBox(width: sizeM10),
+                      Text("${episodeDTO.commentCount}", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                ),
               ),
-              Text("${episodeDTO.commentCount}",
-                  style: TextStyle(color: Colors.white)),
             ],
           ),
           Row(
@@ -59,7 +74,7 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
                     )
                   : IconButton(onPressed: () {}, icon: Icon(Icons.arrow_left, color: Colors.grey[700], size: 30)),
               //
-              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_left, color: Colors.white)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.menu, color: Colors.white)),
               //
               ps.webtoonLastEpisodeId != episodeDTO!.episodeId
                   ? IconButton(

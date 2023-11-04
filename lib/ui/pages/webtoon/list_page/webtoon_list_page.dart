@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/data/provider/advertising_sub_provider.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
@@ -14,6 +16,8 @@ class WebtoonListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(advertisingSubProvider).fetchAdvertisingSubList(ref.read(sessionProvider).jwt!);
+
     return Scaffold(
       bottomNavigationBar: AppBottom(),
       body: WillPopScope(
