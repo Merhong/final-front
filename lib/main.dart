@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // 최초 화면
-      initialRoute: Move.payHomePage,
+      initialRoute: Move.searchPage,
       // initialRoute: Move.loginPage,
       // initialRoute: Move.payHomePage,
       // initialRoute: Move.payMethodPage,

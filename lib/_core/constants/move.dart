@@ -7,6 +7,7 @@ import 'package:flutter_blog/ui/pages/other/see_more_page/see_more_page.dart';
 import 'package:flutter_blog/ui/pages/pay/home_page/pay_home_page.dart';
 import 'package:flutter_blog/ui/pages/pay/pay_card_page/pay_card_page.dart';
 import 'package:flutter_blog/ui/pages/pay/pay_method_page/pay_method_page.dart';
+import 'package:flutter_blog/ui/pages/search/search_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/best_page/webtoon_best_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/webtoon_recommend_page.dart';
@@ -35,6 +36,7 @@ class Move {
   static String payHomePage = "/pay/home"; // 메인결제
   static String payMethodPage = "/pay/method"; // 결제(카드)
   static String payCardPage = "/pay/card"; // 결제(카드)
+  static String searchPage = "/search"; // 결제(카드)
 }
 
 // Map<String, Widget Function(BuildContext)> 를 반환하는 함수
@@ -57,5 +59,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.payHomePage: (context) => PayHomePage(),
     Move.payMethodPage: (context) => PayMethodPage(),
     Move.payCardPage: (context) => PayCardPage(),
+    Move.searchPage: (context) => SearchPage(),
   };
 }
