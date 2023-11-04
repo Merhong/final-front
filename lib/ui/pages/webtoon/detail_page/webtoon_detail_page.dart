@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
@@ -44,7 +42,8 @@ class _WebtoonDetailPageState extends ConsumerState<WebtoonDetailPage> {
   @override
   Widget build(BuildContext context) {
     if (ref.read(paramProvider).isWebtoonDetailMove == true) {
-      print("ref.read(paramProvider).isWebtoonDetailMove : ${ref.read(paramProvider).isWebtoonDetailMove}");
+      print(
+          "ref.read(paramProvider).isWebtoonDetailMove : ${ref.read(paramProvider).isWebtoonDetailMove}");
       ref.read(paramProvider).isWebtoonDetailMove = false;
       ref.read(webtoonDetailProvider.notifier).notifyInit();
     }
@@ -62,7 +61,8 @@ class _WebtoonDetailPageState extends ConsumerState<WebtoonDetailPage> {
       bottomNavigationBar: AppBottom(),
       body: RefreshIndicator(
         key: refreshKey,
-        onRefresh: () async => await ref.read(webtoonDetailProvider.notifier).notifyInit(),
+        onRefresh: () async =>
+            await ref.read(webtoonDetailProvider.notifier).notifyInit(),
         child: WebtoonDetailBody(detailPageController, isScroll, webtoonDTO),
       ),
     );
