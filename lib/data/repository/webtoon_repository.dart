@@ -8,6 +8,8 @@ import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/list_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/interest_DTO.dart';
+import 'package:flutter_blog/data/dto/webtoon_dto/recent_DTO.dart';
+import 'package:flutter_blog/data/dto/webtoon_dto/search_webtoon_DTO.dart';
 import 'package:flutter_blog/data/model/post.dart';
 import 'package:logger/logger.dart';
 
@@ -15,6 +17,60 @@ import 'package:logger/logger.dart';
 // 나중에 싱글톤으로 바꿀것
 class WebtoonRepository {
 //
+
+  Future<ResponseDTO> fetchMyRecent(String jwt) async {
+    try {
+      // 통신
+      Response response = await dio.get("/webtoons/recent", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+
+      List<dynamic> mapList = responseDTO.data as List<dynamic>;
+
+      List<RecentDTO> recentDTOList = mapList.map((recentDTO) => RecentDTO.fromJson(recentDTO)).toList();
+
+      responseDTO.data = recentDTOList;
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
+
+  Future<ResponseDTO> fetchSearch(String jwt, String searchText) async {
+    try {
+      // 통신
+      Response response = await dio.get("/search?searchText=${searchText}", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+
+      List<dynamic> mapList = responseDTO.data as List<dynamic>;
+
+      List<SearchWebtoonDTO> iwDTOList = mapList.map((swDTO) => SearchWebtoonDTO.fromJson(swDTO)).toList();
+
+      responseDTO.data = iwDTOList;
+
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
 
   Future<ResponseDTO> fetchAdvertisingSubList(String jwt) async {
     try {

@@ -77,7 +77,7 @@ class WebtoonListItem extends StatelessWidget {
                           ),
                         ],
                       )
-                    : webtoonDTO.episodeUpdatedAt != null && todayDateTime.difference(webtoonDTO.episodeUpdatedAt!).inHours < 50
+                    : webtoonDTO.episodeUpdatedAt != null && DateTime.now().difference(webtoonDTO.episodeUpdatedAt!).inHours < 50
                         ? Row(
                             children: [
                               TitleTag(titleTagEnum: TitleTagEnum.up),

@@ -9,11 +9,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyWebtoonPageModel {
   List<InterestWebtoonDTO> interestWebtoonDTOList;
+  String? sortCheck;
 
-  MyWebtoonPageModel({required this.interestWebtoonDTOList});
+  MyWebtoonPageModel({required this.interestWebtoonDTOList, this.sortCheck});
 
   MyWebtoonPageModel interestAlarmUpdate({required List<InterestWebtoonDTO> interestWebtoonDTOList}) {
-    return MyWebtoonPageModel(interestWebtoonDTOList: interestWebtoonDTOList);
+    return MyWebtoonPageModel(interestWebtoonDTOList: interestWebtoonDTOList, sortCheck: this.sortCheck);
+  }
+
+  MyWebtoonPageModel sortUpdate({required String sort}) {
+    return MyWebtoonPageModel(interestWebtoonDTOList: this.interestWebtoonDTOList, sortCheck: sort);
   }
 }
 
@@ -55,6 +60,10 @@ class MyWebtoonPageViewModel extends StateNotifier<MyWebtoonPageModel?> {
     interestWebtoonDTOList = interestWebtoonDTOList.map((e) => e.id == paramDTO.id ? updateInterestWebtoonDTO : e).toList();
 
     state = state!.interestAlarmUpdate(interestWebtoonDTOList: interestWebtoonDTOList);
+  }
+
+  Future<void> notifySort(String sort) async {
+    state = state!.sortUpdate(sort: sort);
   }
 }
 

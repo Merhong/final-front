@@ -12,9 +12,10 @@ import 'webtoon_list_sliver_grid.dart';
 import 'webtoon_list_sliver_persistent_header.dart';
 
 class WebtoonListBody extends ConsumerWidget {
-  const WebtoonListBody({
-    super.key,
-  });
+  final ScrollController listPageController;
+  bool isScroll;
+
+  WebtoonListBody(this.listPageController, this.isScroll);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,8 +28,9 @@ class WebtoonListBody extends ConsumerWidget {
     List<ListPageWebtoonDTO> webtoonDTOList = model!.webtoonDTOList!;
 
     return CustomScrollView(
+      controller: listPageController,
       slivers: <Widget>[
-        WebtoonListSliverAppBarAndPageView(),
+        WebtoonListSliverAppBarAndPageView(isScroll),
         WebtoonListSliverPersistentHeader(),
         WebtoonListMiddleAdvertising(),
         WebtoonListSliverGrid(),

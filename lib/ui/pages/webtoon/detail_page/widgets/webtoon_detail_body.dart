@@ -35,7 +35,7 @@ class WebtoonDetailBody extends ConsumerWidget {
               ? SliverToBoxAdapter(
                   child: Column(
                     children: [
-                      Text("에피소드가 하나도 없어요.", style: TextStyle(fontSize: 50)),
+                      Text("에피소드가 하나도 없어요.", style: TextStyle(fontSize: 30)),
                       WebtoonDetailOther(webtoonDTO: webtoonDTO),
                     ],
                   ),

@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class Episode {
+class DetailPageEpisodeDTO {
   int episodeId; //
   String detailTitle;
   String? thumbnail;
@@ -9,10 +9,12 @@ class Episode {
   double starScore;
   double starCount;
   DateTime createdAt;
+  bool? isView;
+  bool? isLastView;
   // DateTime? updatedAt;
 
   // 생성자는 선택적 매개변수에 required 하는게 편하다
-  Episode({
+  DetailPageEpisodeDTO({
     required this.episodeId,
     required this.detailTitle,
     this.thumbnail,
@@ -27,7 +29,7 @@ class Episode {
   // 2. Map 형태로 받아서 Dart 객체로 변환합니다.
   // 이니셜라이저: 안쓰고 {} 안에 적으면 타이밍상 필드 초기화가 안됨
   // 이름이 있는 생성자
-  Episode.fromJson(Map<String, dynamic> json)
+  DetailPageEpisodeDTO.fromJson(Map<String, dynamic> json)
       : episodeId = json["episodeId"],
         detailTitle = json["detailTitle"],
         thumbnail = json["thumbnail"],
@@ -35,11 +37,14 @@ class Episode {
         cookieCost = json["cookieCost"],
         starScore = json["starScore"],
         starCount = json["starCount"],
-        createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]);
-  // updatedAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["updatedAt"]);
+        createdAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]),
+        // isView = json["isView"] == null ? false : json["isView"];
+        isView = json["isView"],
+        isLastView = json["isLastView"];
+// updatedAt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["updatedAt"]);
 
   @override
   String toString() {
-    return 'Episode{episodeId: $episodeId, detailTitle: $detailTitle, thumbnail: $thumbnail, cookieCost: $cookieCost, starScore: $starScore, starCount: $starCount, createdAt: $createdAt}';
+    return 'DetailPageEpisodeDTO{episodeId: $episodeId, detailTitle: $detailTitle, thumbnail: $thumbnail, authorText: $authorText, cookieCost: $cookieCost, starScore: $starScore, starCount: $starCount, createdAt: $createdAt, isView: $isView, isLastView: $isLastView}';
   }
 }

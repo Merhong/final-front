@@ -46,7 +46,7 @@ class ReplyPage extends ConsumerWidget {
                   }
                   return WebtoonReplyBody(commentList: commentList, index: index);
                 },
-                separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey),
+                separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
                 itemCount: commentList.length + 1),
           ),
         )

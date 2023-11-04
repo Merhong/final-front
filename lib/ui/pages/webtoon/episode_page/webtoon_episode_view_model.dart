@@ -52,6 +52,7 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     // Logger().d("1단계");
     ResponseDTO responseDTO = await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
 
+    await EpisodeRepository().fetchRecent(sessionUser.jwt!, episodeId); // 최근본웹툰 반영
 
     state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
   }

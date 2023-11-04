@@ -12,28 +12,45 @@ class WebtoonEpisodeImage extends ConsumerWidget {
   WebtoonEpisodeImage(this.episodeDTO);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    WebtoonEpisodeRatingStarModel model =
-        ref.watch(webtoonEpisodeRatingStarProvider);
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      // scrollDirection: Axis.horizontal, // 수평 스크롤로 변경
+      itemCount: episodeDTO.photoList.length + 1,
+      itemBuilder: (BuildContext context, int index) {
+        // print(index);
+        if (index == episodeDTO.photoList.length) {
+          return Column(
+            children: [
+              episodeDTO.photoList.length == 0 ? Text("에피소드 내용사진 없음", style: TextStyle(fontSize: 25)) : SizedBox(),
+              Divider(color: Colors.grey, height: 1, thickness: 1),
+              Padding(
+                padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+// ======= 혜림 StarCount
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     WebtoonEpisodeRatingStarModel model =
+//         ref.watch(webtoonEpisodeRatingStarProvider);
 
-    return Column(
-      children: [
-        Text("${model.numberOfStar}"),
-        ElevatedButton(
-            onPressed: () {
-              ref
-                  .read(webtoonEpisodeRatingStarProvider.notifier)
-                  .notifyNumberOfStars(5);
-            },
-            child: Text("변경")),
-        Expanded(
-          child: ListView.builder(
-            // scrollDirection: Axis.horizontal, // 수평 스크롤로 변경
-            itemCount: episodeDTO.photoList.length + 1,
-            itemBuilder: (BuildContext context, int index) {
-              // print(index);
-              if (index == episodeDTO.photoList.length) {
-                return Column(
+//     return Column(
+//       children: [
+//         Text("${model.numberOfStar}"),
+//         ElevatedButton(
+//             onPressed: () {
+//               ref
+//                   .read(webtoonEpisodeRatingStarProvider.notifier)
+//                   .notifyNumberOfStars(5);
+//             },
+//             child: Text("변경")),
+//         Expanded(
+//           child: ListView.builder(
+//             // scrollDirection: Axis.horizontal, // 수평 스크롤로 변경
+//             itemCount: episodeDTO.photoList.length + 1,
+//             itemBuilder: (BuildContext context, int index) {
+//               // print(index);
+//               if (index == episodeDTO.photoList.length) {
+//                 return Column(
+// >>>>>>>
                   children: [
                     Divider(height: 1, color: Colors.grey),
                     Padding(
@@ -66,8 +83,23 @@ class WebtoonEpisodeImage extends ConsumerWidget {
                   "${imageURL}EpisodePhoto/${episodeDTO.photoList[index].photoURL}",
                   fit: BoxFit.contain,
                 ),
-              );
-            },
+              ),
+              Divider(color: Colors.grey, height: 1, thickness: 1),
+              Row(
+                children: [
+                  // Image.network("${episodeDTO.authorImage}"),
+                  Text("${episodeDTO.authorName}"),
+                ],
+              ),
+              Text("${episodeDTO.authorText}"),
+            ],
+          );
+        }
+        return Container(
+          width: sizeGetScreenWidth(context),
+          child: Image.network(
+            "${imageURL}EpisodePhoto/${episodeDTO.photoList[index].photoURL}",
+            fit: BoxFit.contain,
           ),
         ),
       ],

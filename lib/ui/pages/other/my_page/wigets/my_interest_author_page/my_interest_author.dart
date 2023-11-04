@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_author_DTO.dart';
-import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/specially_tag.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_view_model.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_model.dart';
-import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_page/my_interest_author_top_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
-import '../my_top_menu.dart';
 
 class MyInterestAuthor extends ConsumerWidget {
   @override
@@ -25,14 +21,26 @@ class MyInterestAuthor extends ConsumerWidget {
     List<InterestAuthorDTO> interestAuthorDTOList = model.interestAuthorDTOList;
     // List<InterestAuthorDTO> interestAuthorDTOList = ref.watch(myAuthorPageProvider)!.interestAuthorDTOList;
 
+    if (model.sortCheck == "등록 순") {
+      interestAuthorDTOList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    }
+
+    if (model.sortCheck == "가나다 순") {
+      interestAuthorDTOList.sort((a, b) => a.authorNickname!.compareTo(b.authorNickname!));
+    }
+
+    if (model.sortCheck == "새소식 순") {
+      interestAuthorDTOList.sort((a, b) => (b.authorBoardCreateAt ?? DateTime(0)).compareTo(a.authorBoardCreateAt ?? DateTime(0)));
+    }
+
     return Column(
       children: [
-        Divider(color: Colors.grey, height: 1),
-        MyTopMenu(allLength: interestAuthorDTOList.length),
-        Divider(color: Colors.grey, height: 1),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
+        MyInterestAuthorTopMenu(allLength: interestAuthorDTOList.length),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1),
+            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
             itemCount: interestAuthorDTOList.length,
             itemBuilder: (context, index) {
               return Container(
@@ -40,11 +48,11 @@ class MyInterestAuthor extends ConsumerWidget {
                 padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
                 child: Row(
                   children: [
-                    buildPhoto(ref, interestAuthorDTOList, index, context), // TODO 클릭시 작가페이지이동
+                    buildPhoto(ref, interestAuthorDTOList[index], context), // TODO 클릭시 작가페이지이동
                     SizedBox(width: sizeM10),
-                    buildDescription(ref, interestAuthorDTOList, index, context), // TODO 클릭시 작가페이지이동
+                    buildDescription(ref, interestAuthorDTOList[index], context), // TODO 클릭시 작가페이지이동
                     SizedBox(width: sizeL20),
-                    buildAlarmButton(ref, interestAuthorDTOList, index, context),
+                    buildAlarmButton(ref, interestAuthorDTOList[index], context),
                   ],
                 ),
               );
@@ -57,19 +65,19 @@ class MyInterestAuthor extends ConsumerWidget {
 
   //
 
-  InkWell buildAlarmButton(WidgetRef ref, List<InterestAuthorDTO> interestAuthorDTOList, int index, BuildContext context) {
+  InkWell buildAlarmButton(WidgetRef ref, InterestAuthorDTO interestAuthorDTO, BuildContext context) {
     return InkWell(
-      child: interestAuthorDTOList[index].isAlarm == true
+      child: interestAuthorDTO.isAlarm == true
           ? Icon(Icons.notifications, color: Colors.green)
           : Icon(Icons.notifications_off_outlined, color: Colors.grey),
       onTap: () {
-        ref.read(myAuthorPageProvider.notifier).notifyMyInterestAlarm(interestAuthorDTOList[index]);
+        ref.read(myAuthorPageProvider.notifier).notifyMyInterestAlarm(interestAuthorDTO);
         print("알람설정");
         ScaffoldMessenger.of(context).clearSnackBars();
         mySnackbar(
           context,
           1000,
-          interestAuthorDTOList[index].isAlarm == true
+          interestAuthorDTO.isAlarm == true
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -89,7 +97,7 @@ class MyInterestAuthor extends ConsumerWidget {
     );
   }
 
-  Expanded buildDescription(WidgetRef ref, List<InterestAuthorDTO> interestAuthorDTOList, int index, BuildContext context) {
+  Expanded buildDescription(WidgetRef ref, InterestAuthorDTO interestAuthorDTO, BuildContext context) {
     return Expanded(
       child: InkWell(
         // onTap: () {
@@ -110,12 +118,12 @@ class MyInterestAuthor extends ConsumerWidget {
                     Container(
                       constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
                       child: Text(
-                        "${interestAuthorDTOList[index].authorNickname}",
+                        "${interestAuthorDTO.authorNickname}",
                         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
                       ),
                     ),
                     SizedBox(width: 3),
-                    todayDateTime.difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours < 50
+                    DateTime.now().difference(interestAuthorDTO.authorBoardCreateAt!).inHours < 50
                         ? TitleTag(titleTagEnum: TitleTagEnum.up)
                         : SizedBox()
                   ],
@@ -127,7 +135,7 @@ class MyInterestAuthor extends ConsumerWidget {
               constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
               child: Wrap(
                 runSpacing: -2,
-                children: interestAuthorDTOList[index].authorWebtoonNameList.map((webtoonName) {
+                children: interestAuthorDTO.authorWebtoonNameList.map((webtoonName) {
                   return Text(
                     "${webtoonName}  ",
                     style: TextStyle(fontSize: 11, color: Colors.grey[600], overflow: TextOverflow.ellipsis),
@@ -136,16 +144,15 @@ class MyInterestAuthor extends ConsumerWidget {
               ),
             ),
             SizedBox(height: 3),
-            interestAuthorDTOList[index].authorBoardCreateAt != null &&
-                    DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours < 100
+            interestAuthorDTO.authorBoardCreateAt != null && DateTime.now().difference(interestAuthorDTO.authorBoardCreateAt!).inHours < 100
                 ? RichText(
                     text: TextSpan(
-                      text: DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours >= 1
-                          ? "${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inHours}시간 전 "
-                          : DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inMinutes >= 1
-                              ? "${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inMinutes}분 전 "
-                              : DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inSeconds >= 5
-                                  ? "${DateTime.now().difference(interestAuthorDTOList[index].authorBoardCreateAt!).inSeconds}초 전 "
+                      text: DateTime.now().difference(interestAuthorDTO.authorBoardCreateAt!).inHours >= 1
+                          ? "${DateTime.now().difference(interestAuthorDTO.authorBoardCreateAt!).inHours}시간 전 "
+                          : DateTime.now().difference(interestAuthorDTO.authorBoardCreateAt!).inMinutes >= 1
+                              ? "${DateTime.now().difference(interestAuthorDTO.authorBoardCreateAt!).inMinutes}분 전 "
+                              : DateTime.now().difference(interestAuthorDTO.authorBoardCreateAt!).inSeconds >= 5
+                                  ? "${DateTime.now().difference(interestAuthorDTO.authorBoardCreateAt!).inSeconds}초 전 "
                                   : "지금 ",
                       style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green),
                       children: [
@@ -162,7 +169,7 @@ class MyInterestAuthor extends ConsumerWidget {
     );
   }
 
-  InkWell buildPhoto(WidgetRef ref, List<InterestAuthorDTO> interestAuthorDTOList, int index, BuildContext context) {
+  InkWell buildPhoto(WidgetRef ref, InterestAuthorDTO interestAuthorDTO, BuildContext context) {
     return InkWell(
       // onTap: () {
       //   ParamStore ps = ref.read(paramProvider);
@@ -171,7 +178,7 @@ class MyInterestAuthor extends ConsumerWidget {
       //   Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
       // },
       child: CircleAvatar(
-        backgroundImage: NetworkImage('${imageURL}/AuthorPhoto/${interestAuthorDTOList[index].authorPhoto}'),
+        backgroundImage: NetworkImage('${imageURL}/AuthorPhoto/${interestAuthorDTO.authorPhoto}'),
         radius: 37,
       ),
     );

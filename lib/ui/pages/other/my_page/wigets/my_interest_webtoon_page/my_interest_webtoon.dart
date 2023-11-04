@@ -7,7 +7,7 @@ import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/specially_tag.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_model.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_top_menu.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_webtoon_page/my_interest_webtoon_top_menu.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -22,14 +22,26 @@ class MyInterestWebtoon extends ConsumerWidget {
     List<InterestWebtoonDTO> interestWebtoonDTOList = model.interestWebtoonDTOList;
     // List<InterestWebtoonDTO> interestWebtoonDTOList = ref.watch(myPageProvider)!.interestWebtoonDTOList;
 
+    if (model.sortCheck == "등록 순") {
+      interestWebtoonDTOList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    }
+
+    if (model.sortCheck == "가나다 순") {
+      interestWebtoonDTOList.sort((a, b) => a.webtoonTitle!.compareTo(b.webtoonTitle!));
+    }
+
+    if (model.sortCheck == "새소식 순") {
+      interestWebtoonDTOList.sort((a, b) => (b.webtoonUpdateAt ?? DateTime(0)).compareTo(a.webtoonUpdateAt ?? DateTime(0)));
+    }
+
     return Column(
       children: [
-        Divider(color: Colors.grey, height: 1),
-        MyTopMenu(allLength: interestWebtoonDTOList.length, isUpdateButton: true),
-        Divider(color: Colors.grey, height: 1),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
+        MyInterestWebtoonTopMenu(allLength: interestWebtoonDTOList.length, isUpdateButton: true),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1),
+            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
             itemCount: interestWebtoonDTOList.length,
             itemBuilder: (context, index) {
               return Container(
@@ -37,11 +49,11 @@ class MyInterestWebtoon extends ConsumerWidget {
                 padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
                 child: Row(
                   children: [
-                    buildPhoto(ref, interestWebtoonDTOList[index], index, context),
+                    buildPhoto(ref, interestWebtoonDTOList[index], context),
                     SizedBox(width: sizeM10),
-                    buildDescription(ref, interestWebtoonDTOList, index, context),
+                    buildDescription(ref, interestWebtoonDTOList[index], context),
                     SizedBox(width: sizeL20),
-                    buildAlarmButton(ref, interestWebtoonDTOList, index, context),
+                    buildAlarmButton(ref, interestWebtoonDTOList[index], context),
                   ],
                 ),
               );
@@ -54,30 +66,30 @@ class MyInterestWebtoon extends ConsumerWidget {
 
   //
 
-  InkWell buildAlarmButton(WidgetRef ref, List<InterestWebtoonDTO> interestWebtoonDTOList, int index, BuildContext context) {
+  InkWell buildAlarmButton(WidgetRef ref, InterestWebtoonDTO interestWebtoonDTO, BuildContext context) {
     return InkWell(
-      child: interestWebtoonDTOList[index].isAlarm == true
+      child: interestWebtoonDTO.isAlarm == true
           ? Icon(Icons.notifications, color: Colors.green)
           : Icon(Icons.notifications_off_outlined, color: Colors.grey),
       onTap: () {
-        ref.read(myWebtoonPageProvider.notifier).notifyMyInterestAlarm(interestWebtoonDTOList[index]);
+        ref.read(myWebtoonPageProvider.notifier).notifyMyInterestAlarm(interestWebtoonDTO);
         print("알람설정");
         ScaffoldMessenger.of(context).clearSnackBars();
         mySnackbar(
           context,
           1000,
-          interestWebtoonDTOList[index].isAlarm == true
+          interestWebtoonDTO.isAlarm == true
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.sentiment_very_dissatisfied, color: IdToColor(interestWebtoonDTOList[index].webtoonId)),
+                    Icon(Icons.sentiment_very_dissatisfied, color: IdToColor(interestWebtoonDTO.webtoonId)),
                     Text(" 웹툰 등록 알림을 껐습니다."),
                   ],
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add_reaction_outlined, color: IdToColor(interestWebtoonDTOList[index].webtoonId)),
+                    Icon(Icons.add_reaction_outlined, color: IdToColor(interestWebtoonDTO.webtoonId)),
                     Text(" 웹툰 등록 알림을 켰습니다."),
                   ],
                 ),
@@ -86,12 +98,12 @@ class MyInterestWebtoon extends ConsumerWidget {
     );
   }
 
-  Widget buildDescription(WidgetRef ref, List<InterestWebtoonDTO> interestWebtoonDTOList, int index, BuildContext context) {
+  Widget buildDescription(WidgetRef ref, InterestWebtoonDTO interestWebtoonDTO, BuildContext context) {
     return Expanded(
       child: InkWell(
         onTap: () {
           ParamStore ps = ref.read(paramProvider);
-          ps.addWebtoonDetailId(interestWebtoonDTOList[index].webtoonId);
+          ps.addWebtoonDetailId(interestWebtoonDTO.webtoonId);
           ps.addBottomNavigationBarIndex(0);
           Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
         },
@@ -104,30 +116,29 @@ class MyInterestWebtoon extends ConsumerWidget {
                 Container(
                   constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.4),
                   child: Text(
-                    "${interestWebtoonDTOList[index].webtoonTitle}",
+                    "${interestWebtoonDTO.webtoonTitle}",
                     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
                   ),
                 ),
                 SizedBox(width: 3),
-                interestWebtoonDTOList[index].webtoonUpdateAt == null
+                interestWebtoonDTO.webtoonUpdateAt == null
                     ? SizedBox()
-                    : interestWebtoonDTOList[index].webtoonSpeciallyEnum == "완결"
+                    : interestWebtoonDTO.webtoonSpeciallyEnum == "완결"
                         ? TitleTag(titleTagEnum: TitleTagEnum.end)
-                        : interestWebtoonDTOList[index].webtoonSpeciallyEnum == "휴재"
+                        : interestWebtoonDTO.webtoonSpeciallyEnum == "휴재"
                             ? TitleTag(titleTagEnum: TitleTagEnum.stop)
-                            : todayDateTime.difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours < 50
+                            : DateTime.now().difference(interestWebtoonDTO.webtoonUpdateAt!).inHours < 50
                                 ? TitleTag(titleTagEnum: TitleTagEnum.up)
                                 : SizedBox()
               ],
             ),
             SizedBox(height: 3),
             Text(
-              "${DateFormat('yyyy-MM-dd').format(interestWebtoonDTOList[index].createdAt)}",
+              "${DateFormat('yyyy-MM-dd').format(interestWebtoonDTO.createdAt)}",
               style: TextStyle(color: Colors.grey[600], fontSize: 13),
             ),
             SizedBox(height: 3),
-            interestWebtoonDTOList[index].webtoonUpdateAt != null &&
-                    todayDateTime.difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours < 50
+            interestWebtoonDTO.webtoonUpdateAt != null && DateTime.now().difference(interestWebtoonDTO.webtoonUpdateAt!).inHours < 50
                 ? RichText(
                     text:
                         // TextSpan(
@@ -138,19 +149,19 @@ class MyInterestWebtoon extends ConsumerWidget {
                         //   ],
                         // ),
                         TextSpan(
-                    text: DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours >= 1
-                        ? "${DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inHours}시간 전 "
-                        : DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inMinutes >= 1
-                            ? "${DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inMinutes}분 전 "
-                            : DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inSeconds >= 5
-                                ? "${DateTime.now().difference(interestWebtoonDTOList[index].webtoonUpdateAt!).inSeconds}초 전 "
+                    text: DateTime.now().difference(interestWebtoonDTO.webtoonUpdateAt!).inHours >= 1
+                        ? "${DateTime.now().difference(interestWebtoonDTO.webtoonUpdateAt!).inHours}시간 전 "
+                        : DateTime.now().difference(interestWebtoonDTO.webtoonUpdateAt!).inMinutes >= 1
+                            ? "${DateTime.now().difference(interestWebtoonDTO.webtoonUpdateAt!).inMinutes}분 전 "
+                            : DateTime.now().difference(interestWebtoonDTO.webtoonUpdateAt!).inSeconds >= 5
+                                ? "${DateTime.now().difference(interestWebtoonDTO.webtoonUpdateAt!).inSeconds}초 전 "
                                 : "지금 ",
                     style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green),
                     children: [
                       TextSpan(text: "새 이야기", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black)),
                     ],
                   ))
-                : interestWebtoonDTOList[index].webtoonSpeciallyEnum == "무료"
+                : interestWebtoonDTO.webtoonSpeciallyEnum == "무료"
                     ? Text("무료 충전 완료!", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green))
                     : SizedBox(),
           ],
@@ -159,7 +170,7 @@ class MyInterestWebtoon extends ConsumerWidget {
     );
   }
 
-  Widget buildPhoto(WidgetRef ref, InterestWebtoonDTO interestWebtoonDTO, int index, BuildContext context) {
+  Widget buildPhoto(WidgetRef ref, InterestWebtoonDTO interestWebtoonDTO, BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(5)),
       child: InkWell(

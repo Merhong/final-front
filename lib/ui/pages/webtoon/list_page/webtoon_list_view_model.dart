@@ -11,12 +11,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class WebtoonListModel {
   List<ListPageWebtoonDTO> webtoonDTOList;
   String? weekCheck;
+  String? sortCheck;
   List<AdvertisingMainDTO>? advertisingMainDTOList;
 
-  WebtoonListModel({required this.webtoonDTOList, this.weekCheck, this.advertisingMainDTOList});
+  WebtoonListModel({required this.webtoonDTOList, this.weekCheck, this.sortCheck, this.advertisingMainDTOList});
 
   WebtoonListModel weekUpdate({required String week}) {
-    return WebtoonListModel(webtoonDTOList: this.webtoonDTOList, weekCheck: week, advertisingMainDTOList: this.advertisingMainDTOList);
+    return WebtoonListModel(
+        webtoonDTOList: this.webtoonDTOList, weekCheck: week, sortCheck: this.sortCheck, advertisingMainDTOList: this.advertisingMainDTOList);
+  }
+
+  WebtoonListModel sortUpdate({required String sort}) {
+    return WebtoonListModel(
+        webtoonDTOList: this.webtoonDTOList, weekCheck: this.weekCheck, sortCheck: sort, advertisingMainDTOList: this.advertisingMainDTOList);
   }
 }
 
@@ -30,8 +37,10 @@ class WebtoonListViewModel extends StateNotifier<WebtoonListModel?> {
 
   Future<void> notifyWeek(String week) async {
     state = state!.weekUpdate(week: week);
+  }
 
-    // print("위크뷰모델위크");
+  Future<void> notifySort(String sort) async {
+    state = state!.sortUpdate(sort: sort);
   }
 
   // notify 구독자들에게 알려줌

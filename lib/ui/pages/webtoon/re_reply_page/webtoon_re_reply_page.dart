@@ -56,7 +56,7 @@ class ReReplyPage extends ConsumerWidget {
                 }
                 return WebtoonReReplyBody(reCommentList: commentDTO.reCommentList, index: index - 1); // 댓글의 대댓글들
               },
-              separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey),
+              separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
               itemCount: commentDTO.reCommentList.length + 2),
         ),
       ),

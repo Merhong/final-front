@@ -5,6 +5,7 @@ import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_like_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
+import 'package:flutter_blog/data/dto/webtoon_dto/recent_DTO.dart';
 import 'package:logger/logger.dart';
 
 // MVVM패턴 : View -> Provider(전역프로바이더or뷰모델) -> Repository(통신+파싱을 책임)
@@ -62,6 +63,27 @@ class EpisodeRepository {
   //     return new ResponseDTO(success: false);
   //   }
   // }
+
+  Future<ResponseDTO> fetchRecent(String jwt, int episodeId) async {
+    try {
+      // 통신
+      Response response = await dio.post("/webtoons/recent/$episodeId", options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      responseDTO.data = RecentDTO.fromJson(responseDTO.data);
+      return responseDTO;
+    } catch (e) {
+      if (e is DioError) {
+        Logger().d("오류: ${e.response!.data}");
+        return new ResponseDTO.fromJson(e.response!.data);
+      }
+
+      // return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+      // return ResponseDTO(success: false, data: null, errorType: new ErrorType("13없음", 404));
+      return ResponseDTO(success: false);
+    }
+  }
 
   Future<ResponseDTO> fetchEpisode(String jwt, int id) async {
     try {
@@ -132,7 +154,6 @@ class EpisodeRepository {
       return new ResponseDTO(success: false, data: "좋아요 등록 실패");
     }
   }
-
 
   Future<ResponseDTO> fetchRandom(String jwt) async {
     try {

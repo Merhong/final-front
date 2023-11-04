@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/common_widgets/search_alert_dialog.dart';
 
 class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -39,7 +40,17 @@ class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
                   color: Colors.green,
                 ),
               ),
-              Icon(Icons.search, color: Colors.black, size: 30),
+              InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return SearchAlertDialog();
+                    },
+                  );
+                },
+                child: Icon(Icons.search, color: Colors.black, size: 30),
+              ),
             ],
           ),
         ),

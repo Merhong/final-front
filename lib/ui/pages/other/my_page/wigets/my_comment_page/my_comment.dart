@@ -6,9 +6,10 @@ import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_comment_view_model.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_comment_page/my_comment_dropdown.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_comment_page/my_comment_top_menu.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/re_reply_page/webtoon_re_reply_page.dart';
-import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -26,10 +27,23 @@ class MyComment extends ConsumerWidget {
     }
     List<MyCommentDTO> myCommentDTOList = model.myCommentDTOList;
 
+    if (model.sortCheck == "최신 순") {
+      myCommentDTOList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    }
+
+    if (model.sortCheck == "가나다 순") {
+      myCommentDTOList.sort((a, b) => a.text.compareTo(b.text));
+    }
+
+    if (model.sortCheck == "좋아요 순") {
+      myCommentDTOList.sort((a, b) => b.likeCommentCount.compareTo(a.likeCommentCount));
+      myCommentDTOList.sort((a, b) => a.dislikeCommentCount.compareTo(b.dislikeCommentCount));
+    }
+
     int replyCount = 0;
     int reReplyCount = 0;
     int totalLikeCount = 0;
-    int totalDislikeCount = 0;
+    // int totalDislikeCount = 0;
     if (myCommentDTOList.length != 0) {
       replyCount = myCommentDTOList.where((element) => !(element.isReComment)).length;
       reReplyCount = myCommentDTOList.where((element) => element.isReComment).length;
@@ -39,22 +53,18 @@ class MyComment extends ConsumerWidget {
 
     return Column(
       children: [
-        Divider(color: Colors.grey, height: 1),
-        buildMyCommentTopMenu(myCommentDTOList.length),
-        Divider(color: Colors.grey, height: 1),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
+        MyCommentTopMenu(allLength: myCommentDTOList.length),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
         Expanded(
-          child: RefreshIndicator(
-            key: refreshKey,
-            onRefresh: () async => await ref.read(myCommentPageProvider.notifier).notifyInit(),
-            child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1),
-              itemCount: myCommentDTOList.length + 1,
-              itemBuilder: (context, index) {
-                return index == 0
-                    ? buildMyCommentCount(replyCount, reReplyCount, totalLikeCount)
-                    : buildCommentDescription(myCommentDTOList[index - 1], context, ref);
-              },
-            ),
+          child: ListView.separated(
+            separatorBuilder: (context, index) => Divider(color: Colors.grey, height: 1, thickness: 1),
+            itemCount: myCommentDTOList.length + 1,
+            itemBuilder: (context, index) {
+              return index == 0
+                  ? buildMyCommentCount(replyCount, reReplyCount, totalLikeCount)
+                  : buildCommentDescription(myCommentDTOList[index - 1], context, ref);
+            },
           ),
         ),
       ],
@@ -164,9 +174,12 @@ class MyComment extends ConsumerWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (_) => ReReplyPage()));
                 },
                 child: myCommentDTO.isReComment == true
-                    ? Text("답글보기 >", style: TextStyle(fontSize: 12, color: Colors.grey[700]))
-                    : CommentBox(
-                        commentBoxRow: Row(children: [Text("답글${myCommentDTO.reCommentCount == 0 ? '' : ' ${myCommentDTO.reCommentCount}'}")]),
+                    ? Container(height: 25, child: Text("답글보기 >", style: TextStyle(fontSize: 12, color: Colors.grey[700])))
+                    : Container(
+                        height: 25,
+                        child: CommentBox(
+                          commentBoxRow: Row(children: [Text("답글${myCommentDTO.reCommentCount == 0 ? '' : ' ${myCommentDTO.reCommentCount}'}")]),
+                        ),
                       ),
               ),
               Spacer(),
@@ -194,10 +207,10 @@ class MyComment extends ConsumerWidget {
 
   Padding buildMyCommentCount(int replyCount, int reReplyCount, int totalLikeCount) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
+      padding: EdgeInsets.all(sizePaddingLR17),
       child: Container(
         padding: EdgeInsets.all(sizeM10),
-        decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(5)),
+        decoration: BoxDecoration(color: Color.fromRGBO(200, 200, 200, 1), borderRadius: BorderRadius.circular(5)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -212,21 +225,22 @@ class MyComment extends ConsumerWidget {
     );
   }
 
-  Container buildMyCommentTopMenu(int count) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
-      child: Row(
-        children: [
-          Text("웹툰 ${count}", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-          SizedBox(width: sizeL20),
-          Text("베도/도전 0", style: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold)),
-          SizedBox(width: sizeL20),
-          Text("최신순", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-          Text("▼"),
-          Spacer(),
-          InkWell(child: Icon(Icons.warning, size: 20, color: Colors.grey)),
-        ],
-      ),
-    );
-  }
+//   Container buildMyCommentTopMenu(int count) {
+//     return Container(
+//       padding: EdgeInsets.fromLTRB(sizePaddingLR17, 0, sizePaddingLR17, 0),
+//       child: Row(
+//         children: [
+//           Text("웹툰 ${count}", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+//           SizedBox(width: sizeL20),
+//           Text("베스트도전 0", style: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold)),
+//           SizedBox(width: sizeL20),
+//           // Text("최신 순", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+//           // Text("▼"),
+//           Container(width: 80, child: MyCommentDropdown()),
+//           Spacer(),
+//           InkWell(child: Icon(Icons.warning, size: 20, color: Colors.grey)),
+//         ],
+//       ),
+//     );
+//   }
 }
