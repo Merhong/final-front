@@ -17,7 +17,7 @@ class SearchPage extends StatelessWidget {
               controller: searchController,
               decoration: InputDecoration(
                 labelText: '검색어를 입력하세요',
-                prefixIcon: Icon(Icons.search),
+                suffixIcon: Icon(Icons.search),
               ),
               onSubmitted: (value) {
                 // 사용자가 검색어를 입력하고 Enter 키를 누르면 실행되는 콜백
