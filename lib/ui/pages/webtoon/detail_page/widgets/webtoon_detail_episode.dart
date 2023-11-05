@@ -43,10 +43,10 @@ class WebtoonDetailEpisode extends ConsumerWidget {
             Stack(
               children: [
                 webtoonDTO.episodeList[index].isLastView == true
-                    ? Positioned(right: 0, child: CustomPaint(size: Size(30, 30), painter: DrawIsView1(color: Color.fromRGBO(170, 170, 170, 1))))
+                    ? Positioned(right: 0, child: CustomPaint(size: Size(40, 40), painter: DrawIsView1(color: Color.fromRGBO(170, 170, 170, 1))))
                     : SizedBox(),
                 webtoonDTO.episodeList[index].isLastView == true
-                    ? Positioned(right: 0, child: CustomPaint(size: Size(30, 30), painter: DrawIsView2(color: Colors.white)))
+                    ? Positioned(right: 0, child: CustomPaint(size: Size(40, 40), painter: DrawIsView2(color: Colors.white)))
                     : SizedBox(),
                 Padding(
                   padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
@@ -81,7 +81,7 @@ class WebtoonDetailEpisode extends ConsumerWidget {
                           Row(
                             children: [
                               Text(
-                                  "★${(webtoonDTO.episodeList![index].starScore / webtoonDTO.episodeList![index].starCount).toStringAsFixed(2)}   ${DateFormat('yyyy-MM-dd').format(webtoonDTO.episodeList![index].createdAt)}",
+                                  "★${(webtoonDTO.episodeList![index].starScore / webtoonDTO.episodeList![index].starCount == 0 ? 1 : webtoonDTO.episodeList![index].starCount).toStringAsFixed(2)}   ${DateFormat('yyyy-MM-dd').format(webtoonDTO.episodeList![index].createdAt)}",
                                   style: TextStyle(fontSize: 10, color: Colors.grey[600])),
                             ],
                           ),
