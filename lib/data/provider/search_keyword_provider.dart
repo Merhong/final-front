@@ -16,10 +16,10 @@ class SearchKeyword {
     savedKeywords.removeWhere((keyword) => keywords.contains(keyword));
 
     final serializedKeywords = jsonEncode(savedKeywords);
-    await secureStorage.write(key: 'searchKeywords', value: serializedKeywords);
+    await secureStorage.write(key: "searchKeywords", value: serializedKeywords);
   }
 
-  // 검색어 목록을 저장
+  // 검색어 저장
   Future<void> saveSearchKeywords(String keyword) async {
     final savedKeywords = await loadSearchKeywords() ?? [];
 
@@ -31,12 +31,12 @@ class SearchKeyword {
     }
 
     final serializedKeywords = jsonEncode(savedKeywords);
-    await secureStorage.write(key: 'searchKeywords', value: serializedKeywords);
+    await secureStorage.write(key: "searchKeywords", value: serializedKeywords);
   }
 
-  // 검색어 목록을 로드
+  // 검색어 로드
   Future<List<String>?> loadSearchKeywords() async {
-    final serializedKeywords = await secureStorage.read(key: 'searchKeywords');
+    final serializedKeywords = await secureStorage.read(key: "searchKeywords");
     if (serializedKeywords != null) {
       List<String> list = List<String>.from(jsonDecode(serializedKeywords));
       return list;

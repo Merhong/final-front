@@ -35,6 +35,7 @@ class _SearchAlertDialogState extends ConsumerState<SearchAlertDialog> {
     // await ref.read(searchKeywordProvider).saveSearchKeywords(["5"]);
     // ref.read(searchKeywordProvider).saveSearchKeywords(["fas"]);
     keywordList = await ref.read(searchKeywordProvider).loadSearchKeywords();
+    if (keywordList == null) keywordList = [];
     print("${keywordList}");
     setState(() {});
   }
@@ -112,6 +113,7 @@ class _SearchAlertDialogState extends ConsumerState<SearchAlertDialog> {
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SearchPage()));
                           },
                           child: Container(
+                            alignment: Alignment(-1, 0),
                             height: 30,
                             child: Text(
                               "${keyword}",
