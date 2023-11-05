@@ -13,6 +13,8 @@ class RequestParam {
   int? bottomNavigationBarIndex;
   String? searchText;
   bool? isSearchMove;
+  bool? isAutoLogin = false;
+  bool? isLoginMove = false;
 
   RequestParam({this.webtoonDetailId});
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/provider/advertising_sub_provider.dart';
+import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
@@ -40,6 +41,25 @@ class _WebtoonListPageState extends ConsumerState<WebtoonListPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (ref.read(paramProvider).isLoginMove == true) {
+      ref.read(paramProvider).isLoginMove = false;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // 여기에서 showSnackBar() 호출
+        mySnackbar(
+          context,
+          2000,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("${ref.read(sessionProvider).user!.username}(${ref.read(sessionProvider).user!.email.split("@")[0]}) 자동 로그인"),
+            ],
+          ),
+        );
+
+        //
+      });
+    }
+
     ref.read(advertisingSubProvider).fetchAdvertisingSubList(ref.read(sessionProvider).jwt!);
 
     return Scaffold(

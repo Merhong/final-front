@@ -27,6 +27,34 @@ class UserRepository {
       );
     }
   }
+//
+
+  Future<ResponseDTO> fetchAutoLogin(String oldjwt) async {
+    try {
+      Response response = await dio.post("/autologin", options: Options(headers: {"Authorization": "${oldjwt}"}));
+
+      ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+
+      responseDTO.data = new User.fromJson(responseDTO.data);
+
+      List<String>? jwt = response.headers["Authorization"];
+
+      if (jwt != null) {
+        responseDTO.token = jwt.first; // jwt[0]과 같음
+      }
+
+      // 필요할때만 쓰기
+      // responseDTO.data = User.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      // 200이 아니면 catch로 감
+      return new ResponseDTO(
+        success: false,
+        errorType: ErrorType(message: "자동 로그인 실패"),
+      );
+    }
+  }
 
 //
 

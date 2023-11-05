@@ -81,6 +81,12 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
                   child: Image.network(
                     "${imageURL}${advertisingMainDTOList[index].photo}",
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        "assets/default_episode_Thumbnail.jpg",
+                        fit: BoxFit.cover,
+                      );
+                    },
                   ),
                 ),
                 Align(
@@ -121,13 +127,11 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 text: TextSpan(
-                                  text:
-                                      "${advertisingMainDTOList[index].isWebLink == true ? advertisingMainDTOList[index].mainText : advertisingMainDTOList[index].webtoonTitle} ",
+                                  text: "${advertisingMainDTOList[index].mainText} ",
                                   style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                                   children: [
                                     TextSpan(
-                                      text:
-                                          " ${advertisingMainDTOList[index].isWebLink == true ? advertisingMainDTOList[index].subText : advertisingMainDTOList[index].authorNicknameList!.join('/')}",
+                                      text: " ${advertisingMainDTOList[index].subText}",
                                       style: TextStyle(fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
                                     )
                                   ],

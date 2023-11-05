@@ -4,8 +4,10 @@ import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/user_request.dart';
 import 'package:flutter_blog/data/model/user.dart';
+import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/repository/user_repository.dart';
 import 'package:flutter_blog/main.dart';
+import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // 1. 창고 데이터
@@ -30,8 +32,39 @@ class SessionUser {
     if (responseDTO.success == true) {
       Navigator.pushNamed(mContext!, Move.loginPage);
     } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-          SnackBar(content: Text(responseDTO.errorType!.message!)));
+      ScaffoldMessenger.of(mContext!).showSnackBar(SnackBar(content: Text(responseDTO.errorType!.message!)));
+    }
+  }
+
+  Future<void> autoLogin(WidgetRef ref) async {
+    print("자동로그인실행");
+    String oldjwt = "";
+    try {
+      oldjwt = await secureStorage.read(key: 'jwt') as String;
+    } catch (e) {
+      print("자동로그인 secureStorage.read 실패");
+    }
+
+    // 1. 통신 코드
+    ResponseDTO responseDTO = await UserRepository().fetchAutoLogin(oldjwt);
+
+    // 2. 비지니스 로직
+    if (responseDTO.success == true) {
+      // 1. 세션값 갱신
+      this.user = responseDTO.data as User;
+      this.jwt = responseDTO.token;
+      this.isLogin = true;
+
+      // 2. 디바이스에 JWT 저장 (자동 로그인)
+      await secureStorage.write(key: "jwt", value: responseDTO.token);
+
+      // 3. 페이지 이동
+      print("자동로그인성공");
+      ref.read(paramProvider).isLoginMove = true;
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.homeListPage, (route) => false);
+    } else {
+      print("자동로그인실패");
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);
     }
   }
 
@@ -51,11 +84,9 @@ class SessionUser {
 
       // print("성공");
       // 3. 페이지 이동
-      Navigator.pushNamedAndRemoveUntil(
-          mContext!, Move.homeListPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.homeListPage, (route) => false);
     } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-          SnackBar(content: Text("${responseDTO.errorType!.message!}")));
+      ScaffoldMessenger.of(mContext!).showSnackBar(SnackBar(content: Text("${responseDTO.errorType!.message!}")));
     }
   }
 
@@ -69,8 +100,7 @@ class SessionUser {
     // await 없으면 삭제 전에 로그인페이지로 이동돼서 바로 다시 자동로그인 될 수 있음
 
     // Navigator.popAndPushNamed(context, Move.loginPage);
-    Navigator.pushNamedAndRemoveUntil(
-        mContext!, Move.loginPage, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);
     // 로그아웃이니까 스택 쌓인거 싹 다 없애기
   }
 }

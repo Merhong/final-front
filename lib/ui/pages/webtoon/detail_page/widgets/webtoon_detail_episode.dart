@@ -81,7 +81,7 @@ class WebtoonDetailEpisode extends ConsumerWidget {
                           Row(
                             children: [
                               Text(
-                                  "★${(webtoonDTO.episodeList![index].starScore / webtoonDTO.episodeList![index].starCount == 0 ? 1 : webtoonDTO.episodeList![index].starCount).toStringAsFixed(2)}   ${DateFormat('yyyy-MM-dd').format(webtoonDTO.episodeList![index].createdAt)}",
+                                  "★${(webtoonDTO.episodeList![index].starScore / (webtoonDTO.episodeList![index].starCount == 0 ? 1 : webtoonDTO.episodeList![index].starCount)).toStringAsFixed(2)}   ${DateFormat('yyyy-MM-dd').format(webtoonDTO.episodeList![index].createdAt)}",
                                   style: TextStyle(fontSize: 10, color: Colors.grey[600])),
                             ],
                           ),
