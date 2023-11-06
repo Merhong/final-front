@@ -18,15 +18,18 @@ class _AppBottomState extends ConsumerState<AppBottom> {
   void _onItemTapped(int index) {
     // 웹툰
     if (index == 0) {
-      Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, Move.homeListPage, (route) => false);
     }
     // 추천완결
     else if (index == 1 && ps.bottomNavigationBarIndex != index) {
-      Navigator.pushNamedAndRemoveUntil(context, Move.recommendPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, Move.recommendPage, (route) => false);
     }
     // 베스트 도전
     else if (index == 2 && ps.bottomNavigationBarIndex != index) {
-      Navigator.pushNamedAndRemoveUntil(context, Move.bestPage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, Move.bestPage, (route) => false);
     }
     // MY
     else if (index == 3 && ps.bottomNavigationBarIndex != index) {
@@ -34,7 +37,8 @@ class _AppBottomState extends ConsumerState<AppBottom> {
     }
     // 더보기
     else if (index == 4 && ps.bottomNavigationBarIndex != index) {
-      Navigator.pushNamedAndRemoveUntil(context, Move.seeMorePage, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, Move.seeMorePage, (route) => false);
     } else {
       print("아무실행안됨");
       return;
@@ -53,36 +57,54 @@ class _AppBottomState extends ConsumerState<AppBottom> {
       onWillPop: () {
         ps.addBottomNavigationBarIndex(0);
         print("뒤로가기${ps.bottomNavigationBarIndex}");
-        Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, Move.homeListPage, (route) => false);
         return Future.value(false);
       },
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: Colors.grey, width: 1.0)), // 라인효과
+          border:
+              Border(top: BorderSide(color: Colors.grey, width: 1.0)), // 라인효과
         ),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           // 아이템 너비 고정
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: ps.bottomNavigationBarIndex == null || ps.bottomNavigationBarIndex == 0 ? Colors.black : Colors.grey),
+              icon: Icon(Icons.propane_tank_outlined,
+                  color: ps.bottomNavigationBarIndex == null ||
+                          ps.bottomNavigationBarIndex == 0
+                      ? Colors.black
+                      : Colors.grey),
               label: '웹툰',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.book, color: ps.bottomNavigationBarIndex == 1 ? Colors.black : Colors.grey),
+              icon: Icon(Icons.book_outlined,
+                  color: ps.bottomNavigationBarIndex == 1
+                      ? Colors.black
+                      : Colors.grey),
               label: '추천완결',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.my_library_books, color: ps.bottomNavigationBarIndex == 2 ? Colors.black : Colors.grey),
+              icon: Icon(Icons.assistant_outlined,
+                  color: ps.bottomNavigationBarIndex == 2
+                      ? Colors.black
+                      : Colors.grey),
               label: '베스트도전',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person, color: ps.bottomNavigationBarIndex == 3 ? Colors.black : Colors.grey),
+              icon: Icon(Icons.emoji_emotions_outlined,
+                  color: ps.bottomNavigationBarIndex == 3
+                      ? Colors.black
+                      : Colors.grey),
               label: 'My',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.more_vert, color: ps.bottomNavigationBarIndex == 4 ? Colors.black : Colors.grey),
+              icon: Icon(Icons.grid_view,
+                  color: ps.bottomNavigationBarIndex == 4
+                      ? Colors.black
+                      : Colors.grey),
               label: '더보기',
             ),
           ],
