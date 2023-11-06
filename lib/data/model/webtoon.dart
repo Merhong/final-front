@@ -11,7 +11,7 @@ class Webtoon {
   double? starScore;
   double? starCount;
   String? image;
-  String? detailImage;
+  // String? detailImage;
   int? ageLimit;
   String? weekDay;
   String? specially;
@@ -27,7 +27,7 @@ class Webtoon {
     this.starScore,
     this.starCount,
     this.image,
-    this.detailImage,
+    // this.detailImage,
     this.ageLimit,
     this.weekDay,
     this.specially,
@@ -63,6 +63,6 @@ class Webtoon {
 
   @override
   String toString() {
-    return 'Webtoon{id: $id, authorList: $authorList, title: $title, intro: $intro, starScore: $starScore, starCount: $starCount, image: $image, detailImage: $detailImage, ageLimit: $ageLimit, weekDay: $weekDay, specially: $specially, createdAt: $createdAt, updatedAt: $updatedAt}';
+    return 'Webtoon{id: $id, authorList: $authorList, title: $title, intro: $intro, starScore: $starScore, starCount: $starCount, image: $image, ageLimit: $ageLimit, weekDay: $weekDay, specially: $specially, createdAt: $createdAt, updatedAt: $updatedAt}';
   }
 }

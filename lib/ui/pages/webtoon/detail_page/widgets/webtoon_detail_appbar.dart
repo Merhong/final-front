@@ -107,7 +107,7 @@ class WebtoonDetailAppbar extends ConsumerWidget implements PreferredSizeWidget 
                 },
                 child: Row(
                   children: [
-                    Icon(CupertinoIcons.plus_circle),
+                    Icon(CupertinoIcons.plus_circle, color: !isScroll ? Colors.white : Colors.black),
                     Text("관심 추가", style: TextStyle(color: !isScroll ? Colors.white : Colors.black, fontSize: 18)),
                     SizedBox(width: sizeL20),
                   ],

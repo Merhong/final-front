@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/data/provider/search_keyword_provider.dart';
 import 'package:flutter_blog/ui/pages/other/search_page/search_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -57,6 +58,9 @@ class _SearchSearchbarState extends ConsumerState<SearchSearchbar> {
                     onTap: () {
                       if (_formKey.currentState!.validate() && _commentText.text.length >= 1) {
                         print("검색입력${_commentText.text}");
+
+                        ref.read(searchKeywordProvider).saveSearchKeywords("${_commentText.text}");
+
                         // ReplyReqDTO replyReqDTO = new ReplyReqDTO(text: _commentText.text);
                         // focusNode.unfocus();
                         // _commentText.clear();

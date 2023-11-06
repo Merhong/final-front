@@ -21,6 +21,7 @@ class LoginForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // WidgetRef ref 추가
+    print("로그인폼으로옴");
     return Form(
       key: _formKey,
       child: Column(

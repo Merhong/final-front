@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/data/provider/search_keyword_provider.dart';
 import 'package:flutter_blog/ui/pages/other/search_page/search_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,8 +22,30 @@ class _SearchAlertDialogState extends ConsumerState<SearchAlertDialog> {
   final _formKey = GlobalKey<FormState>();
   final _commentText = TextEditingController();
 
+  late List<String>? keywordList = null;
+
+  @override
+  void initState() {
+    _initializeData();
+    super.initState();
+  }
+
+  void _initializeData() async {
+    // secureStorage.delete(key: "searchKeywords");
+    // await ref.read(searchKeywordProvider).saveSearchKeywords(["5"]);
+    // ref.read(searchKeywordProvider).saveSearchKeywords(["fas"]);
+    keywordList = await ref.read(searchKeywordProvider).loadSearchKeywords();
+    if (keywordList == null) keywordList = [];
+    print("${keywordList}");
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (keywordList == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+
     return AlertDialog(
       title: Container(
         height: 20,
@@ -39,7 +63,6 @@ class _SearchAlertDialogState extends ConsumerState<SearchAlertDialog> {
                   decoration: InputDecoration(
                     border: UnderlineInputBorder(borderSide: BorderSide.none),
                     hintStyle: TextStyle(fontSize: 15),
-                    // hintText: focusNode.hasFocus ? "주제와 무관한 내용 및 악플은 삭제될 수 있습니다." : "댓글을 입력해주세요.",
                     hintText: "제목 또는 작가명 검색",
                     isDense: true,
                     contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -55,9 +78,8 @@ class _SearchAlertDialogState extends ConsumerState<SearchAlertDialog> {
                 onTap: () {
                   if (_formKey.currentState!.validate() && _commentText.text.length >= 1) {
                     print("검색입력${_commentText.text}");
-                    // ReplyReqDTO replyReqDTO = new ReplyReqDTO(text: _commentText.text);
-                    // focusNode.unfocus();
-                    // _commentText.clear();
+                    ref.read(searchKeywordProvider).saveSearchKeywords("${_commentText.text}");
+
                     ParamStore ps = ref.read(paramProvider);
                     ps.addSearchText(_commentText.text);
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SearchPage()));
@@ -74,31 +96,48 @@ class _SearchAlertDialogState extends ConsumerState<SearchAlertDialog> {
         child: Column(
           children: [
             Divider(color: Colors.grey, height: 1, thickness: 1),
-            Column(
-              children: [
-                // for (Author author in authorList)
-                SizedBox(height: sizeM10),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        print("최근검색어선택");
-                      },
-                      child: Text("ㅎㅁ만ㅏ아ㄴㄹ", style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                    Spacer(),
-                    InkWell(
-                      onTap: () {
-                        print("최근검색어삭제ㅁㄴ");
-                      },
-                      child: Icon(Icons.close, size: 20, color: Colors.grey[600]),
-                    ),
-                    SizedBox(width: 3),
-                  ],
-                ),
-                SizedBox(height: sizeS5),
-              ],
-            ),
+            SizedBox(height: sizeM10),
+            for (String keyword in keywordList!.reversed)
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            print("최근검색어선택${keyword}");
+                            ref.read(searchKeywordProvider).saveSearchKeywords("${keyword}");
+
+                            ParamStore ps = ref.read(paramProvider);
+                            ps.addSearchText(keyword);
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SearchPage()));
+                          },
+                          child: Container(
+                            alignment: Alignment(-1, 0),
+                            height: 30,
+                            child: Text(
+                              "${keyword}",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: sizeL20),
+                      InkWell(
+                        onTap: () {
+                          print("최근검색어삭제${keyword}");
+                          ref.read(searchKeywordProvider).removeSearchKeyword(["${keyword}"]);
+
+                          keywordList!.remove("${keyword}");
+                          setState(() {});
+                        },
+                        child: Icon(Icons.close, size: 20, color: Colors.grey[600]),
+                      ),
+                      SizedBox(width: 3),
+                    ],
+                  ),
+                ],
+              ),
           ],
         ),
       ),

@@ -15,7 +15,7 @@ class Advertising extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String photo = "default_AD.jpg";
+    String photo = "Advertising/default_advertising_sub.jpg";
     String linkURL = "https://naver.com";
 
     try {
@@ -31,7 +31,7 @@ class Advertising extends ConsumerWidget {
       photo = selectSubDTO.photo;
       linkURL = selectSubDTO.linkURL;
     } catch (e) {
-      print("오류$e");
+      print("Advertising오류$e");
     }
 
     return InkWell(

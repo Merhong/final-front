@@ -84,7 +84,10 @@ class MyRecent extends ConsumerWidget {
           ),
           SizedBox(height: 3),
           Text(
-              "${recentDTO.recentEpisodeTitle.contains("화") ? recentDTO.recentEpisodeTitle.split("화")[0] + "화" : recentDTO.recentEpisodeTitle.substring(0, 8) + "..."}",
+              "${recentDTO.recentEpisodeTitle.contains("화") //
+                  ? recentDTO.recentEpisodeTitle.split("화")[0] + "화" //
+                  : recentDTO.recentEpisodeTitle.length >= 8 ? recentDTO.recentEpisodeTitle.substring(0, 7) + "..." //
+                      : recentDTO.recentEpisodeTitle}",
               style: TextStyle(fontSize: 13, color: Colors.grey[600])),
           SizedBox(height: 3),
         ],

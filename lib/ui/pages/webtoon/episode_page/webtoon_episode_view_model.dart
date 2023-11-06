@@ -6,6 +6,7 @@ import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/episode_repository.dart';
 import 'package:flutter_blog/main.dart';
+import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
@@ -55,6 +56,9 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     await EpisodeRepository().fetchRecent(sessionUser.jwt!, episodeId); // 최근본웹툰 반영
 
     state = WebtoonEpisodeModel(episodeDTO: responseDTO.data);
+
+    // TODO // 페이지 build 안에서 때리면 안되던데
+    ref.read(webtoonDetailProvider.notifier).notifyEpisodeViewUpdate(episodeId);
   }
 
   Future<void> appBarHidden() async {
