@@ -11,11 +11,10 @@ class RatingStarAlert extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WebtoonEpisodeRatingStarModel model =
-        ref.watch(webtoonEpisodeRatingStarProvider);
+    WebtoonEpisodeRatingStarModel model = ref.watch(webtoonEpisodeRatingStarProvider);
 
     int star = model.numberOfStar;
-    Logger().d("디버그1", star);
+    // Logger().d("디버그1", star);
 
     return FloatingActionButton(
       onPressed: () {
@@ -30,8 +29,7 @@ class RatingStarAlert extends ConsumerWidget {
                     Row(
                       children: [
                         for (int i = 0; i < star; i++) _star(1, ref, i + 1),
-                        for (int j = 0; j < 5 - star; j++)
-                          _star(-1, ref, j + 1),
+                        for (int j = 0; j < 5 - star; j++) _star(-1, ref, j + 1),
                       ],
                     ),
                   ],
@@ -46,13 +44,9 @@ class RatingStarAlert extends ConsumerWidget {
                   ElevatedButton(
                     child: Text("확인"),
                     onPressed: () async {
-                      ResponseDTO responseDTO = await ref
-                          .read(webtoonEpisodeRatingStarProvider.notifier)
-                          .notifyRatingStars();
+                      ResponseDTO responseDTO = await ref.read(webtoonEpisodeRatingStarProvider.notifier).notifyRatingStars();
 
-                      responseDTO.success == true
-                          ? Navigator.of(context).pop()
-                          : AlertDialog(title: responseDTO.data);
+                      responseDTO.success == true ? Navigator.of(context).pop() : AlertDialog(title: responseDTO.data);
 
                       // 여기에서 각 별점을 처리하거나 다른 작업을 수행할 수 있습니다.
                     },
@@ -63,22 +57,22 @@ class RatingStarAlert extends ConsumerWidget {
           },
         );
       },
-      child: Container(
-        decoration: BoxDecoration(border: Border.all()),
-        child: Padding(
-          padding: EdgeInsets.all(2),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.star,
-                color: Colors.yellow,
-                size: 20.0,
-              ),
-              Text("별점주기"),
-            ],
-          ),
-        ),
-      ),
+      // child: Container(
+      //   decoration: BoxDecoration(border: Border.all()),
+      //   child: Padding(
+      //     padding: EdgeInsets.all(2),
+      //     child: Row(
+      //       children: <Widget>[
+      //         Icon(
+      //           Icons.star,
+      //           color: Colors.yellow,
+      //           size: 20.0,
+      //         ),
+      //         Text("별점주기"),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
@@ -91,9 +85,7 @@ IconButton _star(int value, WidgetRef ref, int currentIndex) {
     //1 :  yellow, -1 :  grey
 
     onPressed: () {
-      ref
-          .read(webtoonEpisodeRatingStarProvider.notifier)
-          .notifyNumberOfStars(currentIndex);
+      ref.read(webtoonEpisodeRatingStarProvider.notifier).notifyNumberOfStars(currentIndex);
     },
   );
 }

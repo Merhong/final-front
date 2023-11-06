@@ -77,11 +77,11 @@ class _SearchSearchbarState extends ConsumerState<SearchSearchbar> {
             ),
             Divider(color: Colors.grey, height: 1, thickness: 1),
             Container(
-              padding: EdgeInsets.symmetric(vertical: sizeS5),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text("전체", style: TextStyle(color: Colors.green)),
+                  Text("전체", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
                   Text("웹툰", style: TextStyle(color: Colors.grey[600])),
                   Text("베스트도전", style: TextStyle(color: Colors.grey[600])),
                 ],
