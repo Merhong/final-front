@@ -14,8 +14,8 @@ class RatingStarAlert extends ConsumerWidget {
     WebtoonEpisodeRatingStarModel model =
         ref.watch(webtoonEpisodeRatingStarProvider);
 
-    int star = model.numberOfStar;
-    Logger().d("디버그1", star);
+    int? rating = model.ratingStarDTO?.episodeStarScore;
+    Logger().d("디버그1", rating);
 
     return RatingStarInkwell(ref: ref);
   }
