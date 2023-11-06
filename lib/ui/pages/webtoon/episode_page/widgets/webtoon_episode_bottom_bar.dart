@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_page/my_interest_author_dropdown.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
+import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_dropdown.dart';
 import 'package:flutter_blog/ui/pages/webtoon/reply_page/webtoon_reply_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -64,28 +66,42 @@ class WebtoonEpisodeBottomBar extends ConsumerWidget {
           Row(
             children: [
               ps.webtoonFirstEpisodeId != episodeDTO!.episodeId
-                  ? IconButton(
-                      icon: Icon(Icons.arrow_left, color: Colors.white, size: 30),
-                      onPressed: () {
+                  ? InkWell(
+                      child: Icon(Icons.arrow_left, color: Colors.white, size: 45),
+                      onTap: () {
+                        // int selectEpisodeId = episodeDTO.episodeMoveDTOList.firstWhere((moveDTO) => moveDTO.id == episodeDTO.episodeId).id;
+                        int selectEpisodeIndex = episodeDTO.episodeMoveDTOList.indexWhere((moveDTO) => moveDTO.id == episodeDTO.episodeId);
+
                         ps.isEpisodeMove = true;
-                        ps.addEpisodeDetailId((episodeDTO!.episodeId) + 1); // 역순정렬?
+                        ps.addEpisodeDetailId(episodeDTO.episodeMoveDTOList[selectEpisodeIndex + 1].id); // 역순정렬?
+                        print("실행에피넘어감");
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
                       },
                     )
-                  : IconButton(onPressed: () {}, icon: Icon(Icons.arrow_left, color: Colors.grey[700], size: 30)),
+                  : InkWell(onTap: () {}, child: Icon(Icons.arrow_left, color: Colors.grey[700], size: 45)),
               //
-              IconButton(onPressed: () {}, icon: Icon(Icons.menu, color: Colors.white)),
+
+              Stack(
+                children: [
+                  Container(width: 70, child: WebtoonEpisodeDropdown(episodeDTO: episodeDTO)),
+                  IgnorePointer(ignoring: true, child: Container(width: 80, child: Icon(Icons.menu, color: Colors.white, size: 45))),
+                ],
+              ),
+              // IconButton(onPressed: () {}, icon: Icon(Icons.menu, color: Colors.white)),
+              //
               //
               ps.webtoonLastEpisodeId != episodeDTO!.episodeId
-                  ? IconButton(
-                      icon: Icon(Icons.arrow_right, color: Colors.white, size: 30),
-                      onPressed: () {
+                  ? InkWell(
+                      child: Icon(Icons.arrow_right, color: Colors.white, size: 45),
+                      onTap: () {
+                        int selectEpisodeIndex = episodeDTO.episodeMoveDTOList.indexWhere((moveDTO) => moveDTO.id == episodeDTO.episodeId);
+
                         ps.isEpisodeMove = true;
-                        ps.addEpisodeDetailId((episodeDTO!.episodeId) - 1); // 역순정렬?
+                        ps.addEpisodeDetailId(episodeDTO.episodeMoveDTOList[selectEpisodeIndex - 1].id); // 역순정렬?
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
                       },
                     )
-                  : IconButton(onPressed: () {}, icon: Icon(Icons.arrow_right, color: Colors.grey[700], size: 30)),
+                  : InkWell(onTap: () {}, child: Icon(Icons.arrow_right, color: Colors.grey[700], size: 45)),
             ],
           ),
         ],

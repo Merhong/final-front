@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/common_widgets/app_bottom.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/see_more_body.dart';
 
@@ -18,11 +17,12 @@ class SeeMorePage extends StatelessWidget {
 
 AppBar SeeMoreAppBar() {
   return AppBar(
-    leading: Row(
-      children: [
-        SizedBox(width: sizeM10),
-        Text("더보기"),
-      ],
-    ),
+    backgroundColor: Colors.white,
+    elevation: 1,
+    title: Text(
+      '더보기',
+      style: TextStyle(color: Colors.black),
+    ), // AppBar의 제목을 설정
+    centerTitle: true, // 제목을 가운데 정렬
   );
 }
