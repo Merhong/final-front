@@ -19,7 +19,6 @@ class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
               // 텍스트 스타일 설정
               style: TextStyle(
                 fontSize: 16, // 텍스트 크기 설정 (원하는 크기로 수정)
-                fontWeight: FontWeight.bold, // 텍스트 굵기 설정
                 color: Colors.black, // 텍스트 색상을 검은색으로 설정
               ),
             ),

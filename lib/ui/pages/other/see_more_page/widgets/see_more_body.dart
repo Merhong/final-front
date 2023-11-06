@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/common_widgets/advertising.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/see_more_function_icons.dart';
@@ -17,8 +16,12 @@ class SeeMoreBody extends StatelessWidget {
         SeeMoreUserCookie(),
         FunctionIcons(),
         Container(height: 70.0),
-        Advertising(
-          ADHeight: sizeXXL100,
+        Padding(
+          padding: const EdgeInsets.only(
+              left: sizePaddingLR17, right: sizePaddingLR17),
+          child: Advertising(
+            ADHeight: sizeXXL100,
+          ),
         )
       ],
     );

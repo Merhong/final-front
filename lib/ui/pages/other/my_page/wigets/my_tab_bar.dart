@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_view_model.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_model.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_comment_page/my_comment.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_page/my_interest_author.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_webtoon_page/my_interest_webtoon.dart';
@@ -21,6 +19,8 @@ class MyTabBar extends ConsumerWidget {
       children: [
         TabBar(
           controller: _tabController,
+          indicatorColor: Colors.green,
+          labelColor: Colors.green,
           tabs: <Widget>[
             Tab(
               child: Text(
