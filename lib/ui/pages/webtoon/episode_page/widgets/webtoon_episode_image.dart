@@ -13,14 +13,17 @@ class WebtoonEpisodeImage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WebtoonEpisodeRatingStarModel model = ref.watch(webtoonEpisodeRatingStarProvider);
+    WebtoonEpisodeRatingStarModel model =
+        ref.watch(webtoonEpisodeRatingStarProvider);
 
     return Column(
       children: [
         Text("${model.numberOfStar}"),
         ElevatedButton(
             onPressed: () {
-              ref.read(webtoonEpisodeRatingStarProvider.notifier).notifyNumberOfStars(5);
+              ref
+                  .read(webtoonEpisodeRatingStarProvider.notifier)
+                  .notifyNumberOfStars(5);
             },
             child: Text("변경")),
         Expanded(

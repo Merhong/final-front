@@ -10,7 +10,6 @@ import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_recent_page/my_rec
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class MyRecent extends ConsumerWidget {
   @override
@@ -30,9 +29,9 @@ class MyRecent extends ConsumerWidget {
       },
       child: Column(
         children: [
-          Divider(color: Colors.grey, height: 1, thickness: 1),
+          Divider(color: Colors.black26, height: 1, thickness: 1),
           MyRecentTopMenu(allLength: myRecentDTOList.length),
-          Divider(color: Colors.grey, height: 1, thickness: 1),
+          Divider(color: Colors.black26),
           Expanded(
             child: ListView.builder(
               itemCount: myRecentDTOList.length,
@@ -41,18 +40,20 @@ class MyRecent extends ConsumerWidget {
                   children: [
                     Container(
                       height: 85,
-                      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
+                      padding: EdgeInsets.fromLTRB(
+                          sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
                       child: Row(
                         children: [
                           buildPhoto(ref, myRecentDTOList[index], context),
                           SizedBox(width: sizeM10),
-                          buildDescription(ref, myRecentDTOList[index], context),
+                          buildDescription(
+                              ref, myRecentDTOList[index], context),
                           // SizedBox(width: sizeL20),
                           buildEpisodeGo(ref, myRecentDTOList[index], context),
                         ],
                       ),
                     ),
-                    Divider(color: Colors.grey, height: 1, thickness: 1),
+                    Divider(color: Colors.black26),
                   ],
                 );
               },
@@ -63,13 +64,15 @@ class MyRecent extends ConsumerWidget {
     );
   }
 
-  Widget buildEpisodeGo(WidgetRef ref, RecentDTO recentDTO, BuildContext context) {
+  Widget buildEpisodeGo(
+      WidgetRef ref, RecentDTO recentDTO, BuildContext context) {
     return InkWell(
       onTap: () {
         ParamStore ps = ref.read(paramProvider);
         ps.addEpisodeDetailId(recentDTO.recentEpisodeId);
         ps.addBottomNavigationBarIndex(0);
-        Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -79,7 +82,8 @@ class MyRecent extends ConsumerWidget {
             // constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.2),
             child: Text(
               "이어보기 >",
-              style: TextStyle(color: Colors.black, overflow: TextOverflow.ellipsis),
+              style: TextStyle(
+                  color: Colors.black, overflow: TextOverflow.ellipsis),
             ),
           ),
           SizedBox(height: 3),
@@ -95,14 +99,16 @@ class MyRecent extends ConsumerWidget {
     );
   }
 
-  Expanded buildDescription(WidgetRef ref, RecentDTO recentDTO, BuildContext context) {
+  Expanded buildDescription(
+      WidgetRef ref, RecentDTO recentDTO, BuildContext context) {
     return Expanded(
       child: InkWell(
         onTap: () {
           ParamStore ps = ref.read(paramProvider);
           ps.addWebtoonDetailId(recentDTO.webtoonId);
           ps.addBottomNavigationBarIndex(0);
-          Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,10 +118,14 @@ class MyRecent extends ConsumerWidget {
               children: [
                 Container(
                   // width: 200,
-                  constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
+                  constraints: BoxConstraints(
+                      maxWidth: sizeGetScreenWidth(context) * 0.6),
                   child: Text(
                     "${recentDTO.webtoonTitle}",
-                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis),
                   ),
                 ),
                 SizedBox(width: 3),
@@ -129,14 +139,24 @@ class MyRecent extends ConsumerWidget {
               ],
             ),
             SizedBox(height: 3),
-            recentDTO.updatedAt != null && DateTime.now().difference(recentDTO.updatedAt!).inHours < 50
+            recentDTO.updatedAt != null &&
+                    DateTime.now().difference(recentDTO.updatedAt!).inHours < 50
                 ? RichText(
                     text: TextSpan(
-                    text: DateTime.now().difference(recentDTO.updatedAt!).inHours >= 1
+                    text: DateTime.now()
+                                .difference(recentDTO.updatedAt!)
+                                .inHours >=
+                            1
                         ? "${DateTime.now().difference(recentDTO.updatedAt!).inHours}시간 전 "
-                        : DateTime.now().difference(recentDTO.updatedAt!).inMinutes >= 1
+                        : DateTime.now()
+                                    .difference(recentDTO.updatedAt!)
+                                    .inMinutes >=
+                                1
                             ? "${DateTime.now().difference(recentDTO.updatedAt!).inMinutes}분 전 "
-                            : DateTime.now().difference(recentDTO.updatedAt!).inSeconds >= 5
+                            : DateTime.now()
+                                        .difference(recentDTO.updatedAt!)
+                                        .inSeconds >=
+                                    5
                                 ? "${DateTime.now().difference(recentDTO.updatedAt!).inSeconds}초 전 "
                                 : "지금 ",
                     style: TextStyle(fontSize: 13, color: Colors.grey[600]),
@@ -149,15 +169,24 @@ class MyRecent extends ConsumerWidget {
             RichText(
               text: TextSpan(
                 text: "남은 이야기 ",
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
                 children: [
                   TextSpan(
                     text: "${recentDTO.totalCount - recentDTO.viewCount}",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.green),
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green),
                   ),
                   TextSpan(
                     text: " / ${recentDTO.totalCount}",
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey[600]),
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[600]),
                   ),
                 ],
               ),
@@ -196,7 +225,8 @@ class MyRecent extends ConsumerWidget {
     );
   }
 
-  ClipRRect buildPhoto(WidgetRef ref, RecentDTO myRecentDTO, BuildContext context) {
+  ClipRRect buildPhoto(
+      WidgetRef ref, RecentDTO myRecentDTO, BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(5)),
       child: InkWell(
@@ -204,7 +234,8 @@ class MyRecent extends ConsumerWidget {
           ParamStore ps = ref.read(paramProvider);
           ps.addWebtoonDetailId(myRecentDTO.webtoonId);
           ps.addBottomNavigationBarIndex(0);
-          Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
         },
         child: Stack(
           children: [
@@ -230,7 +261,8 @@ class MyRecent extends ConsumerWidget {
                         ? Container(
                             height: sizeGetScreenWidth(context) * 0.18,
                             width: sizeGetScreenWidth(context) * 0.25,
-                            child: SpeciallyTag(speciallyTagEnum: SpeciallyTagEnum.rank),
+                            child: SpeciallyTag(
+                                speciallyTagEnum: SpeciallyTagEnum.rank),
                           )
                         : SizedBox()
           ],
