@@ -37,7 +37,7 @@ class SearchBody extends StatelessWidget {
                 return index == 0
                     ? Padding(
                         padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, 0, 0),
-                        child: Text("웹툰 ${searchDTOList.length}"),
+                        child: Text("웹툰 ${searchDTOList.length}", style: TextStyle(fontWeight: FontWeight.bold)),
                       )
                     : SearchItem(searchDTO: searchDTOList[index - 1]);
               },

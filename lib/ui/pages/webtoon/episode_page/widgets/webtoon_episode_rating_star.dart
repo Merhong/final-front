@@ -11,11 +11,10 @@ class RatingStarAlert extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WebtoonEpisodeRatingStarModel model =
-        ref.watch(webtoonEpisodeRatingStarProvider);
+    WebtoonEpisodeRatingStarModel model = ref.watch(webtoonEpisodeRatingStarProvider);
 
     int star = model.numberOfStar;
-    Logger().d("디버그1", star);
+    // Logger().d("디버그1", star);
 
     return RatingStarInkwell(ref: ref);
   }
