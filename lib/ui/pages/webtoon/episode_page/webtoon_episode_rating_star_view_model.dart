@@ -11,9 +11,8 @@ import 'package:logger/logger.dart';
 // 1. 창고 데이터
 
 class WebtoonEpisodeRatingStarModel {
-  RatingStarDTO? ratingStarDTO;
-  int numberOfStar; // 선택된 별의 수
-  WebtoonEpisodeRatingStarModel({this.numberOfStar = 0});
+  RatingStarDTO? ratingStarDTO; // 선택된 별의 수
+  WebtoonEpisodeRatingStarModel({this.ratingStarDTO});
 }
 
 // 2. 창고
@@ -25,13 +24,15 @@ class WebtoonEpisodeRatingStarViewModel
   // StateNotifier<PostListModel?> 에서 PostListModel은 상태의 타입
   WebtoonEpisodeRatingStarViewModel(this.ref, super._state); // 상태가 바뀌면 자동으로 그려짐
 
-  Future<void> notifyNumberOfStars(int star) async {
+  Future<void> notifyNumberOfStars(double rating) async {
     WebtoonEpisodeRatingStarModel model = state;
-    model.numberOfStar = star;
+    model.ratingStarDTO?.episodeStarScore = rating as int;
 
-    Logger().d("star 값 변경됨", model.numberOfStar);
+    Logger().d("star 값 변경됨", rating);
     // 깊은 복사
-    state = WebtoonEpisodeRatingStarModel(numberOfStar: model.numberOfStar);
+    state = WebtoonEpisodeRatingStarModel(ratingStarDTO: model.ratingStarDTO);
+
+    Logger().d("깊은 복사 완료", model.ratingStarDTO?.episodeStarScore);
 
     // notify 구독자들에게 알려줌
   }
@@ -39,9 +40,9 @@ class WebtoonEpisodeRatingStarViewModel
   Future<ResponseDTO> notifyRatingStars() async {
     //요청, 반환까지  오래 걸리니까 퓨처박스 빈박스 반환, 빈박스가 차면 다시 돌아와서 진행
     RatingStarReqDTO ratingStarReqDTO =
-        RatingStarReqDTO(score: state.numberOfStar);
+        RatingStarReqDTO(score: state.ratingStarDTO?.episodeStarScore);
     //ratingStarReqDTO 객체 생성 = 화면의 별점 값을 받아서 넣어줌
-    Logger().d("여!!!!!!!!!!기", state.numberOfStar);
+    Logger().d("여!!!!!!!!!!기", state.ratingStarDTO?.episodeStarScore);
 
     RequestParam requestParam = ref.read(paramProvider);
     //모델을 반환

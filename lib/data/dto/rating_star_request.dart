@@ -1,5 +1,5 @@
 class RatingStarReqDTO {
-  final int score;
+  final int? score;
 
   RatingStarReqDTO({required this.score});
 

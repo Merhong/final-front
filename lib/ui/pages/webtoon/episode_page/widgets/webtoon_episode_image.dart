@@ -18,14 +18,14 @@ class WebtoonEpisodeImage extends ConsumerWidget {
 
     return Column(
       children: [
-        Text("${model.numberOfStar}"),
-        ElevatedButton(
-            onPressed: () {
-              ref
-                  .read(webtoonEpisodeRatingStarProvider.notifier)
-                  .notifyNumberOfStars(5);
-            },
-            child: Text("변경")),
+        // Text("${model.numberOfStar}"),
+        // ElevatedButton(
+        //     onPressed: () {
+        //       ref
+        //           .read(webtoonEpisodeRatingStarProvider.notifier)
+        //           .notifyNumberOfStars(5);
+        //     },
+        //     child: Text("변경")),
         Expanded(
           child: ListView.builder(
             // scrollDirection: Axis.horizontal, // 수평 스크롤로 변경
