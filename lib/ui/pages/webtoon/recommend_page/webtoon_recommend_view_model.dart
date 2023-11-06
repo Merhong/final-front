@@ -22,7 +22,7 @@ class RecommendViewmodel extends StateNotifier<RecommendModel?> {
     SessionUser sessionUser = ref.read(sessionProvider);
     ResponseDTO responseDTO =
         await RecommendRepository().fetchRecommendList(sessionUser.jwt!);
-    Logger().d("이거당${responseDTO.data}");
+    Logger().d("이거당 : ${responseDTO.data}");
     state = RecommendModel(recommendationList: responseDTO.data);
   }
 }
