@@ -39,6 +39,7 @@ class Move {
   static String payMethodPage = "/pay/method"; // 결제(카드)
   static String payCardPage = "/pay/card"; // 결제(카드)
   static String searchPage = "/search"; // 결제(카드)
+  static String myInterestAuthorPage = "/interest/author"; // 결제(카드)
 }
 
 // Map<String, Widget Function(BuildContext)> 를 반환하는 함수
@@ -63,5 +64,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.payMethodPage: (context) => PayMethodPage(),
     Move.payCardPage: (context) => PayCardPage(),
     Move.searchPage: (context) => SearchPage(),
+    // Move.myInterestAuthorPage: (context) => MyInterestAuthorPage(),
   };
 }

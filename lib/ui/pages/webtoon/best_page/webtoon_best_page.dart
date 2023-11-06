@@ -15,16 +15,22 @@ class BestPage extends StatelessWidget implements PreferredSizeWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Center(
-            child: Text(
-              '베스트도전',
-              style: TextStyle(
-                fontSize: sizeL20,
-                color: Colors.black, // 또는 Colors.black으로 변경
-              ),
+          title: Text(
+            '베스트도전',
+            style: TextStyle(
+              fontSize: sizeL20,
+              color: Colors.black, // 또는 Colors.black으로 변경
             ),
           ),
-          actions: [Icon(Icons.search)],
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: sizePaddingLR17),
+              child: Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+            )
+          ],
           bottom: TabBar(
             isScrollable: true,
             labelPadding: EdgeInsets.symmetric(horizontal: 15.0),
