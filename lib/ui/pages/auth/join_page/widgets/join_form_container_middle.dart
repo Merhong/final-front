@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/join_form_container_middle_buttons.dart';
 
 class JoinFormContainerMiddle extends StatelessWidget {
@@ -22,6 +23,9 @@ class JoinFormContainerMiddle extends StatelessWidget {
           SizedBox(
             height: 70,
             child: TextFormField(
+              validator: (value) {
+                return validateUsername()(value);
+              },
               controller: _username,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.person),
