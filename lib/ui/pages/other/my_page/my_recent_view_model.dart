@@ -14,7 +14,8 @@ class MyRecentPageModel {
   MyRecentPageModel({required this.myRecentDTOList, this.sortCheck});
 
   MyRecentPageModel sortUpdate({required String sort}) {
-    return MyRecentPageModel(myRecentDTOList: this.myRecentDTOList, sortCheck: sort);
+    return MyRecentPageModel(
+        myRecentDTOList: this.myRecentDTOList, sortCheck: sort);
   }
 }
 
@@ -29,7 +30,8 @@ class MyRecentPageViewModel extends StateNotifier<MyRecentPageModel?> {
   // notify 구독자들에게 알려줌
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionProvider);
-    ResponseDTO responseDTO = await WebtoonRepository().fetchMyRecent(sessionUser.jwt!);
+    ResponseDTO responseDTO =
+        await WebtoonRepository().fetchMyRecent(sessionUser.jwt!);
 
     List<RecentDTO> myRecentDTOList = responseDTO.data;
     myRecentDTOList.sort((a, b) => b.updatedAt!.compareTo(a.updatedAt!));
@@ -43,7 +45,8 @@ class MyRecentPageViewModel extends StateNotifier<MyRecentPageModel?> {
 }
 
 // 3. 창고 관리자 (View가 빌드되기 직전에 생성됨)
-final myRecentPageProvider = StateNotifierProvider.autoDispose<MyRecentPageViewModel, MyRecentPageModel?>((ref) {
+final myRecentPageProvider = StateNotifierProvider.autoDispose<
+    MyRecentPageViewModel, MyRecentPageModel?>((ref) {
   return new MyRecentPageViewModel(ref, null)..notifyInit();
   // return new MyRecentPageViewModel(ref, null);
 });
