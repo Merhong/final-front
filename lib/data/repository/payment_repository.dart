@@ -10,7 +10,6 @@ class paymentRepository {
           data: dto.toJson(),
           options: Options(headers: {"Authorization": "${jwt}"}));
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
-
       return responseDTO;
     } catch (e) {
       return new ResponseDTO(success: false, data: "통신 실패");
