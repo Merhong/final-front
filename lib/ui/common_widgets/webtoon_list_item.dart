@@ -97,7 +97,7 @@ class WebtoonListItem extends StatelessWidget {
         Row(
           children: [
             Container(
-                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.21),
+                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.2),
                 // child: Text("${webtoonDTO.authorNicknameList!.map((str) => str).toList().join('/').replaceAll(' ', '')} ",
                 child: Text("${webtoonDTO.authorNicknameList!.toList().join('/').replaceAll(' ', '')} ",
                     style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis)),
