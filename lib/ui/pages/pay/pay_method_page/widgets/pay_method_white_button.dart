@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/pages/pay/pay_card_page/pay_card_page.dart';
 
 class PayMethodWhiteButton extends StatelessWidget {
   final String payment;
@@ -15,7 +16,13 @@ class PayMethodWhiteButton extends StatelessWidget {
         children: [
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PayCardPage(), // PayCardPage로 이동
+                  ),
+                );
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

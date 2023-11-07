@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/main.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
 
 class SeeMoreUserCookie extends StatelessWidget {
   const SeeMoreUserCookie({super.key});
@@ -21,6 +23,13 @@ class SeeMoreUserCookie extends StatelessWidget {
             SizedBox(width: 20),
             InkWell(
               child: Text("충전하기"),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PurchaseCookie(), // PayMethodPage로 이동
+                  ),
+                );
+              },
             )
           ],
         ),

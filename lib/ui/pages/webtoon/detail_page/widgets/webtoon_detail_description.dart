@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/model/author.dart';
+import 'package:flutter_blog/ui/common_widgets/author_list_select.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../common_widgets/advertising.dart';
@@ -128,64 +129,15 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
   Row buildAuthornameAndWeek(List<Author> authorList, String webtoonTitle) {
     return Row(
       children: [
-        InkWell(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: RichText(
-                    text: TextSpan(
-                      text: "${webtoonTitle}",
-                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-                      children: [
-                        // TextSpan(text: " 의", style: TextStyle(color: Colors.grey[600], fontSize: 14)),
-                        TextSpan(text: " 작가", style: TextStyle(color: Colors.green, fontSize: 16)),
-                      ],
-                    ),
-                  ),
-                  content: Container(
-                    height: 5 + authorList.length * 70,
-                    child: Column(
-                      children: [
-                        for (Author author in authorList)
-                          Column(
-                            children: [
-                              Divider(color: Colors.grey, height: 1, thickness: 1),
-                              SizedBox(height: sizeS5),
-                              InkWell(
-                                onTap: () {
-                                  print("${author.authorPhoto}/${author.authorNickname}");
-                                  // TODO 작가페이지
-                                },
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundImage: NetworkImage("${imageURL}/AuthorPhoto/${author.authorPhoto}"),
-                                      radius: 30,
-                                    ),
-                                    SizedBox(width: sizeM10),
-                                    Text("${author.authorNickname}"),
-                                    Spacer(),
-                                    Text("> ", style: TextStyle(fontSize: 20, color: Colors.grey)),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: sizeS5),
-                            ],
-                          ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-          child: Row(
+        AuthorListSelect(
+          context: context,
+          authorList: widget.webtoonDTO.authorList,
+          webtoonTitle: widget.webtoonDTO.title,
+          inkWellChild: Row(
             children: [
               Container(
                 constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
-                child: Text("${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/').replaceAll(' ', '')}",
+                child: Text("${authorList.map((author) => author.authorNickname).toList().join('/').replaceAll(' ', '')}",
                     overflow: TextOverflow.ellipsis),
               ),
               Text(" ✅")

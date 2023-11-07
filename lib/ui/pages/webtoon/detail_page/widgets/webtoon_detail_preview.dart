@@ -10,12 +10,9 @@ class WebtoonDetailPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Divider(color: Colors.black26),
+        Divider(color: Colors.grey, height: 1, thickness: 1),
         Padding(
-          padding: const EdgeInsets.only(
-            left: sizePaddingLR17,
-            right: sizePaddingLR17,
-          ),
+          padding: const EdgeInsets.only(left: sizePaddingLR17, right: sizePaddingLR17, top: sizeS5, bottom: sizeS5),
           child: Row(
             children: [
               Text(
@@ -111,7 +108,6 @@ class WebtoonDetailPreview extends StatelessWidget {
             ],
           ),
         ),
-        Divider(color: Colors.black26),
       ],
     );
   }
