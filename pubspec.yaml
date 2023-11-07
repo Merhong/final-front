@@ -77,6 +77,17 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+#  fonts:
+##    - family: PatuaOne # 선생님 책 예제에서 쓴거
+##      fonts:
+##        - asset: assets/PatuaOne-Regular.ttf
+#
+#    - family: Jamsil  # 저번프로젝트에서 쓴거
+#      fonts:
+##        - asset: assets/Giants-Inline.ttf
+##        - asset: assets/Giants-Bold.ttf
+##        - asset: assets/Giants-Regular.ttf
+#        - asset: assets/Jamsil-4-Medium.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
