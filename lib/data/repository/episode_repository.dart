@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/comment_dto/comment_DTO.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_like_dto.dart';
+import 'package:flutter_blog/data/dto/episode_dto/episode_star_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/recent_DTO.dart';
@@ -155,20 +156,40 @@ class EpisodeRepository {
     }
   }
 
-  Future<ResponseDTO> fetchRandom(String jwt) async {
+  Future<ResponseDTO> fetchStar(String jwt, int episodeId, int score) async {
     try {
-      Response response;
-
-      response = await dio.get("/webtoons/random", options: Options(headers: {"Authorization": "${jwt}"}));
+      // print("주소: /episodes/star/${episodeId}?score=${score}");
+      Response response = await dio.post("/episodes/star/${episodeId}?score=${score}", options: Options(headers: {"Authorization": "${jwt}"}));
 
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
-      responseDTO.data = DetailPageWebtoonDTO.fromJson(responseDTO.data);
-      // Logger().d(responseDTO.data);
+      // print("1${responseDTO.data}");
+
+      responseDTO.data = EpisodeStarDTO.fromJson(responseDTO.data);
+      // print("2${responseDTO.data}");
+
+      print("별점 리포지토리 통신 완료");
+
       return responseDTO;
     } catch (e) {
-      return new ResponseDTO(success: false, data: "랜덤작품 불러오기 실패");
+      print("별점실패 리포지토리");
+      return new ResponseDTO(success: false, data: "별점주기 실패");
     }
   }
+
+  // Future<ResponseDTO> fetchRandom(String jwt) async {
+  //   try {
+  //     Response response;
+  //
+  //     response = await dio.get("/webtoons/random", options: Options(headers: {"Authorization": "${jwt}"}));
+  //
+  //     ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+  //     responseDTO.data = DetailPageWebtoonDTO.fromJson(responseDTO.data);
+  //     // Logger().d(responseDTO.data);
+  //     return responseDTO;
+  //   } catch (e) {
+  //     return new ResponseDTO(success: false, data: "랜덤작품 불러오기 실패");
+  //   }
+  // }
 
 // Future<ResponseDTO> fetchWebtoonList(String jwt) async {
 //   try {

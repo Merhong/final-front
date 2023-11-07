@@ -22,7 +22,6 @@ class RequestParam {
 // 2. 창고 (비지니스 로직)
 class ParamStore extends RequestParam {
   final mContext = navigatorKey.currentContext;
-
   void addWebtoonLastEpisode(int episodeId) {
     print("에피소드끝:${episodeId}");
     this.webtoonLastEpisodeId = episodeId;
