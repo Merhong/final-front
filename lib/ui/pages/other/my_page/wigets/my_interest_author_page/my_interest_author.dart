@@ -4,6 +4,7 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_author_DTO.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_detail_page.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_view_model.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_page/my_interest_author_top_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -110,12 +111,13 @@ class MyInterestAuthor extends ConsumerWidget {
       BuildContext context) {
     return Expanded(
       child: InkWell(
-        // onTap: () {
-        //   ParamStore ps = ref.read(paramProvider);
-        //   ps.addWebtoonDetailId(interestAuthorDTOList[index].authorId);
-        //   ps.addBottomNavigationBarIndex(0);
-        //   Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
-        // },
+        onTap: () {
+          // ParamStore ps = ref.read(paramProvider);
+          // ps.addWebtoonDetailId(interestAuthorDTOList[index].authorId);
+          // ps.addBottomNavigationBarIndex(0);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => MyInterestAuthorDetailPage()));
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
