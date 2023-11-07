@@ -34,7 +34,9 @@ class PurchaseCookieBar extends StatelessWidget {
                 // 버튼 클릭 시 수행할 동작
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => PayHomePage(), // PayMethodPage로 이동
+                    builder: (context) => PayHomePage(
+                        cookieCount: cookieCount,
+                        price: price), // PayMethodPage로 이동
                   ),
                 );
               },

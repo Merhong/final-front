@@ -60,7 +60,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.seeMorePage: (context) => SeeMorePage(),
     Move.myPage: (context) => MyPage(),
     Move.bestPage: (context) => BestPage(),
-    Move.payHomePage: (context) => PayHomePage(),
+    // Move.payHomePage: (context) => PayHomePage(),
     Move.payMethodPage: (context) => PayMethodPage(),
     Move.payCardPage: (context) => PayCardPage(),
     Move.searchPage: (context) => SearchPage(),
