@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/cookieshop/free_cookie_page.dart';
+import 'package:flutter_blog/ui/common_widgets/bottom_rule.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/purchase_history_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/used_history_page.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/widgets/current_cookie.dart';
 
 class CookieShopTab extends StatefulWidget {
   const CookieShopTab({super.key});
@@ -17,22 +18,29 @@ class _CookieShopTabState extends State<CookieShopTab>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _tabController = new TabController(length: 4, vsync: this);
+    _tabController = new TabController(length: 3, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [_buildTabBar(), Expanded(child: _buildTabBarView())],
+      children: [
+        _buildTabBar(),
+        CurrentCookie(),
+        Expanded(
+          child: _buildTabBarView(),
+        ),
+        BottomRule(), // BottomRule 추가
+      ],
     );
   }
 
   Widget _buildTabBar() {
     return TabBar(
+        unselectedLabelColor: Colors.black,
+        labelColor: Colors.green,
         controller: _tabController,
-        labelColor: Colors.black,
         indicatorColor: Colors.green,
         tabs: const [
           Tab(
@@ -42,20 +50,14 @@ class _CookieShopTabState extends State<CookieShopTab>
             text: "구매내역",
           ),
           Tab(
-            text: "무료쿠키",
-          ),
-          Tab(
             text: "사용내역",
           ),
         ]);
   }
 
   Widget _buildTabBarView() {
-    return TabBarView(controller: _tabController, children: <Widget>[
-      PurchaseCookie(),
-      PurchaseHistory(),
-      FreeCookie(),
-      UsedHistory()
-    ]);
+    return TabBarView(
+        controller: _tabController,
+        children: <Widget>[PurchaseCookie(), PurchaseHistory(), UsedHistory()]);
   }
 }
