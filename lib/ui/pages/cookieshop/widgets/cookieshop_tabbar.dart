@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/cookieshop/free_cookie_page.dart';
+import 'package:flutter_blog/ui/common_widgets/bottom_rule.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/purchase_history_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/used_history_page.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/widgets/current_cookie.dart';
 
 class CookieShopTab extends StatefulWidget {
   const CookieShopTab({super.key});
@@ -18,9 +18,8 @@ class _CookieShopTabState extends State<CookieShopTab>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _tabController = new TabController(length: 4, vsync: this);
+    _tabController = new TabController(length: 3, vsync: this);
   }
 
   @override
@@ -29,15 +28,20 @@ class _CookieShopTabState extends State<CookieShopTab>
       children: [
         _buildTabBar(),
         CurrentCookie(),
-        Expanded(child: _buildTabBarView())
+        Expanded(
+          child: _buildTabBarView(),
+        ),
+        BottomRule(), // BottomRule 추가
       ],
     );
   }
 
   Widget _buildTabBar() {
     return TabBar(
-        controller: _tabController,
+        unselectedLabelColor: Colors.black,
         labelColor: Colors.green,
+        controller: _tabController,
+        indicatorColor: Colors.green,
         tabs: const [
           Tab(
             text: "쿠키구매",
@@ -46,43 +50,14 @@ class _CookieShopTabState extends State<CookieShopTab>
             text: "구매내역",
           ),
           Tab(
-            text: "무료쿠키",
-          ),
-          Tab(
             text: "사용내역",
           ),
         ]);
   }
 
-  Widget CurrentCookie() {
-    return Padding(
-      padding: const EdgeInsets.all(13.0),
-      child: Row(
-        children: [
-          Icon(
-            Icons.cookie,
-            color: Colors.brown,
-          ),
-          SizedBox(
-            width: sizeS5,
-          ),
-          Text("현재 보유한 쿠키"),
-          SizedBox(
-            width: sizeS5,
-          ),
-          //여기 변수명으로 바꿔야함
-          Text("3개"),
-        ],
-      ),
-    );
-  }
-
   Widget _buildTabBarView() {
-    return TabBarView(controller: _tabController, children: <Widget>[
-      PurchaseCookie(),
-      PurchaseHistory(),
-      FreeCookie(),
-      UsedHistory()
-    ]);
+    return TabBarView(
+        controller: _tabController,
+        children: <Widget>[PurchaseCookie(), PurchaseHistory(), UsedHistory()]);
   }
 }
