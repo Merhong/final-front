@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/ui/common_widgets/author_list_select.dart';
 import 'package:flutter_blog/ui/common_widgets/bottom_rule.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/alert_dialog_star.dart';
@@ -60,27 +61,32 @@ class WebtoonEpisodeBottom extends StatelessWidget {
         Divider(height: 1, color: Colors.grey, thickness: 1),
         Padding(
           padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      text: "작가의 말",
-                      style: TextStyle(color: Colors.black, fontSize: 17),
-                      children: [
-                        TextSpan(
-                          text: " (${episodeDTO.authorName})",
-                          style: TextStyle(color: Colors.grey[600], fontSize: 13),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 5),
-              Container(constraints: BoxConstraints(minHeight: 50), alignment: Alignment(-1, -1), child: Text("${episodeDTO.authorText}")),
-            ],
+          child: AuthorListSelect(
+            context: context,
+            webtoonTitle: episodeDTO.webtoonName,
+            authorList: episodeDTO.authorList,
+            inkWellChild: Column(
+              children: [
+                Row(
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        text: "작가의 말",
+                        style: TextStyle(color: Colors.black, fontSize: 17),
+                        children: [
+                          TextSpan(
+                            text: " (${episodeDTO.authorList.map((author) => author.authorNickname).toList().join('/').replaceAll(' ', '')})",
+                            style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 5),
+                Container(constraints: BoxConstraints(minHeight: 50), alignment: Alignment(-1, -1), child: Text("${episodeDTO.authorText}")),
+              ],
+            ),
           ),
         ),
         Divider(height: 1, color: Colors.grey, thickness: 1),
