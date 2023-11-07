@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // 최초 화면
-      initialRoute: Move.cookieShop,
+      //initialRoute: Move.cookieShop,
       // initialRoute: Move.searchPage,
-      //initialRoute: Move.loginPage,
+      initialRoute: Move.loginPage,
       // initialRoute: Move.payHomePage,
       //initialRoute: Move.payMethodPage,
       //initialRoute: Move.payCardPage,
