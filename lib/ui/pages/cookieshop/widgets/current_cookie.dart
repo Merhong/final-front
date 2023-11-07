@@ -10,23 +10,26 @@ class CurrentCookieState extends State<CurrentCookie> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(13.0),
-      child: Row(
-        children: [
-          Icon(
-            Icons.cookie,
-            color: Colors.orange,
-          ),
-          SizedBox(
-            width: 5.0, // sizeS5 대신 고정 값 사용
-          ),
-          Text("현재 보유한 쿠키"),
-          SizedBox(
-            width: 5.0, // sizeS5 대신 고정 값 사용
-          ),
-          Text("$_cookieCount개", style: TextStyle(color: Colors.green)),
-        ],
+    return Container(
+      color: Colors.grey[300],
+      child: Padding(
+        padding: const EdgeInsets.all(13.0),
+        child: Row(
+          children: [
+            Icon(
+              Icons.cookie,
+              color: Colors.orange,
+            ),
+            SizedBox(
+              width: 5.0, // sizeS5 대신 고정 값 사용
+            ),
+            Text("현재 보유한 쿠키"),
+            SizedBox(
+              width: 5.0, // sizeS5 대신 고정 값 사용
+            ),
+            Text("$_cookieCount개", style: TextStyle(color: Colors.green)),
+          ],
+        ),
       ),
     );
   }
