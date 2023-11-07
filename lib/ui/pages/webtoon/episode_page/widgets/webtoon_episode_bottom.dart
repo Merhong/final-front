@@ -109,7 +109,7 @@ class WebtoonEpisodeNextEpisode extends ConsumerWidget {
               onTap: () {
                 ps.isEpisodeMove = true;
                 ps.addEpisodeDetailId(episodeDTO.episodeMoveDTOList[selectEpisodeIndex - 1].id); // 역순정렬?
-                print("실행에피넘어감");
+                print("실행  에피넘어감");
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
               },
               child: Container(
