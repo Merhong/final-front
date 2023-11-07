@@ -163,6 +163,7 @@ class PayHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int amount = int.parse(price);
+    int numberOfCookie = int.parse(cookieCount);
     SessionUser session = ref.read(sessionProvider);
     WebtoonDetailModel? model = ref.read(webtoonDetailProvider);
 
@@ -201,7 +202,7 @@ class PayHomePage extends ConsumerWidget {
       callback: (Map<String, String> result) async {
         if (result['imp_success'] == 'true') {
           PurchaseReqDTO purchaseReqDTO = new PurchaseReqDTO(
-              cookieAmount: amount, userId: session.user!.id);
+              cookieAmount: numberOfCookie, userId: session.user!.id);
           ResponseDTO responseDTO = await paymentRepository()
               .fetchPayment(purchaseReqDTO, session.jwt!);
           if (responseDTO.success == true) {
