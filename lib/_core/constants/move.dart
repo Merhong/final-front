@@ -3,6 +3,7 @@ import 'package:flutter_blog/ui/pages/auth/login_page/autor_login_page.dart';
 import 'package:flutter_blog/ui/pages/auth/logout_page/logout_page.dart';
 import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_detail_page.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_page.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/see_more_page.dart';
 import 'package:flutter_blog/ui/pages/pay/home_page/pay_home_page.dart';
@@ -39,7 +40,8 @@ class Move {
   static String payMethodPage = "/pay/method"; // 결제(카드)
   static String payCardPage = "/pay/card"; // 결제(카드)
   static String searchPage = "/search"; // 결제(카드)
-  static String myInterestAuthorPage = "/interest/author"; // 결제(카드)
+  static String myInterestAuthorPage = "/interest/author";
+  static String myInterestAuthorDetailPage = "/interest/author/detail";
 }
 
 // Map<String, Widget Function(BuildContext)> 를 반환하는 함수
@@ -64,6 +66,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.payMethodPage: (context) => PayMethodPage(),
     Move.payCardPage: (context) => PayCardPage(),
     Move.searchPage: (context) => SearchPage(),
+    Move.myInterestAuthorDetailPage: (context) => MyInterestAuthorDetailPage(),
     // Move.myInterestAuthorPage: (context) => MyInterestAuthorPage(),
   };
 }
