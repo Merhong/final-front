@@ -29,7 +29,7 @@ class _WebtoonEpisodeDropdownState extends ConsumerState<WebtoonEpisodeDropdown>
 
       _selected = widget.episodeDTO.episodeMoveDTOList.firstWhere((e) => e.id == ref.read(paramProvider).episodeId).detailTitle;
 
-      print("_selected= ${_selected}");
+      print("드롭다운 _selected= ${_selected}");
     });
   }
 
