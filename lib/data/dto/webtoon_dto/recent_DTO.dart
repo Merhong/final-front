@@ -12,6 +12,8 @@ class RecentDTO {
   int totalCount;
   int viewCount;
   DateTime? updatedAt;
+  int lastEpisodeId;
+  int firstEpisodeId;
 
   RecentDTO(
       {required this.id,
@@ -23,6 +25,8 @@ class RecentDTO {
       required this.webtoonSpeciallyEnum,
       required this.totalCount,
       required this.viewCount,
+      required this.lastEpisodeId,
+      required this.firstEpisodeId,
       this.updatedAt});
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
@@ -36,10 +40,12 @@ class RecentDTO {
         webtoonSpeciallyEnum = json["webtoonSpeciallyEnum"],
         totalCount = json["totalCount"],
         viewCount = json["viewCount"],
+        lastEpisodeId = json["lastEpisodeId"],
+        firstEpisodeId = json["firstEpisodeId"],
         updatedAt = json["updatedAt"] == null ? null : DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["updatedAt"]);
 
   @override
   String toString() {
-    return 'RecentDTO{id: $id, recentEpisodeId: $recentEpisodeId, recentEpisodeTitle: $recentEpisodeTitle, recentEpisodeThumbnail: $recentEpisodeThumbnail, webtoonId: $webtoonId, webtoonTitle: $webtoonTitle, webtoonSpeciallyEnum: $webtoonSpeciallyEnum, totalCount: $totalCount, viewCount: $viewCount, updatedAt: $updatedAt}';
+    return 'RecentDTO{id: $id, recentEpisodeId: $recentEpisodeId, recentEpisodeTitle: $recentEpisodeTitle, recentEpisodeThumbnail: $recentEpisodeThumbnail, webtoonId: $webtoonId, webtoonTitle: $webtoonTitle, webtoonSpeciallyEnum: $webtoonSpeciallyEnum, totalCount: $totalCount, viewCount: $viewCount, updatedAt: $updatedAt, lastEpisodeId: $lastEpisodeId, firstEpisodeId: $firstEpisodeId}';
   }
 }
