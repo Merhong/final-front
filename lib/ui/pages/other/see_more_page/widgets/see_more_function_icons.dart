@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/setting_page.dart';
+import 'package:flutter_blog/ui/pages/search/search_page.dart';
 
 class FunctionIcons extends StatelessWidget {
   const FunctionIcons({super.key});
@@ -15,7 +16,16 @@ class FunctionIcons extends StatelessWidget {
           mainAxisSpacing: 0.5,
           crossAxisSpacing: 0.5,
           children: <Widget>[
-            SeeMoreIcons(Icons.search, "검색"),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SearchPage(),
+                  ),
+                );
+              },
+              child: SeeMoreIcons(Icons.search, "검색"),
+            ),
             SeeMoreIcons(Icons.apple_sharp, "쿠키오븐"),
             SeeMoreIcons(Icons.gamepad_rounded, "쿠키미션"),
             SeeMoreIcons(Icons.speaker, "공지사항"),

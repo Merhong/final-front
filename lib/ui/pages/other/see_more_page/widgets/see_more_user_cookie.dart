@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/main.dart';
-import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
 
 class SeeMoreUserCookie extends StatelessWidget {
   const SeeMoreUserCookie({super.key});
@@ -26,7 +25,7 @@ class SeeMoreUserCookie extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => PurchaseCookie(), // PayMethodPage로 이동
+                    builder: (context) => CookieShop(),
                   ),
                 );
               },

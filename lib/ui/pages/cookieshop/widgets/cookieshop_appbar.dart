@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/other/see_more_page/see_more_page.dart';
 
 AppBar cookieAppBar() {
   return AppBar(
+      automaticallyImplyLeading: true, // 뒤로 가기 버튼 표시 여부
+      iconTheme: IconThemeData(
+        color: Colors.black, // 뒤로 가기 버튼 아이콘 색상을 검은색으로 설정
+      ),
+      centerTitle: true,
       backgroundColor: Colors.white,
-      leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Builder(
-            builder: (context) => InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => SeeMorePage(),
-                  ),
-                );
-              },
-              child: Icon(Icons.arrow_back_ios, color: Colors.black),
-            ),
-          )),
-      leadingWidth: 15.0,
       title: Center(
         child: Text(
           "쿠키샵",
