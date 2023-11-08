@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 
       //initialRoute: Move.cookieShop,
       // initialRoute: Move.searchPage,
-     // initialRoute: Move.loginPage,
+      // initialRoute: Move.loginPage,
 
       initialRoute: Move.autoLoginPage,
       // initialRoute: Move.cookieShop,
