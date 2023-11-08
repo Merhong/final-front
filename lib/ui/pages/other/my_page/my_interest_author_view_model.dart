@@ -1,6 +1,7 @@
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_author_DTO.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
+import 'package:flutter_blog/data/dto/user_dto/my_interest_author_all_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/interest_DTO.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/interst_webtoon_DTO.dart';
@@ -14,17 +15,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // 1. 창고 데이터
 
 class MyAuthorPageModel {
-  List<InterestAuthorDTO> interestAuthorDTOList;
+  // List<InterestAuthorDTO> interestAuthorDTOList;
+  MyInterestAuthorAllDTO myInterestAuthorAllDTO;
   String? sortCheck;
 
-  MyAuthorPageModel({required this.interestAuthorDTOList, this.sortCheck});
+  MyAuthorPageModel({required this.myInterestAuthorAllDTO, this.sortCheck});
 
-  MyAuthorPageModel interestAlarmUpdate({required List<InterestAuthorDTO> interestAuthorDTOList}) {
-    return MyAuthorPageModel(interestAuthorDTOList: interestAuthorDTOList, sortCheck: this.sortCheck);
+  MyAuthorPageModel interestAlarmUpdate({required MyInterestAuthorAllDTO myInterestAuthorAllDTO}) {
+    return MyAuthorPageModel(myInterestAuthorAllDTO: myInterestAuthorAllDTO, sortCheck: this.sortCheck);
   }
 
   MyAuthorPageModel sortUpdate({required String sort}) {
-    return MyAuthorPageModel(interestAuthorDTOList: this.interestAuthorDTOList, sortCheck: sort);
+    return MyAuthorPageModel(myInterestAuthorAllDTO: this.myInterestAuthorAllDTO, sortCheck: sort);
   }
 }
 
@@ -41,7 +43,7 @@ class MyAuthorPageViewModel extends StateNotifier<MyAuthorPageModel?> {
     SessionUser sessionUser = ref.read(sessionProvider);
     // int webtoonId = ref.read(paramProvider).webtoonDetailId!;
     ResponseDTO responseDTO = await AuthorRepository().fetchInterestAuthor(sessionUser.jwt!);
-    state = MyAuthorPageModel(interestAuthorDTOList: responseDTO.data);
+    state = MyAuthorPageModel(myInterestAuthorAllDTO: responseDTO.data);
     // state = MyAuthorPageModel();
     // state!.webtoonDTO = responseDTO.data;
   }
@@ -61,11 +63,15 @@ class MyAuthorPageViewModel extends StateNotifier<MyAuthorPageModel?> {
       return;
     }
 
-    List<InterestAuthorDTO> interestAuthorDTOList = state!.interestAuthorDTOList;
+    MyInterestAuthorAllDTO myInterestAuthorAllDTO = state!.myInterestAuthorAllDTO;
+    List<InterestAuthorDTO> interestAuthorDTOList = myInterestAuthorAllDTO.interestAuthorDTOList;
+
     InterestAuthorDTO updateInterestAuthorDTO = responseDTO.data as InterestAuthorDTO;
     interestAuthorDTOList = interestAuthorDTOList.map((e) => e.id == paramDTO.id ? updateInterestAuthorDTO : e).toList();
 
-    state = state!.interestAlarmUpdate(interestAuthorDTOList: interestAuthorDTOList);
+    myInterestAuthorAllDTO.interestAuthorDTOList = interestAuthorDTOList;
+
+    state = state!.interestAlarmUpdate(myInterestAuthorAllDTO: myInterestAuthorAllDTO);
   }
 
   Future<void> notifySort(String sort) async {

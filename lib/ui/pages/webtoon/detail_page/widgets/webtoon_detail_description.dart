@@ -56,7 +56,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            width: sizeGetScreenWidth(context) * 0.85,
+                            width: sizeGetScreenWidth(context) * 0.80,
                             child: Text(
                               "${widget.webtoonDTO.intro}",
                               style: TextStyle(fontSize: 13, color: Colors.grey[600]),
@@ -108,7 +108,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: sizeGetScreenWidth(context) * 0.85,
+                        width: sizeGetScreenWidth(context) * 0.80,
                         child: Text(
                           "${widget.webtoonDTO.intro}",
                           style: TextStyle(fontSize: 13, color: Colors.grey[600]),
