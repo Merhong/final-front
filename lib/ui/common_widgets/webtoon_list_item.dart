@@ -94,18 +94,20 @@ class WebtoonListItem extends StatelessWidget {
                           ),
           ],
         ),
-        Row(
-          children: [
-            Container(
-                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.21),
-                // child: Text("${webtoonDTO.authorNicknameList!.map((str) => str).toList().join('/').replaceAll(' ', '')} ",
-                child: Text("${webtoonDTO.authorNicknameList!.toList().join('/').replaceAll(' ', '')} ",
-                    style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis)),
-            Container(
-                child: Text("★ ${(webtoonDTO.starScore! / (webtoonDTO.starCount == 0 ? 1 : webtoonDTO.starCount!)).toStringAsFixed(2)}",
-                    style: Theme.of(context).textTheme.bodySmall, maxLines: 1)),
-          ],
-        ),
+        webtoonDTO.isInterest == true
+            ? Text("✔ 관심웹툰", style: TextStyle(fontSize: 10, color: Colors.green, fontFamily: "JamsilRegular"))
+            : Row(
+                children: [
+                  Container(
+                      constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.195),
+                      // child: Text("${webtoonDTO.authorNicknameList!.map((str) => str).toList().join('/').replaceAll(' ', '')} ",
+                      child: Text("${webtoonDTO.authorNicknameList!.toList().join('/').replaceAll(' ', '')} ",
+                          style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis)),
+                  Container(
+                      child: Text("★ ${(webtoonDTO.starScore! / (webtoonDTO.starCount == 0 ? 1 : webtoonDTO.starCount!)).toStringAsFixed(2)}",
+                          style: Theme.of(context).textTheme.bodySmall, maxLines: 1)),
+                ],
+              ),
       ],
     );
   }
