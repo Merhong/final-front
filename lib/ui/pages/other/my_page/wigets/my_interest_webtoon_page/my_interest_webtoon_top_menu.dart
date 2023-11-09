@@ -20,7 +20,7 @@ class MyInterestWebtoonTopMenu extends StatelessWidget {
             SizedBox(width: sizeL20),
             // Text("업데이트 순", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
             // Text("▼"),
-            Container(width: 80, child: MyInterestWebtoonDropdown()),
+            Container(width: 90, child: MyInterestWebtoonDropdown()),
             Spacer(),
             isUpdateButton == true ? Text("편집", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)) : SizedBox(),
           ],

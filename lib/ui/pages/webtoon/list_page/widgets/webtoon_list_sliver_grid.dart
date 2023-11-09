@@ -66,7 +66,7 @@ class WebtoonListSliverGrid extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: sizePaddingLR17),
       sliver: SliverGrid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1 / 1.7,
+          childAspectRatio: 1 / 1.75,
           crossAxisSpacing: sizeS5,
           mainAxisSpacing: sizeS5,
           crossAxisCount: 3,

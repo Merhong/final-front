@@ -23,7 +23,7 @@ class MyCommentTopMenu extends StatelessWidget {
           SizedBox(width: sizeL20),
           // Text("최신 순", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
           // Text("▼"),
-          Container(width: 80, child: MyCommentDropdown()),
+          Container(width: 90, child: MyCommentDropdown()),
           Spacer(),
           InkWell(child: Icon(Icons.warning, size: 20, color: Colors.grey)),
         ],

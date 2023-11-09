@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/utils/validator_util.dart';
 
 class JoinFormContainerTop extends StatelessWidget {
   TextEditingController _email;
@@ -18,15 +19,21 @@ class JoinFormContainerTop extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            validator: (value) {
+              return validateEmail()(value);
+            },
             controller: _email,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.person),
-              labelText: "아이디                             @naver.com",
+              labelText: "아이디@naver.com",
               hintText: "example@example.com",
             ),
           ),
           SizedBox(height: 16),
           TextFormField(
+            validator: (value) {
+              return validatePassword()(value);
+            },
             controller: _password,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.lock),

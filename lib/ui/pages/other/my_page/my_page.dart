@@ -9,10 +9,15 @@ import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_body_tab_bar.dart'
 class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyappAppbar(),
-      body: MyBodyTabBar(),
-      bottomNavigationBar: AppBottom(),
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        child: Scaffold(
+          // appBar: MyappAppbar(),
+          body: MyBodyTabBar(),
+          bottomNavigationBar: AppBottom(),
+        ),
+      ),
     );
   }
 }
