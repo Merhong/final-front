@@ -31,7 +31,7 @@ class MyRecent extends ConsumerWidget {
         children: [
           Divider(color: Colors.black26, height: 1, thickness: 1),
           MyRecentTopMenu(allLength: myRecentDTOList.length),
-          Divider(color: Colors.black26),
+          Divider(color: Colors.black26, height: 1, thickness: 1),
           Expanded(
             child: ListView.builder(
               itemCount: myRecentDTOList.length,
@@ -51,7 +51,7 @@ class MyRecent extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    Divider(color: Colors.black26),
+                    Divider(color: Colors.black26, height: 1, thickness: 1),
                   ],
                 );
               },
