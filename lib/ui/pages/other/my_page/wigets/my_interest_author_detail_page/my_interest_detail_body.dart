@@ -9,21 +9,19 @@ class MyInterestAuthorDetailBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          MyInterestAuthorDetailInfo(),
-          MyInterestAuthorDetailMiddleBar(),
-          SizedBox(
-            height: 10,
-          ),
-          MyInterestAuthorDetailArt(),
-          MyInterestAuthorDetailBoard(),
-        ],
-      ),
+    return Column(
+      children: [
+        SizedBox(
+          height: 10,
+        ),
+        MyInterestAuthorDetailInfo(),
+        MyInterestAuthorDetailMiddleBar(),
+        SizedBox(
+          height: 10,
+        ),
+        MyInterestAuthorDetailArt(),
+        MyInterestAuthorDetailBoard(),
+      ],
     );
   }
 }
