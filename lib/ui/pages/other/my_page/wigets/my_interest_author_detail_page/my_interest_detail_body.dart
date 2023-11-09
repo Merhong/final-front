@@ -5,22 +5,29 @@ import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_de
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_detail_page/my_interest_author_detail_middle_bar.dart';
 
 class MyInterestAuthorDetailBody extends StatelessWidget {
-  MyInterestAuthorDetailBody({super.key});
+  MyInterestAuthorDetailBody({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 10,
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverToBoxAdapter(
+          child: MyInterestAuthorDetailInfo(),
         ),
-        MyInterestAuthorDetailInfo(),
-        MyInterestAuthorDetailMiddleBar(),
-        SizedBox(
-          height: 10,
+        SliverToBoxAdapter(
+          child: MyInterestAuthorDetailMiddleBar(),
         ),
-        MyInterestAuthorDetailArt(),
-        MyInterestAuthorDetailBoard(),
+        SliverToBoxAdapter(
+          child: MyInterestAuthorDetailArt(),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return MyInterestAuthorDetailBoard(); // MyInterestAuthorDetailBoard 위젯 추가
+            },
+            childCount: 10, // 아이템 개수
+          ),
+        ),
       ],
     );
   }
