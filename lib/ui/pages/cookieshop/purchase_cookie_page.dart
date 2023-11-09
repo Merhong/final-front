@@ -3,8 +3,7 @@ import 'package:flutter_blog/ui/pages/cookieshop/widgets/purchase_cookie_bar.dar
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PurchaseCookie extends ConsumerWidget {
-  // provider watch여야 함
-  const PurchaseCookie({super.key});
+  const PurchaseCookie({Key? key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,15 +17,15 @@ class PurchaseCookie extends ConsumerWidget {
           ),
         ),
         PurchaseCookieBar(cookieCount: '10개', price: '1000'),
-        Divider(color: Colors.black26, height: 2, thickness: 1),
+        Divider(color: Colors.black26, height: 2, thickness: 2),
         PurchaseCookieBar(cookieCount: '30개', price: '3600'),
-        Divider(color: Colors.black26, height: 2, thickness: 1),
+        Divider(color: Colors.black26, height: 2, thickness: 2),
         PurchaseCookieBar(cookieCount: '50개', price: '6000'),
-        Divider(color: Colors.black26, height: 2, thickness: 1),
+        Divider(color: Colors.black26, height: 2, thickness: 2),
         PurchaseCookieBar(cookieCount: '100개', price: '12000'),
-        Divider(color: Colors.black26, height: 2, thickness: 1),
+        Divider(color: Colors.black26, height: 2, thickness: 2),
         PurchaseCookieBar(cookieCount: '200개', price: '24000'),
-        Divider(color: Colors.black26, height: 2, thickness: 1),
+        Divider(color: Colors.black26, height: 2, thickness: 2),
         PurchaseCookieBar(cookieCount: '300개', price: '36000'),
       ],
     );
