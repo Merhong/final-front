@@ -24,7 +24,7 @@ class PurchaseCookieBar extends StatelessWidget {
             SizedBox(
               width: 5.0, // 고정 값 사용
             ),
-            Text("쿠키 $cookieCount"), // 매개변수를 사용하여 쿠키 개수를 설정
+            Text("쿠키 ${cookieCount}개"), // 매개변수를 사용하여 쿠키 개수를 설정
             SizedBox(
               width: 5.0, // 고정 값 사용
             ),

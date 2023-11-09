@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/common_widgets/bottom_rule.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
-import 'package:flutter_blog/ui/pages/cookieshop/purchase_history_page.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/payment_history/payment_history_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/used_history_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/widgets/current_cookie.dart';
 
@@ -38,26 +38,28 @@ class _CookieShopTabState extends State<CookieShopTab>
 
   Widget _buildTabBar() {
     return TabBar(
-        unselectedLabelColor: Colors.black,
-        labelColor: Colors.green,
-        controller: _tabController,
-        indicatorColor: Colors.green,
-        tabs: const [
-          Tab(
-            text: "쿠키구매",
-          ),
-          Tab(
-            text: "구매내역",
-          ),
-          Tab(
-            text: "사용내역",
-          ),
-        ]);
+      unselectedLabelColor: Colors.black,
+      labelColor: Colors.green,
+      controller: _tabController,
+      indicatorColor: Colors.green,
+      tabs: const [
+        Tab(
+          text: "쿠키구매",
+        ),
+        Tab(
+          text: "구매내역",
+        ),
+        Tab(
+          text: "사용내역",
+        ),
+      ],
+    );
   }
 
   Widget _buildTabBarView() {
     return TabBarView(
-        controller: _tabController,
-        children: <Widget>[PurchaseCookie(), PurchaseHistory(), UsedHistory()]);
+      controller: _tabController,
+      children: <Widget>[PurchaseCookie(), PurchaseHistory(), UsedHistory()],
+    );
   }
 }
