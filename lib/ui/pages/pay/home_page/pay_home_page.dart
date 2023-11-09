@@ -188,16 +188,16 @@ class PayHomePage extends ConsumerWidget {
       userCode: 'imp65088447',
       /* [필수입력] 결제 데이터 */
       data: PaymentData(
-        pg: 'kakaopay', // PG사
-        payMethod: 'card', // 결제수단
-        name: '쿠키 ${cookieCount}', // 주문명
-        merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}', // 주문번호
-        amount: amount, // 결제금액
-        buyerName: "${session.user!.username}", // 구매자 이름
-        buyerTel: '01012345678', // 구매자 연락처
-        buyerEmail: "${session.user!.email}", // 구매자 이메일
-        appScheme: 'example', // 앱 URL scheme
-      ),
+          pg: 'kakaopay', // PG사
+          payMethod: 'card', // 결제수단
+          name: '쿠키 ${cookieCount}', // 주문명
+          merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}', // 주문번호
+          amount: amount, // 결제금액
+          buyerName: "${session.user!.username}", // 구매자 이름
+          buyerTel: '01012345678', // 구매자 연락처
+          buyerEmail: "${session.user!.email}", // 구매자 이메일
+          appScheme: 'example', // 앱 URL scheme
+          mRedirectUrl: '/cookieShop'),
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) async {
         if (result['imp_success'] == 'true') {
