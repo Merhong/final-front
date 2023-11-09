@@ -11,27 +11,27 @@ class SeeMoreUserInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     SessionUser sessionUser = ref.read(sessionProvider);
 
-    return InkWell(
-      onTap: () {
-        ref.read(paramProvider).addBottomNavigationBarIndex(0);
-        ref.read(paramProvider).isAutoLogin = false;
-        sessionUser.logout();
-      },
-      child: Container(
-        height: 100,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: sizeM10),
-              Text(
-                "${sessionUser.user!.username}(${sessionUser.user!.email.split("@")[0]}) 님",
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: sizeS5),
-              Text("로그아웃 >", style: TextStyle(color: Colors.grey[600]))
-            ],
-          ),
+    return Container(
+      height: 100,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: sizeM10),
+            Text(
+              "${sessionUser.user!.username}(${sessionUser.user!.email.split("@")[0]}) 님",
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: sizeS5),
+            InkWell(
+                onTap: () {
+                  ref.read(paramProvider).addBottomNavigationBarIndex(0);
+                  ref.read(paramProvider).isAutoLogin = false;
+                  sessionUser.logout();
+                },
+                child:
+                    Text("로그아웃 >", style: TextStyle(color: Colors.grey[600])))
+          ],
         ),
       ),
     );
