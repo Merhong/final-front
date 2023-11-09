@@ -32,6 +32,8 @@ class SessionUser {
     if (responseDTO.success == true) {
       Navigator.pushNamed(mContext!, Move.loginPage);
     } else {
+      ScaffoldMessenger.of(mContext!).clearSnackBars();
+
       ScaffoldMessenger.of(mContext!).showSnackBar(SnackBar(content: Text(responseDTO.errorType!.message!)));
     }
   }

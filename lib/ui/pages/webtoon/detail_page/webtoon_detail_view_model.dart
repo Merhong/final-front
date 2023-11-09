@@ -59,6 +59,11 @@ class WebtoonDetailViewModel extends StateNotifier<WebtoonDetailModel?> {
   }
 
   Future<void> notifyEpisodeViewUpdate(int epId) async {
+    if (state == null) {
+      print("웹툰 디테일 거쳐서 접근하지 않음");
+      // 어짜피 디테일 거쳐서 안왔으면 디테일로 접근할때 새로고침되니까 반영됨
+      return;
+    }
     DetailPageWebtoonDTO detailDTO = state!.webtoonDTO!;
 
     detailDTO.episodeList.map((e) => e.isLastView = false).toList();

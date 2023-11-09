@@ -34,10 +34,8 @@ class MyComment extends ConsumerWidget {
     }
 
     if (model.sortCheck == "좋아요 순") {
-      myCommentDTOList
-          .sort((a, b) => b.likeCommentCount.compareTo(a.likeCommentCount));
-      myCommentDTOList.sort(
-          (a, b) => a.dislikeCommentCount.compareTo(b.dislikeCommentCount));
+      myCommentDTOList.sort((a, b) => b.likeCommentCount.compareTo(a.likeCommentCount));
+      myCommentDTOList.sort((a, b) => a.dislikeCommentCount.compareTo(b.dislikeCommentCount));
     }
 
     int replyCount = 0;
@@ -45,13 +43,9 @@ class MyComment extends ConsumerWidget {
     int totalLikeCount = 0;
     // int totalDislikeCount = 0;
     if (myCommentDTOList.length != 0) {
-      replyCount =
-          myCommentDTOList.where((element) => !(element.isReComment)).length;
-      reReplyCount =
-          myCommentDTOList.where((element) => element.isReComment).length;
-      totalLikeCount = myCommentDTOList
-          .map((element) => element.likeCommentCount)
-          .reduce((value, element) => value + element);
+      replyCount = myCommentDTOList.where((element) => !(element.isReComment)).length;
+      reReplyCount = myCommentDTOList.where((element) => element.isReComment).length;
+      totalLikeCount = myCommentDTOList.map((element) => element.likeCommentCount).reduce((value, element) => value + element);
       // totalDislikeCount = myCommentDTOList.map((element) => element.dislikeCommentCount).reduce((value, element) => value + element);
     }
 
@@ -59,18 +53,15 @@ class MyComment extends ConsumerWidget {
       children: [
         Divider(color: Colors.black26, height: 1, thickness: 1),
         MyCommentTopMenu(allLength: myCommentDTOList.length),
-        Divider(color: Colors.black26),
+        Divider(color: Colors.black26, height: 1, thickness: 1),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) =>
-                Divider(color: Colors.black26),
+            separatorBuilder: (context, index) => Divider(color: Colors.black26, height: 1, thickness: 1),
             itemCount: myCommentDTOList.length + 1,
             itemBuilder: (context, index) {
               return index == 0
-                  ? buildMyCommentCount(
-                      replyCount, reReplyCount, totalLikeCount)
-                  : buildCommentDescription(
-                      myCommentDTOList[index - 1], context, ref);
+                  ? buildMyCommentCount(replyCount, reReplyCount, totalLikeCount)
+                  : buildCommentDescription(myCommentDTOList[index - 1], context, ref);
             },
           ),
         ),
@@ -78,19 +69,15 @@ class MyComment extends ConsumerWidget {
     );
   }
 
-  Widget buildCommentDescription(
-      MyCommentDTO myCommentDTO, BuildContext context, WidgetRef ref) {
+  Widget buildCommentDescription(MyCommentDTO myCommentDTO, BuildContext context, WidgetRef ref) {
     return Container(
-      padding:
-          EdgeInsets.fromLTRB(sizePaddingLR17, 0, sizePaddingLR17, sizeM10),
+      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeM10),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                  "${DateFormat("yyyy-MM-dd HH:mm:ss").format(myCommentDTO.createdAt)}",
-                  style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+              Text("${DateFormat("yyyy-MM-dd HH:mm:ss").format(myCommentDTO.createdAt)}", style: TextStyle(color: Colors.grey[600], fontSize: 13)),
               InkWell(
                   onTap: () {
                     ScaffoldMessenger.of(context).clearSnackBars();
@@ -108,14 +95,8 @@ class MyComment extends ConsumerWidget {
                               ScaffoldMessenger.of(context).clearSnackBars();
                               print("스낵바-삭제누름");
                               myCommentDTO.isReComment == false
-                                  ? ref
-                                      .read(myCommentPageProvider.notifier)
-                                      .notifyCommentDelete(
-                                          myCommentDTO.commentId)
-                                  : ref
-                                      .read(myCommentPageProvider.notifier)
-                                      .notifyReCommentDelete(
-                                          myCommentDTO.reCommentId);
+                                  ? ref.read(myCommentPageProvider.notifier).notifyCommentDelete(myCommentDTO.commentId)
+                                  : ref.read(myCommentPageProvider.notifier).notifyReCommentDelete(myCommentDTO.reCommentId);
                             },
                           ),
                           SizedBox(width: sizeL20),
@@ -135,9 +116,7 @@ class MyComment extends ConsumerWidget {
           Align(
             alignment: Alignment(-1, 0),
             child: Stack(children: [
-              myCommentDTO.isReComment == true
-                  ? TitleTag(titleTagEnum: TitleTagEnum.reReply)
-                  : TitleTag(titleTagEnum: TitleTagEnum.reply),
+              myCommentDTO.isReComment == true ? TitleTag(titleTagEnum: TitleTagEnum.reReply) : TitleTag(titleTagEnum: TitleTagEnum.reply),
               Text("        ${myCommentDTO.text}"),
             ]),
           ),
@@ -147,11 +126,8 @@ class MyComment extends ConsumerWidget {
               InkWell(
                 onTap: () {
                   // ref.read(paramProvider).addCommentDetailId((myCommentDTO.id));
-                  ref
-                      .read(paramProvider)
-                      .addEpisodeDetailId((myCommentDTO.episodeId));
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+                  ref.read(paramProvider).addEpisodeDetailId((myCommentDTO.episodeId));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
@@ -161,8 +137,7 @@ class MyComment extends ConsumerWidget {
                     height: 40,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
-                      return Image.asset("assets/default_episode_Thumbnail.jpg",
-                          width: 70, height: 40, fit: BoxFit.fill);
+                      return Image.asset("assets/default_episode_Thumbnail.jpg", width: 70, height: 40, fit: BoxFit.fill);
                     },
                   ),
                 ),
@@ -171,25 +146,15 @@ class MyComment extends ConsumerWidget {
               InkWell(
                 onTap: () {
                   // ref.read(paramProvider).addCommentDetailId((myCommentDTO.id));
-                  ref
-                      .read(paramProvider)
-                      .addEpisodeDetailId((myCommentDTO.episodeId));
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
+                  ref.read(paramProvider).addEpisodeDetailId((myCommentDTO.episodeId));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
                 },
                 child: Container(
-                  constraints: BoxConstraints(
-                      maxWidth: sizeGetScreenWidth(context) * 0.6),
+                  constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
                   child: Wrap(children: [
-                    Text("[${myCommentDTO.webtoonTitle}] ",
-                        style: TextStyle(
-                            fontSize: 12, overflow: TextOverflow.ellipsis)),
-                    Text("${myCommentDTO.episodeTitle}",
-                        style: TextStyle(
-                            fontSize: 12, overflow: TextOverflow.ellipsis)),
-                    Text(" >",
-                        style:
-                            TextStyle(color: Colors.grey[600], fontSize: 15)),
+                    Text("[${myCommentDTO.webtoonTitle}] ", style: TextStyle(fontSize: 12, overflow: TextOverflow.ellipsis)),
+                    Text("${myCommentDTO.episodeTitle}", style: TextStyle(fontSize: 12, overflow: TextOverflow.ellipsis)),
+                    Text(" >", style: TextStyle(color: Colors.grey[600], fontSize: 15)),
                   ]),
                 ),
               ),
@@ -202,28 +167,16 @@ class MyComment extends ConsumerWidget {
                 onTap: () {
                   print("답글보기");
                   // ParamStore ps = ref.read(paramProvider);
-                  ref
-                      .read(paramProvider)
-                      .addCommentDetailId((myCommentDTO.commentId));
-                  ref
-                      .read(paramProvider)
-                      .addEpisodeDetailId((myCommentDTO.episodeId));
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => ReReplyPage()));
+                  ref.read(paramProvider).addCommentDetailId((myCommentDTO.commentId));
+                  ref.read(paramProvider).addEpisodeDetailId((myCommentDTO.episodeId));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => ReReplyPage()));
                 },
                 child: myCommentDTO.isReComment == true
-                    ? Container(
-                        height: 25,
-                        child: Text("답글보기 >",
-                            style: TextStyle(
-                                fontSize: 12, color: Colors.grey[700])))
+                    ? Container(height: 25, child: Text("답글보기 >", style: TextStyle(fontSize: 12, color: Colors.grey[700])))
                     : Container(
                         height: 25,
                         child: CommentBox(
-                          commentBoxRow: Row(children: [
-                            Text(
-                                "답글${myCommentDTO.reCommentCount == 0 ? '' : ' ${myCommentDTO.reCommentCount}'}")
-                          ]),
+                          commentBoxRow: Row(children: [Text("답글${myCommentDTO.reCommentCount == 0 ? '' : ' ${myCommentDTO.reCommentCount}'}")]),
                         ),
                       ),
               ),
@@ -232,8 +185,7 @@ class MyComment extends ConsumerWidget {
                 children: [
                   Icon(Icons.thumb_up_outlined, color: Colors.grey),
                   SizedBox(width: 3),
-                  Text("${myCommentDTO.likeCommentCount}",
-                      style: TextStyle(color: Colors.grey)),
+                  Text("${myCommentDTO.likeCommentCount}", style: TextStyle(color: Colors.grey)),
                 ],
               ),
               SizedBox(width: sizeL20),
@@ -241,8 +193,7 @@ class MyComment extends ConsumerWidget {
                 children: [
                   Icon(Icons.thumb_down_outlined, color: Colors.grey),
                   SizedBox(width: 3),
-                  Text("${myCommentDTO.dislikeCommentCount}",
-                      style: TextStyle(color: Colors.grey)),
+                  Text("${myCommentDTO.dislikeCommentCount}", style: TextStyle(color: Colors.grey)),
                 ],
               ),
             ],
@@ -252,34 +203,20 @@ class MyComment extends ConsumerWidget {
     );
   }
 
-  Padding buildMyCommentCount(
-      int replyCount, int reReplyCount, int totalLikeCount) {
+  Padding buildMyCommentCount(int replyCount, int reReplyCount, int totalLikeCount) {
     return Padding(
       padding: EdgeInsets.all(sizePaddingLR17),
       child: Container(
         padding: EdgeInsets.all(sizeM10),
-        decoration: BoxDecoration(
-            color: Colors.grey[300], borderRadius: BorderRadius.circular(5)),
+        decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(5)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Column(children: [
-              Text('총 댓글 수'),
-              Text('${replyCount}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-            ]),
+            Column(children: [Text('총 댓글 수'), Text('${replyCount}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))]),
             Container(color: Colors.grey[500], width: 1, height: 30),
-            Column(children: [
-              Text('총 답글 수'),
-              Text('${reReplyCount}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-            ]),
+            Column(children: [Text('총 답글 수'), Text('${reReplyCount}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))]),
             Container(color: Colors.grey[500], width: 1, height: 30),
-            Column(children: [
-              Text('받은 좋아요 수'),
-              Text('${totalLikeCount}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-            ]),
+            Column(children: [Text('받은 좋아요 수'), Text('${totalLikeCount}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))]),
           ],
         ),
       ),
