@@ -39,12 +39,16 @@ class JoinForm extends ConsumerWidget {
                 child: CustomSubmitButton(
                     text: "회원가입",
                     onPressed: () {
-                      print("회원가입 버튼 누름");
-                      JoinReqDTO joinReqDTO = JoinReqDTO(
+                      if (_formKey.currentState!.validate()) {
+                        print("회원가입 버튼 누름");
+                        JoinReqDTO joinReqDTO = JoinReqDTO(
                           username: _username.text,
                           password: _password.text,
-                          email: _email.text);
-                      ref.read(sessionProvider).join(joinReqDTO);
+                          email: _email.text,
+                          // email: "${_email.text}@naver.com",
+                        );
+                        ref.read(sessionProvider).join(joinReqDTO);
+                      }
                     }),
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_webtoon_DTO.dart';
+import 'package:flutter_blog/ui/common_widgets/myapp_appbar.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_webtoon_view_model.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_tab_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +21,21 @@ class _MyBodyTabBarState extends State<MyBodyTabBar> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return MyTabBar(tabController: _tabController);
+    return NestedScrollView(
+      body: MyTabBar(tabController: _tabController),
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                MyappAppbar(),
+              ],
+            ),
+          ),
+        ];
+      },
+    );
+
+    // MyTabBar(tabController: _tabController);
   }
 }

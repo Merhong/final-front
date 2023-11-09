@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/model/author.dart';
+import 'package:flutter_blog/ui/common_widgets/author_list_select.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../common_widgets/advertising.dart';
@@ -27,7 +28,6 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("${widget.webtoonDTO.title}", style: Theme.of(context).textTheme.displayLarge),
           buildAuthornameAndWeek(widget.webtoonDTO.authorList, widget.webtoonDTO.title),
           buildDescriptionButton(context),
           SizedBox(height: sizeS5),
@@ -46,25 +46,25 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: sizeGetScreenWidth(context) * 0.85,
-                          child: Text(
-                            "${widget.webtoonDTO.intro}",
-                            style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                    InkWell(
+                      onTap: () {
+                        isScroll = !isScroll;
+                        setState(() {});
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: sizeGetScreenWidth(context) * 0.80,
+                            child: Text(
+                              "${widget.webtoonDTO.intro}",
+                              style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                            ),
                           ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            isScroll = !isScroll;
-                            setState(() {});
-                          },
-                          child: Icon(Icons.arrow_drop_up),
-                        ),
-                      ],
+                          Icon(Icons.arrow_drop_up),
+                        ],
+                      ),
                     ),
                     SizedBox(height: sizeS5),
                     Row(
@@ -98,105 +98,62 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
               )
             : Padding(
                 padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: sizeGetScreenWidth(context) * 0.85,
-                      child: Text(
-                        "${widget.webtoonDTO.intro}",
-                        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                child: InkWell(
+                  onTap: () {
+                    isScroll = !isScroll;
+                    setState(() {});
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: sizeGetScreenWidth(context) * 0.80,
+                        child: Text(
+                          "${widget.webtoonDTO.intro}",
+                          style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        isScroll = !isScroll;
-                        setState(() {});
-                      },
-                      child: Icon(Icons.arrow_drop_down),
-                    ),
-                  ],
+                      Icon(Icons.arrow_drop_down),
+                    ],
+                  ),
                 ),
               ),
       ],
     );
   }
 
-  Row buildAuthornameAndWeek(List<Author> authorList, String webtoonTitle) {
-    return Row(
-      children: [
-        InkWell(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: RichText(
-                    text: TextSpan(
-                      text: "${webtoonTitle}",
-                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-                      children: [
-                        // TextSpan(text: " 의", style: TextStyle(color: Colors.grey[600], fontSize: 14)),
-                        TextSpan(text: " 작가", style: TextStyle(color: Colors.green, fontSize: 16)),
-                      ],
-                    ),
-                  ),
-                  content: Container(
-                    height: 5 + authorList.length * 70,
-                    child: Column(
-                      children: [
-                        for (Author author in authorList)
-                          Column(
-                            children: [
-                              Divider(color: Colors.grey, height: 1, thickness: 1),
-                              SizedBox(height: sizeS5),
-                              InkWell(
-                                onTap: () {
-                                  print("${author.authorPhoto}/${author.authorNickname}");
-                                  // TODO 작가페이지
-                                },
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundImage: NetworkImage("${imageURL}/AuthorPhoto/${author.authorPhoto}"),
-                                      radius: 30,
-                                    ),
-                                    SizedBox(width: sizeM10),
-                                    Text("${author.authorNickname}"),
-                                    Spacer(),
-                                    Text("> ", style: TextStyle(fontSize: 20, color: Colors.grey)),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: sizeS5),
-                            ],
-                          ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-          child: Row(
+  Widget buildAuthornameAndWeek(List<Author> authorList, String webtoonTitle) {
+    return AuthorListSelect(
+      context: context,
+      authorList: widget.webtoonDTO.authorList,
+      webtoonTitle: widget.webtoonDTO.title,
+      inkWellChild: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("${widget.webtoonDTO.title}", style: Theme.of(context).textTheme.displayLarge),
+          Row(
             children: [
-              Container(
-                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
-                child: Text("${widget.webtoonDTO.authorList.map((author) => author.authorNickname).toList().join('/').replaceAll(' ', '')}",
-                    overflow: TextOverflow.ellipsis),
+              Row(
+                children: [
+                  Container(
+                    constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.6),
+                    child: Text("${authorList.map((author) => author.authorNickname).toList().join('/').replaceAll(' ', '')}",
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                  Text(" ✅")
+                ],
               ),
-              Text(" ✅")
+              Text("  ·  "),
+              widget.webtoonDTO.webtoonWeekDayEnum! == "월화수목금토일"
+                  ? Text("매일 연재")
+                  : Text("${widget.webtoonDTO.webtoonWeekDayEnum!.split("").join(", ")} 연재", overflow: TextOverflow.ellipsis),
             ],
           ),
-        ),
-        Text("  ·  "),
-        widget.webtoonDTO.webtoonWeekDayEnum! == "월화수목금토일"
-            ? Text("매일 연재")
-            : Text("${widget.webtoonDTO.webtoonWeekDayEnum!.split("").join(", ")} 연재", overflow: TextOverflow.ellipsis),
-      ],
+        ],
+      ),
     );
   }
 }
