@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/Button.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/notice_page.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/setting_Text.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // 추가된 패키지
 
 class CupertinoStyleSwitch extends StatefulWidget {
   final bool value;
@@ -17,11 +18,18 @@ class CupertinoStyleSwitch extends StatefulWidget {
 }
 
 class _CupertinoStyleSwitchState extends State<CupertinoStyleSwitch> {
+  Future<void> saveSwitchState(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('purchaseAfterView', value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         widget.onChanged(!widget.value);
+        // 스위치 상태가 변경될 때 SharedPreferences에 저장
+        saveSwitchState(widget.value);
       },
       child: Container(
         width: 60.0,
@@ -57,8 +65,31 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   bool languageSetting = false;
   bool notificationSetting = false;
-  bool mobileDataAlert = false; // 이동통신망 사용 알림 스위치 상태 변수
-  bool purchaseAfterView = false; // 결제 후 작품 바로 보기 스위치 상태 변수
+  bool mobileDataAlert = false;
+  bool purchaseAfterView = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // 앱 시작 시 스위치 상태를 SharedPreferences에서 로드
+    loadSwitchStates();
+  }
+
+  Future<void> loadSwitchStates() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      languageSetting = prefs.getBool('languageSetting') ?? false;
+      notificationSetting = prefs.getBool('notificationSetting') ?? false;
+      mobileDataAlert = prefs.getBool('mobileDataAlert') ?? false;
+      purchaseAfterView = prefs.getBool('purchaseAfterView') ?? false;
+    });
+  }
+
+  // 스위치 상태를 SharedPreferences에 저장
+  Future<void> saveSwitchState(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('purchaseAfterView', value);
+  }
 
   @override
   Widget build(BuildContext context) {
