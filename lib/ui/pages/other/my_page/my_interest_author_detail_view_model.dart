@@ -16,8 +16,7 @@ class MyAuthorDetailPageModel {
 }
 
 //2. 창고
-class MyAuthorDetailPageViewModel
-    extends StateNotifier<MyAuthorDetailPageModel?> {
+class MyAuthorDetailPageViewModel extends StateNotifier<MyAuthorDetailPageModel?> {
   Ref ref;
   final mContext = navigatorKey.currentContext;
 
@@ -28,26 +27,27 @@ class MyAuthorDetailPageViewModel
   Future<void> notifyInit() async {
     print("여기!!!!!!!");
     SessionUser sessionUser = ref.read(sessionProvider);
-    int authId = ref.read(paramProvider).authMoveId!;
-    print("${authId}");
-    ResponseDTO responseDTO = await AuthorDetailRepository()
-        .fetchAuthorDetail(sessionUser.jwt!, authId);
-    // state = MyAuthorDetailPageModel(interestAuthorDetailDTO: responseDTO.data);
+    int authorId = ref.read(paramProvider).authorMoveId!;
+    print("${authorId}");
+    ResponseDTO responseDTO = await AuthorDetailRepository().fetchAuthorDetail(sessionUser.jwt!, authorId);
+
+    print("리포지토리완료");
+
+    state = MyAuthorDetailPageModel(interestAuthorDetailDTO: responseDTO.data);
     // state = MyAuthorPageModel();
     // state!.webtoonDTO = responseDTO.data;
   }
 
-  Future<void> notifyMyInterestAuthorDetailInfo(
-      InterestAuthorDetailDTO interestAuthorDetailDTO) async {
-    SessionUser sessionUser = ref.read(sessionProvider);
-
-    InterestAuthorDetailDTO interestAuthorDetailDTO =
-        state!.interestAuthorDetailDTO;
-  }
+  // Future<void> notifyMyInterestAuthorDetailInfo(
+  //     InterestAuthorDetailDTO interestAuthorDetailDTO) async {
+  //   SessionUser sessionUser = ref.read(sessionProvider);
+  //
+  //   InterestAuthorDetailDTO interestAuthorDetailDTO =
+  //       state!.interestAuthorDetailDTO;
+  // }
 }
 
-final myAuthorDetailPageProvider = StateNotifierProvider.autoDispose<
-    MyAuthorDetailPageViewModel, MyAuthorDetailPageModel?>((ref) {
+final myAuthorDetailPageProvider = StateNotifierProvider.autoDispose<MyAuthorDetailPageViewModel, MyAuthorDetailPageModel?>((ref) {
   Logger().d("myAuthorPage창고관리자 실행됨");
   return new MyAuthorDetailPageViewModel(ref, null)..notifyInit();
   // return new MyAuthorPageViewModel(ref, null);
