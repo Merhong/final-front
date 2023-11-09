@@ -1,53 +1,37 @@
 import 'package:flutter_blog/data/dto/user_dto/interest_author_detail_board_DTO.dart';
+import 'package:flutter_blog/data/dto/user_dto/interest_author_detail_webtoon_DTO.dart';
 
 class InterestAuthorDetailDTO {
   int id;
-  int authorId;
+  int userId;
   String? authorNickname;
   String? authorPhoto;
-  int interestCount;
-  String? authorSiteURL;
+  String? siteURL;
   String? introduce;
-  int webtoonId;
-  String? webtoonTitle;
-  String? webtoonImage;
-  DateTime? webtoonUpdateAt;
-  bool isInterest;
-  List<InterestAuthorDetailBoardDTO>? interestAuthorDetailBoardList;
+  int? interestCount;
+  bool? isInterest;
 
-  InterestAuthorDetailDTO(
-      this.id,
-      this.authorId,
-      this.authorNickname,
-      this.authorPhoto,
-      this.interestCount,
-      this.authorSiteURL,
-      this.introduce,
-      this.webtoonId,
-      this.webtoonTitle,
-      this.webtoonImage,
-      this.isInterest,
-      this.interestAuthorDetailBoardList);
+  List<InterestAuthorDetailWebtoonDTO>? authorWebtoonList;
+  List<InterestAuthorDetailBoardDTO>? authorBoardList;
+
+  InterestAuthorDetailDTO(this.id, this.userId, this.authorNickname, this.authorPhoto, this.siteURL, this.introduce, this.interestCount,
+      this.isInterest, this.authorWebtoonList, this.authorBoardList);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   InterestAuthorDetailDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        authorId = json["authorId"],
+        userId = json["userId"],
         authorNickname = json["authorNickname"],
         authorPhoto = json["authorPhoto"],
-        interestCount = json["interestCount"],
-        authorSiteURL = json["authorSiteURL"],
+        siteURL = json["siteURL"],
         introduce = json["introduce"],
-        webtoonId = json["webtoonId"],
-        webtoonTitle = json["webtoonTitle"],
-        webtoonImage = json["webtoonImage"],
+        interestCount = json["interestCount"],
         isInterest = json["isInterest"],
-        interestAuthorDetailBoardList = json["interestAuthorDetailBoardList"];
+        authorWebtoonList = (json["authorWebtoonList"] as List).map((jsonDW) => InterestAuthorDetailWebtoonDTO.fromJson(jsonDW)).toList(),
+        authorBoardList = (json["authorBoardList"] as List).map((jsonDA) => InterestAuthorDetailBoardDTO.fromJson(jsonDA)).toList();
 
   @override
   String toString() {
-    return "InterestAuthorDTO{id: $id, authorId: $authorId, authorNickname: $authorNickname, authorPhoto: $authorPhoto, "
-        "interestCount: $interestCount, authorSiteURL: $authorSiteURL, interestCount: $interestCount, introduce: $introduce,  "
-        "interestAuthorDetailBoardList: $interestAuthorDetailBoardList}";
+    return 'InterestAuthorDetailDTO{id: $id, userId: $userId, authorNickname: $authorNickname, authorPhoto: $authorPhoto, siteURL: $siteURL, introduce: $introduce, interestCount: $interestCount, isInterest: $isInterest, authorWebtoonList: $authorWebtoonList, authorBoardList: $authorBoardList}';
   }
 }

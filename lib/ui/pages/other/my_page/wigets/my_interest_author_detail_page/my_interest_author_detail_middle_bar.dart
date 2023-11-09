@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/dto/user_dto/interest_author_detail_DTO.dart';
 
 class MyInterestAuthorDetailMiddleBar extends StatefulWidget {
-  MyInterestAuthorDetailMiddleBar({super.key});
+  InterestAuthorDetailDTO interestAuthorDetailDTO;
+
+  MyInterestAuthorDetailMiddleBar(this.interestAuthorDetailDTO);
 
   @override
-  State<MyInterestAuthorDetailMiddleBar> createState() =>
-      _MyInterestAuthorDetailMiddleBarState();
+  State<MyInterestAuthorDetailMiddleBar> createState() => _MyInterestAuthorDetailMiddleBarState();
 }
 
-class _MyInterestAuthorDetailMiddleBarState
-    extends State<MyInterestAuthorDetailMiddleBar> {
+class _MyInterestAuthorDetailMiddleBarState extends State<MyInterestAuthorDetailMiddleBar> {
   bool isButtonPressed = false;
   Color buttonBackgroundColor = Colors.white; // 기본 버튼 배경 색상
   Color buttonTextColor = Colors.black; // 기본 버튼 텍스트 색상
@@ -39,10 +40,8 @@ class _MyInterestAuthorDetailMiddleBarState
                 });
               },
               style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(buttonBackgroundColor), // 배경 색상
-                foregroundColor: MaterialStateProperty.all(
-                    buttonTextColor), //, // 눌린 상태와 눌리지 않은 상태에 따른 배경 색상 설정
+                backgroundColor: MaterialStateProperty.all(buttonBackgroundColor), // 배경 색상
+                foregroundColor: MaterialStateProperty.all(buttonTextColor), //, // 눌린 상태와 눌리지 않은 상태에 따른 배경 색상 설정
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +52,7 @@ class _MyInterestAuthorDetailMiddleBarState
                   ),
                   Text("관심"),
                   SizedBox(width: 15),
-                  Text("25,471")
+                  Text("${widget.interestAuthorDetailDTO.interestCount}")
                 ],
               ),
             ),

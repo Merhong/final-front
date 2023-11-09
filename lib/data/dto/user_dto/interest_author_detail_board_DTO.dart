@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class InterestAuthorDetailBoardDTO {
   int id;
   int authorId;
@@ -5,7 +7,7 @@ class InterestAuthorDetailBoardDTO {
   String? text;
 
   String? photo;
-  DateTime createdAt;
+  DateTime? createdAt;
 
   InterestAuthorDetailBoardDTO(
     this.id,
@@ -23,7 +25,7 @@ class InterestAuthorDetailBoardDTO {
         title = json["title"],
         text = json["text"],
         photo = json["photo"],
-        createdAt = json["createdAt"];
+        createdAt = json["createdAt"] == null ? null : DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(json["createdAt"]);
 
   @override
   String toString() {
