@@ -16,7 +16,7 @@ class PurchaseHistory extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 13),
       child: ListView.builder(
-          itemCount: 10,
+          itemCount: model!.paymentHistoryDTOList.length,
           //여기 Row 컴포넌트로 빼야함
           itemBuilder: (context, index) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
