@@ -127,7 +127,6 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
 
   Widget buildAuthornameAndWeek(List<Author> authorList, String webtoonTitle) {
     return AuthorListSelect(
-      context: context,
       authorList: widget.webtoonDTO.authorList,
       webtoonTitle: widget.webtoonDTO.title,
       inkWellChild: Column(

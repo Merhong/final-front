@@ -63,7 +63,6 @@ class WebtoonEpisodeBottom extends StatelessWidget {
         Padding(
           padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeM10, sizePaddingLR17, sizeM10),
           child: AuthorListSelect(
-            context: context,
             webtoonTitle: episodeDTO.webtoonName,
             authorList: episodeDTO.authorList,
             inkWellChild: Column(
