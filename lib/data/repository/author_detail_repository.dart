@@ -1,19 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
+import 'package:flutter_blog/data/dto/user_dto/interest_author_detail_DTO.dart';
 import 'package:logger/logger.dart';
 
 class AuthorDetailRepository {
   Future<ResponseDTO> fetchAuthorDetail(String jwt, int authorId) async {
+    print("테스트${"/author/$authorId"}");
     try {
       // 통신
-      Response response = await dio.get("/interest/$authorId",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.get("/authors/$authorId", options: Options(headers: {"Authorization": "${jwt}"}));
+      print("백엔드 통신 가닝????");
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      print("fetchAuthorDetail통신1");
+      // Logger().d("${responseDTO.data}");
 
-      List<dynamic> mapList = responseDTO.data as List<dynamic>;
+      responseDTO.data = InterestAuthorDetailDTO.fromJson(responseDTO.data);
+      print("fetchAuthorDetail통신2찍혀야함");
 
       return responseDTO;
     } catch (e) {

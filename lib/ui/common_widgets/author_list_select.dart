@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_detail_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../_core/constants/http.dart';
 import '../../_core/constants/size.dart';
 import '../../data/model/author.dart';
 
-class AuthorListSelect extends StatelessWidget {
+class AuthorListSelect extends ConsumerWidget {
   const AuthorListSelect({
     super.key,
-    required this.context,
+    // required this.context,
     required this.webtoonTitle,
     required this.authorList,
     required this.inkWellChild,
   });
 
-  final BuildContext context;
+  // final BuildContext context;
   final String webtoonTitle;
   final List<Author> authorList;
   final Widget inkWellChild;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
         showDialog(
@@ -48,7 +51,9 @@ class AuthorListSelect extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               print("${author.authorPhoto}/${author.authorNickname}");
-                              // TODO 작가페이지
+                              ParamStore ps = ref.read(paramProvider);
+                              ps.addAuthorMoveId(author.id);
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => MyInterestAuthorDetailPage()));
                             },
                             child: Row(
                               children: [

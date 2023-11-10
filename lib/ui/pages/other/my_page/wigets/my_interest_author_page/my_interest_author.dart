@@ -4,6 +4,7 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_author_DTO.dart';
 import 'package:flutter_blog/data/dto/user_dto/recommend_author_DTO.dart';
+import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_detail_page.dart';
@@ -70,7 +71,8 @@ class _MyInterestAuthorState extends ConsumerState<MyInterestAuthor> {
                           padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
                           child: Row(
                             children: [
-                              buildPhoto(ref, context, recommendAuthorDTOList[index - interestAuthorDTOList.length].authorPhoto!),
+                              buildPhoto(ref, context, recommendAuthorDTOList[index - interestAuthorDTOList.length].authorPhoto!,
+                                  recommendAuthorDTOList[index - interestAuthorDTOList.length].authorId),
                               SizedBox(width: sizeM10),
                               buildRecommendDescription(ref, context, recommendAuthorDTOList[index - interestAuthorDTOList.length]),
                               SizedBox(width: sizeL20),
@@ -87,7 +89,7 @@ class _MyInterestAuthorState extends ConsumerState<MyInterestAuthor> {
                       padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
                       child: Row(
                         children: [
-                          buildPhoto(ref, context, interestAuthorDTOList[index].authorPhoto!),
+                          buildPhoto(ref, context, interestAuthorDTOList[index].authorPhoto!, interestAuthorDTOList[index].authorId),
                           SizedBox(width: sizeM10),
                           buildDescription(ref, context, interestAuthorDTOList[index]),
                           SizedBox(width: sizeL20),
@@ -159,14 +161,13 @@ class _MyInterestAuthorState extends ConsumerState<MyInterestAuthor> {
     );
   }
 
-  InkWell buildPhoto(WidgetRef ref, BuildContext context, String photo) {
+  InkWell buildPhoto(WidgetRef ref, BuildContext context, String photo, authorId) {
     return InkWell(
-      // onTap: () {
-      //   ParamStore ps = ref.read(paramProvider);
-      //   ps.addWebtoonDetailId(interestAuthorDTOList[index].authorId);
-      //   ps.addBottomNavigationBarIndex(0);
-      //   Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
-      // },
+      onTap: () {
+        ParamStore ps = ref.read(paramProvider);
+        ps.addAuthorMoveId(authorId);
+        Navigator.push(context, MaterialPageRoute(builder: (_) => MyInterestAuthorDetailPage()));
+      },
       child: CircleAvatar(
         backgroundImage: NetworkImage('${imageURL}/AuthorPhoto/${photo}'),
         radius: 37,
@@ -179,9 +180,8 @@ Expanded buildDescription(WidgetRef ref, BuildContext context, InterestAuthorDTO
   return Expanded(
     child: InkWell(
       onTap: () {
-        // ParamStore ps = ref.read(paramProvider);
-        // ps.addWebtoonDetailId(interestAuthorDTOList[index].authorId);
-        // ps.addBottomNavigationBarIndex(0);
+        ParamStore ps = ref.read(paramProvider);
+        ps.addAuthorMoveId(interestAuthorDTO.authorId);
         Navigator.push(context, MaterialPageRoute(builder: (_) => MyInterestAuthorDetailPage()));
       },
       child: Column(
@@ -251,9 +251,8 @@ Expanded buildRecommendDescription(WidgetRef ref, BuildContext context, Recommen
   return Expanded(
     child: InkWell(
       onTap: () {
-        // ParamStore ps = ref.read(paramProvider);
-        // ps.addWebtoonDetailId(interestAuthorDTOList[index].authorId);
-        // ps.addBottomNavigationBarIndex(0);
+        ParamStore ps = ref.read(paramProvider);
+        ps.addAuthorMoveId(recommendAuthorDTO.authorId);
         Navigator.push(context, MaterialPageRoute(builder: (_) => MyInterestAuthorDetailPage()));
       },
       child: Column(
