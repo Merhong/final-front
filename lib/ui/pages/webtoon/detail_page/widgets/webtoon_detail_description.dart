@@ -59,7 +59,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                             width: sizeGetScreenWidth(context) * 0.80,
                             child: Text(
                               "${widget.webtoonDTO.intro}",
-                              style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                              style: TextStyle(fontSize: 13, color: Colors.grey[700]),
                             ),
                           ),
                           Icon(Icons.arrow_drop_up),
@@ -69,7 +69,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                     SizedBox(height: sizeS5),
                     Row(
                       children: [
-                        Text("연령 : ", style: TextStyle(color: Colors.grey[600])),
+                        Text("연령 : ", style: TextStyle(color: Colors.grey[700])),
                         Text("${widget.webtoonDTO.ageLimit == 0 ? "전체 이용가" : "${widget.webtoonDTO.ageLimit}세 이용가"}"),
                       ],
                     ),
@@ -111,7 +111,7 @@ class _WebtoonDetailDescriptionState extends State<WebtoonDetailDescription> {
                         width: sizeGetScreenWidth(context) * 0.80,
                         child: Text(
                           "${widget.webtoonDTO.intro}",
-                          style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                          style: TextStyle(fontSize: 13, color: Colors.grey[700]),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),

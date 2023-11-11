@@ -25,7 +25,7 @@ class SearchItem extends ConsumerWidget {
             onTap: () {
               ParamStore ps = ref.read(paramProvider);
               ps.addWebtoonDetailId(searchDTO.id);
-              ps.addBottomNavigationBarIndex(0);
+              // ps.addBottomNavigationBarIndex(0);
               Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
             },
             child: Container(

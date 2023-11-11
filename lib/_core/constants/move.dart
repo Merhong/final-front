@@ -3,7 +3,7 @@ import 'package:flutter_blog/ui/pages/auth/login_page/autor_login_page.dart';
 import 'package:flutter_blog/ui/pages/auth/logout_page/logout_page.dart';
 import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_detail_page.dart';
+import 'package:flutter_blog/ui/pages/other/author_page/my_interest_author_detail_page.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_page.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/see_more_page.dart';
 import 'package:flutter_blog/ui/pages/pay/home_page/pay_home_page.dart';

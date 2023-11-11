@@ -102,6 +102,13 @@ flutter:
       fonts:
           - asset: assets/The Jamsil 4 Medium.ttf
 
+    - family: CookieRun
+      fonts:
+#        - asset: assets/CookieRun Black.ttf
+        - asset: assets/CookieRun Regular.ttf
+#        - asset: assets/CookieRun Bold.ttf
+
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

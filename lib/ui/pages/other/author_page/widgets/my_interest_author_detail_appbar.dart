@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyInterestAuthorDetailAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class MyInterestAuthorDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyInterestAuthorDetailAppBar({super.key});
 
   @override

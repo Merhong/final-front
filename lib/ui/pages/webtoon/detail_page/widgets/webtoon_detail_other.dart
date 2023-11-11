@@ -21,7 +21,7 @@ class WebtoonDetailOther extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Divider(color: Colors.grey, height: 1, thickness: 1),
+        webtoonDTO.authorOtherWebtoonList!.length != 0 ? Divider(color: Colors.grey, height: 1, thickness: 1) : SizedBox(),
         webtoonDTO.authorOtherWebtoonList!.length != 0 ? buildAutherOtherWebtoon(ref) : SizedBox(),
         SizedBox(height: sizeM10),
         BottomRule(),

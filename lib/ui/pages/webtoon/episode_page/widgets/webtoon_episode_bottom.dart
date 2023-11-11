@@ -127,7 +127,7 @@ class WebtoonEpisodeNextEpisode extends ConsumerWidget {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
                   },
                   child: Container(
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(sizeBorder5), color: Colors.grey[300]),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(sizeBorder5), color: Color.fromRGBO(150, 150, 150, 0.5)),
                     padding: EdgeInsets.all(sizeM10),
                     child: Row(
                       children: [
@@ -148,7 +148,7 @@ class WebtoonEpisodeNextEpisode extends ConsumerWidget {
                           children: [
                             Text(
                               "다음화 보기",
-                              style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                              style: TextStyle(fontSize: 13, color: Colors.grey[700]),
                             ),
                             Container(
                               constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.5),

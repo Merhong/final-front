@@ -34,12 +34,12 @@ class WebtoonListBody extends ConsumerWidget {
         WebtoonListSliverPersistentHeader(),
         WebtoonListMiddleAdvertising(),
         WebtoonListSliverGrid(),
-        SliverToBoxAdapter(
-          child: Container(
-            height: 200.0,
-            child: WebtoonListBottomView(),
-          ),
-        ),
+        // SliverToBoxAdapter(
+        //   child: Container(
+        //     height: 200.0,
+        //     child: WebtoonListBottomView(),
+        //   ),
+        // ),
         WebtoonListBottomRandom(),
         SliverToBoxAdapter(child: BottomRule()),
 
