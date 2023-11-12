@@ -2,17 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
-import 'package:flutter_blog/data/provider/param_provider.dart';
+import 'package:flutter_blog/_core/firebase/api/firebase_api.dart';
+import 'package:flutter_blog/_core/firebase/firebase_options.dart';
+import 'package:flutter_blog/_core/firebase/services/local_notification_service.dart';
 import 'package:flutter_blog/data/provider/push_move_view_model.dart';
-import 'package:flutter_blog/services/local_notification_service.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/autor_login_page.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_view_model.dart';
-import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '_core/constants/theme.dart';
-import 'api/firebase_api.dart';
-import 'firebase_options.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

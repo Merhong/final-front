@@ -89,7 +89,7 @@ class WebtoonListItem extends StatelessWidget {
                             ],
                           )
                         : Container(
-                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.29),
+                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.28),
                             child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                           ),
           ],

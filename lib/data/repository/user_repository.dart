@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/api/firebase_api.dart';
+import 'package:flutter_blog/_core/firebase/api/firebase_api.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/model/user.dart';
 
