@@ -76,6 +76,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       print("실행44");
       if (message.notification != null) {
         print("앱 켜져있을때 : ${message.notification!.title}");
+
         print("앱 켜져있을때 : ${message.notification!.body}");
       }
 
