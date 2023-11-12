@@ -26,9 +26,9 @@ class WebtoonEpisodePage extends ConsumerWidget {
 
     EpisodeDTO episodeDTO = model.episodeDTO;
 
-    if (episodeDTO.episodeId != ref.read(paramProvider).episodeId) {
-      ref.read(webtoonEpisodeProvider.notifier).notifyInit();
-    }
+    // if (episodeDTO.episodeId != ref.read(paramProvider).episodeId) {
+    //   ref.read(webtoonEpisodeProvider.notifier).notifyInit();
+    // }
 
     return Scrollbar(
       trackVisibility: true,

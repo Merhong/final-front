@@ -91,7 +91,7 @@ class MyAuthorDetailPageViewModel extends StateNotifier<MyAuthorDetailPageModel?
 }
 
 final myAuthorDetailPageProvider = StateNotifierProvider.autoDispose<MyAuthorDetailPageViewModel, MyAuthorDetailPageModel?>((ref) {
-  Logger().d("myAuthorPage창고관리자 실행됨");
+  // Logger().d("myAuthorPage창고관리자 실행됨");
   return new MyAuthorDetailPageViewModel(ref, null)..notifyInit();
   // return new MyAuthorPageViewModel(ref, null);
 });
