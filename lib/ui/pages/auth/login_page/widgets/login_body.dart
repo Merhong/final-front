@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginBody extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
-  final _email = TextEditingController(text: "ssar@naver.com");
-  final _password = TextEditingController(text: "1234");
+  // final _email = TextEditingController(text: "ssar@naver.com");
+  // final _password = TextEditingController(text: "1234");
 
   LoginBody({super.key});
 
