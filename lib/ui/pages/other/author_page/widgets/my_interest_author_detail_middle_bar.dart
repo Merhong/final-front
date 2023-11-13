@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/user_dto/interest_author_detail_DTO.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
@@ -11,12 +12,15 @@ class MyInterestAuthorDetailMiddleBar extends ConsumerStatefulWidget {
   MyInterestAuthorDetailMiddleBar(this.interestAuthorDetailDTO);
 
   @override
-  _MyInterestAuthorDetailMiddleBarState createState() => _MyInterestAuthorDetailMiddleBarState();
+  _MyInterestAuthorDetailMiddleBarState createState() =>
+      _MyInterestAuthorDetailMiddleBarState();
 }
 
-class _MyInterestAuthorDetailMiddleBarState extends ConsumerState<MyInterestAuthorDetailMiddleBar> {
+class _MyInterestAuthorDetailMiddleBarState
+    extends ConsumerState<MyInterestAuthorDetailMiddleBar> {
   bool isButtonPressed = false;
-  Color buttonBackgroundColor = Color.fromRGBO(150, 150, 150, 0.5); // 기본 버튼 배경 색상
+  Color buttonBackgroundColor =
+      Color.fromRGBO(150, 150, 150, 0.5); // 기본 버튼 배경 색상
   Color buttonTextColor = Colors.black; // 기본 버튼 텍스트 색상
 
   //각각이 Text여서 자기 크기만큼만 잡음 (=인라인)
@@ -33,14 +37,17 @@ class _MyInterestAuthorDetailMiddleBarState extends ConsumerState<MyInterestAuth
               onPressed: widget.interestAuthorDetailDTO.isInterest == true
                   ? () {
                       ScaffoldMessenger.of(context).clearSnackBars();
-                      ref.read(myAuthorDetailPageProvider.notifier).notifyInterestDelete();
+                      ref
+                          .read(myAuthorDetailPageProvider.notifier)
+                          .notifyInterestDelete();
                       mySnackbar(
                         context,
                         1000,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.sentiment_very_dissatisfied, color: Colors.grey),
+                            Icon(Icons.sentiment_very_dissatisfied,
+                                color: CommonColors.grey),
                             Text(" 관심 작가를 해제하였습니다."),
                           ],
                         ),
@@ -48,28 +55,34 @@ class _MyInterestAuthorDetailMiddleBarState extends ConsumerState<MyInterestAuth
                     }
                   : () {
                       ScaffoldMessenger.of(context).clearSnackBars();
-                      ref.read(myAuthorDetailPageProvider.notifier).notifyInterestCreate();
+                      ref
+                          .read(myAuthorDetailPageProvider.notifier)
+                          .notifyInterestCreate();
                       mySnackbar(
                         context,
                         1000,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.add_reaction_outlined, color: Colors.green),
+                            Icon(Icons.add_reaction_outlined,
+                                color: CommonColors.green),
                             Text(" 관심 작가로 등록하였습니다."),
                           ],
                         ),
                       );
                     },
               style: ButtonStyle(
-                backgroundColor: widget.interestAuthorDetailDTO.isInterest == true
+                backgroundColor: widget.interestAuthorDetailDTO.isInterest ==
+                        true
                     ? MaterialStateProperty.all(buttonBackgroundColor)
-                    : MaterialStateProperty.all(Colors.green), // 배경 색상
-                foregroundColor: MaterialStateProperty.all(buttonTextColor), //, // 눌린 상태와 눌리지 않은 상태에 따른 배경 색상 설정
+                    : MaterialStateProperty.all(CommonColors.green), // 배경 색상
+                foregroundColor: MaterialStateProperty.all(
+                    buttonTextColor), //, // 눌린 상태와 눌리지 않은 상태에 따른 배경 색상 설정
               ),
               child: widget.interestAuthorDetailDTO.isInterest == true
                   ? Text("✔ 관심 ${widget.interestAuthorDetailDTO.interestCount}")
-                  : Text("+ 관심 추가하기  ${widget.interestAuthorDetailDTO.interestCount}"),
+                  : Text(
+                      "+ 관심 추가하기  ${widget.interestAuthorDetailDTO.interestCount}"),
             ),
           ),
           Container(
@@ -80,17 +93,24 @@ class _MyInterestAuthorDetailMiddleBarState extends ConsumerState<MyInterestAuth
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("알림"),
+                        title: Text(
+                          "알림",
+                          style: TextStyle(
+                              color: CommonColors.green,
+                              fontWeight: FontWeight.bold),
+                        ),
                         content: Text("주소가 복사되었습니다."),
                         actions: [
-                          TextButton(
+                          ElevatedButton(
                             onPressed: () {
                               Navigator.of(context).pop(); // AlertDialog 닫기
                             },
                             child: Text(
                               "확인",
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(color: Colors.white),
                             ),
+                            style: ElevatedButton.styleFrom(
+                                primary: CommonColors.green),
                           ),
                         ],
                       );
@@ -98,8 +118,10 @@ class _MyInterestAuthorDetailMiddleBarState extends ConsumerState<MyInterestAuth
                   );
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(buttonBackgroundColor), // 배경 색상
-                  foregroundColor: MaterialStateProperty.all(buttonTextColor), //, // 눌린 상태와 눌리지 않은 상태에 따른 배경 색상 설정
+                  backgroundColor:
+                      MaterialStateProperty.all(buttonBackgroundColor), // 배경 색상
+                  foregroundColor: MaterialStateProperty.all(
+                      buttonTextColor), //, // 눌린 상태와 눌리지 않은 상태에 따른 배경 색상 설정
                 ),
                 child: Icon(
                   Icons.share_rounded,
@@ -114,14 +136,24 @@ class _MyInterestAuthorDetailMiddleBarState extends ConsumerState<MyInterestAuth
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("알림"),
+                      title: Text(
+                        "알림",
+                        style: TextStyle(
+                            color: CommonColors.green,
+                            fontWeight: FontWeight.bold),
+                      ),
                       content: Text("신고하기"),
                       actions: [
-                        TextButton(
+                        ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).pop(); // AlertDialog 닫기
                           },
-                          child: Text("확인", style: TextStyle(color: Colors.black)),
+                          child: Text(
+                            "확인",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: CommonColors.green),
                         ),
                       ],
                     );
@@ -129,8 +161,10 @@ class _MyInterestAuthorDetailMiddleBarState extends ConsumerState<MyInterestAuth
                 );
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(buttonBackgroundColor), // 배경 색상
-                foregroundColor: MaterialStateProperty.all(buttonTextColor), //, // 눌린 상태와 눌리지 않은 상태에 따른 배경 색상 설정
+                backgroundColor:
+                    MaterialStateProperty.all(buttonBackgroundColor), // 배경 색상
+                foregroundColor: MaterialStateProperty.all(
+                    buttonTextColor), //, // 눌린 상태와 눌리지 않은 상태에 따른 배경 색상 설정
               ),
               child: Icon(
                 Icons.report,
