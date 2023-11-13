@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
 class historyList extends StatelessWidget {
@@ -15,7 +16,7 @@ class historyList extends StatelessWidget {
         children: [
           Text(
             purchase,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: CommonColors.grey),
           ),
           SizedBox(
             width: sizeS5,
