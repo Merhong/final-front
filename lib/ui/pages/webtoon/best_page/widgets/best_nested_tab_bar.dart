@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/common_widgets/custom_best_view.dart';
 import 'package:flutter_blog/ui/pages/webtoon/best_page/widgets/dot_tab.dart';
@@ -39,7 +40,7 @@ class _BestNestedTabBarState extends State<BestNestedTabBar>
         TabBar.secondary(
           controller: _tabController,
           indicatorColor: Colors.white,
-          labelColor: Colors.green, // 선택된 탭의 텍스트 색상
+          labelColor: CommonColors.green, // 선택된 탭의 텍스트 색상
           unselectedLabelColor: Colors.black, // 선택되지 않은 탭의 텍스트 색상
           tabs: <Widget>[
             Tab(text: '업데이트순'),

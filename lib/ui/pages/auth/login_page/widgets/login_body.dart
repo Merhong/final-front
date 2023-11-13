@@ -23,7 +23,7 @@ class LoginBody extends ConsumerWidget {
             Container(
                 child: Text(
                   "Naver로고",
-                  style: TextStyle(fontSize: 30, color: Colors.green),
+                  style: TextStyle(fontSize: 30, color: Color(0xFF03C705B)),
                 ),
                 alignment: Alignment.center),
             SizedBox(height: sizeL20),
