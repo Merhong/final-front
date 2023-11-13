@@ -30,7 +30,6 @@ class WebtoonListBody extends ConsumerWidget {
       slivers: <Widget>[
         WebtoonListSliverAppBarAndPageView(isScroll),
         WebtoonListSliverPersistentHeader(),
-
         WebtoonListSliverGrid(),
         // SliverToBoxAdapter(
         //   child: Container(

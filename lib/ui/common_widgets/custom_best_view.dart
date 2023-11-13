@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/webtoon_dto/best_DTO.dart';
 import 'package:flutter_blog/ui/pages/webtoon/best_page/webtoon_best_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class CustomBestView extends ConsumerWidget {
   final int index;
@@ -74,13 +75,13 @@ class CustomBestView extends ConsumerWidget {
                           color: Colors.red,
                         ),
                         Text(
-                          "${bestList[index].starCount}",
+                          "${(bestList[index].starScore! / (bestList[index].starCount == 0 ? 1 : bestList[index].starCount!)).toStringAsFixed(2)}",
                           style: TextStyle(
                             color: Colors.red,
                           ),
                         ),
                         Text(
-                          "   11:07",
+                          "   ${DateFormat('yyyy-MM-dd').format(bestList[index].episodeUpdatedAt!)}",
                           style: TextStyle(
                             color: Colors.black,
                           ),
