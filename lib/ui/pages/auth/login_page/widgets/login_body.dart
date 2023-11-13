@@ -21,11 +21,11 @@ class LoginBody extends ConsumerWidget {
             SizedBox(height: sizeL20),
             //size.dart const붙여서 사용 가능
             Container(
-                child: Text(
-                  "Naver로고",
-                  style: TextStyle(fontSize: 30, color: Colors.green),
-                ),
-                alignment: Alignment.center),
+              width: 40,
+              height: 40,
+              child: Image.asset("assets/main.png"),
+            ),
+
             SizedBox(height: sizeL20),
             LoginForm(),
             SizedBox(height: sizeL20),

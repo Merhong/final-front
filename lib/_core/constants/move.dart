@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/splashScreen.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/autor_login_page.dart';
 import 'package:flutter_blog/ui/pages/auth/logout_page/logout_page.dart';
 import 'package:flutter_blog/ui/pages/auth/terms_page/terms_page.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
 import 'package:flutter_blog/ui/pages/other/author_page/my_interest_author_detail_page.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_page.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/see_more_page.dart';
-import 'package:flutter_blog/ui/pages/pay/home_page/pay_home_page.dart';
 import 'package:flutter_blog/ui/pages/pay/pay_card_page/pay_card_page.dart';
 import 'package:flutter_blog/ui/pages/pay/pay_method_page/pay_method_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_page.dart';
@@ -41,6 +41,7 @@ class Move {
   static String payCardPage = "/pay/card"; // 결제(카드)
   static String searchPage = "/search"; // 결제(카드)
   static String myInterestAuthorPage = "/interest/author";
+  static String splashPage = "/splash";
   static String myInterestAuthorDetailPage = "/interest/author/detail";
 }
 
@@ -67,6 +68,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.payCardPage: (context) => PayCardPage(),
     Move.searchPage: (context) => SearchPage(),
     Move.myInterestAuthorDetailPage: (context) => MyInterestAuthorDetailPage(),
+    Move.splashPage: (context) => SplashScreen(),
     // Move.myInterestAuthorPage: (context) => MyInterestAuthorPage(),
   };
 }
