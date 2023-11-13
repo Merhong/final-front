@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WebtoonDetailPreview extends StatelessWidget {
+class WebtoonDetailPreview extends ConsumerWidget {
   const WebtoonDetailPreview({
+    required this.webtoonDTO,
     Key? key,
   }) : super(key: key);
 
+  final DetailPageWebtoonDTO webtoonDTO;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         Divider(color: Colors.grey, height: 1, thickness: 1),
         Padding(
-          padding: const EdgeInsets.only(left: sizePaddingLR17, right: sizePaddingLR17, top: sizeS5, bottom: sizeS5),
+          padding: const EdgeInsets.only(
+              left: sizePaddingLR17,
+              right: sizePaddingLR17,
+              top: sizeS5,
+              bottom: sizeS5),
           child: Row(
             children: [
               Text(
-                '5개의 ',
+                '3개의 ',
                 style: TextStyle(
                   color: Colors.green, // 초록색 텍스트
                   fontWeight: FontWeight.bold, // 글자 크기를 두꺼워지게 함
@@ -46,12 +56,17 @@ class WebtoonDetailPreview extends StatelessWidget {
                         // 그림 미리보기 아이템 내용 설정 (이미지)
                         child: Center(
                           child: ClipOval(
-                            child: Image.asset(
-                              'assets/default_episode_Thumbnail.jpg', // 이미지 경로 지정
-                              width: 60, // 이미지 너비를 아이콘 크기와 동일하게 설정
-                              height: 60, // 이미지 높이를 아이콘 크기와 동일하게 설정
-                              fit: BoxFit.cover, // 이미지를 동그라미에 꽉 채우도록 설정
-                            ),
+                            child: Image.network(
+                                '$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![1].thumbnail}',
+                                fit: BoxFit.cover,
+                                width: 60, // 이미지 너비를 아이콘 크기와 동일하게 설정
+                                height: 55, // 이미지 높이를 아이콘 크기와 동일하게 설정
+                                errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                "assets/default_episode_Thumbnail.jpg",
+                                fit: BoxFit.cover,
+                              );
+                            }),
                           ),
                         ),
                       ),
@@ -71,8 +86,8 @@ class WebtoonDetailPreview extends StatelessWidget {
                         // 그림 미리보기 아이템 내용 설정 (이미지)
                         child: Center(
                           child: ClipOval(
-                            child: Image.asset(
-                              'assets/default_episode_Thumbnail.jpg', // 이미지 경로 지정
+                            child: Image.network(
+                              '$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![2].thumbnail}',
                               width: 60, // 이미지 너비를 아이콘 크기와 동일하게 설정
                               height: 60, // 이미지 높이를 아이콘 크기와 동일하게 설정
                               fit: BoxFit.cover, // 이미지를 동그라미에 꽉 채우도록 설정
@@ -93,8 +108,8 @@ class WebtoonDetailPreview extends StatelessWidget {
                       // 그림 미리보기 아이템 내용 설정 (이미지)
                       child: Center(
                         child: ClipOval(
-                          child: Image.asset(
-                            'assets/default_episode_Thumbnail.jpg', // 이미지 경로 지정
+                          child: Image.network(
+                            '$imageURL/EpisodeThumbnail/${webtoonDTO.episodeList![3].thumbnail}',
                             width: 60, // 이미지 너비를 아이콘 크기와 동일하게 설정
                             height: 60, // 이미지 높이를 아이콘 크기와 동일하게 설정
                             fit: BoxFit.cover, // 이미지를 동그라미에 꽉 채우도록 설정

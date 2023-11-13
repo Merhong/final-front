@@ -23,15 +23,23 @@ class WebtoonDetailBody extends ConsumerWidget {
       child: CustomScrollView(
         controller: detailPageController,
         slivers: [
-          SliverToBoxAdapter(child: WebtoonDetailThumbnail(isScroll, webtoonDTO)),
+          SliverToBoxAdapter(
+              child: WebtoonDetailThumbnail(isScroll, webtoonDTO)),
           SliverToBoxAdapter(child: WebtoonDetailDescription(webtoonDTO)),
-          webtoonDTO.episodeList.length == 0 ? SliverToBoxAdapter(child: SizedBox()) : SliverToBoxAdapter(child: WebtoonDetailPreview()),
+          webtoonDTO.episodeList.length == 0
+              ? SliverToBoxAdapter(child: SizedBox())
+              : SliverToBoxAdapter(
+                  child: WebtoonDetailPreview(webtoonDTO: webtoonDTO)),
           webtoonDTO.episodeList.length == 0
               ? SliverToBoxAdapter(
                   child: Column(
                     children: [
                       Divider(color: Colors.grey, height: 1, thickness: 1),
-                      Container(height: 250, child: Center(child: Text("에피소드가 하나도 없어요.", style: TextStyle(fontSize: 20)))),
+                      Container(
+                          height: 250,
+                          child: Center(
+                              child: Text("에피소드가 하나도 없어요.",
+                                  style: TextStyle(fontSize: 20)))),
                       WebtoonDetailOther(webtoonDTO: webtoonDTO),
                     ],
                   ),
@@ -41,7 +49,8 @@ class WebtoonDetailBody extends ConsumerWidget {
                     childCount: webtoonDTO.episodeList.length + 1,
                     (context, index) {
                       if (index != webtoonDTO.episodeList.length) {
-                        return WebtoonDetailEpisode(index: index, webtoonDTO: webtoonDTO);
+                        return WebtoonDetailEpisode(
+                            index: index, webtoonDTO: webtoonDTO);
                       }
                       return WebtoonDetailOther(webtoonDTO: webtoonDTO);
                     },
