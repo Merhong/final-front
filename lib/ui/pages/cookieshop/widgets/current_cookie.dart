@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 
 class CurrentCookie extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class CurrentCookieState extends State<CurrentCookie> {
             SizedBox(
               width: 5.0, // sizeS5 대신 고정 값 사용
             ),
-            Text("$_cookieCount개", style: TextStyle(color: Colors.green)),
+            Text("$_cookieCount개", style: TextStyle(color: CommonColors.green)),
           ],
         ),
       ),

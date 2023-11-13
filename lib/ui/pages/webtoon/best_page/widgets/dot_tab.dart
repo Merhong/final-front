@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 
 class DotTab extends StatelessWidget {
   final String text;
@@ -12,7 +13,7 @@ class DotTab extends StatelessWidget {
         Icon(
           Icons.brightness_1, // 원형 아이콘을 점으로 사용
           size: 6, // 점의 크기 조절
-          color: Colors.grey, // 점의 색상 설정
+          color: CommonColors.grey, // 점의 색상 설정
         ),
         SizedBox(width: 2), // 점과 텍스트 사이에 공백
         Text(text),

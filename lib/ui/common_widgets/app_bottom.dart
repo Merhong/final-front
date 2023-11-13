@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
-import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class AppBottom extends ConsumerStatefulWidget {
   const AppBottom({
@@ -34,31 +33,53 @@ class _AppBottomState extends ConsumerState<AppBottom> {
     return Container(
       height: 50,
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.grey, width: 1.0)), // 라인효과
+        border: Border(
+            top: BorderSide(color: CommonColors.grey, width: 1.0)), // 라인효과
       ),
       child: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         // 아이템 너비 고정
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.propane_tank_outlined,
-                color: ps.bottomNavigationBarIndex == null || ps.bottomNavigationBarIndex == 0 ? Colors.black : Colors.grey),
+            icon: Icon(
+              Icons.propane_tank_outlined,
+              color: ps.bottomNavigationBarIndex == null ||
+                      ps.bottomNavigationBarIndex == 0
+                  ? Colors.black
+                  : CommonColors.grey,
+            ),
             label: '웹툰',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book_outlined, color: ps.bottomNavigationBarIndex == 1 ? Colors.black : Colors.grey),
+            icon: Icon(
+              Icons.book_outlined,
+              color: ps.bottomNavigationBarIndex == 1
+                  ? Colors.black
+                  : CommonColors.grey,
+            ),
             label: '추천완결',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.assistant_outlined, color: ps.bottomNavigationBarIndex == 2 ? Colors.black : Colors.grey),
+            icon: Icon(
+              Icons.assistant_outlined,
+              color: ps.bottomNavigationBarIndex == 2
+                  ? Colors.black
+                  : CommonColors.grey,
+            ),
             label: '베스트도전',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.emoji_emotions_outlined, color: ps.bottomNavigationBarIndex == 3 ? Colors.black : Colors.grey),
+            icon: Icon(Icons.emoji_emotions_outlined,
+                color: ps.bottomNavigationBarIndex == 3
+                    ? Colors.black
+                    : Colors.grey),
             label: 'My',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view, color: ps.bottomNavigationBarIndex == 4 ? Colors.black : Colors.grey),
+            icon: Icon(Icons.grid_view,
+                color: ps.bottomNavigationBarIndex == 4
+                    ? Colors.black
+                    : CommonColors.grey),
             label: '더보기',
           ),
         ],
@@ -79,11 +100,13 @@ class _AppBottomState extends ConsumerState<AppBottom> {
 void onItemTapped(int index, BuildContext context, ParamStore ps) {
   // 웹툰
   if (index == 0) {
-    Navigator.pushNamedAndRemoveUntil(context, Move.homeListPage, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, Move.homeListPage, (route) => false);
   }
   // 추천완결
   else if (index == 1 && ps.bottomNavigationBarIndex != index) {
-    Navigator.pushNamedAndRemoveUntil(context, Move.recommendPage, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, Move.recommendPage, (route) => false);
   }
   // 베스트 도전
   else if (index == 2 && ps.bottomNavigationBarIndex != index) {
@@ -95,7 +118,8 @@ void onItemTapped(int index, BuildContext context, ParamStore ps) {
   }
   // 더보기
   else if (index == 4 && ps.bottomNavigationBarIndex != index) {
-    Navigator.pushNamedAndRemoveUntil(context, Move.seeMorePage, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, Move.seeMorePage, (route) => false);
   } else {
     print("아무실행안됨");
     return;

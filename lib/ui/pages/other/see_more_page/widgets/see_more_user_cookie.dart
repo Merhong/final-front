@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
 
@@ -58,7 +59,7 @@ class SeeMoreUserCookieState extends State<SeeMoreUserCookie> {
         // 여기 변수로 바꿔야함
         Text(
           "$_cookieCount개",
-          style: TextStyle(color: Colors.green),
+          style: TextStyle(color: CommonColors.green),
         )
       ],
     );

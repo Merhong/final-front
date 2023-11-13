@@ -25,7 +25,6 @@ class LoginBody extends ConsumerWidget {
               height: 40,
               child: Image.asset("assets/main.png"),
             ),
-
             SizedBox(height: sizeL20),
             LoginForm(),
             SizedBox(height: sizeL20),

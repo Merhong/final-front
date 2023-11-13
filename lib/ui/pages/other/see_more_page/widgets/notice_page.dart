@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/ui/common_widgets/bottom_rule.dart';
 
 class NoticePage extends StatefulWidget {
@@ -52,7 +53,8 @@ class _NoticePageState extends State<NoticePage> {
               return Container(
                 padding: EdgeInsets.all(16), // 적절한 패딩을 추가하세요
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey), // 원하는 스타일을 추가하세요
+                  border:
+                      Border.all(color: CommonColors.grey), // 원하는 스타일을 추가하세요
                 ),
                 child: Row(
                   children: [

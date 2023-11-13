@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,7 +21,8 @@ class WebtoonListSliverPersistentHeader extends ConsumerWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.symmetric(horizontal: BorderSide(color: Colors.grey, width: 1.0)),
+            border: Border.symmetric(
+                horizontal: BorderSide(color: CommonColors.grey, width: 1.0)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -60,11 +62,16 @@ class WebtoonListWeekSelect extends ConsumerWidget {
       child: weekClickCheck == "${checkWeek}"
           ? InkWell(
               // onTap: () => ref.read(webtoonListProvider.notifier).notifyWeek("신작"),
-              child: Text("${checkWeek}", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+              child: Text("${checkWeek}",
+                  style: TextStyle(
+                      color: Color(0xFF03C705B), fontWeight: FontWeight.bold)),
             )
           : InkWell(
-              onTap: () => ref.read(webtoonListProvider.notifier).notifyWeek("${checkWeek}"),
-              child: Text("${checkWeek}", style: TextStyle(color: Colors.black)),
+              onTap: () => ref
+                  .read(webtoonListProvider.notifier)
+                  .notifyWeek("${checkWeek}"),
+              child:
+                  Text("${checkWeek}", style: TextStyle(color: Colors.black)),
             ),
     );
   }

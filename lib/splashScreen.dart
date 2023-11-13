@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
+import 'package:flutter_blog/ui/pages/auth/login_page/autor_login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Image.asset("assets/naverrr.png"),
         ],
       ),
-      nextScreen: LoginPage(),
+      nextScreen: AutoLoginPage(),
       splashIconSize: 250,
       duration: 3000,
       splashTransition: SplashTransition.slideTransition,

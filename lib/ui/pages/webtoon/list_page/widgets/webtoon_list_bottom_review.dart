@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 
 class WebttonListBottomReview extends StatelessWidget {
   @override
@@ -22,7 +23,7 @@ class WebttonListBottomReview extends StatelessWidget {
               ],
             ),
             Divider(
-              color: Colors.grey,
+              color: CommonColors.grey,
             ),
             Row(
               children: <Widget>[
@@ -34,7 +35,7 @@ class WebttonListBottomReview extends StatelessWidget {
               ],
             ),
             Divider(
-              color: Colors.grey,
+              color: CommonColors.grey,
             ),
             Row(
               children: <Widget>[
