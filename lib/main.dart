@@ -2,14 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
+import 'package:flutter_blog/_core/constants/theme.dart';
 import 'package:flutter_blog/_core/firebase/api/firebase_api.dart';
 import 'package:flutter_blog/_core/firebase/firebase_options.dart';
 import 'package:flutter_blog/_core/firebase/services/local_notification_service.dart';
 import 'package:flutter_blog/data/provider/push_move_view_model.dart';
-import 'package:flutter_blog/ui/pages/auth/login_page/autor_login_page.dart';
+import 'package:flutter_blog/splashScreen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '_core/constants/theme.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -118,10 +117,10 @@ class _MyAppState extends ConsumerState<MyApp> {
       debugShowCheckedModeBanner: false,
 
       // 최초 화면
-      initialRoute: Move.autoLoginPage,
+      initialRoute: Move.splashPage,
       // _core/move.dart 에 적어주세요
 
-      home: AutoLoginPage(),
+      home: SplashScreen(),
 
       routes: getRouters(),
       theme: theme(),
