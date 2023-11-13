@@ -28,9 +28,10 @@ class BestPage extends ConsumerWidget implements PreferredSizeWidget {
             title: Text(
               '베스트도전',
               style: TextStyle(
-                fontSize: sizeL20,
-                color: Colors.black, // 또는 Colors.black으로 변경
-              ),
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold // 또는 Colors.black으로 변경
+                  ),
             ),
             actions: [
               Padding(
@@ -48,13 +49,62 @@ class BestPage extends ConsumerWidget implements PreferredSizeWidget {
               labelColor: Colors.green, // 선택된 탭의 텍스트 색상
               unselectedLabelColor: Colors.black, // 선택되지 않은 탭의 텍스트 색상
               tabs: <Widget>[
-                Tab(text: '전체'),
-                Tab(text: '순정'),
-                Tab(text: '액션'),
-                Tab(text: '스포츠'),
-                Tab(text: '스릴러'),
-                Tab(text: '판타지'),
-                Tab(text: '드라마'),
+                Tab(
+                  child: Text(
+                    "전체",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "순정",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "액션",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "스포츠",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "스릴러",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "판타지",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "드라마",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

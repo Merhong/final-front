@@ -54,7 +54,7 @@ class WebtoonListSliverAppBarAndPageView extends StatelessWidget {
               },
             );
           },
-          child: Icon(Icons.search, size: 30, color: Colors.black),
+          child: Icon(Icons.search, color: Colors.black),
         ),
         SizedBox(width: 18),
       ],

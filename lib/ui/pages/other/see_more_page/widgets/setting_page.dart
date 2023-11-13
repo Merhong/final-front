@@ -102,10 +102,12 @@ class _SettingPageState extends State<SettingPage> {
         ),
         centerTitle: true, // 제목 가운데 정렬
         title: Text(
-          '설정',
+          "설정",
+          // 텍스트 스타일 설정
           style: TextStyle(
-            color: Colors.black, // 텍스트 컬러를 검은색으로 설정
-          ),
+              color: Colors.black, // 텍스트 색상을 검은색으로 설정
+              fontSize: 18,
+              fontWeight: FontWeight.bold),
         ),
       ),
       body: ListView(

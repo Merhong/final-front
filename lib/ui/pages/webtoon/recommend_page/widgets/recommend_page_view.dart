@@ -30,14 +30,14 @@ class RecommendPageView extends ConsumerWidget {
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: 18,
             ),
           ),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.search, size: 30, color: Colors.black),
+            padding: const EdgeInsets.all(10.0),
+            child: Icon(Icons.search, color: Colors.black),
           )
         ],
         pinned: true,

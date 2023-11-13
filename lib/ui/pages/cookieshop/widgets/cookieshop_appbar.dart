@@ -13,6 +13,8 @@ AppBar cookieAppBar() {
         "쿠키샵",
         style: TextStyle(
           color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
           // 다른 스타일 속성을 필요에 따라 추가할 수 있습니다.
         ),
       ));

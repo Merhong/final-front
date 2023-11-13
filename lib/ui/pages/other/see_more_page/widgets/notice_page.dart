@@ -29,8 +29,12 @@ class _NoticePageState extends State<NoticePage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          "웹툰",
-          style: TextStyle(color: Colors.black),
+          '웹툰',
+          style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: FontWeight.bold // 또는 Colors.black으로 변경
+              ),
         ),
       ),
       body: Column(

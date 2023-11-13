@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/app_bottom.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/see_more_body.dart';
@@ -32,7 +31,8 @@ AppBar SeeMoreAppBar() {
     elevation: 1,
     title: Text(
       '더보기',
-      style: TextStyle(color: Colors.black),
+      style: TextStyle(
+          color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
     ), // AppBar의 제목을 설정
     centerTitle: true, // 제목을 가운데 정렬
   );
