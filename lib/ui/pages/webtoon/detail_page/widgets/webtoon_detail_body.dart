@@ -29,13 +29,14 @@ class WebtoonDetailBody extends ConsumerWidget {
           SliverToBoxAdapter(child: WebtoonDetailDescription(webtoonDTO)),
           webtoonDTO.episodeList.length == 0
               ? SliverToBoxAdapter(child: SizedBox())
-              : SliverToBoxAdapter(child: WebtoonDetailPreview()),
+              : SliverToBoxAdapter(
+                  child: WebtoonDetailPreview(webtoonDTO: webtoonDTO)),
+
           webtoonDTO.episodeList.length == 0
               ? SliverToBoxAdapter(
                   child: Column(
                     children: [
-                      Divider(
-                          color: CommonColors.grey, height: 1, thickness: 1),
+                      Divider(color: Colors.grey, height: 1, thickness: 1),
                       Container(
                           height: 250,
                           child: Center(
