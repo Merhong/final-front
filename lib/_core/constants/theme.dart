@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData theme() {
   return ThemeData(
-    // fontFamily: "Jamsil",
+    // fontFamily: "JamsilRegular",
     // primarySwatch: Colors.green,
     primaryColor: Colors.white,
     dividerColor: Colors.black26,

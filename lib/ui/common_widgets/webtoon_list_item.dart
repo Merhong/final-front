@@ -72,7 +72,7 @@ class WebtoonListItem extends StatelessWidget {
                           TitleTag(titleTagEnum: TitleTagEnum.end),
                           SizedBox(width: 2),
                           Container(
-                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.235),
+                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.225),
                             child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                           ),
                         ],
@@ -83,13 +83,13 @@ class WebtoonListItem extends StatelessWidget {
                               TitleTag(titleTagEnum: TitleTagEnum.up),
                               SizedBox(width: 2),
                               Container(
-                                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.235),
+                                constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.225),
                                 child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                               ),
                             ],
                           )
                         : Container(
-                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.29),
+                            constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.28),
                             child: Text("${webtoonDTO.title}", style: Theme.of(context).textTheme.displayMedium, overflow: TextOverflow.ellipsis),
                           ),
           ],

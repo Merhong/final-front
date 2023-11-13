@@ -72,7 +72,7 @@ class MyRecent extends ConsumerWidget {
         ps.addWebtoonFirstEpisode(recentDTO.firstEpisodeId);
 
         ps.addEpisodeDetailId(recentDTO.recentEpisodeId);
-        ps.addBottomNavigationBarIndex(0);
+        // ps.addBottomNavigationBarIndex(0);
         Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
       },
       child: Column(
@@ -105,7 +105,7 @@ class MyRecent extends ConsumerWidget {
         onTap: () {
           ParamStore ps = ref.read(paramProvider);
           ps.addWebtoonDetailId(recentDTO.webtoonId);
-          ps.addBottomNavigationBarIndex(0);
+          // ps.addBottomNavigationBarIndex(0);
           Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
         },
         child: Column(
@@ -207,7 +207,7 @@ class MyRecent extends ConsumerWidget {
         onTap: () {
           ParamStore ps = ref.read(paramProvider);
           ps.addWebtoonDetailId(myRecentDTO.webtoonId);
-          ps.addBottomNavigationBarIndex(0);
+          // ps.addBottomNavigationBarIndex(0);
           Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
         },
         child: Stack(

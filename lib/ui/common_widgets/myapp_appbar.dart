@@ -10,18 +10,15 @@ class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 1,
       backgroundColor: Colors.white, // 앱바 배경색을 흰색으로 설정
-      leading: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16), // 왼쪽 여백을 추가
-        child: Row(
-          children: [
-            Text(
-              "MY",
-              // 텍스트 스타일 설정
-              style: TextStyle(
-                  color: Colors.black, // 텍스트 색상을 검은색으로 설정
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
+      leading: Center(
+        child: Text(
+          "MY",
+          // 텍스트 스타일 설정
+          style: TextStyle(
+            color: Colors.black, // 텍스트 색상을 검은색으로 설정
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       actions: [

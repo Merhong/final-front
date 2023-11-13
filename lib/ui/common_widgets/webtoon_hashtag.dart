@@ -23,7 +23,7 @@ class HashTag extends StatelessWidget {
         margin: EdgeInsets.all(3),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: Colors.grey[300],
+          color: Color.fromRGBO(150, 150, 150, 0.5),
         ),
         child: Padding(
           padding: EdgeInsets.fromLTRB(6, 3, 6, 3),

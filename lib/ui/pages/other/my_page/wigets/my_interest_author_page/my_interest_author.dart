@@ -7,7 +7,7 @@ import 'package:flutter_blog/data/dto/user_dto/recommend_author_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/my_stackbar.dart';
 import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_detail_page.dart';
+import 'package:flutter_blog/ui/pages/other/author_page/my_interest_author_detail_page.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_view_model.dart';
 import 'package:flutter_blog/ui/pages/other/my_page/wigets/my_interest_author_page/my_interest_author_top_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

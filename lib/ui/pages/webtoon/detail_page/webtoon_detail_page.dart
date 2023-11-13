@@ -42,8 +42,7 @@ class _WebtoonDetailPageState extends ConsumerState<WebtoonDetailPage> {
   @override
   Widget build(BuildContext context) {
     if (ref.read(paramProvider).isWebtoonDetailMove == true) {
-      print(
-          "ref.read(paramProvider).isWebtoonDetailMove : ${ref.read(paramProvider).isWebtoonDetailMove}");
+      print("ref.read(paramProvider).isWebtoonDetailMove : ${ref.read(paramProvider).isWebtoonDetailMove}");
       ref.read(paramProvider).isWebtoonDetailMove = false;
       ref.read(webtoonDetailProvider.notifier).notifyInit();
     }
@@ -55,14 +54,17 @@ class _WebtoonDetailPageState extends ConsumerState<WebtoonDetailPage> {
     }
     DetailPageWebtoonDTO webtoonDTO = model.webtoonDTO!;
 
+    if (webtoonDTO.id != ref.read(paramProvider).webtoonDetailId) {
+      ref.read(webtoonDetailProvider.notifier).notifyInit();
+    }
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: WebtoonDetailAppbar(isScroll, webtoonDTO),
       bottomNavigationBar: AppBottom(),
       body: RefreshIndicator(
         key: refreshKey,
-        onRefresh: () async =>
-            await ref.read(webtoonDetailProvider.notifier).notifyInit(),
+        onRefresh: () async => await ref.read(webtoonDetailProvider.notifier).notifyInit(),
         child: WebtoonDetailBody(detailPageController, isScroll, webtoonDTO),
       ),
     );

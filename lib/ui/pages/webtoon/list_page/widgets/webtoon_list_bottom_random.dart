@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
@@ -18,24 +19,28 @@ class WebtoonListBottomRandom extends ConsumerWidget {
 
               ParamStore paramStore = ref.read(paramProvider);
 
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
 
               //   Navigator.push(context,
               //       MaterialPageRoute(builder: (_) => WebtoonEpisodePage()));
               //
             },
-            child: Container(
-              padding: EdgeInsets.all(30.0),
-              child: Text(
-                '랜덤작품보러가기>',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
+            child: Column(
+              children: [
+                Divider(color: Colors.black26, height: 1, thickness: 1),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(CupertinoIcons.question_circle_fill, color: Colors.green),
+                      Text(' 랜덤 작품 ', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
+                      Text('보러가기', style: TextStyle(fontSize: 18, color: Colors.black)),
+                      Text(' >', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
+              ],
             ),
           );
         },

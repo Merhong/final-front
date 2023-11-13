@@ -69,7 +69,7 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
               } else {
                 ParamStore ps = ref.read(paramProvider);
                 ps.addWebtoonDetailId(advertisingMainDTOList[index].webtoonId);
-                ps.addBottomNavigationBarIndex(0);
+                // ps.addBottomNavigationBarIndex(0);
                 Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
               }
             },

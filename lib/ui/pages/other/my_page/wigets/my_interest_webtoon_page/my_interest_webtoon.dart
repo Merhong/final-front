@@ -104,7 +104,7 @@ class MyInterestWebtoon extends ConsumerWidget {
         onTap: () {
           ParamStore ps = ref.read(paramProvider);
           ps.addWebtoonDetailId(interestWebtoonDTO.webtoonId);
-          ps.addBottomNavigationBarIndex(0);
+          // ps.addBottomNavigationBarIndex(0);
           Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
         },
         child: Column(
@@ -177,7 +177,7 @@ class MyInterestWebtoon extends ConsumerWidget {
         onTap: () {
           ParamStore ps = ref.read(paramProvider);
           ps.addWebtoonDetailId(interestWebtoonDTO.webtoonId);
-          ps.addBottomNavigationBarIndex(0);
+          // ps.addBottomNavigationBarIndex(0);
           Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
         },
         child: Stack(

@@ -49,7 +49,7 @@ class ReReplyPage extends ConsumerWidget {
           child: ListView.separated(
               itemBuilder: (context, index) {
                 if (index == commentDTO.reCommentList.length + 1) {
-                  return SizedBox(height: 70);
+                  return SizedBox(height: 60);
                 }
                 if (index == 0) {
                   return WebtoonReplyBody(commentList: [commentDTO], index: index, isReReply: true); // 원댓글

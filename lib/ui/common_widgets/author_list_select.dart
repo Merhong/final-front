@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
-import 'package:flutter_blog/ui/pages/other/my_page/my_interest_author_detail_page.dart';
+import 'package:flutter_blog/ui/pages/other/author_page/my_interest_author_detail_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../_core/constants/http.dart';
@@ -53,7 +53,7 @@ class AuthorListSelect extends ConsumerWidget {
                               print("${author.authorPhoto}/${author.authorNickname}");
                               ParamStore ps = ref.read(paramProvider);
                               ps.addAuthorMoveId(author.id);
-                              Navigator.push(context, MaterialPageRoute(builder: (_) => MyInterestAuthorDetailPage()));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MyInterestAuthorDetailPage()));
                             },
                             child: Row(
                               children: [
