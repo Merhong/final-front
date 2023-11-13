@@ -9,24 +9,23 @@ class PurchaseCookie extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListView(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 13),
+        Center(
           child: Text(
             '일반패키지',
             style: TextStyle(fontSize: 18),
           ),
         ),
-        PurchaseCookieBar(cookieCount: '10개', price: '1000'),
-        Divider(color: Colors.black26, height: 2, thickness: 2),
-        PurchaseCookieBar(cookieCount: '30개', price: '3600'),
-        Divider(color: Colors.black26, height: 2, thickness: 2),
-        PurchaseCookieBar(cookieCount: '50개', price: '6000'),
-        Divider(color: Colors.black26, height: 2, thickness: 2),
-        PurchaseCookieBar(cookieCount: '100개', price: '12000'),
-        Divider(color: Colors.black26, height: 2, thickness: 2),
-        PurchaseCookieBar(cookieCount: '200개', price: '24000'),
-        Divider(color: Colors.black26, height: 2, thickness: 2),
-        PurchaseCookieBar(cookieCount: '300개', price: '36000'),
+        PurchaseCookieBar(cookieCount: '10', price: '1000'),
+        Divider(color: Colors.black26, height: 2, thickness: 1),
+        PurchaseCookieBar(cookieCount: '30', price: '3600'),
+        Divider(color: Colors.black26, height: 2, thickness: 1),
+        PurchaseCookieBar(cookieCount: '50', price: '6000'),
+        Divider(color: Colors.black26, height: 2, thickness: 1),
+        PurchaseCookieBar(cookieCount: '100', price: '12000'),
+        Divider(color: Colors.black26, height: 2, thickness: 1),
+        PurchaseCookieBar(cookieCount: '200', price: '24000'),
+        Divider(color: Colors.black26, height: 2, thickness: 1),
+        PurchaseCookieBar(cookieCount: '300', price: '36000'),
       ],
     );
   }

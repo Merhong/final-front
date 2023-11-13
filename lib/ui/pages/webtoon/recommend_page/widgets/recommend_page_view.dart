@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_pageview.dart';
+import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/recommend_drop_down.dart';
 
 class RecommendPageView extends StatelessWidget {
+  final bool isScroll;
+
   const RecommendPageView({
-    super.key,
-  });
+    Key? key,
+    required this.isScroll,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      // title: InkWell(onTap: () {}, child: Text("인기순", style: TextStyle(fontSize: 30))),
-      centerTitle: true,
       leading: Text(
         "추천완결",
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
+        style: TextStyle(color: Colors.white),
       ),
-      actions: [Icon(Icons.search, size: 20)],
+      centerTitle: true,
+      title: Container(
+          width: 110, child: isScroll ? RecommendDropdown() : SizedBox()),
+      backgroundColor: Colors.white,
+      actions: [
+        IconButton(
+          icon: Icon(Icons.search, size: 20, color: Colors.white),
+          onPressed: () {
+            // Add the search functionality here
+          },
+        ),
+      ],
       pinned: true,
-      expandedHeight: 210,
+      expandedHeight: 150,
       flexibleSpace: FlexibleSpaceBar(
         background: InkWell(
           onTap: () {

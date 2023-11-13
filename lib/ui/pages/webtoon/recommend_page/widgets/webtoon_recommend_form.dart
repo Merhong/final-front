@@ -8,10 +8,11 @@ import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/recommend_p
 import 'package:flutter_blog/ui/pages/webtoon/recommend_page/widgets/webtoon_recommend_bottom_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WebtoonRecommendForm extends ConsumerWidget {
-  const WebtoonRecommendForm({
-    super.key,
-  });
+class WebtoonRecommendBody extends ConsumerWidget {
+  final ScrollController recommendPageController;
+  bool isScroll;
+
+  WebtoonRecommendBody(this.recommendPageController, this.isScroll);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,8 +23,11 @@ class WebtoonRecommendForm extends ConsumerWidget {
     }
     List<EndRecommendationDTO> list = model!.recommendationList;
     return CustomScrollView(
+      controller: recommendPageController,
       slivers: [
-        RecommendPageView(),
+        RecommendPageView(
+          isScroll: isScroll,
+        ),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
             if (index == 0) {
