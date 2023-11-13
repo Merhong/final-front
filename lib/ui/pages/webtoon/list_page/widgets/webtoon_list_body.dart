@@ -6,7 +6,6 @@ import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_bot
 import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_bottom_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'webtoon_list_middle_advertising.dart';
 import 'webtoon_list_sliver_appbar_and_pageview.dart';
 import 'webtoon_list_sliver_grid.dart';
 import 'webtoon_list_sliver_persistent_header.dart';
@@ -32,7 +31,6 @@ class WebtoonListBody extends ConsumerWidget {
       slivers: <Widget>[
         WebtoonListSliverAppBarAndPageView(isScroll),
         WebtoonListSliverPersistentHeader(),
-        WebtoonListMiddleAdvertising(),
         WebtoonListSliverGrid(),
         // SliverToBoxAdapter(
         //   child: Container(
