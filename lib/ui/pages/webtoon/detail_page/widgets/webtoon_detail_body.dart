@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/widgets/webtoon_detail_description.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/widgets/webtoon_detail_episode.dart';
@@ -30,6 +31,7 @@ class WebtoonDetailBody extends ConsumerWidget {
               ? SliverToBoxAdapter(child: SizedBox())
               : SliverToBoxAdapter(
                   child: WebtoonDetailPreview(webtoonDTO: webtoonDTO)),
+
           webtoonDTO.episodeList.length == 0
               ? SliverToBoxAdapter(
                   child: Column(

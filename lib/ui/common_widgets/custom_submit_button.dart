@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 
 class CustomSubmitButton extends StatelessWidget {
   final String text;
@@ -16,7 +17,7 @@ class CustomSubmitButton extends StatelessWidget {
       width: double.infinity,
       child: TextButton(
         child: Text(text, style: TextStyle(color: Colors.white)),
-        style: TextButton.styleFrom(backgroundColor: Colors.green),
+        style: TextButton.styleFrom(backgroundColor: CommonColors.green),
         onPressed: onPressed,
       ),
     );

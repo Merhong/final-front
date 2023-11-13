@@ -23,6 +23,7 @@ class BestPage extends ConsumerWidget implements PreferredSizeWidget {
         length: 7,
         child: Scaffold(
           appBar: AppBar(
+            elevation: 1,
             backgroundColor: Colors.white,
             title: Text(
               '베스트도전',

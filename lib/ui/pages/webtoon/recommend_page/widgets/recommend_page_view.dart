@@ -21,15 +21,25 @@ class RecommendPageView extends ConsumerWidget {
       child: SliverAppBar(
         // title: InkWell(onTap: () {}, child: Text("인기순", style: TextStyle(fontSize: 30))),
         centerTitle: true,
-        leading: Text(
-          "추천완결",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
+        backgroundColor: Colors.white,
+        elevation: 1,
+        title: Container(
+          alignment: Alignment.topLeft,
+          child: Text(
+            "추천완결",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
         ),
-        actions: [Icon(Icons.search, size: 20)],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.search, size: 30, color: Colors.black),
+          )
+        ],
         pinned: true,
         expandedHeight: 210,
         flexibleSpace: FlexibleSpaceBar(

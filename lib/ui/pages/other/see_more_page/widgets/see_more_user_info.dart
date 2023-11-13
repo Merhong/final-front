@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
@@ -30,7 +31,7 @@ class SeeMoreUserInfo extends ConsumerWidget {
                   sessionUser.logout();
                 },
                 child:
-                    Text("로그아웃 >", style: TextStyle(color: Colors.grey[600])))
+                    Text("로그아웃 >", style: TextStyle(color: CommonColors.grey)))
           ],
         ),
       ),
