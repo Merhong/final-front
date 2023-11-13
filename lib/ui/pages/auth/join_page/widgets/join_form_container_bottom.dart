@@ -9,7 +9,7 @@ class JoinBuildContainerBottom extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+        border: Border.all(color: Color(0xFF8E8E8E)),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: MyExpansionTile(

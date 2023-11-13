@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/webtoon/list_page/webtoon_list_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_appbar_dropdown.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_pageview.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widgets/search_alert_dialog.dart';
 
@@ -17,12 +14,27 @@ class WebtoonListSliverAppBarAndPageView extends StatelessWidget {
     return SliverAppBar(
       centerTitle: true,
       // primary: false, // 상단 화면표시줄 침범함
-      title: Container(width: 110, child: isScroll ? WebtoonListAppbarDropdown() : SizedBox()),
+      title: Container(
+          width: 110,
+          child: isScroll ? WebtoonListAppbarDropdown() : SizedBox()),
       backgroundColor: Colors.white,
       elevation: 0,
       leading: InkWell(
         onTap: () {},
-        child: Icon(Icons.cookie, size: 30, color: Colors.orange),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Stack(children: [
+            Icon(Icons.cookie, size: 35, color: Colors.orange),
+            Positioned(
+              top: 6.0,
+              left: 10.0,
+              child: Text(
+                'C',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            )
+          ]),
+        ),
       ),
       actions: [
         InkWell(

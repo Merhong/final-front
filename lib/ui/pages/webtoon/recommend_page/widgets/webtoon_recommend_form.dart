@@ -39,11 +39,14 @@ class WebtoonRecommendForm extends ConsumerWidget {
                           onTap: () {
                             // 최신순 버튼 눌렀을 때의 동작 추가
                           },
-                          child: Row(
-                            children: [
-                              Text("최신순"),
-                              Icon(Icons.arrow_drop_down),
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Text("최신순"),
+                                Icon(Icons.arrow_drop_down),
+                              ],
+                            ),
                           ),
                         ),
                         InkWell(
@@ -59,7 +62,10 @@ class WebtoonRecommendForm extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    Text("총 50작품"),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("총 50작품"),
+                    ),
                   ],
                 ),
               );

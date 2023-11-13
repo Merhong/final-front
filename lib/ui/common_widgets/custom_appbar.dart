@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -12,7 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         "NAVER",
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.green,
+          color: CommonColors.green,
         ),
       ),
     );
