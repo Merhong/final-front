@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_appbar_dropdown.dart';
 import 'package:flutter_blog/ui/pages/webtoon/list_page/widgets/webtoon_list_pageview.dart';
 
@@ -24,7 +25,14 @@ class WebtoonListSliverAppBarAndPageView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Stack(children: [
-            Icon(Icons.cookie, size: 35, color: Colors.orange),
+            InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CookieShop()),
+                  );
+                },
+                child: Icon(Icons.cookie, size: 35, color: Colors.orange)),
             Positioned(
               top: 6.0,
               left: 10.0,
