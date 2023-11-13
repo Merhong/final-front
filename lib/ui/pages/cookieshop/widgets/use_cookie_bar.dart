@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 
 class UseCookieBar extends StatelessWidget {
   final String date;
@@ -25,13 +26,13 @@ class UseCookieBar extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("$date", style: TextStyle(color: Colors.grey)),
+              Text("$date", style: TextStyle(color: CommonColors.grey)),
               Text("$title"),
               Text("$page"),
               Row(
                 children: [
-                  Text("대여 ", style: TextStyle(color: Colors.grey)),
-                  Text("$cookie", style: TextStyle(color: Colors.green)),
+                  Text("대여 ", style: TextStyle(color: CommonColors.grey)),
+                  Text("$cookie", style: TextStyle(color: CommonColors.green)),
                 ],
               ),
             ],
