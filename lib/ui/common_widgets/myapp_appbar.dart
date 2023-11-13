@@ -12,13 +12,12 @@ class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 1,
       backgroundColor: Colors.white, // 앱바 배경색을 흰색으로 설정
       title: Text(
-        "쿠키샵",
+        "MY",
         // 텍스트 스타일 설정
         style: TextStyle(
-          color: Colors.black, // 텍스트 색상을 검은색으로 설정
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
+            color: Colors.black, // 텍스트 색상을 검은색으로 설정
+            fontSize: 18,
+            fontWeight: FontWeight.bold),
       ),
       actions: [
         Padding(
@@ -35,16 +34,15 @@ class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               InkWell(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return SearchAlertDialog();
-                    },
-                  );
-                },
-                child: Icon(Icons.search, color: Colors.black, size: 30),
-              ),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return SearchAlertDialog();
+                      },
+                    );
+                  },
+                  child: Icon(Icons.search, color: Colors.black)),
             ],
           ),
         ),

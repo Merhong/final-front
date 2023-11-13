@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/notice_page.dart';
 import 'package:flutter_blog/ui/pages/other/see_more_page/widgets/setting_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_page.dart';
 
@@ -28,7 +29,16 @@ class FunctionIcons extends StatelessWidget {
             ),
             SeeMoreIcons(Icons.apple_sharp, "쿠키오븐"),
             SeeMoreIcons(Icons.gamepad_rounded, "쿠키미션"),
-            SeeMoreIcons(Icons.speaker, "공지사항"),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => NoticePage(),
+                  ),
+                );
+              },
+              child: SeeMoreIcons(Icons.speaker, "공지사항"),
+            ),
             SeeMoreIcons(CupertinoIcons.smiley, "겟짤"),
             SeeMoreIcons(CupertinoIcons.game_controller, "play"),
             SeeMoreIcons(CupertinoIcons.bag, "스토어"),

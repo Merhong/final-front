@@ -64,7 +64,8 @@ class CustomPreviewNumber extends ConsumerWidget {
                     Text("${list[index].title}"),
                     RecommendIntro(list: list, index: index),
                     SizedBox(height: 5),
-                    Text("${list[index].episodeCount}"),
+                    Text(
+                        "${list[index].episodeCount == 0 ? '0' : list[index].episodeCount}화"),
                   ],
                 ),
               ),

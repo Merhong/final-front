@@ -19,14 +19,14 @@ class MyTabBar extends ConsumerWidget {
       children: [
         TabBar(
           controller: _tabController,
-          indicatorColor: Colors.green,
-          labelColor: Colors.green,
+          indicatorColor: Colors.green, // 탭 바 아래의 인디케이터 색상
+          labelColor: Colors.green, // 선택된 탭의 텍스트 색상
+          unselectedLabelColor: Colors.black, // 선택되지 않은 탭의 텍스트 색상
           tabs: <Widget>[
             Tab(
               child: Text(
                 "관심작가",
                 style: TextStyle(
-                  color: Colors.black, // 텍스트 색상을 검은색으로 설정
                   fontWeight: FontWeight.bold, // 텍스트를 굵게 만듭니다
                 ),
               ),
@@ -35,7 +35,6 @@ class MyTabBar extends ConsumerWidget {
               child: Text(
                 "관심웹툰",
                 style: TextStyle(
-                  color: Colors.black, // 텍스트 색상을 검은색으로 설정
                   fontWeight: FontWeight.bold, // 텍스트를 굵게 만듭니다
                 ),
               ),
@@ -44,7 +43,6 @@ class MyTabBar extends ConsumerWidget {
               child: Text(
                 "최근 본",
                 style: TextStyle(
-                  color: Colors.black, // 텍스트 색상을 검은색으로 설정
                   fontWeight: FontWeight.bold, // 텍스트를 굵게 만듭니다
                 ),
               ),
@@ -53,7 +51,6 @@ class MyTabBar extends ConsumerWidget {
               child: Text(
                 "모든 댓글",
                 style: TextStyle(
-                  color: Colors.black, // 텍스트 색상을 검은색으로 설정
                   fontWeight: FontWeight.bold, // 텍스트를 굵게 만듭니다
                 ),
               ),

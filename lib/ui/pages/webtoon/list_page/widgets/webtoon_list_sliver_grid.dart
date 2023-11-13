@@ -24,24 +24,35 @@ class WebtoonListSliverGrid extends ConsumerWidget {
     List<ListPageWebtoonDTO> webtoonDTOList = model!.webtoonDTOList!;
 
     String week = "모두";
-    if (model.weekCheck != null && model.weekCheck != "신작" && model.weekCheck != "완결" && model.weekCheck != "매일") {
+    if (model.weekCheck != null &&
+        model.weekCheck != "신작" &&
+        model.weekCheck != "완결" &&
+        model.weekCheck != "매일") {
       week = model.weekCheck!;
     }
 
     if (week != "모두" && model.weekCheck != "신작" && model.weekCheck != "완결") {
-      webtoonDTOList = webtoonDTOList.where((e) => e.webtoonWeekDayEnum!.contains(week)).toList();
+      webtoonDTOList = webtoonDTOList
+          .where((e) => e.webtoonWeekDayEnum!.contains(week))
+          .toList();
     }
 
     if (model.weekCheck == "신작") {
-      webtoonDTOList = webtoonDTOList.where((e) => e.webtoonSpeciallyEnum!.contains("신작")).toList();
+      webtoonDTOList = webtoonDTOList
+          .where((e) => e.webtoonSpeciallyEnum!.contains("신작"))
+          .toList();
     }
 
     if (model.weekCheck == "완결") {
-      webtoonDTOList = webtoonDTOList.where((e) => e.webtoonSpeciallyEnum!.contains("완결")).toList();
+      webtoonDTOList = webtoonDTOList
+          .where((e) => e.webtoonSpeciallyEnum!.contains("완결"))
+          .toList();
     }
 
     if (model.weekCheck == "매일") {
-      webtoonDTOList = webtoonDTOList.where((e) => e.webtoonWeekDayEnum!.contains("월화수목금토일")).toList();
+      webtoonDTOList = webtoonDTOList
+          .where((e) => e.webtoonWeekDayEnum!.contains("월화수목금토일"))
+          .toList();
     }
 
     if (model.sortCheck == "가나다 순") {
@@ -49,7 +60,8 @@ class WebtoonListSliverGrid extends ConsumerWidget {
     }
 
     if (model.sortCheck == "최신 순") {
-      webtoonDTOList.sort((a, b) => (b.episodeUpdatedAt ?? DateTime(0)).compareTo(a.episodeUpdatedAt ?? DateTime(0)));
+      webtoonDTOList.sort((a, b) => (b.episodeUpdatedAt ?? DateTime(0))
+          .compareTo(a.episodeUpdatedAt ?? DateTime(0)));
     }
 
     if (model.sortCheck == "인기 순") {
@@ -58,12 +70,15 @@ class WebtoonListSliverGrid extends ConsumerWidget {
     }
 
     if (model.sortCheck == "별점 순") {
-      webtoonDTOList
-          .sort((a, b) => (b.starScore! / (b.starCount == 0 ? 1 : b.starCount!)).compareTo(a.starScore! / (a.starCount == 0 ? 1 : a.starCount!)));
+      webtoonDTOList.sort((a, b) =>
+          (b.starScore! / (b.starCount == 0 ? 1 : b.starCount!))
+              .compareTo(a.starScore! / (a.starCount == 0 ? 1 : a.starCount!)));
     }
 
     return SliverPadding(
-      padding: EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
+      padding:
+          EdgeInsets.fromLTRB(sizePaddingLR17, sizeS5, sizePaddingLR17, sizeS5),
+
       sliver: SliverGrid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 1 / 1.75,
@@ -77,7 +92,8 @@ class WebtoonListSliverGrid extends ConsumerWidget {
                 onTap: () {
                   ParamStore paramStore = ref.read(paramProvider);
                   paramStore.addWebtoonDetailId(webtoonDTOList[index].id);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
                 },
                 child: WebtoonListItem(webtoonDTO: webtoonDTOList[index]));
           },

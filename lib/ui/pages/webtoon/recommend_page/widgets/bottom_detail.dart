@@ -41,7 +41,7 @@ class _BottomDetailState extends State<BottomDetail> {
         ),
         buildDescriptionButton(context),
         Text(
-          "${widget.list[widget.index].episodeCount}",
+          "${widget.list[widget.index].episodeCount == 0 ? '0' : widget.list[widget.index].episodeCount}화",
           style: TextStyle(
             color: Colors.black,
           ),
