@@ -8,14 +8,15 @@ class JoinFormContainerMiddle extends StatelessWidget {
   TextEditingController _gender;
   TextEditingController _tel;
 
-  JoinFormContainerMiddle(this._username, this._birthday, this._gender, this._tel);
+  JoinFormContainerMiddle(
+      this._username, this._birthday, this._gender, this._tel);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+        border: Border.all(color: Color(0xFF8E8E8E)),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(

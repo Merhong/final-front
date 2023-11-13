@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/ui/common_widgets/search_alert_dialog.dart';
 
 class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -10,15 +11,13 @@ class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 1,
       backgroundColor: Colors.white, // 앱바 배경색을 흰색으로 설정
-      leading: Center(
-        child: Text(
-          "MY",
-          // 텍스트 스타일 설정
-          style: TextStyle(
-            color: Colors.black, // 텍스트 색상을 검은색으로 설정
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
+      title: Text(
+        "쿠키샵",
+        // 텍스트 스타일 설정
+        style: TextStyle(
+          color: Colors.black, // 텍스트 색상을 검은색으로 설정
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
         ),
       ),
       actions: [
@@ -32,7 +31,7 @@ class MyappAppbar extends StatelessWidget implements PreferredSizeWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  color: CommonColors.green,
                 ),
               ),
               InkWell(

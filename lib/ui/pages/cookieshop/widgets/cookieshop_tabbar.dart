@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/ui/common_widgets/bottom_rule.dart';
-import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/payment_history/payment_history_page.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/purchase_cookie_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/used_history_page.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/widgets/current_cookie.dart';
 
@@ -39,9 +40,9 @@ class _CookieShopTabState extends State<CookieShopTab>
   Widget _buildTabBar() {
     return TabBar(
       unselectedLabelColor: Colors.black,
-      labelColor: Colors.green,
+      labelColor: CommonColors.green,
       controller: _tabController,
-      indicatorColor: Colors.green,
+      indicatorColor: CommonColors.green,
       tabs: const [
         Tab(
           text: "쿠키구매",

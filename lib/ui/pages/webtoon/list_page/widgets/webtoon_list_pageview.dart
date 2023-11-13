@@ -46,7 +46,8 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
 
   @override
   Widget build(BuildContext context) {
-    List<AdvertisingMainDTO> advertisingMainDTOList = ref.watch(webtoonListProvider)!.advertisingMainDTOList!;
+    List<AdvertisingMainDTO> advertisingMainDTOList =
+        ref.watch(webtoonListProvider)!.advertisingMainDTOList!;
     lastPage = advertisingMainDTOList.length;
 
     return SizedBox(
@@ -70,7 +71,8 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
                 ParamStore ps = ref.read(paramProvider);
                 ps.addWebtoonDetailId(advertisingMainDTOList[index].webtoonId);
                 // ps.addBottomNavigationBarIndex(0);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => WebtoonDetailPage()));
               }
             },
             child: Stack(
@@ -92,7 +94,10 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
                 Align(
                   alignment: Alignment(0.9, 0.55),
                   child: Container(
-                    decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.all(Radius.circular(sizeBorder5))),
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(sizeBorder5))),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
                       child: Text(
@@ -114,7 +119,8 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
                         ),
                         color: advertisingMainDTOList[index].isWebLink == true
                             ? IdToColor(advertisingMainDTOList[index].id)
-                            : IdToColor(advertisingMainDTOList[index].webtoonId),
+                            : IdToColor(
+                                advertisingMainDTOList[index].webtoonId),
                       ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12),
@@ -122,17 +128,26 @@ class _WebtoonListPageViewState extends ConsumerState<WebtoonListPageView> {
                           children: [
                             SizedBox(width: sizeS5),
                             Container(
-                              constraints: BoxConstraints(maxWidth: sizeGetScreenWidth(context) * 0.8),
+                              constraints: BoxConstraints(
+                                  maxWidth: sizeGetScreenWidth(context) * 0.8),
                               child: RichText(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 text: TextSpan(
-                                  text: "${advertisingMainDTOList[index].mainText} ",
-                                  style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+                                  text:
+                                      "${advertisingMainDTOList[index].mainText} ",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                   children: [
                                     TextSpan(
-                                      text: " ${advertisingMainDTOList[index].subText}",
-                                      style: TextStyle(fontSize: 13, color: Colors.grey[700], fontWeight: FontWeight.bold),
+                                      text:
+                                          " ${advertisingMainDTOList[index].subText}",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
                                     )
                                   ],
                                 ),

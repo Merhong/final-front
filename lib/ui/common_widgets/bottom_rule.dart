@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 
 import '../../_core/constants/size.dart';
 
@@ -13,7 +14,7 @@ class BottomRule extends StatelessWidget {
       color: Colors.grey[300],
       child: Column(
         children: [
-          Divider(color: Colors.grey, height: 1, thickness: 1),
+          Divider(color: CommonColors.grey, height: 1, thickness: 1),
           SizedBox(height: sizeL20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

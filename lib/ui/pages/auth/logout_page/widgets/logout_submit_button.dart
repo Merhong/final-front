@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -66,7 +67,7 @@ class LogoutSubmitButton extends ConsumerWidget {
       width: double.infinity,
       child: TextButton(
         child: Text(text, style: TextStyle(color: Colors.white)),
-        style: TextButton.styleFrom(backgroundColor: Colors.green),
+        style: TextButton.styleFrom(backgroundColor: CommonColors.green),
         onPressed: () {
           _showAlertDialog(context, ref);
         },
