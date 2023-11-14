@@ -1,5 +1,11 @@
 # 네이버 웹툰 홈페이지 및 상세보기 페이지 클론코딩
 
+## 백엔드 주소
+https://github.com/Merhong/final-back
+
+## 테이블 설계
+![테이블 완성1 231114](https://github.com/Merhong/final-front/assets/135561696/843e5f27-b847-44ef-95a3-ecfab6e80673)
+
 ## 홈페이지
 
 ![KakaoTalk_20231013_164540378](https://github.com/Merhong/toy-front/assets/78343061/fbb6813f-84a7-42a0-811a-86e925785d12)
