@@ -29,18 +29,20 @@ class paymentRepository {
   Future<ResponseDTO> fetchPaymentHistory(String jwt) async {
     try {
       Response response = await dio.get("/payment/history",
-          options: Options(headers: {"Authorization": "${jwt}"}));
-
+          options: Options(headers: {"Authorization": "$jwt"}));
+      Logger().d("통신 완료");
       ResponseDTO responseDTO = new ResponseDTO.fromJson(response.data);
+      Logger().d("1차 파싱 완료");
 
-      List<dynamic> mapList = responseDTO.data as List<dynamic>;
+      List<dynamic> mapList = responseDTO.data["dtoList"];
+      Logger().d(mapList);
 
-      List<PaymentHistoryDTO> paymentHistoryDTO = mapList
-          .map((paymentHistoryDTO) =>
-              PaymentHistoryDTO.fromJson(paymentHistoryDTO))
-          .toList();
+      List<PaymentHistoryDTO> dtoList =
+          mapList.map((e) => PaymentHistoryDTO.fromJson(e)).toList();
 
-      responseDTO.data = paymentHistoryDTO;
+      Logger().d("2차 파싱 완료");
+
+      responseDTO.data = dtoList;
 
       return responseDTO;
     } catch (e) {

@@ -1,10 +1,19 @@
-import 'package:intl/intl.dart';
+class PaymentHistoryDTOList {
+  List<PaymentHistoryDTO> dto;
+
+  PaymentHistoryDTOList(this.dto);
+
+  PaymentHistoryDTOList.fromJson(Map<String, dynamic> json)
+      : dto = (json["dtoList"] as List)
+            .map((e) => PaymentHistoryDTO.fromJson(e))
+            .toList();
+}
 
 class PaymentHistoryDTO {
   int purchasedCookie;
   int nowCookieAmount;
   int price;
-  String createdAt;
+  DateTime createdAt;
 
   PaymentHistoryDTO(
       this.purchasedCookie, this.nowCookieAmount, this.price, this.createdAt);
@@ -14,10 +23,10 @@ class PaymentHistoryDTO {
       : purchasedCookie = json["purchasedCookie"],
         nowCookieAmount = json["nowCookieAmount"],
         price = json["price"],
-        createdAt = json["createdAt"];
+        createdAt = DateTime.parse(json["createdAt"]);
 
   @override
   String toString() {
-    return 'PaymentHistoryDTO{purchasedCookie: $purchasedCookie, nowCookieAmount: $nowCookieAmount, price: $price, createdAt: $createdAt';
+    return 'PaymentHistoryDTO{purchasedCookie: $purchasedCookie, nowCookieAmount: $nowCookieAmount, price: $price, createdAt: $createdAt}';
   }
 }

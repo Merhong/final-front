@@ -2,13 +2,13 @@ import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_like_dto.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_star_DTO.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
-import 'package:flutter_blog/data/dto/webtoon_DTO/detail_page_webtoon_DTO.dart';
 import 'package:flutter_blog/data/provider/param_provider.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/episode_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 // 1. 창고 데이터
 
@@ -65,7 +65,7 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
     SessionUser sessionUser = ref.read(sessionProvider);
     int episodeId = ref.read(paramProvider).episodeId!;
 
-    // Logger().d("1단계");
+    Logger().d("1단계");
     ResponseDTO responseDTO =
         await EpisodeRepository().fetchEpisode(sessionUser.jwt!, episodeId);
 
@@ -108,7 +108,8 @@ class WebtoonEpisodeViewModel extends StateNotifier<WebtoonEpisodeModel?> {
 // =======
     int episodeId = ref.read(paramProvider).episodeId!;
 
-    ResponseDTO responseDTO = await EpisodeRepository().fetchStar(sessionUser.jwt!, episodeId, score);
+    ResponseDTO responseDTO =
+        await EpisodeRepository().fetchStar(sessionUser.jwt!, episodeId, score);
 
     if (responseDTO.success == false) {
       print("responseDTO.success == false");

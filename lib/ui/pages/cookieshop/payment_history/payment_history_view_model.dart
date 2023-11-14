@@ -4,6 +4,7 @@ import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/data/repository/payment_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class PaymentHistoryModel {
   List<PaymentHistoryDTO> paymentHistoryDTOList;
@@ -18,9 +19,11 @@ class PaymentHistoryViewModel extends StateNotifier<PaymentHistoryModel?> {
   PaymentHistoryViewModel(this.ref, super._state);
 
   Future<void> notifyInit() async {
+    Logger().d("뷰모델 실행");
     SessionUser sessionUser = ref.read(sessionProvider);
     ResponseDTO responseDTO =
         await paymentRepository().fetchPaymentHistory(sessionUser.jwt!);
+    Logger().d("여기");
 
     state = PaymentHistoryModel(paymentHistoryDTOList: responseDTO.data);
   }
