@@ -5,10 +5,11 @@
 https://github.com/Merhong/final-back
 
 ## REST Docs(API)
+(이거 브라우저로 볼 수 있게 하는 방법을 모르겠어요)
 https://github.com/Merhong/final-back/blob/dev/images/api-docs.html
 
 ## 테이블 설계
-![테이블 완성1 231114](https://github.com/Merhong/final-front/assets/135561696/e4c275d7-3541-4113-88dd-9cce090eedbb)
+![테이블 완성2](https://github.com/Merhong/final-front/assets/135561696/3808da60-69a9-43b4-9804-7c4bae645d43)
 
 
 ## 홈페이지
@@ -58,7 +59,7 @@ https://github.com/Merhong/final-back/blob/dev/images/api-docs.html
 - 쿠키 사용내역
 - 더보기(설정)
 - 검색(추천완결 검색, 베스트 도전 검색, MY 검색, ~~전체 검색~~)
-- 관리자 페이지(웹 페이지) - 기능 일부 완료
+- ~~관리자 페이지(웹 페이지)~~
 - 회원가입 화면 ID 중복체크 및 입력값 오류 알려주기
 -~~MY 최근 본 웹툰~~
 - MY 보관함
@@ -70,11 +71,11 @@ https://github.com/Merhong/final-back/blob/dev/images/api-docs.html
 - ~~유저가 읽은 웹툰 / 안 읽은 웹툰 (완료)~~
   
 ## 3단계
-- 필터(Filter)
-- 유효성검사 자동화
+- ~~필터(Filter)~~
+- ~~유효성검사 자동화~~
 - OAuth
-- API 문서 (Tool 제작)
-- 실시간 푸시 기술
+- ~~API 문서 (Tool 제작)~~
+- ~~실시간 푸시 기술~~
 - 신고하기
 - 차단하기
   
