@@ -13,7 +13,7 @@ class PurchaseHistory extends ConsumerWidget {
     ref.read(paymentHistoryProvider.notifier).notifyInit();
 
     PaymentHistoryModel? model = ref.watch(paymentHistoryProvider);
-    Logger().d(model!.cookieAmount);
+
     return Padding(
       padding: const EdgeInsets.only(left: 13),
       child: ListView.builder(

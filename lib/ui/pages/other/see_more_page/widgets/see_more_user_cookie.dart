@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/my_color.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/cookieshop_page.dart';
+import 'package:flutter_blog/ui/pages/pay/home_page/wigets/payment_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SeeMoreUserCookie extends StatefulWidget {
+class SeeMoreUserCookie extends ConsumerStatefulWidget {
   @override
   SeeMoreUserCookieState createState() => SeeMoreUserCookieState();
 }
 
-class SeeMoreUserCookieState extends State<SeeMoreUserCookie> {
+class SeeMoreUserCookieState extends ConsumerState<SeeMoreUserCookie> {
   int _cookieCount = 0;
 
   // 쿠키 수를 업데이트하는 메서드
@@ -20,6 +23,8 @@ class SeeMoreUserCookieState extends State<SeeMoreUserCookie> {
 
   @override
   Widget build(BuildContext context) {
+    SessionUser user = ref.read(sessionProvider);
+    ref.watch(paymentProvider);
     return Padding(
       padding: EdgeInsets.only(left: sizePaddingLR17, right: sizePaddingLR17),
       child: Container(
@@ -32,7 +37,7 @@ class SeeMoreUserCookieState extends State<SeeMoreUserCookie> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // 내 쿠키 갯수 보여주는 곳.
-            MyCookie(),
+            MyCookie(user.user!.cookie),
             SizedBox(width: 20),
             InkWell(
               child: Text("충전하기"),
@@ -50,7 +55,7 @@ class SeeMoreUserCookieState extends State<SeeMoreUserCookie> {
     );
   }
 
-  Widget MyCookie() {
+  Widget MyCookie(int? cookieAmount) {
     return Row(
       children: [
         Icon(Icons.cookie, color: Colors.orange),
@@ -58,7 +63,7 @@ class SeeMoreUserCookieState extends State<SeeMoreUserCookie> {
         SizedBox(width: sizeS5),
         // 여기 변수로 바꿔야함
         Text(
-          "$_cookieCount개",
+          "${cookieAmount}개",
           style: TextStyle(color: CommonColors.green),
         )
       ],

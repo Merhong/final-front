@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/my_color.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
 import 'package:flutter_blog/ui/common_widgets/search_alert_dialog.dart';
 import 'package:flutter_blog/ui/pages/cookieshop/payment_history/payment_history_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,7 @@ class MyappAppbar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser user = ref.read(sessionProvider);
     PaymentHistoryModel? model = ref.watch(paymentHistoryProvider);
     return AppBar(
       elevation: 1,
@@ -28,7 +30,7 @@ class MyappAppbar extends ConsumerWidget implements PreferredSizeWidget {
           child: Row(
             children: [
               Text(
-                "내 쿠키 ${model!.cookieAmount} >   ",
+                "내 쿠키 ${user.user!.cookie} >   ",
                 // 텍스트 스타일 설정
                 style: TextStyle(
                   fontSize: 16,
