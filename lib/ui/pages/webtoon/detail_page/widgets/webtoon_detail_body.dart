@@ -27,7 +27,7 @@ class WebtoonDetailBody extends ConsumerWidget {
           SliverToBoxAdapter(
               child: WebtoonDetailThumbnail(isScroll, webtoonDTO)),
           SliverToBoxAdapter(child: WebtoonDetailDescription(webtoonDTO)),
-          webtoonDTO.episodeList.length == 0
+          webtoonDTO.episodeList.length < 6
               ? SliverToBoxAdapter(child: SizedBox())
               : SliverToBoxAdapter(
                   child: WebtoonDetailPreview(webtoonDTO: webtoonDTO)),

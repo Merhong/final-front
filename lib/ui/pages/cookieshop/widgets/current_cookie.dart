@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/my_color.dart';
+import 'package:flutter_blog/data/provider/session_provider.dart';
+import 'package:flutter_blog/ui/pages/pay/home_page/wigets/payment_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CurrentCookie extends StatefulWidget {
-  @override
-  CurrentCookieState createState() => CurrentCookieState();
-}
-
-class CurrentCookieState extends State<CurrentCookie> {
-  int _cookieCount = 0;
+class CurrentCookie extends ConsumerWidget {
+  CurrentCookie();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser user = ref.read(sessionProvider);
+    ref.watch(paymentProvider);
+
     return Container(
       color: Colors.grey[300],
       child: Padding(
@@ -28,17 +29,11 @@ class CurrentCookieState extends State<CurrentCookie> {
             SizedBox(
               width: 5.0, // sizeS5 대신 고정 값 사용
             ),
-            Text("$_cookieCount개", style: TextStyle(color: CommonColors.green)),
+            Text("${user.user!.cookie}개",
+                style: TextStyle(color: CommonColors.green)),
           ],
         ),
       ),
     );
-  }
-
-  // 쿠키 수를 업데이트하는 메서드
-  void updateCookieCount(int newCount) {
-    setState(() {
-      _cookieCount = newCount;
-    });
   }
 }

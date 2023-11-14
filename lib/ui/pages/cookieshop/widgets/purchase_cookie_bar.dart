@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/pay/home_page/pay_home_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PurchaseCookieBar extends StatelessWidget {
+class PurchaseCookieBar extends ConsumerWidget {
   final String cookieCount;
   final String price;
 
@@ -10,7 +11,7 @@ class PurchaseCookieBar extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       color: Colors.white,
       child: Padding(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/data/dto/purchase_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
-import 'package:flutter_blog/data/repository/payment_repository.dart';
+import 'package:flutter_blog/ui/pages/pay/home_page/wigets/payment_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 /* 아임포트 결제 모듈을 불러옵니다. */
 import 'package:iamport_flutter/iamport_payment.dart';
 import 'package:iamport_flutter/model/payment_data.dart';
+import 'package:logger/logger.dart';
 
 class PayHomePage extends ConsumerWidget {
   final String cookieCount;
@@ -55,11 +55,14 @@ class PayHomePage extends ConsumerWidget {
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) async {
         if (result['imp_success'] == 'true') {
-          PurchaseReqDTO purchaseReqDTO = new PurchaseReqDTO(
-              cookieAmount: numberOfCookie, userId: session.user!.id);
-          ResponseDTO responseDTO = await paymentRepository()
-              .fetchPayment(purchaseReqDTO, session.jwt!);
+          ResponseDTO responseDTO =
+              await ref.read(paymentProvider.notifier).payment(numberOfCookie);
+
+          Logger().d(responseDTO.success);
           if (responseDTO.success == true) {
+            SessionUser user = ref.read(sessionProvider);
+            user.user!.cookie = numberOfCookie;
+            Logger().d(user.user!.cookie);
             return AlertDialog(content: Text("결제 완료"));
           } else {
             return AlertDialog(content: Text("결제는 완료, 서버 통신 실패"));
