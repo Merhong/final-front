@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/data/dto/purchase_request.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/provider/session_provider.dart';
-import 'package:flutter_blog/data/repository/payment_repository.dart';
+import 'package:flutter_blog/ui/pages/cookieshop/payment_history/payment_history_view_model.dart';
 import 'package:flutter_blog/ui/pages/webtoon/detail_page/webtoon_detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 /* 아임포트 결제 모듈을 불러옵니다. */
@@ -55,10 +54,9 @@ class PayHomePage extends ConsumerWidget {
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) async {
         if (result['imp_success'] == 'true') {
-          PurchaseReqDTO purchaseReqDTO = new PurchaseReqDTO(
-              cookieAmount: numberOfCookie, userId: session.user!.id);
-          ResponseDTO responseDTO = await paymentRepository()
-              .fetchPayment(purchaseReqDTO, session.jwt!);
+          ResponseDTO responseDTO = await ref
+              .read(paymentHistoryProvider.notifier)
+              .payment(numberOfCookie);
           if (responseDTO.success == true) {
             return AlertDialog(content: Text("결제 완료"));
           } else {
