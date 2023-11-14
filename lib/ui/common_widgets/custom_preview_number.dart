@@ -55,7 +55,7 @@ class CustomPreviewNumber extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      list[2].title,
+                      list[index].title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold, // 텍스트를 두꺼운 스타일로 설정
                       ),
