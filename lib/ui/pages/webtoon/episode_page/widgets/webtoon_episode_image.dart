@@ -2,14 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/episode_dto/episode_DTO.dart';
-import 'package:flutter_blog/data/provider/param_provider.dart';
-import 'package:flutter_blog/ui/common_widgets/bottom_rule.dart';
-import 'package:flutter_blog/ui/common_widgets/title_tag.dart';
-import 'package:flutter_blog/ui/pages/webtoon/episode_page/webtoon_episode_page.dart';
-import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/alert_dialog_star.dart';
 import 'package:flutter_blog/ui/pages/webtoon/episode_page/widgets/webtoon_episode_bottom.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 
 class WebtoonEpisodeImage extends ConsumerWidget {
   EpisodeDTO episodeDTO;

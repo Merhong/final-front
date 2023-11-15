@@ -3,22 +3,24 @@ import 'package:flutter_blog/ui/pages/cookieshop/payment_history/payment_history
 import 'package:flutter_blog/ui/pages/cookieshop/widgets/history_list_item.dart';
 import 'package:flutter_blog/ui/pages/pay/home_page/wigets/payment_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class PurchaseHistory extends ConsumerWidget {
   const PurchaseHistory({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Logger().d("1번");
     ref.read(paymentHistoryProvider.notifier).notifyInit();
     PaymentHistoryModel? model = ref.watch(paymentHistoryProvider);
     ref.watch(paymentProvider);
 
+    if (model == null) {
+      return CircularProgressIndicator();
+    }
+
     return Padding(
       padding: const EdgeInsets.only(left: 13),
       child: ListView.builder(
-          itemCount: model!.paymentHistoryDTOList.length,
+          itemCount: model.paymentHistoryDTOList.length,
           //여기 Row 컴포넌트로 빼야함
           itemBuilder: (context, index) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
