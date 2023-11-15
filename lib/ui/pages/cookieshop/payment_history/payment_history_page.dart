@@ -15,6 +15,10 @@ class PurchaseHistory extends ConsumerWidget {
     PaymentHistoryModel? model = ref.watch(paymentHistoryProvider);
     ref.watch(paymentProvider);
 
+    if(model==null) {
+      return CircularProgressIndicator();
+    }
+
     return Padding(
       padding: const EdgeInsets.only(left: 13),
       child: ListView.builder(
