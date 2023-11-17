@@ -3,7 +3,7 @@
 # 네이버 웹툰 클론코딩
 
 ## 시연영상
-https://www.youtube.com/watch?v=AUlqyQ6gb64
+[![Video Label](http://img.youtube.com/vi/'AUlqyQ6gb64'/0.jpg)](https://youtu.be/'AUlqyQ6gb64')
 
 ## 프로젝트 4조
 * 김대홍(팀장)
