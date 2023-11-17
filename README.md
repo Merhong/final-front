@@ -6,14 +6,6 @@
 [![Video Label](http://img.youtube.com/vi/AUlqyQ6gb64/0.jpg)](https://youtu.be/AUlqyQ6gb64)
 
 ## 프로젝트 4조
-* 김대홍(팀장)
-* 김지원
-* 김하얀
-* 박민희
-* 윤혜림
-
-
-## 프로젝트 4조
 - 김대홍(팀장)
 - 김하얀
 - 윤채빈
